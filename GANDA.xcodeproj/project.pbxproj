@@ -69,6 +69,7 @@
 		111F08A727922F7D0096BF68 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111F087A27922F5C0096BF68 /* ButtonStyle.swift */; };
 		111F08A827922F7D0096BF68 /* BarGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111F089827922F700096BF68 /* BarGraph.swift */; };
 		111F08A927922F7D0096BF68 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111F089927922F7D0096BF68 /* LottieView.swift */; };
+		111F08AB279259390096BF68 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111F08AA279259390096BF68 /* Observer.swift */; };
 		1184AC5E2791FD550094C384 /* GANDAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184AC5D2791FD550094C384 /* GANDAApp.swift */; };
 		1184AC602791FD550094C384 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184AC5F2791FD550094C384 /* ContentView.swift */; };
 		1184AC622791FD5B0094C384 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1184AC612791FD5B0094C384 /* Assets.xcassets */; };
@@ -140,6 +141,7 @@
 		111F087B27922F670096BF68 /* TagView_Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView_Card.swift; sourceTree = "<group>"; };
 		111F089827922F700096BF68 /* BarGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarGraph.swift; sourceTree = "<group>"; };
 		111F089927922F7D0096BF68 /* LottieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		111F08AA279259390096BF68 /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		1184AC5A2791FD550094C384 /* GANDA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GANDA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1184AC5D2791FD550094C384 /* GANDAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GANDAApp.swift; sourceTree = "<group>"; };
 		1184AC5F2791FD550094C384 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				111F084027922DC90096BF68 /* UploadViewModel.swift */,
 				111F083E27922DBF0096BF68 /* UserViewModel.swift */,
 				111F083D27922DBA0096BF68 /* VoteViewModel.swift */,
+				111F08AA279259390096BF68 /* Observer.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				111F088827922F670096BF68 /* PostCardView.swift in Sources */,
 				111F08A927922F7D0096BF68 /* LottieView.swift in Sources */,
 				111F083927922D770096BF68 /* Reel.swift in Sources */,
+				111F08AB279259390096BF68 /* Observer.swift in Sources */,
 				111F087E27922F670096BF68 /* SettingsLabelView.swift in Sources */,
 				111F088427922F670096BF68 /* HelpView.swift in Sources */,
 				111F089327922F670096BF68 /* ParallexView.swift in Sources */,

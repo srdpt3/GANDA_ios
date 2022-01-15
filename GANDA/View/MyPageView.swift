@@ -8,13 +8,11 @@
 import SwiftUI
 import SDWebImageSwiftUI
 struct MyPageView: View {
+    
     @State  var showingModal: Bool = false
     @State  var animatingModal: Bool = false
     
     @StateObject  var cardViewModel = CardViewModel()
-    @StateObject  var chartViewModel = ChartViewModel()
-    
-    
     
     var body: some View {
         NavigationView{
@@ -60,6 +58,7 @@ struct MyPageView_Previews: PreviewProvider {
 
 
 struct ImageGrid : View {
+    @EnvironmentObject var observer : Observer
     
     @State var img : [ActiveVote] = []
     @Binding var selected : ActiveVote
@@ -67,7 +66,6 @@ struct ImageGrid : View {
     @Binding var animatingModal: Bool
     
     @State var voteData:[Double] = []
-    @State var voteBarData:[Double] = []
     
     //    @State var buttonTitle : [String] = ["나는코린이다", "빨간구두가 잘어울린다","돈잘벌꺼같다"]
     @State var numVoteData:[Int] = [0,0,0]
@@ -75,11 +73,9 @@ struct ImageGrid : View {
     @State var buttonTitle : [String] = ["test", "test2","test1"]
     @State var ymax : Int = 100
     @State var totalNumVote : Int = 0
-
+    
     @State var isAnimating : Bool = true
     @State var voteDataOneCard:[Double] = []
-    @State var voteBarDataOnceCard:[Double] = []
-    @StateObject private var chartViewModel = ChartViewModel()
     
     var body: some View {
         
@@ -91,18 +87,18 @@ struct ImageGrid : View {
                     HStack{
                         Spacer()
                         
-                        ProgressImageView(pic: img[0], seclectedPic: $selected, isMainPic: true, showingModal: $showingModal, voteDataOneCard:$voteDataOneCard, voteBarDataOnceCard:$voteBarDataOnceCard, chartViewModel:chartViewModel)
+                        ProgressImageView(pic: img[0], seclectedPic: $selected, isMainPic: true, showingModal: $showingModal, voteDataOneCard:$voteDataOneCard)
                             .padding(.leading, -8.8)
                         VStack{
-                            ProgressImageView(pic: img[1], seclectedPic: $selected, isMainPic: false, showingModal: $showingModal, voteDataOneCard:$voteDataOneCard, voteBarDataOnceCard:$voteBarDataOnceCard, chartViewModel:chartViewModel)
-                            ProgressImageView(pic: img[2], seclectedPic: $selected, isMainPic: false, showingModal: $showingModal, voteDataOneCard:$voteDataOneCard, voteBarDataOnceCard:$voteBarDataOnceCard, chartViewModel:chartViewModel)
+                            ProgressImageView(pic: img[1], seclectedPic: $selected, isMainPic: false, showingModal: $showingModal, voteDataOneCard:$voteDataOneCard)
+                            ProgressImageView(pic: img[2], seclectedPic: $selected, isMainPic: false, showingModal: $showingModal, voteDataOneCard:$voteDataOneCard)
                             
                         }.frame(width : geo.size.width / 3 - 13 , height: 270)
                     }
                     HStack{
-                        ProgressImageView(pic: img[3], seclectedPic: $selected, isMainPic: false, showingModal: $showingModal, voteDataOneCard:$voteDataOneCard, voteBarDataOnceCard:$voteBarDataOnceCard, chartViewModel:chartViewModel)
-                        ProgressImageView(pic: img[4], seclectedPic: $selected, isMainPic: false, showingModal: $showingModal, voteDataOneCard:$voteDataOneCard, voteBarDataOnceCard:$voteBarDataOnceCard, chartViewModel:chartViewModel)
-                        ProgressImageView(pic: img[5], seclectedPic: $selected, isMainPic: false, showingModal: $showingModal, voteDataOneCard:$voteDataOneCard, voteBarDataOnceCard:$voteBarDataOnceCard, chartViewModel:chartViewModel)
+                        ProgressImageView(pic: img[3], seclectedPic: $selected, isMainPic: false, showingModal: $showingModal, voteDataOneCard:$voteDataOneCard)
+                        ProgressImageView(pic: img[4], seclectedPic: $selected, isMainPic: false, showingModal: $showingModal, voteDataOneCard:$voteDataOneCard)
+                        ProgressImageView(pic: img[5], seclectedPic: $selected, isMainPic: false, showingModal: $showingModal, voteDataOneCard:$voteDataOneCard)
                         
                     }.frame(height: 135, alignment: .leading)
                     
@@ -120,12 +116,12 @@ struct ImageGrid : View {
                         }
                         
                     }
-//                    .padding()
-                        .background(Color.white)
-                        .cornerRadius(25)
-                        .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
-                        .shadow(color: Color.black.opacity(0.05), radius: 5, x: -5, y: -5)
-                        .padding(.horizontal, 1)
+                    //                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(25)
+                    .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
+                    .shadow(color: Color.black.opacity(0.05), radius: 5, x: -5, y: -5)
+                    .padding(.horizontal, 1)
                     //                    .frame(height: 135, alignment: .leading)
                     
                     FollowersStats(count:  String(totalNumVote))
@@ -186,7 +182,7 @@ struct ImageGrid : View {
                                     ChartView_BAR(data: self.$voteDataOneCard, numVote: self.$numVoteData, totalNum: self.$ymax, title: "TEST" , categories: selected.attrNames)
                                         .frame(width: geo.size.width / 1.3, height: 180).padding(.horizontal)
                                 }
-                     
+                                
                                 Spacer()
                                 
                             }
@@ -220,7 +216,11 @@ struct ImageGrid : View {
         )
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now()+0.2){
-                loadChartData(postId: self.img[0].id.uuidString)
+                //                loadChartData(postId: self.img[0].id.uuidString)
+                self.observer.loadChartData(postId: self.img[0].id.uuidString) { voteData , numVote in
+                    self.voteData = voteData
+                    self.totalNumVote = numVote
+                }
             }
             
             
@@ -237,7 +237,7 @@ struct ImageGrid : View {
         
         VStack{
             
-
+            
             // Following Followers Stats...
             
             HStack(spacing: 10){
@@ -246,12 +246,12 @@ struct ImageGrid : View {
                 
                 StatView(title: "라이크 수", count: "0", image: "play.fill", color: GRADIENT_COLORS[2])
             }
-//            .padding(.top)
+            //            .padding(.top)
         }
         .frame(maxWidth: .infinity)
         .padding(15)
         .background(
-        
+            
             RoundedRectangle(cornerRadius: 20)
                 .fill(Color.white)
         )
@@ -263,22 +263,22 @@ struct ImageGrid : View {
         VStack(alignment: .leading, spacing: 15) {
             
             HStack{
-//                Image(systemName: image)
-//                    .font(.caption.bold())
-//                   .foregroundColor(color)
-//                    .padding(6)
-//                    .background(Color("BG"))
-//                    .cornerRadius(8)
-
+                //                Image(systemName: image)
+                //                    .font(.caption.bold())
+                //                   .foregroundColor(color)
+                //                    .padding(6)
+                //                    .background(Color("BG"))
+                //                    .cornerRadius(8)
+                
                 Text(title)
             }
             HStack{
                 Spacer()
                 Text(count).font(Font.custom(FONT, size: 17))
                 Spacer()
-
+                
             }
-//                .font(.title.bold())
+            //                .font(.title.bold())
         }
         .foregroundColor(Color("BG"))
         .padding(.vertical,10)
@@ -286,34 +286,6 @@ struct ImageGrid : View {
         .frame(maxWidth: .infinity,alignment: .leading)
         .background(color)
         .cornerRadius(15)
-    }
-    
-    func loadChartData(postId : String){
-        self.totalNumVote = 0
-        self.chartViewModel.loadChartData(postId: postId) { (vote) in
-            self.voteBarData.removeAll()
-            self.voteData.removeAll()
-            
-            if(vote.numVote == 0){
-                self.voteData = [0,0,0]
-            }else{
-                let attr1 = (Double(vote.attr1) / Double(vote.numVote) * 100).roundToDecimal(1)
-                let attr2 = (Double(vote.attr2) / Double(vote.numVote) * 100).roundToDecimal(1)
-                let attr3 = (Double(vote.attr3) / Double(vote.numVote) * 100).roundToDecimal(1)
-                
-                self.voteData = [attr1, attr2, attr3]
-                self.numVoteData = [Int(vote.attr1), Int(vote.attr2) ,Int(vote.attr3)]
-                
-                let maxNum =  100 - (self.voteData.max()!)
-                print(maxNum)
-                self.totalNumVote = vote.numVote
-                self.voteBarData = [attr1 > 0.0 ? attr1 + maxNum : attr1 ,
-                                    attr2 > 0.0 ? attr2 + maxNum : attr2 ,
-                                    attr3 > 0.0 ? attr3 + maxNum : attr3]
-            }                //
-        }
-        
-        
     }
     
     
@@ -327,8 +299,7 @@ struct ProgressImageView: View {
     var isMainPic : Bool = false
     @Binding var showingModal : Bool
     @Binding var voteDataOneCard:[Double]
-    @Binding var voteBarDataOnceCard:[Double]
-    @StateObject  var chartViewModel : ChartViewModel
+    @EnvironmentObject var observer : Observer
     
     
     var body: some View {
@@ -349,10 +320,15 @@ struct ProgressImageView: View {
                     .onTapGesture {
                         withAnimation {
                             seclectedPic = pic
+                            observer.loadChartData(postId: seclectedPic.id.uuidString) { voteData,numVote  in
+                                voteDataOneCard = voteData
+                            }
                             showingModal.toggle()
                             
                             DispatchQueue.main.asyncAfter(deadline: .now()+0.2){
-                                loadChartData(postId: seclectedPic.id.uuidString)
+                                
+                                
+                                
                             }
                             
                         }
@@ -363,88 +339,22 @@ struct ProgressImageView: View {
                     .onTapGesture {
                         withAnimation {
                             seclectedPic = pic
+                            observer.loadChartData(postId: seclectedPic.id.uuidString) { voteData , numVote in
+                                voteDataOneCard = voteData
+                            }
                             showingModal.toggle()
                             
                             DispatchQueue.main.asyncAfter(deadline: .now()+0.2){
-                                loadChartData(postId: seclectedPic.id.uuidString)
+                                
                             }
                             
                         }
                     }
             }
             
-            
-           
-            
-            
-//            AsyncImage(
-//                url: URL(string: pic.imageLocation),
-//                content: { image in
-//                    if(isMainPic){
-//                        image.resizable()
-//                            .frame(height: 270)
-//                    }else{
-//                        image.resizable()
-//                    }
-//
-//
-//                },
-//                placeholder: {
-//                    HStack{
-//                        Spacer()
-//                        ProgressView()
-//                        Spacer()
-//                    }
-//
-//                }
-//            ).onTapGesture {
-//                withAnimation {
-//                    seclectedPic = pic
-//                    showingModal.toggle()
-//
-//                    DispatchQueue.main.asyncAfter(deadline: .now()+0.2){
-//                        loadChartData(postId: seclectedPic.id.uuidString)
-//                    }
-//
-//                }
-//            }
-        }
-        
-        
-        
-        
-        
-        
-        
-    }
-    
-    func loadChartData(postId : String){
-        
-        self.chartViewModel.loadChartData(postId: postId) { (vote) in
-            self.voteDataOneCard.removeAll()
-            self.voteBarDataOnceCard.removeAll()
-            
-            if(vote.numVote == 0){
-                self.voteDataOneCard = [0,0,0]
-            }else{
-                let attr1 = (Double(vote.attr1) / Double(vote.numVote) * 100).roundToDecimal(1)
-                let attr2 = (Double(vote.attr2) / Double(vote.numVote) * 100).roundToDecimal(1)
-                let attr3 = (Double(vote.attr3) / Double(vote.numVote) * 100).roundToDecimal(1)
-                
-                self.voteDataOneCard = [attr1, attr2, attr3]
-                //                self.numVoteData = [Int(vote.attr1), Int(vote.attr2) ,Int(vote.attr3)]
-                
-                let maxNum =  100 - (self.voteDataOneCard.max()!)
-                print(maxNum)
-                self.voteBarDataOnceCard = [attr1 > 0.0 ? attr1 + maxNum : attr1 ,
-                                            attr2 > 0.0 ? attr2 + maxNum : attr2 ,
-                                            attr3 > 0.0 ? attr3 + maxNum : attr3]
-            }                //
         }
         
         
     }
-    
-    
     
 }

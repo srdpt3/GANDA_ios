@@ -9,6 +9,10 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct CardView: View {
+    
+    @EnvironmentObject var observer : Observer
+
+    
     @Binding var showDetailView : Bool
     
     @State var selected  = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [],numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "")
@@ -48,10 +52,7 @@ struct CardView: View {
     //FlowingButton
     @State var showFavoriteView  = false
     
-    
     @StateObject private var cardViewModel = CardViewModel()
-    @StateObject private var voteViewModel = VoteViewModel()
-    @StateObject private var chartViewModel = ChartViewModel()
     
     
     var body: some View {
@@ -70,7 +71,7 @@ struct CardView: View {
                                     
                                     if post.imageLocation != "" {
                                         self.voteBarData.removeAll()
-                                        self.voteData.removeAll()
+                                       self.voteData.removeAll()
                                         self.selected = post
                                         loadChartData(postId: self.selected.id.uuidString)
                                         
@@ -241,133 +242,132 @@ struct CardView: View {
                                 Spacer()
                                 
                             }
-                            // if(!voteViewModel.votedCards.contains(self.selected.id.uuidString)){
-                            
-                            VStack(alignment: .leading,spacing: 15){
+                            if(!observer.votedCards.contains(self.selected.id.uuidString)){
                                 
-                                Text(self.selected.description)
-                                    .font(.title2)
-                                    .fontWeight(.heavy)
-                                    .foregroundColor(.black)
-                                Spacer(minLength: 0)
-                                Button(action: {
-                                    withAnimation {
-                                        self.buttonPressed[0].toggle()
-                                        self.sendMessageToDevice(title: ("\(User.currentUser()!.username) 이 투표를 했습니다"),
-                                                                 body: "\(self.selected.attrNames[0])", token: self.selected.token)
-                                        self.persist()
-                                    }
-                                    buttonSelected = self.selected.attrNames[0]
+                                VStack(alignment: .leading,spacing: 15){
                                     
-                                }, label: {
-                                    Text(self.selected.attrNames[0])
+                                    Text(self.selected.description)
+                                        .font(.title2)
+                                        .fontWeight(.heavy)
                                         .foregroundColor(.black)
-                                        .padding()
-                                        .frame(maxWidth: .infinity)
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 15)
-                                                .stroke(color(option: self.selected.attrNames[0]),lineWidth: 2)
-                                        )
-                                })
-                                
-                                Button(action: {
-                                    
-                                    withAnimation {
-                                        self.buttonPressed[1].toggle()
-                                        self.sendMessageToDevice(title: ("\(User.currentUser()!.username) 이 투표를 했습니다"),
-                                                                 body: "\(self.selected.attrNames[1])", token: self.selected.token)
-                                        self.persist()
-                                    }
-                                    buttonSelected = self.selected.attrNames[1]
-                                    
-                                }, label: {
-                                    Text(self.selected.attrNames[1])
-                                        .foregroundColor(.black)
-                                        .padding()
-                                        .frame(maxWidth: .infinity)
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 15)
-                                                .stroke(color(option: self.selected.attrNames[1]),lineWidth: 2)
-                                        )
-                                })
-                                
-                                Button(action: {
-                                    
-                                    withAnimation {
-                                        self.buttonPressed[2].toggle()
-                                        self.sendMessageToDevice(title: ("\(User.currentUser()!.username) 이 투표를 했습니다"),
-                                                                 body: "\(self.selected.attrNames[2])", token: self.selected.token)
+                                    Spacer(minLength: 0)
+                                    Button(action: {
+                                        withAnimation {
+                                            self.buttonPressed[0].toggle()
+                                            self.sendMessageToDevice(title: ("\(User.currentUser()!.username) 이 투표를 했습니다"),
+                                                                     body: "\(self.selected.attrNames[0])", token: self.selected.token)
+                                            self.persist()
+                                        }
+                                        buttonSelected = self.selected.attrNames[0]
                                         
-                                        self.persist()
-                                    }
-                                    buttonSelected = self.selected.attrNames[2]
+                                    }, label: {
+                                        Text(self.selected.attrNames[0])
+                                            .foregroundColor(.black)
+                                            .padding()
+                                            .frame(maxWidth: .infinity)
+                                            .background(
+                                                RoundedRectangle(cornerRadius: 15)
+                                                    .stroke(color(option: self.selected.attrNames[0]),lineWidth: 2)
+                                            )
+                                    })
                                     
-                                }, label: {
-                                    Text(self.selected.attrNames[2])
-                                        .foregroundColor(.black)
-                                        .padding()
-                                        .frame(maxWidth: .infinity)
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 15)
-                                                .stroke(color(option: self.selected.attrNames[2]),lineWidth: 2)
-                                        )
-                                })
-                                Spacer(minLength: 0)
+                                    Button(action: {
+                                        
+                                        withAnimation {
+                                            self.buttonPressed[1].toggle()
+                                            self.sendMessageToDevice(title: ("\(User.currentUser()!.username) 이 투표를 했습니다"),
+                                                                     body: "\(self.selected.attrNames[1])", token: self.selected.token)
+                                            self.persist()
+                                        }
+                                        buttonSelected = self.selected.attrNames[1]
+                                        
+                                    }, label: {
+                                        Text(self.selected.attrNames[1])
+                                            .foregroundColor(.black)
+                                            .padding()
+                                            .frame(maxWidth: .infinity)
+                                            .background(
+                                                RoundedRectangle(cornerRadius: 15)
+                                                    .stroke(color(option: self.selected.attrNames[1]),lineWidth: 2)
+                                            )
+                                    })
+                                    
+                                    Button(action: {
+                                        
+                                        withAnimation {
+                                            self.buttonPressed[2].toggle()
+                                            self.sendMessageToDevice(title: ("\(User.currentUser()!.username) 이 투표를 했습니다"),
+                                                                     body: "\(self.selected.attrNames[2])", token: self.selected.token)
+                                            
+                                            self.persist()
+                                        }
+                                        buttonSelected = self.selected.attrNames[2]
+                                        
+                                    }, label: {
+                                        Text(self.selected.attrNames[2])
+                                            .foregroundColor(.black)
+                                            .padding()
+                                            .frame(maxWidth: .infinity)
+                                            .background(
+                                                RoundedRectangle(cornerRadius: 15)
+                                                    .stroke(color(option: self.selected.attrNames[2]),lineWidth: 2)
+                                            )
+                                    })
+                                    Spacer(minLength: 0)
+                                    
+                                    
+                                }
+                                .padding()
+                                .background(Color.white)
+                                .cornerRadius(25)
+                                .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
+                                .shadow(color: Color.black.opacity(0.05), radius: 5, x: -5, y: -5)
+                                .padding(.horizontal)
                                 
                                 
                             }
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(25)
-                            .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
-                            .shadow(color: Color.black.opacity(0.05), radius: 5, x: -5, y: -5)
-                            .padding(.horizontal)
-                            
-                            
-                            //                            BannerAdView(bannerId: BANNER_UNIT_ID).frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height < 896.0 ? 70 : 90)
-                            //}
-                            //                            else{
-                            //
-                            //                                VStack(alignment: .leading,spacing: 22){
-                            //                                    if !self.voteData.isEmpty {
-                            //                                        ChartView_BAR(data: self.$voteData, numVote: self.$numVoteData, totalNum: self.$ymax, title: self.selected.description, categories: self.selected.attrNames)
-                            //                                            .frame(maxWidth: .infinity,idealHeight: 200)
-                            //                                    }
-                            //
-                            //                                    //                                  x          .padding()
-                            //                                    //                                            .background(Color.white)
-                            //                                    //                                            .cornerRadius(25)
-                            //                                    //                                            .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
-                            //                                    //                                            .shadow(color: Color.black.opacity(0.05), radius: 5, x: -5, y: -5)
-                            //                                    //                                            .padding(.horizontal)
-                            //                                    //                                            .padding(.top)
-                            //                                    Divider().padding(.horizontal, 15)
-                            //                                    VStack(spacing: 5){
-                            //                                        HStack{
-                            //                                            Text("사진 태그들")
-                            //                                                .foregroundColor(Color("Gray")).font(Font.custom(FONT, size: 15))
-                            //                                                .fontWeight(.bold)
-                            //                                                .foregroundColor(.black)
-                            //                                            Spacer(minLength: 0)
-                            //                                        }
-                            //                                        TagView_Card(maxLimit: 100, tags: self.selected.tags,fontSize: 16)
-                            //                                        // Default Height...
-                            //                                            .frame(height: 100)
-                            //
-                            //                                        //                                            ParallexView().padding(.leading,15).z
-                            //
-                            //                                    }.padding(.leading,15)
-                            //
-                            //                                }
-                            //                                .offset(y : -20)
-                            //                                .padding()
-                            //                                .background(Color.white)
-                            //                                .cornerRadius(25)
-                            //                                .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
-                            //                                .shadow(color: Color.black.opacity(0.05), radius: 5, x: -5, y: -5)
-                            //                                .padding(.horizontal)
-                            //
-                            //                            }
+                            else{
+                                
+                                VStack(alignment: .leading,spacing: 22){
+                                    if !self.voteData.isEmpty {
+                                        ChartView_BAR(data: self.$voteData, numVote: self.$numVoteData, totalNum: self.$ymax, title: self.selected.description, categories: self.selected.attrNames)
+                                            .frame(maxWidth: .infinity,idealHeight: 200)
+                                    }
+                                    
+                                    //                                  x          .padding()
+                                    //                                            .background(Color.white)
+                                    //                                            .cornerRadius(25)
+                                    //                                            .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
+                                    //                                            .shadow(color: Color.black.opacity(0.05), radius: 5, x: -5, y: -5)
+                                    //                                            .padding(.horizontal)
+                                    //                                            .padding(.top)
+                                    Divider().padding(.horizontal, 15)
+                                    VStack(spacing: 5){
+                                        HStack{
+                                            Text("사진 태그들")
+                                                .foregroundColor(Color("Gray")).font(Font.custom(FONT, size: 15))
+                                                .fontWeight(.bold)
+                                                .foregroundColor(.black)
+                                            Spacer(minLength: 0)
+                                        }
+                                        TagView_Card(maxLimit: 100, tags: self.selected.tags,fontSize: 16)
+                                        // Default Height...
+                                            .frame(height: 100)
+                                        
+                                        //                                            ParallexView().padding(.leading,15).z
+                                        
+                                    }.padding(.leading,15)
+                                    
+                                }
+                                .offset(y : -20)
+                                .padding()
+                                .background(Color.white)
+                                .cornerRadius(25)
+                                .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
+                                .shadow(color: Color.black.opacity(0.05), radius: 5, x: -5, y: -5)
+                                .padding(.horizontal)
+                                
+                            }
                             
                         }
                     }
@@ -502,7 +502,7 @@ struct CardView: View {
     
     func persist() {
         
-        self.voteViewModel.persist(votePost: selected, buttonPressed: self.buttonPressed)
+        self.observer.persist(votePost: selected, buttonPressed: self.buttonPressed)
         buttonPressed = [false,false,false]
         loadChartData(postId: selected.id.uuidString)
     }
@@ -517,30 +517,9 @@ struct CardView: View {
     }
     
     func loadChartData(postId : String){
-        
-        self.chartViewModel.loadChartData(postId: postId) { (vote) in
-            self.voteBarData.removeAll()
-            self.voteData.removeAll()
-            
-            if(vote.numVote == 0){
-                self.voteData = [0,0,0]
-            }else{
-                let attr1 = (Double(vote.attr1) / Double(vote.numVote) * 100).roundToDecimal(1)
-                let attr2 = (Double(vote.attr2) / Double(vote.numVote) * 100).roundToDecimal(1)
-                let attr3 = (Double(vote.attr3) / Double(vote.numVote) * 100).roundToDecimal(1)
-                
-                self.voteData = [attr1, attr2, attr3]
-                self.numVoteData = [Int(vote.attr1), Int(vote.attr2) ,Int(vote.attr3)]
-                
-                let maxNum =  100 - (self.voteData.max()!)
-                print(maxNum)
-                self.voteBarData = [attr1 > 0.0 ? attr1 + maxNum : attr1 ,
-                                    attr2 > 0.0 ? attr2 + maxNum : attr2 ,
-                                    attr3 > 0.0 ? attr3 + maxNum : attr3]
-            }                //
+        observer.loadChartData(postId: postId) { voteBarData, numVote in
+            self.voteData  = voteBarData
         }
-        
-        
     }
     
 }

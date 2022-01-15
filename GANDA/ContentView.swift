@@ -8,7 +8,7 @@ import SwiftUI
 
 struct ContentView: View {
     @AppStorage("isLogged") var log_Status = false
-//    @Stat var observer: ProfileDetailModel
+    @StateObject var observer = Observer()
 
     var body: some View {
         
@@ -17,7 +17,7 @@ struct ContentView: View {
             
 //            PushTestView()
             MainView()
-//                .environmentObject(observer)
+               .environmentObject(observer)
         }
         else{
             if #available(iOS 15, *) {

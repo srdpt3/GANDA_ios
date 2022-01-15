@@ -8,6 +8,7 @@ struct MainView: View {
     @State var showDetailView = false
 
     let haptics = UINotificationFeedbackGenerator()
+    @EnvironmentObject var observer: Observer
 
     var body: some View {
        

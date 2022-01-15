@@ -21,6 +21,7 @@ class CardViewModel: ObservableObject {
     @Published var isReloading : Bool = false
     @Published var error: NSError?
     
+    
     let CARDLIMIT : Int = 5
     
     init(){
