@@ -16,7 +16,12 @@ struct LoadingView: View {
     var body: some View {
         Group {
             if isLoading {
-                LottieView(filename: "loading").frame(width: 220, height: 220)
+                HStack {
+                    Spacer()
+                    ProgressView()
+//                    ActivityIndicatorView()
+                    Spacer()
+                }
             } else if error == nil {
                 HStack {
                     Spacer()

@@ -20,7 +20,8 @@ let NAME_ = "앱이름"
 
 // Information
 let APP_VERSION = "1.0.0"
-let APP_DESC = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make "
+let APP_DESC = "패션 스타일 통해 사람들과 소통할 수 있는 공간. 오늘 내 옷 스타일 어때? \n자유롭게 나만의 스타일을 표현하고 사람들의 투표를 받아보세요. 또 사람들의 옷 스타일에 투표를 하고, 최신 옷 트렌드도 파악해보세요 \n* 오늘 평가받고 싶은 나의 옷 사진을 채널에 게시해보세요. 사람들이 당신의 옷 스타일에 투표할겁니다. \n* 다른 사람의 옷 스타일에 투표해보세요. Good or Bad?"
+
 let APP_CREDIT = "크레딧"
 
 let APP_PLATFORM = "플랫폼"
@@ -137,7 +138,7 @@ let IMAGE_PHOTO = "plus.circle"
 
 let GRADIENT_COLORS = [
 LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9647058824, green: 0.8274509804, blue: 0.3960784314, alpha: 1)), Color(#colorLiteral(red: 0.9921568627, green: 0.6274509804, blue: 0.5215686275, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing),
-LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.4, green: 0.4941176471, blue: 0.9176470588, alpha: 1)), Color(#colorLiteral(red: 0.462745098, green: 0.2941176471, blue: 0.6352941176, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing),
+LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.3215686275, green: 0.4352941176, blue: 0.9490196078, alpha: 1)), Color(#colorLiteral(red: 0.462745098, green: 0.2941176471, blue: 0.6352941176, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing),
 LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9411764706, green: 0.5764705882, blue: 0.9843137255, alpha: 1)), Color(#colorLiteral(red: 0.9607843137, green: 0.3411764706, blue: 0.4235294118, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing),
 LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.5254901961, green: 0.5607843137, blue: 0.5882352941, alpha: 1)), Color(#colorLiteral(red: 0.3490196078, green: 0.3803921569, blue: 0.3921568627, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing),
 LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.3215686275, green: 0.4352941176, blue: 0.9490196078, alpha: 1)), Color(#colorLiteral(red: 0.4732982204, green: 0.5873056538, blue: 0.9990956398, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing),
@@ -147,6 +148,7 @@ LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9019607843
 
 ]
 
+let APP_THEME_GRADIENT = LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.3215686275, green: 0.4352941176, blue: 0.9490196078, alpha: 1)), Color(#colorLiteral(red: 0.462745098, green: 0.2941176471, blue: 0.6352941176, alpha: 1))]), startPoint: .top , endPoint: .bottom)
 
     
 
@@ -188,6 +190,8 @@ public let PLEASE_UPLOAD_PIC = "사진을 먼저 등록해주세요"
 //RatingDetailView
 
 public let VOTENUM = "투표수: "
+public let LIKENUM = "좋아요수: "
+
 public let VOTE_TIMESTAMP = "업로드된 날짜: "
 public let GENDER = "성별:"
 
@@ -198,6 +202,7 @@ public let SERIES_TITLE = "나의 OOTD(%)"
 
 //Menu
 
+public let PROFILE_VIEW = "내 프로파일 보기"
 public let PROFILE_COMPLETE = "% 완료"
 public let ACCOUNT = "계정"
 public let PROFILE = "내 계정"
@@ -216,7 +221,7 @@ public let SELECT_ATTRIBUTES = "사진에 대한 3가지 태그를 정해주세�
 public let UPLOAD_COMPLETE = "사진등록이 완료되었습니다"
 public let UPLOAD_BUTTON = "등록"
 public let ADD_TAG = "태그 추가"
-public let PLEASE_ADD_TAG = "사진에 대한 태그 항목들을 입력해주세요(산택)"
+public let PLEASE_ADD_TAG = "사진에 대한 태그를 입력해 주세요(3개이상)"
 
 
 // Key
@@ -439,8 +444,8 @@ class Ref {
     
     
     static var FIRESTORE_COLLECTION_LIKED = FIRESTORE_ROOT.collection("liked")
-    static func FIRESTORE_COLLECTION_LIKED_USERID(userId: String, userId2: String) -> DocumentReference {
-        return FIRESTORE_COLLECTION_LIKED.document(userId).collection("liked").document(userId2)
+    static func FIRESTORE_COLLECTION_LIKED_POSTID(userId: String, postId: String) -> DocumentReference {
+        return FIRESTORE_COLLECTION_LIKED.document(userId).collection("liked").document(postId)
     }
     
     

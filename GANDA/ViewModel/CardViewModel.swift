@@ -16,111 +16,112 @@ class CardViewModel: ObservableObject {
     // Since we're building UI so using sample Users here....
     @Published var activeCards = [ActiveVote]()
     @Published var myActiveCards = [ActiveVote]()
-
+    
     @Published var isVoteLoading : Bool = false
     @Published var isReloading : Bool = false
     @Published var error: NSError?
+    @Published var liked : Bool = false
     
-    
+    //    @Published var voted : Bool = false
+    //    @Published var liked : Bool = false
+    @Published var totalVoted : Int = 0
+    @Published var totalSkipped : Int = 0
+    @Published var totalFlagged: Int = 0
+    @Published var votedCards = [String]()
+    @Published var isLoading = false
+    @Published var mainVoteCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [],numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0)
+
     let CARDLIMIT : Int = 5
-    
+    @Published var columns: Int = 3
+
     init(){
-        getAllCard()
-       getMyCards()
-        
     }
-    func getAllCard(){
-        self.isReloading = true
-        //        let whereField = User.currentUser()!.sex == "female" ? "male" : "female"
-        //        let lesserGeopoint = GeoPoint(latitude: 0.5, longitude: 1)
-        
-        Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.limit(to: CARD_LIMIT_TO_QUERY).getDocuments { (snap, err) in
-            self.activeCards.removeAll()
-            
-            if err != nil{
-                print((err?.localizedDescription)!)
-                self.error = (err! as NSError)
-                return
+    
+    
+    
+    func checkLiked(postId : String,onSuccess: @escaping(_ result: Bool) -> Void){
+        var result : Bool = false
+
+        Ref.FIRESTORE_COLLECTION_LIKED_POSTID(userId: User.currentUser()!.id, postId: postId).getDocument { (document, error) in
+            if let doc = document, doc.exists {
+                result = true
+            } else {
+                result  = false
             }
-            
-            for i in snap!.documents{
+            onSuccess(result)
+        }
+       
+    }
+    
+    func disLikePost(postId : String ,onSuccess: @escaping(_ result: Bool) -> Void) {
+        var result : Bool = false
+        Ref.FIRESTORE_COLLECTION_LIKED_POSTID(userId: User.currentUser()!.id, postId: postId).getDocument { (document, error) in
+            if let doc = document, doc.exists {
+                doc.reference.delete()
+                print("Removed sucessfully from liked : \(postId) ")
+                result = false
                 
-                let id = i.documentID
-                if(id != Auth.auth().currentUser?.uid){
+                let batch = Ref.FIRESTORE_ROOT.batch()
+                
+                let voteRef = Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.document(postId)
+                batch.updateData(["numLiked" : FieldValue.increment(Int64(-1))], forDocument: voteRef)
+                        
+                batch.commit() { err in
+                    if let err = err {
+                        print("Error writing batch \(err)")
+                    } else {
+                        print("Batch write succeeded.")
+                        result = false
+                        
+                        
+                    }
                     
-                    let dict = i.data()
-                    guard let decoderPost = try? ActiveVote.init(fromDictionary: dict) else {return}
-                    self.activeCards.append(decoderPost)
+                    onSuccess(result)
                 }
+
+                
                 
             }
-            self.isReloading = false
             
-            while (self.activeCards.count < 15){
-                
-                let dummyCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [], numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "")
-                self.activeCards.append(dummyCard)
-                
-                
-                print("self.activeCards.count \(self.activeCards.count)")
+            
+        }
+      
+        
+    }
+ 
+    
+    func likePost(post: ActiveVote , onSuccess: @escaping(_ result: Bool) -> Void) {
+        var result: Bool = false
+        let batch = Ref.FIRESTORE_ROOT.batch()
+        
+        let currentUser = User.currentUser()!
 
+        guard let userDict = try? currentUser.toDictionary() else {return}
+        
+//
+        let id = post.id.uuidString
+        let voteRef = Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.document(id)
+        batch.updateData(["numLiked" : FieldValue.increment(Int64(1))], forDocument: voteRef)
+        
+        
+        let likeRef = Ref.FIRESTORE_COLLECTION_LIKED_POSTID(userId: User.currentUser()!.id, postId: post.id.uuidString)
+        batch.setData(userDict, forDocument: likeRef)
+        batch.commit() { err in
+            if let err = err {
+                print("Error writing batch \(err)")
+            } else {
+                print("Batch write succeeded.")
+                result = true
+                
+                
             }
             
+            onSuccess(result)
 
-            
-            
-            print("self.activeCards.count \(self.activeCards.count)")
-            
-     
         }
         
     }
     
     
-    func getMyCards(){
-//        self.isReloading = true
-        //        let whereField = User.currentUser()!.sex == "female" ? "male" : "female"
-        //        let lesserGeopoint = GeoPoint(latitude: 0.5, longitude: 1)
-        
-        Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.whereField("userId", isEqualTo: User.currentUser()!.id ).limit(to: MY_CARD_LIMIT_TO_QUERY).getDocuments { [self] (snap, err) in
-            self.myActiveCards.removeAll()
-            
-            if err != nil{
-                print((err?.localizedDescription)!)
-                self.error = (err! as NSError)
-                return
-            }
-            
-            for i in snap!.documents{
-                
-                let id = i.documentID
-                
-                let dict = i.data()
-                guard let decoderPost = try? ActiveVote.init(fromDictionary: dict) else {return}
-                self.myActiveCards.append(decoderPost)
-                
-                
-            }
-//            self.isReloading = false
-            
-            while (self.myActiveCards.count < MY_CARD_LIMIT_TO_QUERY){
-                
-                let dummyCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [], numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "")
-                self.myActiveCards.append(dummyCard)
-                
-                
-//                print("self.activeCards.count \(self.activeCards.count)")
-
-            }
-            
-
-            self.myActiveCards = self.myActiveCards.sorted(by: { $0.createdDate > $1.createdDate })
-            
-            print("self.myActiveCards.count \(self.myActiveCards.count)")
-            
-     
-        }
-        
-    }
-    
+  
 }

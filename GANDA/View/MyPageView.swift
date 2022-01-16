@@ -12,14 +12,14 @@ struct MyPageView: View {
     @State  var showingModal: Bool = false
     @State  var animatingModal: Bool = false
     
-    @StateObject  var cardViewModel = CardViewModel()
-    
+    @EnvironmentObject var observer : Observer
+
     var body: some View {
         NavigationView{
             ScrollView(.vertical, showsIndicators: false) {
-                if !self.cardViewModel.myActiveCards.isEmpty {
+                if !self.$observer.myActiveCards.isEmpty {
                     VStack(spacing:10) {
-                        ImageGrid(img:self.cardViewModel.myActiveCards, selected: self.$cardViewModel.myActiveCards[0], showingModal: $showingModal, animatingModal: $animatingModal).offset(y: -25)
+                        ImageGrid(img:self.observer.myActiveCards, selected: self.$observer.myActiveCards[0], showingModal: $showingModal, animatingModal: $animatingModal).offset(y: -25)
                         
                     }     .toolbar {
                         
@@ -59,23 +59,24 @@ struct MyPageView_Previews: PreviewProvider {
 
 struct ImageGrid : View {
     @EnvironmentObject var observer : Observer
-    
+    let haptics = UINotificationFeedbackGenerator()
+
     @State var img : [ActiveVote] = []
     @Binding var selected : ActiveVote
     @Binding var showingModal: Bool
     @Binding var animatingModal: Bool
     
-    @State var voteData:[Double] = []
-    
-    //    @State var buttonTitle : [String] = ["나는코린이다", "빨간구두가 잘어울린다","돈잘벌꺼같다"]
+//    @State var voteData:[Double] = []
+//
     @State var numVoteData:[Int] = [0,0,0]
-    
-    @State var buttonTitle : [String] = ["test", "test2","test1"]
     @State var ymax : Int = 100
     @State var totalNumVote : Int = 0
+    @State var totalNumLiked : Int = 0
+
+    
     
     @State var isAnimating : Bool = true
-    @State var voteDataOneCard:[Double] = []
+   @State var voteDataOneCard:[Double] = []
     
     var body: some View {
         
@@ -87,18 +88,18 @@ struct ImageGrid : View {
                     HStack{
                         Spacer()
                         
-                        ProgressImageView(pic: img[0], seclectedPic: $selected, isMainPic: true, showingModal: $showingModal, voteDataOneCard:$voteDataOneCard)
+                        ProgressImageView(pic: img[0], seclectedPic: $selected, isMainPic: true, showingModal: $showingModal, animatingModal: $animatingModal,voteDataOneCard:$voteDataOneCard)
                             .padding(.leading, -8.8)
                         VStack{
-                            ProgressImageView(pic: img[1], seclectedPic: $selected, isMainPic: false, showingModal: $showingModal, voteDataOneCard:$voteDataOneCard)
-                            ProgressImageView(pic: img[2], seclectedPic: $selected, isMainPic: false, showingModal: $showingModal, voteDataOneCard:$voteDataOneCard)
+                            ProgressImageView(pic: img[1], seclectedPic: $selected, isMainPic: false, showingModal: $showingModal,animatingModal: $animatingModal, voteDataOneCard:$voteDataOneCard)
+                            ProgressImageView(pic: img[2], seclectedPic: $selected, isMainPic: false, showingModal: $showingModal,animatingModal: $animatingModal,voteDataOneCard:$voteDataOneCard)
                             
                         }.frame(width : geo.size.width / 3 - 13 , height: 270)
                     }
                     HStack{
-                        ProgressImageView(pic: img[3], seclectedPic: $selected, isMainPic: false, showingModal: $showingModal, voteDataOneCard:$voteDataOneCard)
-                        ProgressImageView(pic: img[4], seclectedPic: $selected, isMainPic: false, showingModal: $showingModal, voteDataOneCard:$voteDataOneCard)
-                        ProgressImageView(pic: img[5], seclectedPic: $selected, isMainPic: false, showingModal: $showingModal, voteDataOneCard:$voteDataOneCard)
+                        ProgressImageView(pic: img[3], seclectedPic: $selected, isMainPic: false, showingModal: $showingModal,animatingModal: $animatingModal, voteDataOneCard:$voteDataOneCard)
+                        ProgressImageView(pic: img[4], seclectedPic: $selected, isMainPic: false, showingModal: $showingModal, animatingModal: $animatingModal,voteDataOneCard:$voteDataOneCard)
+                        ProgressImageView(pic: img[5], seclectedPic: $selected, isMainPic: false, showingModal: $showingModal, animatingModal: $animatingModal,voteDataOneCard:$voteDataOneCard)
                         
                     }.frame(height: 135, alignment: .leading)
                     
@@ -108,8 +109,8 @@ struct ImageGrid : View {
                     VStack(alignment: .leading,spacing: 5){
                         HStack{
                             
-                            if !self.voteData.isEmpty {
-                                ChartView_BAR(data: self.$voteData, numVote: self.$numVoteData, totalNum: self.$ymax, title: self.img[0].description, categories: self.img[0].attrNames)
+                            if !self.observer.mainVoteData.isEmpty {
+                                ChartView_BAR(data: self.$observer.mainVoteData, totalNum: self.$ymax, title: self.img[0].description, categories: self.img[0].attrNames)
                                     .frame( height: 170)
                             }
                             
@@ -124,7 +125,7 @@ struct ImageGrid : View {
                     .padding(.horizontal, 1)
                     //                    .frame(height: 135, alignment: .leading)
                     
-                    FollowersStats(count:  String(totalNumVote))
+                    FollowersStats(numVote:  String(observer.mainVoteNum), numLiked: String(observer.mainVoteLiked))
                         .background(Color.white)
                         .cornerRadius(25)
                         .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
@@ -156,13 +157,14 @@ struct ImageGrid : View {
                                                     withAnimation(.spring(response: 0.9, dampingFraction: 1.0, blendDuration: 1.0)){
                                                         
                                                         self.showingModal.toggle()
+                                                        self.haptics.notificationOccurred(.success)
                                                     }
                                                     
                                                 } label: {
                                                     Spacer()
                                                     Image(systemName: "xmark")
                                                         .foregroundColor(.white)
-                                                        .frame(width: 28, height: 28)
+                                                        .frame(width: 25, height: 25)
                                                         .padding(5)
                                                         .background(Color.black.opacity(0.5))
                                                         .clipShape(Circle())
@@ -179,7 +181,7 @@ struct ImageGrid : View {
                                     )
                                 
                                 if !self.voteDataOneCard.isEmpty {
-                                    ChartView_BAR(data: self.$voteDataOneCard, numVote: self.$numVoteData, totalNum: self.$ymax, title: "TEST" , categories: selected.attrNames)
+                                    ChartView_BAR(data: self.$voteDataOneCard, totalNum: self.$ymax, title: selected.description , categories: selected.attrNames)
                                         .frame(width: geo.size.width / 1.3, height: 180).padding(.horizontal)
                                 }
                                 
@@ -196,12 +198,11 @@ struct ImageGrid : View {
                             
                             .opacity(self.$animatingModal.wrappedValue ? 1 : 0)
                             .offset(y: self.$animatingModal.wrappedValue ? 0 : -100)
-                            
                             .animation(
                                 Animation.spring(response: 0.9, dampingFraction: 1.0, blendDuration: 1.0))
                             .onAppear(perform: {
                                 self.animatingModal = true
-                            }).offset(y: 80)
+                            }).offset(y: 50)
                             //                        .padding(.horizontal)
                         }
                         Spacer()
@@ -215,14 +216,7 @@ struct ImageGrid : View {
                 .ignoresSafeArea()
         )
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now()+0.2){
-                //                loadChartData(postId: self.img[0].id.uuidString)
-                self.observer.loadChartData(postId: self.img[0].id.uuidString) { voteData , numVote in
-                    self.voteData = voteData
-                    self.totalNumVote = numVote
-                }
-            }
-            
+        
             
         }
         
@@ -233,7 +227,7 @@ struct ImageGrid : View {
     
     
     @ViewBuilder
-    func FollowersStats(count:String)->some View{
+    func FollowersStats(numVote:String, numLiked: String)->some View{
         
         VStack{
             
@@ -242,9 +236,9 @@ struct ImageGrid : View {
             
             HStack(spacing: 10){
                 
-                StatView(title: "총 받은 투표수", count: count, image: "checkmark", color: GRADIENT_COLORS[0])
+                StatView(title: VOTENUM, count: numVote, image: "checkmark", color: GRADIENT_COLORS[0])
                 
-                StatView(title: "라이크 수", count: "0", image: "play.fill", color: GRADIENT_COLORS[2])
+                StatView(title: LIKENUM, count: numLiked, image: "play.fill", color: GRADIENT_COLORS[2])
             }
             //            .padding(.top)
         }
@@ -260,17 +254,12 @@ struct ImageGrid : View {
     @ViewBuilder
     func StatView(title: String,count: String,image: String,color: LinearGradient)->some View{
         
-        VStack(alignment: .leading, spacing: 15) {
+        VStack(alignment: .leading, spacing: 10) {
             
             HStack{
-                //                Image(systemName: image)
-                //                    .font(.caption.bold())
-                //                   .foregroundColor(color)
-                //                    .padding(6)
-                //                    .background(Color("BG"))
-                //                    .cornerRadius(8)
-                
+                Spacer()
                 Text(title)
+                Spacer()
             }
             HStack{
                 Spacer()
@@ -298,6 +287,7 @@ struct ProgressImageView: View {
     @Binding var seclectedPic : ActiveVote
     var isMainPic : Bool = false
     @Binding var showingModal : Bool
+    @Binding var animatingModal : Bool
     @Binding var voteDataOneCard:[Double]
     @EnvironmentObject var observer : Observer
     
@@ -319,17 +309,19 @@ struct ProgressImageView: View {
                 AnimatedImage(url: URL(string: pic.imageLocation)).resizable()
                     .onTapGesture {
                         withAnimation {
+//                            voteDataOneCard.removeAll()
                             seclectedPic = pic
-                            observer.loadChartData(postId: seclectedPic.id.uuidString) { voteData,numVote  in
+                            observer.loadChartData(postId: seclectedPic.id.uuidString) { voteData,numVote , numLiked in
+                                
                                 voteDataOneCard = voteData
+                                
+                                showingModal.toggle()
                             }
-                            showingModal.toggle()
                             
-                            DispatchQueue.main.asyncAfter(deadline: .now()+0.2){
-                                
-                                
-                                
-                            }
+//                            DispatchQueue.main.asyncAfter(deadline: .now()+0.2){
+//
+//
+//                            }
                             
                         }
                     }
@@ -339,14 +331,16 @@ struct ProgressImageView: View {
                     .onTapGesture {
                         withAnimation {
                             seclectedPic = pic
-                            observer.loadChartData(postId: seclectedPic.id.uuidString) { voteData , numVote in
+                            observer.loadChartData(postId: seclectedPic.id.uuidString) { voteData , numVote, numLiked in
                                 voteDataOneCard = voteData
+                                showingModal.toggle()
                             }
-                            showingModal.toggle()
                             
-                            DispatchQueue.main.asyncAfter(deadline: .now()+0.2){
-                                
-                            }
+                            
+                            
+//                            DispatchQueue.main.asyncAfter(deadline: .now()+0.3){
+//                                showingModal.toggle()
+//                            }
                             
                         }
                     }

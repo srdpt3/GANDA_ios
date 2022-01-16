@@ -70,6 +70,8 @@
 		111F08A827922F7D0096BF68 /* BarGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111F089827922F700096BF68 /* BarGraph.swift */; };
 		111F08A927922F7D0096BF68 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111F089927922F7D0096BF68 /* LottieView.swift */; };
 		111F08AB279259390096BF68 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111F08AA279259390096BF68 /* Observer.swift */; };
+		111F08AF27932AB00096BF68 /* upload.json in Resources */ = {isa = PBXBuildFile; fileRef = 111F08AE27932AAF0096BF68 /* upload.json */; };
+		111F08B12793A92A0096BF68 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111F08B02793A9260096BF68 /* ActivityIndicatorView.swift */; };
 		1184AC5E2791FD550094C384 /* GANDAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184AC5D2791FD550094C384 /* GANDAApp.swift */; };
 		1184AC602791FD550094C384 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184AC5F2791FD550094C384 /* ContentView.swift */; };
 		1184AC622791FD5B0094C384 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1184AC612791FD5B0094C384 /* Assets.xcassets */; };
@@ -142,6 +144,8 @@
 		111F089827922F700096BF68 /* BarGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarGraph.swift; sourceTree = "<group>"; };
 		111F089927922F7D0096BF68 /* LottieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		111F08AA279259390096BF68 /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
+		111F08AE27932AAF0096BF68 /* upload.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = upload.json; sourceTree = "<group>"; };
+		111F08B02793A9260096BF68 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		1184AC5A2791FD550094C384 /* GANDA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GANDA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1184AC5D2791FD550094C384 /* GANDAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GANDAApp.swift; sourceTree = "<group>"; };
 		1184AC5F2791FD550094C384 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -196,6 +200,7 @@
 				111F087B27922F670096BF68 /* TagView_Card.swift */,
 				111F084F27922E270096BF68 /* TagView.swift */,
 				111F085C27922E6C0096BF68 /* UploadView.swift */,
+				111F08B02793A9260096BF68 /* ActivityIndicatorView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -276,6 +281,7 @@
 		111F086227922E8D0096BF68 /* Lottie Json */ = {
 			isa = PBXGroup;
 			children = (
+				111F08AE27932AAF0096BF68 /* upload.json */,
 				111F086327922E8D0096BF68 /* plus.json */,
 				111F086427922E8D0096BF68 /* loading.json */,
 			);
@@ -404,6 +410,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				111F08AF27932AB00096BF68 /* upload.json in Resources */,
 				1184AC652791FD5B0094C384 /* Preview Assets.xcassets in Resources */,
 				111F089B27922F7D0096BF68 /* plus.json in Resources */,
 				1184AC6E2791FDE40094C384 /* GoogleService-Info.plist in Resources */,
@@ -520,6 +527,7 @@
 				111F089427922F670096BF68 /* BaseView.swift in Sources */,
 				111F088D27922F670096BF68 /* FavoriteView.swift in Sources */,
 				111F089727922F670096BF68 /* TagView_Card.swift in Sources */,
+				111F08B12793A92A0096BF68 /* ActivityIndicatorView.swift in Sources */,
 				111F087F27922F670096BF68 /* SelectionView.swift in Sources */,
 				111F08A427922F7D0096BF68 /* ChartView_BAR.swift in Sources */,
 				111F089527922F670096BF68 /* LoadingView.swift in Sources */,
@@ -652,6 +660,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = GANDA/GANDA.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -665,6 +674,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -684,6 +694,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = GANDA/GANDA.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -697,6 +708,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

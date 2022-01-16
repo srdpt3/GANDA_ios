@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import GoogleSignIn
+import SDWebImageSwiftUI
 
 
 struct SideMenu: View {
@@ -23,13 +24,29 @@ struct SideMenu: View {
         VStack(alignment: .leading, spacing: 15, content: {
             
             // Profile Pic...
-            Image(APP_LOGO_SMALL)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 70, height: 70)
-                .cornerRadius(10)
-            // Padding top for Top Close Button...
-                .padding(.top,50)
+            
+            if( User.currentUser()!.profileImageUrl != ""){
+                AnimatedImage(url: URL(string: User.currentUser()!.profileImageUrl)).resizable()
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 70, height: 70)
+                    .cornerRadius(35)
+                    .clipShape(Circle())
+                // Padding top for Top Close Button...
+                    .padding(.top,50)
+            }
+            else{
+                Image(APP_LOGO_SMALL)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 70, height: 70)
+                    .cornerRadius(35)
+                    .clipShape(Circle())
+                // Padding top for Top Close Button...
+                    .padding(.top,50)
+            }
+//            Image(APP_LOGO_SMALL)
+
             
             VStack(alignment: .leading, spacing: 6, content: {
 
@@ -38,12 +55,12 @@ struct SideMenu: View {
                     .fontWeight(.heavy)
                     .foregroundColor(.white)
 
-//                Button(action: {}, label: {
-//                    Text("View Profile")
-//                        .fontWeight(.semibold)
-//                        .foregroundColor(.white)
-//                        .opacity(0.7)
-//                })
+                Button(action: {}, label: {
+                    Text(PROFILE_VIEW)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                        .opacity(0.7)
+                })
             })
             
             // tab Buttons...

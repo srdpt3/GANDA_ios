@@ -12,7 +12,7 @@ import AAInfographics
 struct ChartView_BAR: UIViewRepresentable {
     
     @Binding var data : [Double]
-    @Binding var numVote : [Int]
+//    @Binding var numVote : [Int]
     
     @Binding var totalNum : Int
     var title : String
@@ -36,7 +36,7 @@ struct ChartView_BAR: UIViewRepresentable {
     
     let gradientColorDic1 = AAGradientColor.linearGradient(
         direction: .toTop,
-        startColor: "#667EEA",
+        startColor: "#526FF2",
         endColor: "#764BA2"
     )
     let gradientColorArr = [

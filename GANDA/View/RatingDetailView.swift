@@ -11,12 +11,18 @@ struct RatingDetailView: View {
     
     //    var recipe: Recipe
     var card:  ActiveVote
+    var hideDetail : Bool = true
 
     var body: some View {
         HStack(alignment: .center, spacing: 10) {
             HStack(alignment: .center, spacing: 2) {
                 Image(systemName: "person.2")
-                Text(VOTENUM +  String(self.card.numVote))
+                Text(VOTENUM + (!hideDetail ? String(self.card.numVote) : "***"))
+            }
+            
+            HStack(alignment: .center, spacing: 2) {
+                Image(systemName: "suit.heart")
+                Text(LIKENUM + (!hideDetail ? String(self.card.numLiked) : "***"))
             }
             HStack(alignment: .center, spacing: 2) {
                 Image(systemName: "clock")

@@ -24,6 +24,7 @@ struct CustomTextField: View {
             HStack(alignment: .bottom){
                 
                 Image(systemName: image)
+                
                     .font(.system(size: 22))
                     .foregroundColor(value == "" ? .gray : .primary)
                     .frame(width: 35)
@@ -31,9 +32,9 @@ struct CustomTextField: View {
                 VStack(alignment: .leading, spacing: 6) {
                     
                     if value != ""{
-                        
                         Text(title)
-                            .font(.caption)
+                            .font(Font.custom(FONT, size: 13))
+//                            .font(.caption)
                             .fontWeight(.heavy)
                             .foregroundColor(.gray)
                             .matchedGeometryEffect(id: title, in: animation)
@@ -44,7 +45,8 @@ struct CustomTextField: View {
                         if value == ""{
                             
                             Text(title)
-                                .font(.caption)
+                                .font(Font.custom(FONT, size: 13))
+//                                .font(.caption)
                                 .fontWeight(.heavy)
                                 .foregroundColor(.gray)
                                 .matchedGeometryEffect(id: title, in: animation)

@@ -12,7 +12,8 @@ struct UploadView: View {
     @Binding var uploadComplete : Bool
     @Binding var showUploadView : Bool
     
-    
+    @EnvironmentObject var observer : Observer
+
     
     @ObservedObject var uploadViewModel = UploadViewModel()
     
@@ -54,7 +55,7 @@ struct UploadView: View {
                             
                             if self.images[0].count == 0{
                                 
-                                LottieView(filename: "plus").frame(width: 100, height: 100)
+                                LottieView(filename: "upload").frame(width: 100, height: 100)
                                     .clipShape(Circle()).padding(.bottom, 10).padding(.top, 10).zIndex(1)
                                     .onTapGesture {
                                         self.index = 0
@@ -75,54 +76,41 @@ struct UploadView: View {
                             }
                         }
 
-                        VStack{
-                            //                            Text("나의 스타일 올리기").font(.system(size: 16, weight: .bold)).foregroundColor(.black)
-                            //                            //                            Spacer()
-                            CustomTextField(image: "questionmark.circle", title: "내스타일 질문", value: $questionText, animation: animation)
-                                .padding(.top,5)
-                            
-                        }
+                     
                     }.padding(.leading)
-                    
-                    
-                    
-                    
-                    
+                
                 }
-                .padding(10)
+                .padding(.horizontal)
                 .cornerRadius(20)
                 .background(
                     Color("BG")
                         .ignoresSafeArea()
                 )
-                
-                
+                VStack{
+                    //                            Text("나의 스타일 올리기").font(.system(size: 16, weight: .bold)).foregroundColor(.black)
+                    //                            //                            Spacer()
+                    CustomTextField(image: "questionmark.circle", title: "내스타일 질문", value: $questionText, animation: animation)
+                }
                 CustomTextField(image: "filemenu.and.selection", title: "보기 1", value: $selectionText[0], animation: animation)
                 CustomTextField(image: "filemenu.and.selection", title: "보기 2", value: $selectionText[1], animation: animation)
-                CustomTextField(image: "filemenu.and.selection", title: "보기 3", value: $selectionText[2], animation: animation)
-                
+                CustomTextField(image: "filemenu.and.selection", title: "보기 3(선택사항)", value: $selectionText[2], animation: animation)
                 VStack{
-                    
                     VStack(spacing: 10){
-
                         TextField(PLEASE_ADD_TAG, text: $text)
                             .font(Font.custom(FONT, size: 14))
                             .foregroundColor(.black)
                             .padding(.vertical,10)
                             .padding(.horizontal)
                             .background(
-                                
                                 RoundedRectangle(cornerRadius: 20)
                                     .strokeBorder(Color(.gray),lineWidth: 1)
-                                
                             )
                         // Setting only Textfield as Dark..
                         //                .environment(\.colorScheme, .dark)
                             .padding(.vertical,5)
-                        
                         TagView(maxLimit: 100, tags: $tags,fontSize: 15)
                         // Default Height...
-                            .frame(height: 150)
+                            .frame(height: 100)
                         // Add Button..
                         HStack{
 
@@ -171,16 +159,14 @@ struct UploadView: View {
                                     .cornerRadius(20)
                             }
                             // Disabling Button...
-                            .disabled((tags.count < 5 || questionText == "" || self.images[0].count == 0))
-                            .opacity((tags.count < 5 || questionText == "" || self.images[0].count == 0) ? 0.6 : 1)
- 
-                            
+                            .disabled((tags.count < 3 || questionText == "" || self.images[0].count == 0))
+                            .opacity((tags.count < 3 || questionText == "" || self.images[0].count == 0) ? 0.6 : 1) 
                         }
 
                     }
 
                 }
-                .padding(10)
+                .padding(.horizontal, 12)
                 .frame(maxWidth: .infinity,maxHeight: .infinity,alignment: .top)
                 .alert(isPresented: $showAlert) {
                     Alert(title: Text(ERROR), message: Text(TAG_LIMIT_ERROR), dismissButton: .destructive(Text("Ok")))
@@ -232,18 +218,21 @@ struct UploadView: View {
     
     func uploadPicture(){
         
-        uploadViewModel.uploadVote(title: self.questionText, selectionText: self.selectionText, tags: self.tags, imageData: self.images[0])
-        self.uploadComplete = true
-        self.presentationMode.wrappedValue.dismiss()
-        //        if(!self.noVotePic && self.vote.imageLocation != ""){
-        //            historyViewModel.persistPastVoteData(vote: self.vote)
-        //            //            if(!historyViewModel.isLoading){
-        //            //            }
-        //
-        //        }
-        self.uploadComplete = true
-        //        self.showAlert.toggle()
-        //         self.activeAlert = ActiveAlert.second
+        uploadViewModel.uploadVote(title: self.questionText, selectionText: self.selectionText, tags: self.tags, imageData: self.images[0]) { result in
+            
+            self.uploadComplete = true
+
+//            self.showAlert.toggle()
+            
+            
+            
+            self.showUploadView.toggle()
+            observer.refresh()
+            self.presentationMode.wrappedValue.dismiss()
+
+            
+            
+        }
     }
     
     func hide_keyboard()

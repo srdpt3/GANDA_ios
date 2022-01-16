@@ -15,8 +15,8 @@ struct CardView: View {
     
     @Binding var showDetailView : Bool
     
-    @State var selected  = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [],numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "")
-    @State var show = false
+    @State var selected  = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [],numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0)
+    @State var showDetailScreen = false
     @State var isTap = false
     
     @State var showUploadView = false
@@ -24,7 +24,7 @@ struct CardView: View {
     
     // To show dynamic...
     @State var activeVote : ActiveVote?
-    @State var columns: Int = 3
+    
     @State var loadView = false
     @State var buttonPressed = [false,false,false]
     @State var buttonSelected = ""
@@ -47,21 +47,18 @@ struct CardView: View {
     @State var selectedFlag = ""
     @State var showFlag = false
     @State var flagMessage = false
-    
-    
     //FlowingButton
     @State var showFavoriteView  = false
     
-    @StateObject private var cardViewModel = CardViewModel()
-    
-    
+    let haptics = UINotificationFeedbackGenerator()
+
     var body: some View {
         ZStack(alignment: .bottomTrailing){
             NavigationView{
                 
-                if !self.cardViewModel.activeCards.isEmpty {
+                if !self.observer.activeCards.isEmpty {
                     
-                    StaggeredGrid(columns: columns, list: self.cardViewModel.activeCards, content: { post in
+                    StaggeredGrid(columns: self.observer.columns, list: self.observer.activeCards, content: { post in
                         
                         // Post Card View...
                         PostCardView(post: post)
@@ -73,9 +70,12 @@ struct CardView: View {
                                         self.voteBarData.removeAll()
                                        self.voteData.removeAll()
                                         self.selected = post
-                                        loadChartData(postId: self.selected.id.uuidString)
+                                        let postID = self.selected.id.uuidString
                                         
-                                        show.toggle()
+                                        loadChartData(postId: postID)
+                                        self.observer.checkLiked(postId: postID)
+                                        
+                                        showDetailScreen.toggle()
                                         showDetailView.toggle()
                                         print(TOKEN)
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -106,6 +106,7 @@ struct CardView: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(height: 25)
+                                    .foregroundColor(Color("Gray"))
                                     .padding(.leading,UIScreen.main.bounds.width / 4)
                                 
                                 
@@ -115,7 +116,7 @@ struct CardView: View {
                             ToolbarItem(placement: .navigationBarTrailing) {
                                 
                                 Button {
-                                    columns = min(columns + 1, 4)
+                                    self.observer.columns = min(self.observer.columns + 1, 4)
                                     
                                 } label: {
                                     Image(systemName: "plus")
@@ -135,7 +136,7 @@ struct CardView: View {
                             ToolbarItem(placement: .navigationBarTrailing) {
                                 
                                 Button {
-                                    columns = max(columns - 1, 1)
+                                    self.observer.columns = max(self.observer.columns - 1, 1)
                                 } label: {
                                     Image(systemName: "minus")
                                         .foregroundColor(.white)
@@ -148,7 +149,7 @@ struct CardView: View {
                                         )
                                 }
                             }
-                        }.animation(.easeInOut, value: columns)
+                        }.animation(.easeInOut, value: self.observer.columns)
                         .background(
                             Color("BG")
                                 .ignoresSafeArea()
@@ -158,6 +159,7 @@ struct CardView: View {
                     
                 }
                 else{
+
                     LottieView(filename: "loading").frame(width: 220, height: 220)
                 }
             }
@@ -167,7 +169,7 @@ struct CardView: View {
             )
             //            .zIndex(1)
             
-            if show{
+            if showDetailScreen {
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 10){
@@ -182,7 +184,11 @@ struct CardView: View {
                                 .ignoresSafeArea(.container)
                             
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            
+//                                .overlay(
+//
+//                                    HeartLike(isTapped: self.$cardViewModel.liked, taps: 3)
+//                                )
+                                .cornerRadius(15)
                             
                             HStack{
                                 if !self.voteData.isEmpty{
@@ -192,7 +198,7 @@ struct CardView: View {
                                         
                                         withAnimation(.spring()){
                                             
-                                            show.toggle()
+                                            showDetailScreen.toggle()
                                             showDetailView.toggle()
                                         }
                                         
@@ -211,17 +217,14 @@ struct CardView: View {
                                 Spacer()
                                 
                                 Button {
-                                    
-                                    
+                                    self.observer.liked ? self.observer.disLikePost(postId: selected.id.uuidString) :
+                                    self.observer.likePost(post: selected)
                                 } label: {
-                                    
-                                    
-                                    Image("empty-heart")
+                                    Image(self.observer.liked ? "full-heart" : "empty-heart" )
                                         .resizable()
                                         .scaledToFit()
-                                        .frame(maxHeight: 30)
+                                        .frame(maxHeight: 35)
                                         .clipShape(Circle())
-                                    
                                     
                                 }
                             }
@@ -236,22 +239,24 @@ struct CardView: View {
                         .previewLayout(.fixed(width: 375, height: 500))
                         // Detail View....
                         VStack{
-                            HStack{
-                                Spacer()
-                                RatingDetailView(card: selected)
-                                Spacer()
-                                
-                            }
+                         
                             if(!observer.votedCards.contains(self.selected.id.uuidString)){
-                                
+                                HStack{
+                                    Spacer()
+                                    RatingDetailView(card: selected, hideDetail : true)
+                                    Spacer()
+                                    
+                                }.padding(.vertical, 10)
                                 VStack(alignment: .leading,spacing: 15){
                                     
                                     Text(self.selected.description)
-                                        .font(.title2)
+                                        .font(Font.custom(FONT, size: 16))
                                         .fontWeight(.heavy)
                                         .foregroundColor(.black)
-                                    Spacer(minLength: 0)
+//                                    Spacer(minLength: 0)
                                     Button(action: {
+                                        self.haptics.notificationOccurred(.success)
+
                                         withAnimation {
                                             self.buttonPressed[0].toggle()
                                             self.sendMessageToDevice(title: ("\(User.currentUser()!.username) 이 투표를 했습니다"),
@@ -262,20 +267,26 @@ struct CardView: View {
                                         
                                     }, label: {
                                         Text(self.selected.attrNames[0])
+                                            .font(Font.custom(FONT, size: 15))
                                             .foregroundColor(.black)
                                             .padding()
                                             .frame(maxWidth: .infinity)
-                                            .background(
-                                                RoundedRectangle(cornerRadius: 15)
-                                                    .stroke(color(option: self.selected.attrNames[0]),lineWidth: 2)
-                                            )
+                                            .background(Color("BG"))
+                                            .animation(.spring())
+                                            .cornerRadius(15)
+                                            .shadow(color: Color.black.opacity(self.buttonPressed[0] ? 0.1: 0.3), radius: 5, x: 5, y: 5)
+                                            .shadow(color: Color.white.opacity(0.5), radius: 5, x: -8, y: -8)
+                                        
+//                                   =
                                     })
                                     
                                     Button(action: {
-                                        
+                                        self.haptics.notificationOccurred(.success)
+
                                         withAnimation {
+
                                             self.buttonPressed[1].toggle()
-                                            self.sendMessageToDevice(title: ("\(User.currentUser()!.username) 이 투표를 했습니다"),
+                                            self.sendMessageToDevice(title: ("누군가가 투표를 했습니다"),
                                                                      body: "\(self.selected.attrNames[1])", token: self.selected.token)
                                             self.persist()
                                         }
@@ -286,33 +297,40 @@ struct CardView: View {
                                             .foregroundColor(.black)
                                             .padding()
                                             .frame(maxWidth: .infinity)
-                                            .background(
-                                                RoundedRectangle(cornerRadius: 15)
-                                                    .stroke(color(option: self.selected.attrNames[1]),lineWidth: 2)
-                                            )
+                                            .font(Font.custom(FONT, size: 15))
+                                            .background(Color("BG"))
+                                            .animation(.spring())
+                                            .cornerRadius(15)
+                                            .shadow(color: Color.black.opacity(self.buttonPressed[1] ? 0.1: 0.3), radius: 5, x: 5, y: 5)
+                                            .shadow(color: Color.white.opacity(0.5), radius: 5, x: -8, y: -8)
                                     })
-                                    
-                                    Button(action: {
-                                        
-                                        withAnimation {
-                                            self.buttonPressed[2].toggle()
-                                            self.sendMessageToDevice(title: ("\(User.currentUser()!.username) 이 투표를 했습니다"),
-                                                                     body: "\(self.selected.attrNames[2])", token: self.selected.token)
+                                    if(self.selected.attrNames[2] != ""){
+                                        Button(action: {
+                                            self.haptics.notificationOccurred(.success)
+
+                                            withAnimation {
+                                                self.buttonPressed[2].toggle()
+                                                self.sendMessageToDevice(title: ("\(User.currentUser()!.username) 이 투표를 했습니다"),
+                                                                         body: "\(self.selected.attrNames[2])", token: self.selected.token)
+                                                
+                                                self.persist()
+                                            }
+                                            buttonSelected = self.selected.attrNames[2]
                                             
-                                            self.persist()
-                                        }
-                                        buttonSelected = self.selected.attrNames[2]
-                                        
-                                    }, label: {
-                                        Text(self.selected.attrNames[2])
-                                            .foregroundColor(.black)
-                                            .padding()
-                                            .frame(maxWidth: .infinity)
-                                            .background(
-                                                RoundedRectangle(cornerRadius: 15)
-                                                    .stroke(color(option: self.selected.attrNames[2]),lineWidth: 2)
-                                            )
-                                    })
+                                        }, label: {
+                                            Text(self.selected.attrNames[2])
+                                                .foregroundColor(.black)
+                                                .padding()
+                                                .font(Font.custom(FONT, size: 15))
+                                                .frame(maxWidth: .infinity)
+                                                .background(Color("BG"))
+                                                .animation(.spring())
+                                                .cornerRadius(15)
+                                                .shadow(color: Color.black.opacity(self.buttonPressed[2] ? 0.1: 0.3), radius: 5, x: 5, y: 5)
+                                                .shadow(color: Color.white.opacity(0.5), radius: 5, x: -8, y: -8)
+                                        })
+                                    }
+      
                                     Spacer(minLength: 0)
                                     
                                     
@@ -327,25 +345,23 @@ struct CardView: View {
                                 
                             }
                             else{
-                                
+                                HStack{
+                                    Spacer()
+                                    RatingDetailView(card: selected, hideDetail : false)
+                                    Spacer()
+                                    
+                                }.padding(.vertical, 10)
                                 VStack(alignment: .leading,spacing: 22){
                                     if !self.voteData.isEmpty {
-                                        ChartView_BAR(data: self.$voteData, numVote: self.$numVoteData, totalNum: self.$ymax, title: self.selected.description, categories: self.selected.attrNames)
+                                        ChartView_BAR(data: self.$voteData, totalNum: self.$ymax, title: self.selected.description, categories: self.selected.attrNames)
                                             .frame(maxWidth: .infinity,idealHeight: 200)
                                     }
-                                    
-                                    //                                  x          .padding()
-                                    //                                            .background(Color.white)
-                                    //                                            .cornerRadius(25)
-                                    //                                            .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
-                                    //                                            .shadow(color: Color.black.opacity(0.05), radius: 5, x: -5, y: -5)
-                                    //                                            .padding(.horizontal)
-                                    //                                            .padding(.top)
+     
                                     Divider().padding(.horizontal, 15)
                                     VStack(spacing: 5){
                                         HStack{
                                             Text("사진 태그들")
-                                                .foregroundColor(Color("Gray")).font(Font.custom(FONT, size: 15))
+                                                .foregroundColor(Color.black).font(Font.custom(FONT, size: 15))
                                                 .fontWeight(.bold)
                                                 .foregroundColor(.black)
                                             Spacer(minLength: 0)
@@ -356,11 +372,11 @@ struct CardView: View {
                                         
                                         //                                            ParallexView().padding(.leading,15).z
                                         
-                                    }.padding(.leading,15)
+                                    }.padding(.leading,12)
                                     
                                 }
                                 .offset(y : -20)
-                                .padding()
+                                .padding(.horizontal)
                                 .background(Color.white)
                                 .cornerRadius(25)
                                 .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
@@ -505,6 +521,7 @@ struct CardView: View {
         self.observer.persist(votePost: selected, buttonPressed: self.buttonPressed)
         buttonPressed = [false,false,false]
         loadChartData(postId: selected.id.uuidString)
+        selected.numVote = selected.numVote + 1
     }
     // highlighting answer...
     func color(option: String)->Color{
@@ -517,11 +534,190 @@ struct CardView: View {
     }
     
     func loadChartData(postId : String){
-        observer.loadChartData(postId: postId) { voteBarData, numVote in
+        observer.loadChartData(postId: postId) { voteBarData, numVote , numLiked in
             self.voteData  = voteBarData
         }
     }
     
+    
+    struct HeartLike: View{
+        
+        // Animation Properites....
+        @Binding var isTapped: Bool
+        
+        @State var startAnimation = false
+        @State var bgAniamtion = false
+        // Resetting Bg....
+        @State var resetBG = false
+        @State var fireworkAnimation = false
+        
+        @State var animationEnded = false
+        
+        // To Avoid Taps during Animation...
+        @State var tapComplete = false
+        
+        // Setting How Many taps...
+        var taps: Int = 2
+        
+        var body: some View{
+            
+            // Heart Like Animation....
+            Image(systemName: resetBG ? "suit.heart.fill" : "suit.heart")
+                .font(.system(size: 45))
+                .foregroundColor(resetBG ? .red : .gray)
+            // Scaling...
+                .scaleEffect(startAnimation && !resetBG ? 0 : 1)
+                .opacity(startAnimation && !animationEnded ? 1 : 0)
+            // BG...
+                .background(
+                
+                    ZStack{
+                        
+                        CustomShape(radius: resetBG ? 29 : 0)
+                            .fill(Color.purple)
+                            .clipShape(Circle())
+                            // Fixed Size...
+                            .frame(width: 50, height: 50)
+                            .scaleEffect(bgAniamtion ? 2.2 : 0)
+                        
+                        ZStack{
+                            
+                            // random Colors..
+                            let colors: [Color] = [.red,.purple,.green,.yellow,.pink]
+                            
+                            ForEach(1...6,id: \.self){index in
+                                
+                                Circle()
+                                    .fill(colors.randomElement()!)
+                                    .frame(width: 12, height: 12)
+                                    .offset(x: fireworkAnimation ? 80 : 40)
+                                    .rotationEffect(.init(degrees: Double(index) * 60))
+                            }
+                            
+                            ForEach(1...6,id: \.self){index in
+                                
+                                Circle()
+                                    .fill(colors.randomElement()!)
+                                    .frame(width: 8, height: 8)
+                                    .offset(x: fireworkAnimation ? 64 : 24)
+                                    .rotationEffect(.init(degrees: Double(index) * 60))
+                                    .rotationEffect(.init(degrees: -45))
+                            }
+                        }
+                        .opacity(resetBG ? 1 : 0)
+                        .opacity(animationEnded ? 0 : 1)
+                    }
+                )
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                .contentShape(Rectangle())
+                .onTapGesture(count: taps){
+                    
+                    if tapComplete{
+                        
+                        updateFields(value: false)
+                        // resettin back...
+                        return
+                    }
+                    
+                    
+                    if startAnimation{
+                        return
+                    }
+                    
+                    isTapped = true
+                    
+                    withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.6, blendDuration: 0.6)){
+                        
+                        startAnimation = true
+                    }
+                    
+                    // Sequnce Animation...
+                    // Chain Animation...
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                        
+                        withAnimation(.interactiveSpring(response: 0.4, dampingFraction: 0.5, blendDuration: 0.5)){
+                            
+                            bgAniamtion = true
+                        }
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            
+                            withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.6, blendDuration: 0.6)){
+                                
+                                resetBG = true
+                            }
+                            
+                            // Fireworks...
+                            withAnimation(.spring()){
+                                fireworkAnimation = true
+                            }
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                                
+                                withAnimation(.easeOut(duration: 0.4)){
+                                    animationEnded = true
+                                }
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                    tapComplete = true
+                                }
+                            }
+                        }
+                    }
+                }
+                .onChange(of: isTapped) { newValue in
+                    if isTapped && !startAnimation{
+                        // setting everything to true...
+                        updateFields(value: true)
+                    }
+                    
+                    if !isTapped{
+                        updateFields(value: false)
+                    }
+                }
+        }
+        
+        func updateFields(value: Bool){
+            
+            startAnimation = value
+            bgAniamtion = value
+            resetBG = value
+            fireworkAnimation = value
+            animationEnded = value
+            tapComplete = value
+            isTapped = value
+        }
+    }
+}
+
+struct CustomShape: Shape{
+    
+    // value...
+    var radius: CGFloat
+    
+    // animating Path...
+    var animatableData: CGFloat{
+        get{return radius}
+        set{radius = newValue}
+    }
+    
+    // Animatable path wont work on previews....
+    
+    func path(in rect: CGRect) -> Path {
+        
+        return Path{path in
+            
+            path.move(to: CGPoint(x: 0, y: 0))
+            path.addLine(to: CGPoint(x: 0, y: rect.height))
+            path.addLine(to: CGPoint(x: rect.width, y: rect.height))
+            path.addLine(to: CGPoint(x: rect.width, y: 0))
+            
+            // adding Center Circle....
+            let center = CGPoint(x: rect.width / 2, y: rect.height / 2)
+            path.move(to: center)
+            path.addArc(center: center, radius: radius, startAngle: .zero, endAngle: .init(degrees: 360), clockwise: false)
+        }
+    }
 }
 
 //struct Home_Previews: PreviewProvider {

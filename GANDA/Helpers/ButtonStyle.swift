@@ -27,7 +27,7 @@ struct NeumorphicButtonStyle: ButtonStyle {
             .scaledToFill()
             .foregroundColor(self.isPressed ? Color.white : Color.black)
             .animation(.spring())
-            .background(Color("Color-2"))
+            .background(Color("BG"))
             .cornerRadius(15)
 //            .shadow(color: Color.black.opacity(self.isPressed ? 0.1: 0.3), radius: 5, x: 5, y: 5)
             .shadow(color: Color.black.opacity(self.isPressed ? 0.1: 0.3), radius: 1, x: 1, y: 1)

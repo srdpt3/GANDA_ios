@@ -19,53 +19,7 @@ class ChartViewModel: ObservableObject {
     //    var listener: ListenerRegistration!
     @Published var activeVote : ActiveVote?
     
-//    func loadSomeoneVoted() {
-//        isLoading = true
-//        self.someOneVoted.removeAll()
 //
-//
-//
-//        Ref.FIRESTORE_COLLECTION_WHO_VOTED.document(User.currentUser()!.id).collection("voted").order(by: "date", descending: true).limit(to: 6).addSnapshotListener({ (querySnapshot, error) in
-//            guard let snapshot = querySnapshot else {
-//                return
-//            }
-//
-//            snapshot.documentChanges.forEach { (documentChange) in
-//
-//                switch documentChange.type {
-//                case .added:
-//                    //                    var activityArray = [Activity]()
-//                    print("type: added")
-//                    let dict = documentChange.document.data()
-//                    guard let decoderActivity = try? Activity.init(fromDictionary: dict) else {return}
-//
-//                    //
-//                    if(self.someOneVoted.count == 1 && self.someOneVoted[0].userAvatar == ""){
-//                        self.someOneVoted.removeAll()
-//                    }
-//
-//                    self.someOneVoted.append(decoderActivity)
-//                case .modified:
-//                    print("type: modified")
-//                case .removed:
-////                    self.someOneVoted.removeAll()
-//
-//                    print("type: removed")
-//                }
-//
-//            }
-//
-//
-//
-//            if (self.someOneVoted.isEmpty){
-//                let activity = Activity(activityId: "", type: "", username: "", userId: "", userAvatar: "", message: "", date: 0, read: true, age: "", location: "" ,occupation: "", description: "")
-//                self.someOneVoted.append(activity)
-//            }
-//
-//        })
-//
-//
-//    }
     
     func loadChartData(postId: String, onSuccess: @escaping(_ data: ActiveVote) -> Void) {
         isLoading = true

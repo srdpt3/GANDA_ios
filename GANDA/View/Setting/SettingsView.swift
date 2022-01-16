@@ -28,7 +28,7 @@ struct SettingsView: View {
             Divider().padding(.vertical, 4)
             
             HStack(alignment: .center, spacing: 10) {
-              Image("logo")
+              Image(APP_LOGO)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 80, height: 80)
