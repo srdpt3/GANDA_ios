@@ -28,14 +28,14 @@ struct SettingsView: View {
             Divider().padding(.vertical, 4)
             
             HStack(alignment: .center, spacing: 10) {
-              Image(APP_LOGO)
+              Image("logo-setting")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 80, height: 80)
+                .frame(width: 70, height: 70)
                 .cornerRadius(9)
-              
+              Spacer()
               Text(APP_DESC)
-                .font(.footnote)
+                    .font(Font.custom(FONT, size: 12))
             }
           }
        
