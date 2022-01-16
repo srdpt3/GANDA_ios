@@ -125,8 +125,11 @@ struct SideMenu: View {
 //                TabButton(image: "rectangle.righthalf.inset.fill.arrow.right", title: "Log out", selectedTab: .constant(""), animation: animation)
 //                    .padding(.leading,-15)
                  Spacer()
-                Text(APP_VERSION)
-                    .font(.caption)
+                
+                
+                Text(VERSION + ": " + APP_VERSION + " 데모")
+//                    .font(.caption)
+                    .font(Font.custom(FONT, size: 14))
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
                     .opacity(0.6)

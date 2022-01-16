@@ -30,7 +30,7 @@ let HOMEPAGE = "홈페이지"
 let TWITTER_PAGE = "트위터"
 
 let VERSION = "앱버젼"
-let MIN_REQUIREMENT = "iPhone X 기종 이상 - iOS 14 이상"
+let MIN_REQUIREMENT = "iPhone X 기종 이상 - iOS 15 이상"
 let COMPANY_NAME = ""
 let COMPANY_HOMEPAGE = "FrontYardTech.com"
 let DEVELOPER = "개발자"

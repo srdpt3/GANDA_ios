@@ -173,6 +173,8 @@ struct UploadView: View {
                 }.sheet(isPresented: self.$imagePicker) {
                     ImagePicker(showImagePicker: self.$imagePicker, pickedImage: self.$image, imageData: self.$images[self.index])
                 }
+               
+                
                 
                 
                 
@@ -211,6 +213,21 @@ struct UploadView: View {
                 
                 
             )
+            .alert(isPresented: $uploadComplete) {
+               
+           return  Alert(
+                title: Text(COMPLETE),
+                message: Text(UPLOAD_COMPLETE),
+                dismissButton: .default(Text(CONFIRM).font(.custom(FONT, size: 17)).foregroundColor(APP_THEME_COLOR), action: {
+//                    showUploadView = false
+                    showUploadView.toggle()
+                   
+
+                }))
+                
+            
+        }
+          
    
         
     }
@@ -220,16 +237,21 @@ struct UploadView: View {
         
         uploadViewModel.uploadVote(title: self.questionText, selectionText: self.selectionText, tags: self.tags, imageData: self.images[0]) { result in
             
-            self.uploadComplete = true
 
 //            self.showAlert.toggle()
             
-            
-            
-            self.showUploadView.toggle()
-            observer.refresh()
-            self.presentationMode.wrappedValue.dismiss()
+            withAnimation {
+                
+                observer.refresh()
+                self.uploadComplete.toggle()
+//                self.showUploadView.toggle()
 
+//                self.presentationMode.wrappedValue.dismiss()
+                
+            }
+            
+      
+           
             
             
         }

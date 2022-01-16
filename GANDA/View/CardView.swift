@@ -165,7 +165,7 @@ struct CardView: View {
             }
             .overlay(
                 FloatingButton(isTap: $isTap, showUploadView: $showUploadView, showFavoriteView: $showFavoriteView, uploadComplete:$uploadComplete)
-                
+              
             )
             //            .zIndex(1)
             
@@ -444,11 +444,8 @@ struct CardView: View {
             }
             
             
-        }
-        .onAppear {
-            
-        }
-        //        .zIndex(1)
+        }  
+  
         
     }
     
