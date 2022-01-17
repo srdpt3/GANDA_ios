@@ -13,9 +13,11 @@ import SDWebImageSwiftUI
 
 struct SideMenu: View {
     @AppStorage("isLogged") var log_Status = false
+    @EnvironmentObject var observer : Observer
 
     @Binding var selectedTab: String
     @Binding var showMenu: Bool
+    @State var profile_show : Bool = false
 
     @Namespace var animation
 
@@ -25,7 +27,7 @@ struct SideMenu: View {
             
             // Profile Pic...
             
-            if( User.currentUser()!.profileImageUrl != ""){
+            if(User.currentUser() != nil &&  User.currentUser()!.profileImageUrl != ""){
                 AnimatedImage(url: URL(string: User.currentUser()!.profileImageUrl)).resizable()
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -49,13 +51,22 @@ struct SideMenu: View {
 
             
             VStack(alignment: .leading, spacing: 6, content: {
+                if(User.currentUser() != nil){
+                    Text("Hello \(User.currentUser()!.username)")
+    //                    .font(.title)
+                        .fontWeight(.heavy)
+                        .foregroundColor(.white)
+                }
+       
 
-                Text("Hello \(User.currentUser()!.username)")
-//                    .font(.title)
-                    .fontWeight(.heavy)
-                    .foregroundColor(.white)
-
-                Button(action: {}, label: {
+                Button(action: {
+                    withAnimation{
+                        self.profile_show.toggle()
+                    }
+                 
+                    
+                    
+                }, label: {
                     Text(PROFILE_VIEW)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
@@ -95,10 +106,12 @@ struct SideMenu: View {
                     GIDSignIn.sharedInstance.signOut()
                     try? Auth.auth().signOut()
                     
-                    
                     // Setting Back View To Login...
                     withAnimation(.easeInOut){
+                        observer.resetDefaults()
+
                         log_Status = false
+                        
                     }
                     
                     
@@ -138,6 +151,12 @@ struct SideMenu: View {
         })
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .sheet(isPresented: self.$profile_show) {
+       
+                ProfileView(profile_show: self.$profile_show).animation(.spring())
+
+           
+        }
     }
 }
 

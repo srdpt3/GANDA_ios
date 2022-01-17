@@ -32,26 +32,16 @@ struct Home: View {
             // Views...
             CardView(showDetailView : $showDetailView)
                 .tag("둘러보기")
-                .onTapGesture {
-                
-                }
+              
             
             MyPageView().tag("마이페이지")
-            
-            
             ReelsView()
                 .tag("릴스")
             
             
-            //
             SettingsView()
                 .tag("세팅")
-            //
-            //            Help()
-            //                .tag("Help")
-            //
-            //            Notifications()
-            //                .tag("Notifications")
+     
         }
     }
 }

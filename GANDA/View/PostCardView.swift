@@ -21,6 +21,8 @@ struct PostCardView: View{
                 .aspectRatio(contentMode: .fill)
                 .cornerRadius(10)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .shadow(color: Color.black.opacity(0.3), radius: 1, x: 1, y: 1)
+                .shadow(color: Color.white.opacity(0.5), radius: 5, x: -8, y: -8)
             
         }else{
             Image("")

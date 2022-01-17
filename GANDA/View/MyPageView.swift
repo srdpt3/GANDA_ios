@@ -17,9 +17,9 @@ struct MyPageView: View {
     var body: some View {
         NavigationView{
             ScrollView(.vertical, showsIndicators: false) {
-                if !self.$observer.myActiveCards.isEmpty {
+                if !self.observer.myActiveCards.isEmpty {
                     VStack(spacing:10) {
-                        ImageGrid(img:self.observer.myActiveCards, selected: self.$observer.myActiveCards[0], showingModal: $showingModal, animatingModal: $animatingModal).offset(y: -25)
+                        ImageGrid(img:self.$observer.myActiveCards, selected: self.observer.myActiveCards[0], showingModal: $showingModal, animatingModal: $animatingModal).offset(y: -25)
                         
                     }     .toolbar {
                         
@@ -61,8 +61,8 @@ struct ImageGrid : View {
     @EnvironmentObject var observer : Observer
     let haptics = UINotificationFeedbackGenerator()
 
-    @State var img : [ActiveVote] = []
-    @Binding var selected : ActiveVote
+    @Binding var img : [ActiveVote]
+    @State var selected : ActiveVote
     @Binding var showingModal: Bool
     @Binding var animatingModal: Bool
     
@@ -103,15 +103,25 @@ struct ImageGrid : View {
                         
                     }.frame(height: 135, alignment: .leading)
                     
-                    
-                    //                    if(self.img[0].imageLocation != ""){
-                    
                     VStack(alignment: .leading,spacing: 5){
                         HStack{
                             
-                            if !self.observer.mainVoteData.isEmpty {
+                            if self.img[0].description != ""{
                                 ChartView_BAR(data: self.$observer.mainVoteData, totalNum: self.$ymax, title: self.img[0].description, categories: self.img[0].attrNames)
                                     .frame( height: 170)
+                            }else{
+                                HStack{
+                                    Spacer()
+                                    LottieView(filename: "no-data").frame( height: 170)
+                                    
+                                    Text("참여중인 사진이 없어요")
+                                        .font(Font.custom(FONT, size: 14))
+                                        .fontWeight(.heavy)
+                                        .foregroundColor(Color("Gray")).padding(.trailing)
+                                    Spacer()
+                                }
+                               
+                                
                             }
                             
                         }
@@ -123,9 +133,8 @@ struct ImageGrid : View {
                     .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
                     .shadow(color: Color.black.opacity(0.05), radius: 5, x: -5, y: -5)
                     .padding(.horizontal, 1)
-                    //                    .frame(height: 135, alignment: .leading)
-                    
-                    FollowersStats(numVote:  String(observer.mainVoteNum), numLiked: String(observer.mainVoteLiked))
+                    .padding(.top, 3)
+                    MyStatsDasgBoard(numVote: observer.mainVoteNum, numLiked: observer.mainVoteLiked)
                         .background(Color.white)
                         .cornerRadius(25)
                         .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
@@ -158,6 +167,7 @@ struct ImageGrid : View {
                                                         
                                                         self.showingModal.toggle()
                                                         self.haptics.notificationOccurred(.success)
+                                                        selected.description = ""
                                                     }
                                                     
                                                 } label: {
@@ -227,7 +237,7 @@ struct ImageGrid : View {
     
     
     @ViewBuilder
-    func FollowersStats(numVote:String, numLiked: String)->some View{
+    func MyStatsDasgBoard(numVote:Int, numLiked: Int)->some View{
         
         VStack{
             
@@ -238,7 +248,14 @@ struct ImageGrid : View {
                 
                 StatView(title: VOTENUM, count: numVote, image: "checkmark", color: GRADIENT_COLORS[0])
                 
-                StatView(title: LIKENUM, count: numLiked, image: "play.fill", color: GRADIENT_COLORS[2])
+                StatView(title: LIKENUM, count: numLiked, image: "play.fill", color: GRADIENT_COLORS[1])
+                
+                
+                if(User.currentUser() != nil){
+                    StatView(title: POINTNUM, count: User.currentUser()!.point_avail, image: "bitcoinsign.circle", color: GRADIENT_COLORS[2])
+
+                }
+
             }
             //            .padding(.top)
         }
@@ -252,7 +269,7 @@ struct ImageGrid : View {
     }
     
     @ViewBuilder
-    func StatView(title: String,count: String,image: String,color: LinearGradient)->some View{
+    func StatView(title: String,count: Int,image: String,color: LinearGradient)->some View{
         
         VStack(alignment: .leading, spacing: 10) {
             
@@ -263,7 +280,7 @@ struct ImageGrid : View {
             }
             HStack{
                 Spacer()
-                Text(count).font(Font.custom(FONT, size: 17))
+                Text(String(count)).font(Font.custom(FONT, size: 16))
                 Spacer()
                 
             }
@@ -295,54 +312,60 @@ struct ProgressImageView: View {
     var body: some View {
         
         if pic.imageLocation == ""{
-            Image("")
-                .resizable()
-            //                .aspectRatio(contentMode: .fill)
-                .background(GRADIENT_COLORS[GRADIENT_COLORS.count - 1])
-            //                .cornerRadius(10)
-            //                .frame(maxWidth: .infinity, alignment: .leading)
-                .shadow(color: Color.black.opacity(0.3), radius: 1, x: 1, y: 1)
-                .shadow(color: Color.white.opacity(0.5), radius: 5, x: -8, y: -8)
+//            if(isMainPic){
+//                Image("")
+//                    .resizable()
+//                    .background(GRADIENT_COLORS[GRADIENT_COLORS.count - 1])
+//                    .shadow(color: Color.black.opacity(0.3), radius: 1, x: 1, y: 1)
+//                    .shadow(color: Color.white.opacity(0.5), radius: 5, x: -8, y: -8)
+//                    .frame(height: 270)
+//            }else{
+                Image("")
+                    .resizable()
+                    .background(GRADIENT_COLORS[GRADIENT_COLORS.count - 1])
+
+                    .shadow(color: Color.black.opacity(0.3), radius: 1, x: 1, y: 1)
+                    .shadow(color: Color.white.opacity(0.5), radius: 5, x: -8, y: -8)
+                    .frame(height :isMainPic ? 270 : 135)
+//            }
+
         }else{
             
             if(isMainPic){
                 AnimatedImage(url: URL(string: pic.imageLocation)).resizable()
                     .onTapGesture {
-                        withAnimation {
-//                            voteDataOneCard.removeAll()
-                            seclectedPic = pic
-                            observer.loadChartData(postId: seclectedPic.id.uuidString) { voteData,numVote , numLiked in
-                                
-                                voteDataOneCard = voteData
-                                
-                                showingModal.toggle()
+                        seclectedPic = pic
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                            withAnimation {
+                              
+                                observer.loadChartData(postId: pic.id.uuidString) { voteData , numVote, numLiked in
+                                    voteDataOneCard = voteData
+                                    showingModal.toggle()
+                                }
                             }
                             
-//                            DispatchQueue.main.asyncAfter(deadline: .now()+0.2){
-//
-//
-//                            }
-                            
+                        
                         }
                     }
                     .frame(height: 270)
             }else{
                 AnimatedImage(url: URL(string: pic.imageLocation)).resizable()
                     .onTapGesture {
-                        withAnimation {
-                            seclectedPic = pic
-                            observer.loadChartData(postId: seclectedPic.id.uuidString) { voteData , numVote, numLiked in
-                                voteDataOneCard = voteData
-                                showingModal.toggle()
+                        seclectedPic = pic
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                            withAnimation {
+                              
+                                observer.loadChartData(postId: pic.id.uuidString) { voteData , numVote, numLiked in
+                                    voteDataOneCard = voteData
+                                    showingModal.toggle()
+                                }
                             }
                             
-                            
-                            
-//                            DispatchQueue.main.asyncAfter(deadline: .now()+0.3){
-//                                showingModal.toggle()
-//                            }
-                            
                         }
+                        
+                      
                     }
             }
             

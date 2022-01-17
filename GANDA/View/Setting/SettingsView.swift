@@ -78,16 +78,16 @@ struct SettingsView: View {
             label:
             SettingsLabelView(labelText: "Application", labelImage: "apps.iphone")
           ) {
-            SettingsRowView(name: DEVELOPER , content: "Dustin Yang")
-            SettingsRowView(name: CEO, content: "GD Kwon")
+            SettingsRowView(name: DEVELOPER , content: "더스틴양")
+            SettingsRowView(name: CEO, content: "지디 권")
             SettingsRowView(name: MIN_REQUIREMENT, content: "iOS 15")
-            SettingsRowView(name: HOMEPAGE, linkLabel: "Company Website", linkDestination: "google.com")
-            SettingsRowView(name: TWITTER_PAGE, linkLabel: "@srdpt3", linkDestination: "twitter.com/srdpt3")
+            SettingsRowView(name: HOMEPAGE, linkLabel: "Company Website", linkDestination: "https://www.instagram.com/gideok_kwon/")
+            SettingsRowView(name: TWITTER_PAGE, linkLabel: "@srdpt3", linkDestination: "https://www.instagram.com/srdpt3/")
             SettingsRowView(name: VERSION, content: APP_VERSION)
           }
           
         } //: VSTACK
-        .navigationBarTitle(Text("About").foregroundColor(Color.gray), displayMode: .large)
+        .navigationBarTitle(Text("애플리케이션 정보").foregroundColor(Color.gray), displayMode: .large)
 //        .navigationBarItems(
 //          trailing:
 //            Button(action: {

@@ -10,6 +10,9 @@ import Firebase
 
 
 class Observer: ObservableObject {
+    
+    @AppStorage("isLogged") var log_Status = false
+
     @Published var isSucess = false
     @Published var error: NSError?
     @Published var totalFlagged: Int = 0
@@ -40,7 +43,7 @@ class Observer: ObservableObject {
     @Published var showProfile = false
     
     // Storing The Selected profile...
-    @Published var selectedProfile : Profile!
+//    @Published var selectedProfile : Profile!
     
     // To Show Big Image...
     @Published var showEnlargedImage = false
@@ -57,16 +60,42 @@ class Observer: ObservableObject {
     @Published var myActiveCards = [ActiveVote]()
     @Published var mainVoteCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [],numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0)
     init(){
-        refresh()
+        if log_Status {
+            refresh()
+        }
+//
     
     }
     
     
+    
+    
+    func listenAuthenticationState(){
+        
+        
+        
+    }
+    func resetDefaults() {
+        print("resetDefaults")
+        
+        let defaults = UserDefaults.standard
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            defaults.removeObject(forKey: key)
+        }
+    }
+    
     func refresh(){
-        votedCards.removeAll()
-        checkVoted()
-        getAllCard()
-        getMyCards()
+      
+        
+        
+            votedCards.removeAll()
+            getAllCard()
+            checkVoted()
+            getMyCards()
+        
+        
+   
         
     }
     
@@ -188,7 +217,7 @@ class Observer: ObservableObject {
     
     func checkVoted(){
         self.votedCards.removeAll()
-
+        
         Ref.FIRESTORE_COLLECTION_MYVOTE.document(User.currentUser()!.id).collection("voted").order(by: "lastModifiedDate", descending: true).addSnapshotListener ({ (snapshot, error) in
             
             
@@ -310,8 +339,8 @@ class Observer: ObservableObject {
         
         //
         //                let someoneVoteObject = Activity(activityId: User.currentUser()!.id, type: "voted", username: User.currentUser()!.username, userId: User.currentUser()!.id, userAvatar: User.currentUser()!.profileImageUrl, message: "", date: Date().timeIntervalSince1970, read: false, age: User.currentUserProfile()!.age, location: User.currentUserProfile()!.location,occupation: User.currentUserProfile()!.occupation, description: User.currentUserProfile()!.description)
-//        
-//        
+//
+//
 //        guard let someOneVotedDict = try? currentUser.toDictionary() else { return }
 //        let someOneVoteRef  = Ref.FIRESTORE_COLLECTION_WHO_VOTED_USERID(postId: id)
 //        batch.setData(someOneVotedDict, forDocument: someOneVoteRef)

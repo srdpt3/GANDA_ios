@@ -28,9 +28,9 @@ struct BaseView: View {
             // Tab View..
             TabView(selection: $currentTab) {
                 
-                CardView(showDetailView: $showDetailView)
-                    .modifier(BGModifier())
-                    .tag("home")
+//                CardView(showDetailView: $showDetailView, ignoreHeight: <#Binding<Bool>#>)
+//                    .modifier(BGModifier())
+//                    .tag("home")
                 
                 MyPageView()
                     .modifier(BGModifier())

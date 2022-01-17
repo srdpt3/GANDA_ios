@@ -36,7 +36,11 @@ struct TagView_Card: View {
                             ForEach(rows){row in
                                 
                                 // Row View....
-                                RowView(tag: row)
+                                RowView(tag: row)           .background(
+//                                    Capsule()
+//                                        .fill(GRADIENT_COLORS[3]).frame(width: 5)
+                                    
+                                )
                             }
                         }
                     }
@@ -56,13 +60,16 @@ struct TagView_Card: View {
         Text(tag.text)
         // applying same font size..
         // else size will vary..
-            .font(.system(size: fontSize))
+            .font(Font.custom(FONT, size: fontSize))
         // adding capsule..
-            .padding(.horizontal,14)
-            .padding(.vertical,8)
+            .padding(.horizontal,16)
+            .padding(.vertical,10)
             .background(
-//                Capsule().fill((tagColor[getIndex(tag: tag) % 5]))
-                Capsule().fill(GRADIENT_COLORS[2])
+//                Capsule()
+//                    .fill(GRADIENT_COLORS[3]).padding(100)
+                GRADIENT_COLORS[0].cornerRadius(15)
+                
+               
 
                 
             )
@@ -98,7 +105,7 @@ struct TagView_Card: View {
         var totalWidth: CGFloat = 0
         
         // For safety extra 10....
-        let screenWidth: CGFloat = UIScreen.main.bounds.width - 90
+        let screenWidth: CGFloat = UIScreen.main.bounds.width - 80
         
         tags.forEach { tag in
             
@@ -107,7 +114,7 @@ struct TagView_Card: View {
             // adding the capsule size into total width with spacing..
             // 14 + 14 + 6 + 6
             // extra 6 for safety...
-            totalWidth += (tag.size + 40)
+            totalWidth += (tag.size + 30)
             
             // checking if totalwidth is greater than size...
             if totalWidth > screenWidth{
@@ -115,7 +122,7 @@ struct TagView_Card: View {
                 // adding row in rows...
                 // clearing the data...
                 // checking for long string...
-                totalWidth = (!currentRow.isEmpty || rows.isEmpty ? (tag.size + 40) : 0)
+                totalWidth = (!currentRow.isEmpty || rows.isEmpty ? (tag.size + 30) : 0)
                 
                 rows.append(currentRow)
                 currentRow.removeAll()

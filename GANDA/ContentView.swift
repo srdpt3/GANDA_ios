@@ -8,25 +8,43 @@ import SwiftUI
 
 struct ContentView: View {
     @AppStorage("isLogged") var log_Status = false
-    @StateObject var observer = Observer()
+    @EnvironmentObject var observer: Observer
+    @State var showSplash = true
 
+    
+    
+    
     var body: some View {
         
-        //        ZStack{
-        if log_Status{
-            
-//            PushTestView()
-            MainView()
-               .environmentObject(observer)
-        }
-        else{
-            if #available(iOS 15, *) {
-                BoardingView()
-            } else {
-                // Fallback on earlier versions
+        ZStack{
+            if(!SplashScreen.shouldAnimate){
+                
+                if log_Status{
+                    MainView()
+                    
+                }
+                else{
+                    BoardingView()
+                    
+                }
+                
             }
+            
+            SplashScreen()
+                .opacity(showSplash ? 1 : 0)
+            
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+                        SplashScreen.shouldAnimate = false
+                        withAnimation() {
+                            self.showSplash = false
+                        }
+                    }
+                }
+            
+            
         }
-        //        }
+
     }
 }
 
@@ -72,8 +90,8 @@ struct pushtest: View{
                 } label: {
                     Text("Send Push Notification")
                 }
-
-
+                
+                
             }
             .listStyle(.insetGrouped)
             .navigationTitle("Push Notification")
@@ -92,15 +110,15 @@ struct pushtest: View{
         }
         
         let json: [String: Any] = [
-        
+            
             "to": deviceToken,
             "notification": [
-            
+                
                 "title": titleText,
                 "body": bodyText
             ],
             "data": [
-            
+                
                 // Data to be Sent....
                 // Dont pass empty or remove the block..
                 "user_name": "iJustine"
@@ -137,7 +155,7 @@ struct pushtest: View{
             DispatchQueue.main.async {[self] in
                 titleText = ""
                 bodyText = ""
-//                deviceToken = ""
+                //                deviceToken = ""
             }
         }
         .resume()

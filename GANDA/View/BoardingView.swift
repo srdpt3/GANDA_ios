@@ -12,6 +12,8 @@ import AuthenticationServices
 @available(iOS 15, *)
 struct BoardingView: View {
     @StateObject var loginData = LoginViewModel()
+    @EnvironmentObject var observer: Observer
+
     // Loading Indicator...
     @State var isLoading: Bool = false
     
@@ -280,7 +282,7 @@ struct BoardingView: View {
                     } else {
                         print("Batch persistMatching write succeeded.")
                         saveUserLocally(mUserDictionary: dict as NSDictionary)
-
+                        observer.refresh()
                         withAnimation{
                             log_Status = true
                         }

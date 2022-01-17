@@ -4,7 +4,6 @@
 //
 //  Created by Dustin yang on 12/31/21.
 //
-
 import SwiftUI
 import SDWebImageSwiftUI
 
@@ -12,7 +11,9 @@ struct CardView: View {
     
     @EnvironmentObject var observer : Observer
 
-    
+    let icon_size =  UIScreen.main.bounds.height <  926.0 ? 25 : 30
+    let log_size =  UIScreen.main.bounds.height < 926.0 ? 30 : 150
+
     @Binding var showDetailView : Bool
     
     @State var selected  = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [],numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0)
@@ -68,19 +69,18 @@ struct CardView: View {
                                     
                                     if post.imageLocation != "" {
                                         self.voteBarData.removeAll()
-                                       self.voteData.removeAll()
+                                        self.voteData.removeAll()
                                         self.selected = post
                                         let postID = self.selected.id.uuidString
                                         
-                                        loadChartData(postId: postID)
-                                        self.observer.checkLiked(postId: postID)
-                                        
+                                        print(TOKEN)
+                                        DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                            loadChartData(postId: postID)
+                                            self.observer.checkLiked(postId: postID)
+                                        }
                                         showDetailScreen.toggle()
                                         showDetailView.toggle()
-                                        print(TOKEN)
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                            
-                                        }
+                                     
                                     }
                                     
                                 }
@@ -92,8 +92,6 @@ struct CardView: View {
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                     }
                                 }
-                                
-                                
                             }
                     })
                         .padding(.horizontal)
@@ -102,15 +100,34 @@ struct CardView: View {
                             
                             ToolbarItem(placement: .navigationBarLeading) {
                                 
-                                Image(APP_LOGO)
+                                Image("logo_main_blue")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(height: 25)
+                                    .frame(height: 30)
                                     .foregroundColor(Color("Gray"))
-                                    .padding(.leading,UIScreen.main.bounds.width / 4)
+                                    .padding(.leading,50)
                                 
                                 
                             }
+                            
+                            
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                
+                                Button(action: {
+                                    // ACTION
+                                    //        playSound(sound: "sound-click", type: "mp3")
+                                    
+                                    self.haptics.notificationOccurred(.success)
+              
+                                }) {
+                                    Image(systemName:  "bell.fill")
+                                      .foregroundColor(APP_THEME_COLOR)
+                                        .frame(width: CGFloat(log_size), height: CGFloat(log_size))
+                                }
+                                
+                            }
+                            
+                            
                             
                             
                             ToolbarItem(placement: .navigationBarTrailing) {
@@ -125,7 +142,7 @@ struct CardView: View {
                                             ZStack{
                                                 Color("Blue")
                                             }
-                                                .frame(width: 30, height: 30)
+                                                .frame(width: CGFloat(icon_size), height: CGFloat(icon_size))
                                                 .clipShape(Circle())
                                         )
                                     
@@ -144,7 +161,7 @@ struct CardView: View {
                                             ZStack{
                                                 Color("Blue")
                                             }
-                                                .frame(width: 30, height: 30)
+                                                .frame(width: CGFloat(icon_size), height: CGFloat(icon_size))
                                                 .clipShape(Circle())
                                         )
                                 }
@@ -444,8 +461,8 @@ struct CardView: View {
             }
             
             
-        }  
-  
+        }
+      
         
     }
     
@@ -722,6 +739,5 @@ struct CustomShape: Shape{
 //        Home()
 //    }
 //}
-
 // since we declared T as Identifiable...
 // so we need to pass Idenfiable conform collection/Array...

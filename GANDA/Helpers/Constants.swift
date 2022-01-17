@@ -20,14 +20,14 @@ let NAME_ = "앱이름"
 
 // Information
 let APP_VERSION = "1.0.0"
-let APP_DESC = "패션 스타일 통해 사람들과 소통할 수 있는 공간. 오늘 내 옷 스타일 어때? \n자유롭게 나만의 스타일을 표현하고 사람들의 투표를 받아보세요. 또 사람들의 옷 스타일에 투표를 하고, 최신 옷 트렌드도 파악해보세요 \n* 오늘 평가받고 싶은 나의 옷 사진을 채널에 게시해보세요. 사람들이 당신의 옷 스타일에 투표할겁니다. \n* 다른 사람의 옷 스타일에 투표해보세요. Good or Bad?"
+let APP_DESC = "패션 스타일 통해 사람들과 소통할 수 있는 공간. 오늘 내 옷 스타일 어때? \n\n자유롭게 나만의 스타일을 표현하고 사람들의 투표를 받아보세요. 또 사람들의 옷 스타일에 투표를 하고, 최신 옷 트렌드도 파악해보세요 \n\n* 오늘 평가받고 싶은 나의 옷 사진을 채널에 게시해보세요. 사람들이 당신의 옷 스타일에 투표할겁니다. \n\n* 다른 사람의 옷 스타일에 투표해보세요. Good or Bad?"
 
 let APP_CREDIT = "크레딧"
 
 let APP_PLATFORM = "플랫폼"
 let COMPANY = "회사"
 let HOMEPAGE = "홈페이지"
-let TWITTER_PAGE = "트위터"
+let TWITTER_PAGE = "인스타그램"
 
 let VERSION = "앱버젼"
 let MIN_REQUIREMENT = "iPhone X 기종 이상 - iOS 15 이상"
@@ -189,8 +189,10 @@ public let PLEASE_UPLOAD_PIC = "사진을 먼저 등록해주세요"
 
 //RatingDetailView
 
-public let VOTENUM = "투표수: "
-public let LIKENUM = "좋아요수: "
+public let VOTENUM = "투표수 "
+public let LIKENUM = "좋아요수 "
+public let POINTNUM = "포인트보유"
+
 
 public let VOTE_TIMESTAMP = "업로드된 날짜: "
 public let GENDER = "성별:"

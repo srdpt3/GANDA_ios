@@ -13,10 +13,11 @@ struct GANDAApp: App {
 
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject var observer = Observer()
     var body: some Scene {
         WindowGroup {
             ContentView().environment(\.colorScheme, .light)
-               
+                .environmentObject(observer)
         }
     }
 }
