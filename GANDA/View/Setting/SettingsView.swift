@@ -87,7 +87,8 @@ struct SettingsView: View {
           }
           
         } //: VSTACK
-        .navigationBarTitle(Text("애플리케이션 정보").foregroundColor(Color.gray), displayMode: .large)
+        .navigationTitle("").navigationBarHidden(true)
+//        .navigationBarTitle(Text("애플리케이션 정보").foregroundColor(Color.gray), displayMode: .large)
 //        .navigationBarItems(
 //          trailing:
 //            Button(action: {
@@ -96,7 +97,7 @@ struct SettingsView: View {
 //              Image(systemName: "xmark")
 //            }
 //        )
-       .padding()
+        .padding().padding(.top, 30)
 //        .navigationBarHidden(true)
 
       } //: SCROLL

@@ -167,7 +167,6 @@ struct ImageGrid : View {
                                                         
                                                         self.showingModal.toggle()
                                                         self.haptics.notificationOccurred(.success)
-                                                        selected.description = ""
                                                     }
                                                     
                                                 } label: {
@@ -246,9 +245,9 @@ struct ImageGrid : View {
             
             HStack(spacing: 10){
                 
-                StatView(title: VOTENUM, count: numVote, image: "checkmark", color: GRADIENT_COLORS[0])
+                StatView(title: VOTENUM, count: numVote, image: "person.2", color: GRADIENT_COLORS[0])
                 
-                StatView(title: LIKENUM, count: numLiked, image: "play.fill", color: GRADIENT_COLORS[1])
+                StatView(title: LIKENUM, count: numLiked, image: "suit.heart", color: GRADIENT_COLORS[1])
                 
                 
                 if(User.currentUser() != nil){
@@ -274,8 +273,9 @@ struct ImageGrid : View {
         VStack(alignment: .leading, spacing: 10) {
             
             HStack{
-                Spacer()
-                Text(title)
+//                Spacer()
+                Image(systemName: image)
+                Text(title).font(Font.custom(FONT, size: 14))
                 Spacer()
             }
             HStack{

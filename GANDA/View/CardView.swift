@@ -12,7 +12,7 @@ struct CardView: View {
     @EnvironmentObject var observer : Observer
 
     let icon_size =  UIScreen.main.bounds.height <  926.0 ? 25 : 30
-    let log_size =  UIScreen.main.bounds.height < 926.0 ? 30 : 150
+    let logo_size =  UIScreen.main.bounds.height < 926.0 ? 30 : 35
 
     @Binding var showDetailView : Bool
     
@@ -57,128 +57,143 @@ struct CardView: View {
         ZStack(alignment: .bottomTrailing){
             NavigationView{
                 
-                if !self.observer.activeCards.isEmpty {
+                ScrollRefreshable(title: "사진 새로고침", tintColor: APP_THEME_COLOR, content: {
                     
-                    StaggeredGrid(columns: self.observer.columns, list: self.observer.activeCards, content: { post in
+                    if !self.observer.activeCards.isEmpty {
                         
-                        // Post Card View...
-                        PostCardView(post: post)
-                            .matchedGeometryEffect(id: post.id, in: animation)
-                            .onTapGesture {
-                                withAnimation(.spring()){
-                                    
-                                    if post.imageLocation != "" {
-                                        self.voteBarData.removeAll()
-                                        self.voteData.removeAll()
-                                        self.selected = post
-                                        let postID = self.selected.id.uuidString
+                        StaggeredGrid(columns: self.observer.columns, list: self.observer.activeCards, content: { post in
+                            
+                            // Post Card View...
+                            PostCardView(post: post)
+                                .matchedGeometryEffect(id: post.id, in: animation)
+                                .onTapGesture {
+                                    withAnimation(.spring()){
                                         
-                                        print(TOKEN)
-                                        DispatchQueue.main.asyncAfter(deadline: .now()) {
-                                            loadChartData(postId: postID)
-                                            self.observer.checkLiked(postId: postID)
+                                        if post.imageLocation != "" {
+                                            self.voteBarData.removeAll()
+                                            self.voteData.removeAll()
+                                            self.selected = post
+                                            let postID = self.selected.id.uuidString
+                                            
+                                            print(TOKEN)
+                                            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                                loadChartData(postId: postID)
+                                                self.observer.checkLiked(postId: postID)
+                                            }
+                                            showDetailScreen.toggle()
+                                            showDetailView.toggle()
+                                         
                                         }
-                                        showDetailScreen.toggle()
-                                        showDetailView.toggle()
-                                     
+                                        
+                                    }
+                                }.onLongPressGesture {
+                                    withAnimation(.spring()){
+                                        
+                                        showFlag.toggle()
+                                        self.selected = post
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                        }
+                                    }
+                                }
+                        })
+                            .padding(.horizontal)
+                            .padding(.top, -50)
+                            .toolbar {
+                                
+                                ToolbarItem(placement: .navigationBarLeading) {
+                                    
+                                    Image("logo_main_blue")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(height: CGFloat(logo_size))
+                                        .foregroundColor(Color("Gray"))
+                                        .padding(.leading,50)
+                                    
+                                    
+                                }
+                                
+                                
+                                ToolbarItem(placement: .navigationBarTrailing) {
+                                    
+                                    Button(action: {
+                                        // ACTION
+                                        //        playSound(sound: "sound-click", type: "mp3")
+                                        
+                                        self.haptics.notificationOccurred(.success)
+                  
+                                    }) {
+                                        Image(systemName:  "bell.fill")
+                                          .foregroundColor(APP_THEME_COLOR)
+                                            .frame(width: CGFloat(icon_size), height: CGFloat(icon_size))
                                     }
                                     
                                 }
-                            }.onLongPressGesture {
-                                withAnimation(.spring()){
+                                
+                                
+                                
+                                
+                                ToolbarItem(placement: .navigationBarTrailing) {
                                     
-                                    showFlag.toggle()
-                                    self.selected = post
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                    Button {
+                                        self.haptics.notificationOccurred(.success)
+                                        self.observer.columns = min(self.observer.columns + 1, 4)
+                                        
+                                    } label: {
+                                        Image(systemName: "plus")
+                                            .foregroundColor(.white)
+                                            .background(
+                                                ZStack{
+                                                    APP_THEME_COLOR
+                                                }
+                                                    .frame(width: CGFloat(icon_size), height: CGFloat(icon_size))
+                                                    .clipShape(Circle())
+                                            )
+                                        
+                                    }
+                                    
+                                }
+                                
+                                ToolbarItem(placement: .navigationBarTrailing) {
+                                    
+                                    Button {
+                                        self.haptics.notificationOccurred(.success)
+                                        self.observer.columns = max(self.observer.columns - 1, 1)
+                                    } label: {
+                                        Image(systemName: "minus")
+                                            .foregroundColor(.white)
+                                            .background(
+                                                ZStack{
+                                                    APP_THEME_COLOR
+                                                }
+                                                    .frame(width: CGFloat(icon_size), height: CGFloat(icon_size))
+                                                    .clipShape(Circle())
+                                            )
                                     }
                                 }
-                            }
-                    })
-                        .padding(.horizontal)
-                        .padding(.top, -50)
-                        .toolbar {
-                            
-                            ToolbarItem(placement: .navigationBarLeading) {
-                                
-                                Image("logo_main_blue")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(height: 30)
-                                    .foregroundColor(Color("Gray"))
-                                    .padding(.leading,50)
-                                
-                                
-                            }
-                            
-                            
-                            ToolbarItem(placement: .navigationBarTrailing) {
-                                
-                                Button(action: {
-                                    // ACTION
-                                    //        playSound(sound: "sound-click", type: "mp3")
-                                    
-                                    self.haptics.notificationOccurred(.success)
-              
-                                }) {
-                                    Image(systemName:  "bell.fill")
-                                      .foregroundColor(APP_THEME_COLOR)
-                                        .frame(width: CGFloat(log_size), height: CGFloat(log_size))
-                                }
-                                
-                            }
-                            
-                            
-                            
-                            
-                            ToolbarItem(placement: .navigationBarTrailing) {
-                                
-                                Button {
-                                    self.observer.columns = min(self.observer.columns + 1, 4)
-                                    
-                                } label: {
-                                    Image(systemName: "plus")
-                                        .foregroundColor(.white)
-                                        .background(
-                                            ZStack{
-                                                Color("Blue")
-                                            }
-                                                .frame(width: CGFloat(icon_size), height: CGFloat(icon_size))
-                                                .clipShape(Circle())
-                                        )
-                                    
-                                }
-                                
-                            }
-                            
-                            ToolbarItem(placement: .navigationBarTrailing) {
-                                
-                                Button {
-                                    self.observer.columns = max(self.observer.columns - 1, 1)
-                                } label: {
-                                    Image(systemName: "minus")
-                                        .foregroundColor(.white)
-                                        .background(
-                                            ZStack{
-                                                Color("Blue")
-                                            }
-                                                .frame(width: CGFloat(icon_size), height: CGFloat(icon_size))
-                                                .clipShape(Circle())
-                                        )
-                                }
-                            }
-                        }.animation(.easeInOut, value: self.observer.columns)
-                        .background(
-                            Color("BG")
-                                .ignoresSafeArea()
-                        )
-                    
-                    
-                    
-                }
-                else{
+                            }.animation(.easeInOut, value: self.observer.columns)
+                            .background(
+                                Color("BG")
+                                    .ignoresSafeArea()
+                            )
+                        
+                        
+                        
+                    }
+                    else{
 
-                    LottieView(filename: "loading").frame(width: 220, height: 220)
+                        LottieView(filename: "loading").frame(width: 200, height: 200).offset(y:20)
+                    }
+                }){
+                    
+                    // Refresh COntent....
+                    // Await Task....
+                    
+                    self.observer.refresh()
+                    // Since iOS 15 will show indicator until await task finishes...
+                    await Task.sleep(1_500_000_000)
                 }
+                    
+         
             }
             .overlay(
                 FloatingButton(isTap: $isTap, showUploadView: $showUploadView, showFavoriteView: $showFavoriteView, uploadComplete:$uploadComplete)
@@ -385,7 +400,7 @@ struct CardView: View {
                                         }
                                         TagView_Card(maxLimit: 100, tags: self.selected.tags,fontSize: 16)
                                         // Default Height...
-                                            .frame(height: 100)
+                                            .frame(height: 120)
                                         
                                         //                                            ParallexView().padding(.leading,15).z
                                         

@@ -13,7 +13,7 @@ import AAInfographics
 struct TagView_Card: View {
     var maxLimit: Int
     var tags: [Tag]
-    
+    @Environment(\.openURL) var openURL
     var fontSize: CGFloat = 16
     
     // Adding Geometry Effect to Tag...
@@ -78,8 +78,13 @@ struct TagView_Card: View {
         // Delete...
             .contentShape(Capsule())
             .contextMenu{
-                Button("링크가기"){
- 
+                
+              
+                
+                Button("네이버 검색하기"){
+                    openURL(URL(string: "https://www.naver.com/")!)
+
+                    
                 }
             }
             .matchedGeometryEffect(id: tag.id, in: animation)

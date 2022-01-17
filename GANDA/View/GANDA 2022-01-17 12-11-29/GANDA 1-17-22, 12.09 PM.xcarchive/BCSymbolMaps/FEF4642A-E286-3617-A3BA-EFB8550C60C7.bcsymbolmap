@@ -1,0 +1,954 @@
+BCSymbolMap Version: 2.0
+Apple clang version 13.0.0 (clang-1300.0.29.30)
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.2.sdk
+iPhoneOS15.2.sdk
+/Users/dustinyang/Library/Developer/Xcode/DerivedData/GANDA-bkfrvszbcqnkoreznnrrqsjlzexv/Build/Intermediates.noindex/ArchiveIntermediates/GANDA/IntermediateBuildFilesPath/Pods.build/Release-iphoneos/GoogleSignIn.build/DerivedSources/GoogleSignIn_vers.c
+/Users/dustinyang/project/iOs/GANDA/Pods
+-[GTMAppAuthFetcherAuthorizationEMMChainedDelegate initWithDelegate:selector:]
+-[GTMAppAuthFetcherAuthorizationEMMChainedDelegate authentication:request:finishedWithError:]
+___93-[GTMAppAuthFetcherAuthorizationEMMChainedDelegate authentication:request:finishedWithError:]_block_invoke
+___copy_helper_block_e4_20s24s28s
+___destroy_helper_block_e4_20s24s28s
+-[GTMAppAuthFetcherAuthorizationEMMChainedDelegate .cxx_destruct]
+-[GTMAppAuthFetcherAuthorizationWithEMMSupport authorizeRequest:delegate:didFinishSelector:]
+-[GTMAppAuthFetcherAuthorizationWithEMMSupport authorizeRequest:completionHandler:]
+___83-[GTMAppAuthFetcherAuthorizationWithEMMSupport authorizeRequest:completionHandler:]_block_invoke
+___83-[GTMAppAuthFetcherAuthorizationWithEMMSupport authorizeRequest:completionHandler:]_block_invoke_2
+___copy_helper_block_e4_20b
+___destroy_helper_block_e4_20s
+-[GIDAuthentication initWithAuthState:]
+-[GIDAuthentication clientID]
+-[GIDAuthentication accessToken]
+-[GIDAuthentication accessTokenExpirationDate]
+-[GIDAuthentication refreshToken]
+-[GIDAuthentication idToken]
+-[GIDAuthentication idTokenExpirationDate]
+-[GIDAuthentication emmSupport]
+-[GIDAuthentication fetcherAuthorizer]
+-[GIDAuthentication doWithFreshTokens:]
+___39-[GIDAuthentication doWithFreshTokens:]_block_invoke
+___copy_helper_block_e4_20b24s
+___destroy_helper_block_e4_20s24s
+___39-[GIDAuthentication doWithFreshTokens:]_block_invoke.102
+___39-[GIDAuthentication doWithFreshTokens:]_block_invoke_2
+___39-[GIDAuthentication doWithFreshTokens:]_block_invoke_3
+___copy_helper_block_e4_20b24s28s
+___copy_helper_block_e4_20s
++[GIDAuthentication parametersWithParameters:emmSupport:isPasscodeInfoRequired:]
++[GIDAuthentication updatedEMMParametersWithParameters:]
++[GIDAuthentication handleTokenFetchEMMError:completion:]
+___57+[GIDAuthentication handleTokenFetchEMMError:completion:]_block_invoke
+___copy_helper_block_e4_20b24s28r
+___destroy_helper_block_e4_20s24s28r
+-[GIDAuthentication additionalRefreshParameters:]
++[GIDAuthentication supportsSecureCoding]
+-[GIDAuthentication initWithCoder:]
+-[GIDAuthentication encodeWithCoder:]
+-[GIDAuthentication authState]
+-[GIDAuthentication .cxx_destruct]
+_OBJC_SELECTOR_REFERENCES_
+_OBJC_CLASSLIST_REFERENCES_$_
+_OBJC_SELECTOR_REFERENCES_.12
+_OBJC_CLASSLIST_REFERENCES_$_.13
+_OBJC_SELECTOR_REFERENCES_.15
+_OBJC_SELECTOR_REFERENCES_.17
+_OBJC_SELECTOR_REFERENCES_.19
+_OBJC_SELECTOR_REFERENCES_.21
+_OBJC_SELECTOR_REFERENCES_.23
+___block_descriptor_32_e4_20s24s28s_e16_v8?0"NSError"4l
+_OBJC_SELECTOR_REFERENCES_.26
+__OBJC_METACLASS_RO_$_GTMAppAuthFetcherAuthorizationEMMChainedDelegate
+__OBJC_$_INSTANCE_METHODS_GTMAppAuthFetcherAuthorizationEMMChainedDelegate
+_OBJC_IVAR_$_GTMAppAuthFetcherAuthorizationEMMChainedDelegate._delegate
+_OBJC_IVAR_$_GTMAppAuthFetcherAuthorizationEMMChainedDelegate._selector
+_OBJC_IVAR_$_GTMAppAuthFetcherAuthorizationEMMChainedDelegate._retained_self
+__OBJC_$_INSTANCE_VARIABLES_GTMAppAuthFetcherAuthorizationEMMChainedDelegate
+__OBJC_CLASS_RO_$_GTMAppAuthFetcherAuthorizationEMMChainedDelegate
+_OBJC_CLASSLIST_REFERENCES_$_.40
+_OBJC_SELECTOR_REFERENCES_.41
+_OBJC_SELECTOR_REFERENCES_.42
+_OBJC_SELECTOR_REFERENCES_.45
+___block_descriptor_24_e4_20bs_e16_v8?0"NSError"4l
+_OBJC_SELECTOR_REFERENCES_.47
+__OBJC_METACLASS_RO_$_GTMAppAuthFetcherAuthorizationWithEMMSupport
+__OBJC_$_INSTANCE_METHODS_GTMAppAuthFetcherAuthorizationWithEMMSupport
+__OBJC_CLASS_RO_$_GTMAppAuthFetcherAuthorizationWithEMMSupport
+_OBJC_CLASSLIST_REFERENCES_$_.52
+_OBJC_SELECTOR_REFERENCES_.54
+_OBJC_SELECTOR_REFERENCES_.56
+_OBJC_SELECTOR_REFERENCES_.58
+_OBJC_SELECTOR_REFERENCES_.60
+_OBJC_SELECTOR_REFERENCES_.62
+_OBJC_SELECTOR_REFERENCES_.64
+_OBJC_SELECTOR_REFERENCES_.66
+_OBJC_SELECTOR_REFERENCES_.68
+_OBJC_CLASSLIST_REFERENCES_$_.69
+_OBJC_SELECTOR_REFERENCES_.71
+_OBJC_SELECTOR_REFERENCES_.73
+_OBJC_SELECTOR_REFERENCES_.75
+_OBJC_SELECTOR_REFERENCES_.77
+_OBJC_SELECTOR_REFERENCES_.79
+_OBJC_CLASSLIST_REFERENCES_$_.80
+_OBJC_SELECTOR_REFERENCES_.82
+_OBJC_CLASSLIST_REFERENCES_$_.83
+_OBJC_SELECTOR_REFERENCES_.85
+_OBJC_SELECTOR_REFERENCES_.87
+_OBJC_SELECTOR_REFERENCES_.89
+___block_descriptor_28_e4_20bs24s_e5_v4?0l
+_OBJC_SELECTOR_REFERENCES_.92
+_OBJC_SELECTOR_REFERENCES_.94
+_OBJC_SELECTOR_REFERENCES_.96
+_OBJC_SELECTOR_REFERENCES_.98
+_OBJC_SELECTOR_REFERENCES_.100
+_OBJC_CLASSLIST_REFERENCES_$_.101
+_OBJC_SELECTOR_REFERENCES_.104
+_OBJC_SELECTOR_REFERENCES_.106
+_OBJC_SELECTOR_REFERENCES_.108
+_OBJC_SELECTOR_REFERENCES_.110
+_OBJC_SELECTOR_REFERENCES_.112
+_OBJC_SELECTOR_REFERENCES_.114
+_OBJC_SELECTOR_REFERENCES_.116
+___block_descriptor_32_e4_20bs24s28s_e5_v4?0l
+___block_descriptor_24_e4_20s_e16_v8?0"NSError"4l
+___block_descriptor_24_e4_20s_e37_v12?0"OIDTokenResponse"4"NSError"8l
+_OBJC_SELECTOR_REFERENCES_.119
+_OBJC_SELECTOR_REFERENCES_.121
+_OBJC_SELECTOR_REFERENCES_.123
+_OBJC_CLASSLIST_REFERENCES_$_.124
+_OBJC_SELECTOR_REFERENCES_.126
+_OBJC_SELECTOR_REFERENCES_.128
+_OBJC_SELECTOR_REFERENCES_.130
+_OBJC_CLASSLIST_REFERENCES_$_.131
+_OBJC_SELECTOR_REFERENCES_.135
+_OBJC_SELECTOR_REFERENCES_.137
+_OBJC_CLASSLIST_REFERENCES_$_.138
+_OBJC_SELECTOR_REFERENCES_.140
+_OBJC_SELECTOR_REFERENCES_.142
+_OBJC_SELECTOR_REFERENCES_.144
+_OBJC_SELECTOR_REFERENCES_.146
+_OBJC_CLASSLIST_REFERENCES_$_.147
+_OBJC_SELECTOR_REFERENCES_.149
+_OBJC_CLASSLIST_REFERENCES_$_.150
+_OBJC_SELECTOR_REFERENCES_.152
+___block_descriptor_32_e4_20bs24s28r_e5_v4?0l
+_OBJC_SELECTOR_REFERENCES_.154
+_OBJC_SELECTOR_REFERENCES_.156
+_OBJC_CLASSLIST_REFERENCES_$_.157
+_OBJC_SELECTOR_REFERENCES_.159
+_OBJC_SELECTOR_REFERENCES_.161
+_OBJC_SELECTOR_REFERENCES_.163
+__OBJC_$_CLASS_METHODS_GIDAuthentication
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_NSObject
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_OPT_NSObject
+__OBJC_$_PROP_LIST_NSObject
+__OBJC_$_PROTOCOL_METHOD_TYPES_NSObject
+__OBJC_PROTOCOL_$_NSObject
+__OBJC_LABEL_PROTOCOL_$_NSObject
+__OBJC_$_PROTOCOL_REFS_GTMAppAuthFetcherAuthorizationTokenRefreshDelegate
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_GTMAppAuthFetcherAuthorizationTokenRefreshDelegate
+__OBJC_$_PROTOCOL_METHOD_TYPES_GTMAppAuthFetcherAuthorizationTokenRefreshDelegate
+__OBJC_PROTOCOL_$_GTMAppAuthFetcherAuthorizationTokenRefreshDelegate
+__OBJC_LABEL_PROTOCOL_$_GTMAppAuthFetcherAuthorizationTokenRefreshDelegate
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_NSCoding
+__OBJC_$_PROTOCOL_METHOD_TYPES_NSCoding
+__OBJC_PROTOCOL_$_NSCoding
+__OBJC_LABEL_PROTOCOL_$_NSCoding
+__OBJC_$_PROTOCOL_REFS_NSSecureCoding
+__OBJC_$_PROTOCOL_CLASS_METHODS_NSSecureCoding
+__OBJC_$_PROTOCOL_METHOD_TYPES_NSSecureCoding
+__OBJC_$_CLASS_PROP_LIST_NSSecureCoding
+__OBJC_PROTOCOL_$_NSSecureCoding
+__OBJC_LABEL_PROTOCOL_$_NSSecureCoding
+__OBJC_CLASS_PROTOCOLS_$_GIDAuthentication
+__OBJC_$_CLASS_PROP_LIST_GIDAuthentication
+__OBJC_METACLASS_RO_$_GIDAuthentication
+__OBJC_$_INSTANCE_METHODS_GIDAuthentication
+_OBJC_IVAR_$_GIDAuthentication._authenticationHandlerQueue
+_OBJC_IVAR_$_GIDAuthentication._authState
+__OBJC_$_INSTANCE_VARIABLES_GIDAuthentication
+__OBJC_$_PROP_LIST_GIDAuthentication
+__OBJC_CLASS_RO_$_GIDAuthentication
+/Users/dustinyang/project/iOs/GANDA/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDAuthentication.m
+GoogleSignIn/GoogleSignIn/Sources/GIDAuthentication.m
+GoogleSignIn/GoogleSignIn/Sources/GIDAuthentication_Private.h
+__destroy_helper_block_e4_20s24s28r
+__copy_helper_block_e4_20b24s28r
+__57+[GIDAuthentication handleTokenFetchEMMError:completion:]_block_invoke
+__copy_helper_block_e4_20s
+__copy_helper_block_e4_20b24s28s
+__39-[GIDAuthentication doWithFreshTokens:]_block_invoke_3
+__39-[GIDAuthentication doWithFreshTokens:]_block_invoke_2
+__39-[GIDAuthentication doWithFreshTokens:]_block_invoke.102
+__destroy_helper_block_e4_20s24s
+__copy_helper_block_e4_20b24s
+__39-[GIDAuthentication doWithFreshTokens:]_block_invoke
+__destroy_helper_block_e4_20s
+__copy_helper_block_e4_20b
+__83-[GTMAppAuthFetcherAuthorizationWithEMMSupport authorizeRequest:completionHandler:]_block_invoke_2
+__83-[GTMAppAuthFetcherAuthorizationWithEMMSupport authorizeRequest:completionHandler:]_block_invoke
+__destroy_helper_block_e4_20s24s28s
+__copy_helper_block_e4_20s24s28s
+__93-[GTMAppAuthFetcherAuthorizationEMMChainedDelegate authentication:request:finishedWithError:]_block_invoke
++[GIDAuthStateMigration migrateIfNeededWithTokenURL:callbackPath:keychainName:isFreshInstall:]
++[GIDAuthStateMigration extractAuthorizationWithTokenURL:callbackPath:]
++[GIDAuthStateMigration passwordForService:]
+_OBJC_SELECTOR_REFERENCES_.8
+_OBJC_SELECTOR_REFERENCES_.10
+_OBJC_CLASSLIST_REFERENCES_$_.11
+_OBJC_SELECTOR_REFERENCES_.13
+_OBJC_CLASSLIST_REFERENCES_$_.16
+_OBJC_SELECTOR_REFERENCES_.18
+_OBJC_CLASSLIST_REFERENCES_$_.19
+_OBJC_CLASSLIST_REFERENCES_$_.22
+_OBJC_SELECTOR_REFERENCES_.24
+_OBJC_CLASSLIST_REFERENCES_$_.27
+_OBJC_SELECTOR_REFERENCES_.31
+_OBJC_CLASSLIST_REFERENCES_$_.32
+_OBJC_SELECTOR_REFERENCES_.34
+_OBJC_SELECTOR_REFERENCES_.36
+_OBJC_SELECTOR_REFERENCES_.38
+_OBJC_SELECTOR_REFERENCES_.40
+_OBJC_SELECTOR_REFERENCES_.44
+_OBJC_SELECTOR_REFERENCES_.46
+_OBJC_CLASSLIST_REFERENCES_$_.47
+_OBJC_SELECTOR_REFERENCES_.49
+_OBJC_SELECTOR_REFERENCES_.51
+_OBJC_CLASSLIST_REFERENCES_$_.58
+_OBJC_CLASSLIST_REFERENCES_$_.61
+_OBJC_SELECTOR_REFERENCES_.63
+_OBJC_SELECTOR_REFERENCES_.65
+_OBJC_SELECTOR_REFERENCES_.67
+__OBJC_$_CLASS_METHODS_GIDAuthStateMigration
+__OBJC_METACLASS_RO_$_GIDAuthStateMigration
+__OBJC_CLASS_RO_$_GIDAuthStateMigration
+/Users/dustinyang/project/iOs/GANDA/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDAuthStateMigration.m
+GoogleSignIn/GoogleSignIn/Sources/GIDAuthStateMigration.m
+-[GIDCallbackQueue init]
+-[GIDCallbackQueue wait]
+-[GIDCallbackQueue next]
+-[GIDCallbackQueue reset]
+-[GIDCallbackQueue addCallback:]
+-[GIDCallbackQueue fire]
+-[GIDCallbackQueue .cxx_destruct]
+_OBJC_SELECTOR_REFERENCES_.2
+_OBJC_SELECTOR_REFERENCES_.4
+_OBJC_SELECTOR_REFERENCES_.6
+_OBJC_SELECTOR_REFERENCES_.14
+_OBJC_SELECTOR_REFERENCES_.16
+__OBJC_METACLASS_RO_$_GIDCallbackQueue
+__OBJC_$_INSTANCE_METHODS_GIDCallbackQueue
+_OBJC_IVAR_$_GIDCallbackQueue._firing
+_OBJC_IVAR_$_GIDCallbackQueue._pending
+_OBJC_IVAR_$_GIDCallbackQueue._queue
+_OBJC_IVAR_$_GIDCallbackQueue._strongSelf
+__OBJC_$_INSTANCE_VARIABLES_GIDCallbackQueue
+__OBJC_CLASS_RO_$_GIDCallbackQueue
+/Users/dustinyang/project/iOs/GANDA/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDCallbackQueue.m
+GoogleSignIn/GoogleSignIn/Sources/GIDCallbackQueue.m
+llvm.loop.mustprogress
+-[GIDConfiguration initWithClientID:]
+-[GIDConfiguration initWithClientID:serverClientID:]
+-[GIDConfiguration initWithClientID:serverClientID:hostedDomain:openIDRealm:]
+-[GIDConfiguration description]
+-[GIDConfiguration copyWithZone:]
++[GIDConfiguration supportsSecureCoding]
+-[GIDConfiguration initWithCoder:]
+-[GIDConfiguration encodeWithCoder:]
+-[GIDConfiguration clientID]
+-[GIDConfiguration serverClientID]
+-[GIDConfiguration hostedDomain]
+-[GIDConfiguration openIDRealm]
+-[GIDConfiguration .cxx_destruct]
+_OBJC_SELECTOR_REFERENCES_.20
+__OBJC_$_CLASS_METHODS_GIDConfiguration
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_NSCopying
+__OBJC_$_PROTOCOL_METHOD_TYPES_NSCopying
+__OBJC_PROTOCOL_$_NSCopying
+__OBJC_LABEL_PROTOCOL_$_NSCopying
+__OBJC_CLASS_PROTOCOLS_$_GIDConfiguration
+__OBJC_$_CLASS_PROP_LIST_GIDConfiguration
+__OBJC_METACLASS_RO_$_GIDConfiguration
+__OBJC_$_INSTANCE_METHODS_GIDConfiguration
+_OBJC_IVAR_$_GIDConfiguration._clientID
+_OBJC_IVAR_$_GIDConfiguration._serverClientID
+_OBJC_IVAR_$_GIDConfiguration._hostedDomain
+_OBJC_IVAR_$_GIDConfiguration._openIDRealm
+__OBJC_$_INSTANCE_VARIABLES_GIDConfiguration
+__OBJC_$_PROP_LIST_GIDConfiguration
+__OBJC_CLASS_RO_$_GIDConfiguration
+/Users/dustinyang/project/iOs/GANDA/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDConfiguration.m
+GoogleSignIn/GoogleSignIn/Sources/GIDConfiguration.m
+GoogleSignIn/GoogleSignIn/Sources/Public/GoogleSignIn/GIDConfiguration.h
++[GIDEMMErrorHandler sharedInstance]
+___36+[GIDEMMErrorHandler sharedInstance]_block_invoke
+___copy_helper_block_e4_
+___destroy_helper_block_e4_
+-[GIDEMMErrorHandler handleErrorFromResponse:completion:]
+___57-[GIDEMMErrorHandler handleErrorFromResponse:completion:]_block_invoke
+___57-[GIDEMMErrorHandler handleErrorFromResponse:completion:]_block_invoke_2
+___copy_helper_block_e4_20s24s28s32b
+___destroy_helper_block_e4_20s24s28s32s
+___copy_helper_block_e4_20s24b28s
+-[GIDEMMErrorHandler deviceNotCompliantAlertWithCompletion:]
+___60-[GIDEMMErrorHandler deviceNotCompliantAlertWithCompletion:]_block_invoke
+-[GIDEMMErrorHandler passcodeRequiredAlertWithCompletion:]
+___58-[GIDEMMErrorHandler passcodeRequiredAlertWithCompletion:]_block_invoke
+___58-[GIDEMMErrorHandler passcodeRequiredAlertWithCompletion:]_block_invoke_2
+___58-[GIDEMMErrorHandler passcodeRequiredAlertWithCompletion:]_block_invoke_3
+-[GIDEMMErrorHandler appVerificationRequiredAlertWithURL:completion:]
+___69-[GIDEMMErrorHandler appVerificationRequiredAlertWithURL:completion:]_block_invoke
+___69-[GIDEMMErrorHandler appVerificationRequiredAlertWithURL:completion:]_block_invoke_2
+___69-[GIDEMMErrorHandler appVerificationRequiredAlertWithURL:completion:]_block_invoke.118
+-[GIDEMMErrorHandler unableToAccessString]
+-[GIDEMMErrorHandler passcodeRequiredString]
+-[GIDEMMErrorHandler appVerificationTitleString]
+-[GIDEMMErrorHandler appVerificationTextString]
+-[GIDEMMErrorHandler appVerificationActionString]
+-[GIDEMMErrorHandler deviceNotCompliantString]
+-[GIDEMMErrorHandler settingsString]
+-[GIDEMMErrorHandler okayString]
+-[GIDEMMErrorHandler cancelString]
+_sharedInstance.once
+_sharedInstance.sharedInstance
+___block_descriptor_24_e4__e5_v4?0l
+_OBJC_SELECTOR_REFERENCES_.11
+_OBJC_CLASSLIST_REFERENCES_$_.12
+_OBJC_SELECTOR_REFERENCES_.22
+_OBJC_CLASSLIST_REFERENCES_$_.25
+_OBJC_SELECTOR_REFERENCES_.27
+_OBJC_SELECTOR_REFERENCES_.29
+_OBJC_CLASSLIST_REFERENCES_$_.30
+_OBJC_SELECTOR_REFERENCES_.32
+_OBJC_CLASSLIST_REFERENCES_$_.33
+_OBJC_SELECTOR_REFERENCES_.35
+_OBJC_SELECTOR_REFERENCES_.37
+_OBJC_SELECTOR_REFERENCES_.39
+_OBJC_CLASSLIST_REFERENCES_$_.43
+_OBJC_CLASSLIST_REFERENCES_$_.46
+_OBJC_SELECTOR_REFERENCES_.48
+_OBJC_SELECTOR_REFERENCES_.50
+_OBJC_CLASSLIST_REFERENCES_$_.51
+_OBJC_SELECTOR_REFERENCES_.53
+_OBJC_SELECTOR_REFERENCES_.55
+_OBJC_SELECTOR_REFERENCES_.57
+_OBJC_SELECTOR_REFERENCES_.59
+_OBJC_SELECTOR_REFERENCES_.61
+___block_descriptor_36_e4_20s24s28s32bs_e5_v4?0l
+_OBJC_SELECTOR_REFERENCES_.69
+___block_descriptor_36_e4_20s24bs28s_e5_v4?0l
+_OBJC_CLASSLIST_REFERENCES_$_.78
+_OBJC_SELECTOR_REFERENCES_.80
+___block_descriptor_24_e4_20bs_e22_v8?0"UIAlertAction"4l
+_OBJC_SELECTOR_REFERENCES_.83
+_OBJC_CLASSLIST_REFERENCES_$_.88
+_OBJC_SELECTOR_REFERENCES_.90
+_OBJC_CLASSLIST_REFERENCES_$_.95
+_OBJC_SELECTOR_REFERENCES_.97
+_OBJC_SELECTOR_REFERENCES_.99
+_OBJC_SELECTOR_REFERENCES_.103
+_OBJC_SELECTOR_REFERENCES_.105
+_OBJC_SELECTOR_REFERENCES_.107
+_OBJC_SELECTOR_REFERENCES_.109
+_OBJC_SELECTOR_REFERENCES_.111
+_OBJC_SELECTOR_REFERENCES_.113
+_OBJC_SELECTOR_REFERENCES_.115
+_OBJC_SELECTOR_REFERENCES_.117
+___block_descriptor_28_e4_20bs24s_e22_v8?0"UIAlertAction"4l
+_OBJC_CLASSLIST_REFERENCES_$_.119
+_OBJC_SELECTOR_REFERENCES_.125
+__OBJC_$_CLASS_METHODS_GIDEMMErrorHandler
+__OBJC_METACLASS_RO_$_GIDEMMErrorHandler
+__OBJC_$_INSTANCE_METHODS_GIDEMMErrorHandler
+_OBJC_IVAR_$_GIDEMMErrorHandler._pendingDialog
+__OBJC_$_INSTANCE_VARIABLES_GIDEMMErrorHandler
+__OBJC_CLASS_RO_$_GIDEMMErrorHandler
+/Users/dustinyang/project/iOs/GANDA/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDEMMErrorHandler.m
+GoogleSignIn/GoogleSignIn/Sources/GIDEMMErrorHandler.m
+__69-[GIDEMMErrorHandler appVerificationRequiredAlertWithURL:completion:]_block_invoke.118
+__69-[GIDEMMErrorHandler appVerificationRequiredAlertWithURL:completion:]_block_invoke_2
+__69-[GIDEMMErrorHandler appVerificationRequiredAlertWithURL:completion:]_block_invoke
+__58-[GIDEMMErrorHandler passcodeRequiredAlertWithCompletion:]_block_invoke_3
+__58-[GIDEMMErrorHandler passcodeRequiredAlertWithCompletion:]_block_invoke_2
+__58-[GIDEMMErrorHandler passcodeRequiredAlertWithCompletion:]_block_invoke
+__60-[GIDEMMErrorHandler deviceNotCompliantAlertWithCompletion:]_block_invoke
+__copy_helper_block_e4_20s24b28s
+__destroy_helper_block_e4_20s24s28s32s
+__copy_helper_block_e4_20s24s28s32b
+__57-[GIDEMMErrorHandler handleErrorFromResponse:completion:]_block_invoke_2
+__57-[GIDEMMErrorHandler handleErrorFromResponse:completion:]_block_invoke
+__destroy_helper_block_e4_
+__copy_helper_block_e4_
+__36+[GIDEMMErrorHandler sharedInstance]_block_invoke
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.2.sdk/usr/include/dispatch/once.h
+-[GIDGoogleUser userID]
+-[GIDGoogleUser hostedDomain]
+-[GIDGoogleUser serverAuthCode]
+-[GIDGoogleUser serverClientID]
+-[GIDGoogleUser openIDRealm]
+-[GIDGoogleUser grantedScopes]
+-[GIDGoogleUser initWithAuthState:profileData:]
+-[GIDGoogleUser updateAuthState:profileData:]
+-[GIDGoogleUser idToken]
++[GIDGoogleUser supportsSecureCoding]
+-[GIDGoogleUser initWithCoder:]
+-[GIDGoogleUser encodeWithCoder:]
+-[GIDGoogleUser profile]
+-[GIDGoogleUser authentication]
+-[GIDGoogleUser .cxx_destruct]
+_OBJC_SELECTOR_REFERENCES_.28
+_OBJC_SELECTOR_REFERENCES_.30
+_OBJC_CLASSLIST_REFERENCES_$_.31
+_OBJC_SELECTOR_REFERENCES_.33
+_OBJC_CLASSLIST_REFERENCES_$_.50
+_OBJC_SELECTOR_REFERENCES_.52
+_OBJC_CLASSLIST_REFERENCES_$_.53
+_OBJC_CLASSLIST_REFERENCES_$_.60
+__OBJC_$_CLASS_METHODS_GIDGoogleUser
+__OBJC_CLASS_PROTOCOLS_$_GIDGoogleUser
+__OBJC_$_CLASS_PROP_LIST_GIDGoogleUser
+__OBJC_METACLASS_RO_$_GIDGoogleUser
+__OBJC_$_INSTANCE_METHODS_GIDGoogleUser
+_OBJC_IVAR_$_GIDGoogleUser._authState
+_OBJC_IVAR_$_GIDGoogleUser._profile
+_OBJC_IVAR_$_GIDGoogleUser._authentication
+__OBJC_$_INSTANCE_VARIABLES_GIDGoogleUser
+__OBJC_$_PROP_LIST_GIDGoogleUser
+__OBJC_CLASS_RO_$_GIDGoogleUser
+/Users/dustinyang/project/iOs/GANDA/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDGoogleUser.m
+GoogleSignIn/GoogleSignIn/Sources/GIDGoogleUser.m
+GoogleSignIn/GoogleSignIn/Sources/Public/GoogleSignIn/GIDGoogleUser.h
+-[GIDMDMPasscodeCache init]
+-[GIDMDMPasscodeCache dealloc]
++[GIDMDMPasscodeCache sharedInstance]
+___37+[GIDMDMPasscodeCache sharedInstance]_block_invoke
+-[GIDMDMPasscodeCache passcodeState]
+___36-[GIDMDMPasscodeCache passcodeState]_block_invoke
+-[GIDMDMPasscodeCache hasLocalAuthentication]
+-[GIDMDMPasscodeCache hasKeychain]
+-[GIDMDMPasscodeCache applicationDidEnterBackground:]
+-[GIDMDMPasscodeCache obtainLocalAuthenticationInfo]
+-[GIDMDMPasscodeCache obtainKeychainInfo]
+-[GIDMDMPasscodeCache status]
+-[GIDMDMPasscodeCache info]
+-[GIDMDMPasscodeCache .cxx_destruct]
+_sharedInstance.onceToken
+___block_descriptor_20_e5_v4?0l
+___block_literal_global
+_OBJC_CLASSLIST_REFERENCES_$_.28
+_passcodeState.workQueue
+_passcodeState.semaphore
+___block_descriptor_24_e4_20s_e5_v4?0l
+_OBJC_CLASSLIST_REFERENCES_$_.36
+_obtainLocalAuthenticationInfo.context
+_OBJC_CLASSLIST_REFERENCES_$_.62
+_OBJC_CLASSLIST_REFERENCES_$_.65
+_obtainKeychainInfo.attributes
+_obtainKeychainInfo.query
+_OBJC_CLASSLIST_REFERENCES_$_.86
+_OBJC_SELECTOR_REFERENCES_.88
+_OBJC_CLASSLIST_REFERENCES_$_.91
+_OBJC_SELECTOR_REFERENCES_.93
+_OBJC_SELECTOR_REFERENCES_.95
+_OBJC_SELECTOR_REFERENCES_.101
+__OBJC_$_CLASS_METHODS_GIDMDMPasscodeCache
+__OBJC_METACLASS_RO_$_GIDMDMPasscodeCache
+__OBJC_$_INSTANCE_METHODS_GIDMDMPasscodeCache
+_OBJC_IVAR_$_GIDMDMPasscodeCache._hasLocalAuthentication
+_OBJC_IVAR_$_GIDMDMPasscodeCache._localAuthenticationInfo
+_OBJC_IVAR_$_GIDMDMPasscodeCache._hasEnteredBackground
+_OBJC_IVAR_$_GIDMDMPasscodeCache._hasKeychain
+_OBJC_IVAR_$_GIDMDMPasscodeCache._keychainInfo
+_OBJC_IVAR_$_GIDMDMPasscodeCache._keychainExpireTime
+_OBJC_IVAR_$_GIDMDMPasscodeCache._cachedState
+__OBJC_$_INSTANCE_VARIABLES_GIDMDMPasscodeCache
+__OBJC_CLASS_RO_$_GIDMDMPasscodeCache
+/Users/dustinyang/project/iOs/GANDA/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDMDMPasscodeCache.m
+GoogleSignIn/GoogleSignIn/Sources/GIDMDMPasscodeCache.m
+__36-[GIDMDMPasscodeCache passcodeState]_block_invoke
+__37+[GIDMDMPasscodeCache sharedInstance]_block_invoke
+-[GIDMDMPasscodeState initWithStatus:info:]
++[GIDMDMPasscodeState passcodeState]
+-[GIDMDMPasscodeState status]
+-[GIDMDMPasscodeState info]
+-[GIDMDMPasscodeState .cxx_destruct]
+__OBJC_$_CLASS_METHODS_GIDMDMPasscodeState
+__OBJC_METACLASS_RO_$_GIDMDMPasscodeState
+__OBJC_$_INSTANCE_METHODS_GIDMDMPasscodeState
+_OBJC_IVAR_$_GIDMDMPasscodeState._status
+_OBJC_IVAR_$_GIDMDMPasscodeState._info
+__OBJC_$_INSTANCE_VARIABLES_GIDMDMPasscodeState
+__OBJC_$_PROP_LIST_GIDMDMPasscodeState
+__OBJC_CLASS_RO_$_GIDMDMPasscodeState
+/Users/dustinyang/project/iOs/GANDA/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDMDMPasscodeState.m
+GoogleSignIn/GoogleSignIn/Sources/GIDMDMPasscodeState.m
+GoogleSignIn/GoogleSignIn/Sources/GIDMDMPasscodeState.h
+-[GIDProfileData initWithEmail:name:givenName:familyName:imageURL:]
+-[GIDProfileData hasImage]
+-[GIDProfileData imageURLWithDimension:]
+-[GIDProfileData isFIFEAvatarURL:]
++[GIDProfileData supportsSecureCoding]
+-[GIDProfileData initWithCoder:]
+-[GIDProfileData encodeWithCoder:]
+-[GIDProfileData copyWithZone:]
+-[GIDProfileData email]
+-[GIDProfileData name]
+-[GIDProfileData givenName]
+-[GIDProfileData familyName]
+-[GIDProfileData .cxx_destruct]
+_OBJC_CLASSLIST_REFERENCES_$_.17
+_OBJC_SELECTOR_REFERENCES_.25
+_OBJC_CLASSLIST_REFERENCES_$_.35
+_OBJC_CLASSLIST_REFERENCES_$_.42
+_OBJC_CLASSLIST_REFERENCES_$_.49
+_OBJC_CLASSLIST_REFERENCES_$_.64
+_OBJC_SELECTOR_REFERENCES_.70
+__OBJC_$_CLASS_METHODS_GIDProfileData
+__OBJC_CLASS_PROTOCOLS_$_GIDProfileData
+__OBJC_$_CLASS_PROP_LIST_GIDProfileData
+__OBJC_METACLASS_RO_$_GIDProfileData
+__OBJC_$_INSTANCE_METHODS_GIDProfileData
+_OBJC_IVAR_$_GIDProfileData._imageURL
+_OBJC_IVAR_$_GIDProfileData._email
+_OBJC_IVAR_$_GIDProfileData._name
+_OBJC_IVAR_$_GIDProfileData._givenName
+_OBJC_IVAR_$_GIDProfileData._familyName
+__OBJC_$_INSTANCE_VARIABLES_GIDProfileData
+__OBJC_$_PROP_LIST_GIDProfileData
+__OBJC_CLASS_RO_$_GIDProfileData
+/Users/dustinyang/project/iOs/GANDA/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDProfileData.m
+GoogleSignIn/GoogleSignIn/Sources/GIDProfileData.m
+GoogleSignIn/GoogleSignIn/Sources/Public/GoogleSignIn/GIDProfileData.h
++[GIDScopes scopesWithBasicProfile:]
+_addScopeTo
+_hasEmail
+_hasProfile
+__OBJC_$_CLASS_METHODS_GIDScopes
+__OBJC_METACLASS_RO_$_GIDScopes
+__OBJC_CLASS_RO_$_GIDScopes
+_OBJC_SELECTOR_REFERENCES_.9
+/Users/dustinyang/project/iOs/GANDA/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDScopes.m
+hasProfile
+GoogleSignIn/GoogleSignIn/Sources/GIDScopes.m
+hasEmail
+addScopeTo
+hasScopeInArray
+-[GIDAuthFlow authState]
+-[GIDAuthFlow setAuthState:]
+-[GIDAuthFlow error]
+-[GIDAuthFlow setError:]
+-[GIDAuthFlow emmSupport]
+-[GIDAuthFlow setEmmSupport:]
+-[GIDAuthFlow profileData]
+-[GIDAuthFlow setProfileData:]
+-[GIDAuthFlow .cxx_destruct]
+-[GIDSignIn handleURL:]
+-[GIDSignIn hasPreviousSignIn]
+-[GIDSignIn restorePreviousSignInWithCallback:]
+-[GIDSignIn restorePreviousSignInNoRefresh]
+-[GIDSignIn signInWithConfiguration:presentingViewController:hint:callback:]
+-[GIDSignIn signInWithConfiguration:presentingViewController:callback:]
+-[GIDSignIn addScopes:presentingViewController:callback:]
+___57-[GIDSignIn addScopes:presentingViewController:callback:]_block_invoke
+___57-[GIDSignIn addScopes:presentingViewController:callback:]_block_invoke.144
+-[GIDSignIn signOut]
+-[GIDSignIn disconnectWithCallback:]
+___36-[GIDSignIn disconnectWithCallback:]_block_invoke
+___36-[GIDSignIn disconnectWithCallback:]_block_invoke.176
+___36-[GIDSignIn disconnectWithCallback:]_block_invoke_2
+___copy_helper_block_e4_20s24b
++[GIDSignIn sharedInstance]
+___27+[GIDSignIn sharedInstance]_block_invoke
+-[GIDSignIn initPrivate]
+-[GIDSignIn signInWithOptions:]
+___31-[GIDSignIn signInWithOptions:]_block_invoke
+___31-[GIDSignIn signInWithOptions:]_block_invoke_2
+___copy_helper_block_e4_20s24s
+-[GIDSignIn authenticateInteractivelyWithOptions:]
+___50-[GIDSignIn authenticateInteractivelyWithOptions:]_block_invoke
+___50-[GIDSignIn authenticateInteractivelyWithOptions:]_block_invoke_2
+-[GIDSignIn authenticateWithOptions:]
+___37-[GIDSignIn authenticateWithOptions:]_block_invoke
+___37-[GIDSignIn authenticateWithOptions:]_block_invoke_2
+-[GIDSignIn maybeFetchToken:fallback:]
+___38-[GIDSignIn maybeFetchToken:fallback:]_block_invoke
+___38-[GIDSignIn maybeFetchToken:fallback:]_block_invoke_2
+___copy_helper_block_e4_20s24s28b
+-[GIDSignIn addSaveAuthCallback:]
+___33-[GIDSignIn addSaveAuthCallback:]_block_invoke
+___copy_helper_block_e4_20s24w
+___destroy_helper_block_e4_20s24w
+-[GIDSignIn addDecodeIdTokenCallback:]
+___38-[GIDSignIn addDecodeIdTokenCallback:]_block_invoke
+___38-[GIDSignIn addDecodeIdTokenCallback:]_block_invoke_2
+-[GIDSignIn addCompletionCallback:]
+___35-[GIDSignIn addCompletionCallback:]_block_invoke
+___35-[GIDSignIn addCompletionCallback:]_block_invoke_2
+-[GIDSignIn startFetchURL:fromAuthState:withComment:withCompletionHandler:]
+-[GIDSignIn handleDevicePolicyAppURL:]
+___38-[GIDSignIn handleDevicePolicyAppURL:]_block_invoke
++[GIDSignIn automaticallyNotifiesObserversForKey:]
+-[GIDSignIn errorWithString:code:]
++[GIDSignIn isOperatingSystemAtLeast9]
+-[GIDSignIn assertValidParameters]
+-[GIDSignIn assertValidPresentingViewController]
+-[GIDSignIn isFreshInstall]
+-[GIDSignIn removeAllKeychainEntries]
+-[GIDSignIn saveAuthState:]
+-[GIDSignIn loadAuthState]
+-[GIDSignIn profileDataWithIDToken:]
+-[GIDSignIn setCurrentUserWithKVO:]
+-[GIDSignIn currentUser]
+-[GIDSignIn .cxx_destruct]
+_OBJC_IVAR_$_GIDAuthFlow._authState
+_OBJC_IVAR_$_GIDAuthFlow._error
+_OBJC_IVAR_$_GIDAuthFlow._emmSupport
+_OBJC_IVAR_$_GIDAuthFlow._profileData
+__OBJC_METACLASS_RO_$_GIDAuthFlow
+__OBJC_$_INSTANCE_METHODS_GIDAuthFlow
+__OBJC_$_INSTANCE_VARIABLES_GIDAuthFlow
+__OBJC_$_PROP_LIST_GIDAuthFlow
+__OBJC_CLASS_RO_$_GIDAuthFlow
+_OBJC_SELECTOR_REFERENCES_.81
+_OBJC_CLASSLIST_REFERENCES_$_.97
+_OBJC_CLASSLIST_REFERENCES_$_.106
+_OBJC_CLASSLIST_REFERENCES_$_.117
+_OBJC_CLASSLIST_REFERENCES_$_.121
+_OBJC_SELECTOR_REFERENCES_.127
+_OBJC_SELECTOR_REFERENCES_.129
+_OBJC_SELECTOR_REFERENCES_.131
+_OBJC_SELECTOR_REFERENCES_.133
+_OBJC_CLASSLIST_REFERENCES_$_.136
+_OBJC_SELECTOR_REFERENCES_.138
+_OBJC_CLASSLIST_REFERENCES_$_.139
+_OBJC_SELECTOR_REFERENCES_.141
+_OBJC_SELECTOR_REFERENCES_.143
+_OBJC_SELECTOR_REFERENCES_.148
+_OBJC_SELECTOR_REFERENCES_.150
+_OBJC_SELECTOR_REFERENCES_.158
+_OBJC_SELECTOR_REFERENCES_.160
+_OBJC_SELECTOR_REFERENCES_.162
+___block_descriptor_24_e4_20bs_e5_v4?0l
+_OBJC_CLASSLIST_REFERENCES_$_.163
+_OBJC_CLASSLIST_REFERENCES_$_.164
+_OBJC_SELECTOR_REFERENCES_.166
+_OBJC_SELECTOR_REFERENCES_.168
+_OBJC_CLASSLIST_REFERENCES_$_.171
+_OBJC_SELECTOR_REFERENCES_.173
+___block_descriptor_28_e4_20s24bs_e27_v12?0"NSData"4"NSError"8l
+_OBJC_SELECTOR_REFERENCES_.179
+_OBJC_SELECTOR_REFERENCES_.181
+_OBJC_SELECTOR_REFERENCES_.184
+_OBJC_SELECTOR_REFERENCES_.186
+_OBJC_SELECTOR_REFERENCES_.188
+_OBJC_CLASSLIST_REFERENCES_$_.189
+_OBJC_SELECTOR_REFERENCES_.191
+_OBJC_CLASSLIST_REFERENCES_$_.192
+_OBJC_SELECTOR_REFERENCES_.194
+_OBJC_SELECTOR_REFERENCES_.196
+_OBJC_SELECTOR_REFERENCES_.198
+_OBJC_SELECTOR_REFERENCES_.200
+_OBJC_SELECTOR_REFERENCES_.202
+_OBJC_SELECTOR_REFERENCES_.204
+_OBJC_CLASSLIST_REFERENCES_$_.205
+_OBJC_SELECTOR_REFERENCES_.207
+_OBJC_SELECTOR_REFERENCES_.209
+_OBJC_SELECTOR_REFERENCES_.211
+_OBJC_SELECTOR_REFERENCES_.213
+_OBJC_CLASSLIST_REFERENCES_$_.214
+_OBJC_SELECTOR_REFERENCES_.220
+_OBJC_SELECTOR_REFERENCES_.222
+_OBJC_SELECTOR_REFERENCES_.224
+_OBJC_SELECTOR_REFERENCES_.226
+___block_descriptor_28_e4_20s24s_e5_v4?0l
+___block_descriptor_28_e4_20s24s_e38_v12?0"GIDAuthentication"4"NSError"8l
+_OBJC_SELECTOR_REFERENCES_.229
+_OBJC_SELECTOR_REFERENCES_.233
+_OBJC_SELECTOR_REFERENCES_.235
+_OBJC_SELECTOR_REFERENCES_.237
+_OBJC_SELECTOR_REFERENCES_.239
+_OBJC_SELECTOR_REFERENCES_.243
+_OBJC_SELECTOR_REFERENCES_.245
+_OBJC_CLASSLIST_REFERENCES_$_.246
+_OBJC_SELECTOR_REFERENCES_.248
+_OBJC_SELECTOR_REFERENCES_.250
+_OBJC_SELECTOR_REFERENCES_.252
+_OBJC_CLASSLIST_REFERENCES_$_.253
+_OBJC_SELECTOR_REFERENCES_.255
+_OBJC_SELECTOR_REFERENCES_.257
+_OBJC_CLASSLIST_REFERENCES_$_.258
+_OBJC_SELECTOR_REFERENCES_.260
+_OBJC_CLASSLIST_REFERENCES_$_.261
+_OBJC_SELECTOR_REFERENCES_.262
+_OBJC_SELECTOR_REFERENCES_.264
+_OBJC_SELECTOR_REFERENCES_.266
+_OBJC_CLASSLIST_REFERENCES_$_.267
+_OBJC_SELECTOR_REFERENCES_.269
+_OBJC_SELECTOR_REFERENCES_.270
+_OBJC_SELECTOR_REFERENCES_.272
+_OBJC_SELECTOR_REFERENCES_.274
+_OBJC_SELECTOR_REFERENCES_.275
+_OBJC_SELECTOR_REFERENCES_.277
+_OBJC_CLASSLIST_REFERENCES_$_.278
+_OBJC_SELECTOR_REFERENCES_.280
+_OBJC_SELECTOR_REFERENCES_.282
+_OBJC_SELECTOR_REFERENCES_.284
+_OBJC_SELECTOR_REFERENCES_.286
+_OBJC_SELECTOR_REFERENCES_.288
+_OBJC_SELECTOR_REFERENCES_.290
+_OBJC_SELECTOR_REFERENCES_.291
+_OBJC_SELECTOR_REFERENCES_.293
+_OBJC_SELECTOR_REFERENCES_.295
+_OBJC_SELECTOR_REFERENCES_.297
+_OBJC_SELECTOR_REFERENCES_.299
+_OBJC_SELECTOR_REFERENCES_.301
+___block_descriptor_28_e4_20s24s_e45_v12?0"OIDAuthorizationResponse"4"NSError"8l
+_OBJC_SELECTOR_REFERENCES_.304
+_OBJC_SELECTOR_REFERENCES_.306
+_OBJC_SELECTOR_REFERENCES_.307
+_OBJC_SELECTOR_REFERENCES_.309
+_OBJC_SELECTOR_REFERENCES_.311
+_OBJC_SELECTOR_REFERENCES_.313
+_OBJC_SELECTOR_REFERENCES_.315
+_OBJC_SELECTOR_REFERENCES_.317
+_OBJC_SELECTOR_REFERENCES_.319
+_OBJC_SELECTOR_REFERENCES_.321
+_OBJC_SELECTOR_REFERENCES_.323
+_OBJC_SELECTOR_REFERENCES_.326
+___block_descriptor_32_e4_20s24s28bs_e37_v12?0"OIDTokenResponse"4"NSError"8l
+_OBJC_SELECTOR_REFERENCES_.329
+_OBJC_SELECTOR_REFERENCES_.331
+_OBJC_SELECTOR_REFERENCES_.333
+_OBJC_SELECTOR_REFERENCES_.334
+_OBJC_SELECTOR_REFERENCES_.336
+___block_descriptor_28_e4_20s24w_e5_v4?0l
+_OBJC_SELECTOR_REFERENCES_.338
+_OBJC_SELECTOR_REFERENCES_.339
+_OBJC_SELECTOR_REFERENCES_.341
+_OBJC_CLASSLIST_REFERENCES_$_.344
+_OBJC_SELECTOR_REFERENCES_.346
+_OBJC_CLASSLIST_REFERENCES_$_.347
+_OBJC_SELECTOR_REFERENCES_.349
+_OBJC_SELECTOR_REFERENCES_.351
+___block_descriptor_28_e4_20s24s_e27_v12?0"NSData"4"NSError"8l
+_OBJC_CLASSLIST_REFERENCES_$_.352
+_OBJC_SELECTOR_REFERENCES_.354
+_OBJC_CLASSLIST_REFERENCES_$_.355
+_OBJC_SELECTOR_REFERENCES_.357
+_OBJC_SELECTOR_REFERENCES_.359
+_OBJC_SELECTOR_REFERENCES_.361
+_OBJC_CLASSLIST_REFERENCES_$_.362
+_OBJC_SELECTOR_REFERENCES_.364
+_OBJC_SELECTOR_REFERENCES_.366
+_OBJC_SELECTOR_REFERENCES_.368
+_OBJC_SELECTOR_REFERENCES_.370
+_OBJC_CLASSLIST_REFERENCES_$_.371
+_OBJC_SELECTOR_REFERENCES_.373
+_OBJC_SELECTOR_REFERENCES_.375
+_OBJC_SELECTOR_REFERENCES_.379
+_OBJC_SELECTOR_REFERENCES_.383
+_OBJC_CLASSLIST_REFERENCES_$_.384
+_OBJC_SELECTOR_REFERENCES_.386
+_OBJC_SELECTOR_REFERENCES_.388
+_OBJC_SELECTOR_REFERENCES_.391
+_OBJC_CLASSLIST_REFERENCES_$_.394
+_OBJC_SELECTOR_REFERENCES_.396
+_OBJC_SELECTOR_REFERENCES_.398
+_OBJC_SELECTOR_REFERENCES_.400
+_OBJC_CLASSLIST_REFERENCES_$_.405
+_OBJC_SELECTOR_REFERENCES_.407
+_OBJC_SELECTOR_REFERENCES_.409
+_OBJC_SELECTOR_REFERENCES_.411
+_OBJC_SELECTOR_REFERENCES_.413
+_OBJC_SELECTOR_REFERENCES_.415
+_OBJC_SELECTOR_REFERENCES_.417
+__OBJC_$_CLASS_METHODS_GIDSignIn
+__OBJC_$_CLASS_PROP_LIST_GIDSignIn
+__OBJC_METACLASS_RO_$_GIDSignIn
+__OBJC_$_INSTANCE_METHODS_GIDSignIn
+_OBJC_IVAR_$_GIDSignIn._currentOptions
+_OBJC_IVAR_$_GIDSignIn._appAuthConfiguration
+_OBJC_IVAR_$_GIDSignIn._currentAuthorizationFlow
+_OBJC_IVAR_$_GIDSignIn._restarting
+_OBJC_IVAR_$_GIDSignIn._currentUser
+__OBJC_$_INSTANCE_VARIABLES_GIDSignIn
+__OBJC_$_PROP_LIST_GIDSignIn
+__OBJC_CLASS_RO_$_GIDSignIn
+/Users/dustinyang/project/iOs/GANDA/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDSignIn.m
+GoogleSignIn/GoogleSignIn/Sources/GIDSignIn.m
+GoogleSignIn/GoogleSignIn/Sources/Public/GoogleSignIn/GIDSignIn.h
+__38-[GIDSignIn handleDevicePolicyAppURL:]_block_invoke
+__35-[GIDSignIn addCompletionCallback:]_block_invoke_2
+__35-[GIDSignIn addCompletionCallback:]_block_invoke
+__38-[GIDSignIn addDecodeIdTokenCallback:]_block_invoke_2
+__38-[GIDSignIn addDecodeIdTokenCallback:]_block_invoke
+__destroy_helper_block_e4_20s24w
+__copy_helper_block_e4_20s24w
+__33-[GIDSignIn addSaveAuthCallback:]_block_invoke
+__copy_helper_block_e4_20s24s28b
+__38-[GIDSignIn maybeFetchToken:fallback:]_block_invoke_2
+__38-[GIDSignIn maybeFetchToken:fallback:]_block_invoke
+__37-[GIDSignIn authenticateWithOptions:]_block_invoke_2
+__37-[GIDSignIn authenticateWithOptions:]_block_invoke
+__50-[GIDSignIn authenticateInteractivelyWithOptions:]_block_invoke_2
+__50-[GIDSignIn authenticateInteractivelyWithOptions:]_block_invoke
+__copy_helper_block_e4_20s24s
+__31-[GIDSignIn signInWithOptions:]_block_invoke_2
+__31-[GIDSignIn signInWithOptions:]_block_invoke
+__27+[GIDSignIn sharedInstance]_block_invoke
+__copy_helper_block_e4_20s24b
+__36-[GIDSignIn disconnectWithCallback:]_block_invoke_2
+__36-[GIDSignIn disconnectWithCallback:]_block_invoke.176
+__36-[GIDSignIn disconnectWithCallback:]_block_invoke
+__57-[GIDSignIn addScopes:presentingViewController:callback:]_block_invoke.144
+__57-[GIDSignIn addScopes:presentingViewController:callback:]_block_invoke
+-[GIDSignInButton initWithFrame:]
+-[GIDSignInButton sharedInit]
+-[GIDSignInButton initWithCoder:]
+-[GIDSignInButton encodeWithCoder:]
+-[GIDSignInButton updateUI]
+-[GIDSignInButton loadIcon]
+-[GIDSignInButton switchToPressed]
+-[GIDSignInButton switchToNormal]
+-[GIDSignInButton switchToDisabled]
+-[GIDSignInButton setStyle:]
+-[GIDSignInButton setColorScheme:]
+-[GIDSignInButton setEnabled:]
+-[GIDSignInButton setButtonState:]
+-[GIDSignInButton setFrame:]
+-[GIDSignInButton minWidth]
+-[GIDSignInButton isConstraint:equalToConstraint:]
+-[GIDSignInButton sizeThatFits:]
+-[GIDSignInButton updateConstraints]
+-[GIDSignInButton drawRect:]
+-[GIDSignInButton drawButtonBackground:]
+_colorForStyleState
+-[GIDSignInButton drawButtonText:]
+-[GIDSignInButton buttonText]
++[GIDSignInButton buttonTextFont]
++[GIDSignInButton textSize:withFont:]
+-[GIDSignInButton style]
+-[GIDSignInButton colorScheme]
+-[GIDSignInButton buttonState]
+-[GIDSignInButton .cxx_destruct]
+-[UIImage(GIDAdditions_Private) gid_imageWithBlendMode:color:]
+_OBJC_IVAR_$_GIDSignInButton._style
+_OBJC_IVAR_$_GIDSignInButton._colorScheme
+_OBJC_IVAR_$_GIDSignInButton._buttonState
+_OBJC_IVAR_$_GIDSignInButton._icon
+_OBJC_SELECTOR_REFERENCES_.72
+_OBJC_CLASSLIST_REFERENCES_$_.73
+_OBJC_SELECTOR_REFERENCES_.91
+_OBJC_CLASSLIST_REFERENCES_$_.116
+_OBJC_SELECTOR_REFERENCES_.118
+_OBJC_SELECTOR_REFERENCES_.122
+_OBJC_SELECTOR_REFERENCES_.132
+_OBJC_SELECTOR_REFERENCES_.134
+_OBJC_SELECTOR_REFERENCES_.136
+_OBJC_CLASSLIST_REFERENCES_$_.151
+_OBJC_SELECTOR_REFERENCES_.153
+_OBJC_SELECTOR_REFERENCES_.155
+_OBJC_CLASSLIST_REFERENCES_$_.156
+_OBJC_CLASSLIST_REFERENCES_$_.161
+_OBJC_SELECTOR_REFERENCES_.165
+_OBJC_SELECTOR_REFERENCES_.167
+__OBJC_$_CLASS_METHODS_GIDSignInButton
+__OBJC_METACLASS_RO_$_GIDSignInButton
+__OBJC_$_INSTANCE_METHODS_GIDSignInButton
+__OBJC_$_INSTANCE_VARIABLES_GIDSignInButton
+__OBJC_$_PROP_LIST_GIDSignInButton
+__OBJC_CLASS_RO_$_GIDSignInButton
+_OBJC_SELECTOR_REFERENCES_.203
+_OBJC_SELECTOR_REFERENCES_.205
+_OBJC_SELECTOR_REFERENCES_.215
+__OBJC_$_CATEGORY_INSTANCE_METHODS_UIImage_$_GIDAdditions_Private
+__OBJC_$_CATEGORY_UIImage_$_GIDAdditions_Private
+_kColors
+/Users/dustinyang/project/iOs/GANDA/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDSignInButton.m
+GoogleSignIn/GoogleSignIn/Sources/GIDSignInButton.m
+GoogleSignIn/GoogleSignIn/Sources/Public/GoogleSignIn/GIDSignInButton.h
+colorForStyleState
++[GIDSignInCallbackSchemes relevantURLSchemes]
+-[GIDSignInCallbackSchemes initWithClientIdentifier:]
+-[GIDSignInCallbackSchemes clientIdentifierScheme]
+-[GIDSignInCallbackSchemes allSchemes]
+-[GIDSignInCallbackSchemes unsupportedSchemes]
+-[GIDSignInCallbackSchemes URLSchemeIsCallbackScheme:]
+-[GIDSignInCallbackSchemes .cxx_destruct]
+_OBJC_CLASSLIST_REFERENCES_$_.1
+_OBJC_SELECTOR_REFERENCES_.3
+_OBJC_SELECTOR_REFERENCES_.5
+_OBJC_SELECTOR_REFERENCES_.7
+_OBJC_SELECTOR_REFERENCES_.43
+__OBJC_$_CLASS_METHODS_GIDSignInCallbackSchemes
+__OBJC_METACLASS_RO_$_GIDSignInCallbackSchemes
+__OBJC_$_INSTANCE_METHODS_GIDSignInCallbackSchemes
+_OBJC_IVAR_$_GIDSignInCallbackSchemes._clientIdentifier
+__OBJC_$_INSTANCE_VARIABLES_GIDSignInCallbackSchemes
+__OBJC_CLASS_RO_$_GIDSignInCallbackSchemes
+/Users/dustinyang/project/iOs/GANDA/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDSignInCallbackSchemes.m
+GoogleSignIn/GoogleSignIn/Sources/GIDSignInCallbackSchemes.m
++[GIDSignInInternalOptions defaultOptionsWithConfiguration:presentingViewController:loginHint:addScopesFlow:callback:]
++[GIDSignInInternalOptions silentOptionsWithCallback:]
+-[GIDSignInInternalOptions optionsWithExtraParameters:forContinuation:]
+-[GIDSignInInternalOptions interactive]
+-[GIDSignInInternalOptions continuation]
+-[GIDSignInInternalOptions addScopesFlow]
+-[GIDSignInInternalOptions extraParams]
+-[GIDSignInInternalOptions configuration]
+-[GIDSignInInternalOptions presentingViewController]
+-[GIDSignInInternalOptions callback]
+-[GIDSignInInternalOptions scopes]
+-[GIDSignInInternalOptions setScopes:]
+-[GIDSignInInternalOptions loginHint]
+-[GIDSignInInternalOptions setLoginHint:]
+-[GIDSignInInternalOptions .cxx_destruct]
+__OBJC_$_CLASS_METHODS_GIDSignInInternalOptions
+__OBJC_METACLASS_RO_$_GIDSignInInternalOptions
+__OBJC_$_INSTANCE_METHODS_GIDSignInInternalOptions
+_OBJC_IVAR_$_GIDSignInInternalOptions._interactive
+_OBJC_IVAR_$_GIDSignInInternalOptions._continuation
+_OBJC_IVAR_$_GIDSignInInternalOptions._addScopesFlow
+_OBJC_IVAR_$_GIDSignInInternalOptions._extraParams
+_OBJC_IVAR_$_GIDSignInInternalOptions._configuration
+_OBJC_IVAR_$_GIDSignInInternalOptions._presentingViewController
+_OBJC_IVAR_$_GIDSignInInternalOptions._callback
+_OBJC_IVAR_$_GIDSignInInternalOptions._scopes
+_OBJC_IVAR_$_GIDSignInInternalOptions._loginHint
+__OBJC_$_INSTANCE_VARIABLES_GIDSignInInternalOptions
+__OBJC_$_PROP_LIST_GIDSignInInternalOptions
+__OBJC_CLASS_RO_$_GIDSignInInternalOptions
+/Users/dustinyang/project/iOs/GANDA/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDSignInInternalOptions.m
+GoogleSignIn/GoogleSignIn/Sources/GIDSignInInternalOptions.m
+GoogleSignIn/GoogleSignIn/Sources/GIDSignInInternalOptions.h
++[GIDSignInPreferences googleAuthorizationServer]
++[GIDSignInPreferences googleTokenServer]
++[GIDSignInPreferences googleUserInfoServer]
+__OBJC_$_CLASS_METHODS_GIDSignInPreferences
+__OBJC_METACLASS_RO_$_GIDSignInPreferences
+__OBJC_CLASS_RO_$_GIDSignInPreferences
+/Users/dustinyang/project/iOs/GANDA/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDSignInPreferences.m
+GoogleSignIn/GoogleSignIn/Sources/GIDSignInPreferences.m
+GIDVersion
++[GIDSignInStrings localizedStringForKey:text:]
++[GIDSignInStrings signInString]
++[GIDSignInStrings signInWithGoogleString]
+__OBJC_$_CLASS_METHODS_GIDSignInStrings
+__OBJC_METACLASS_RO_$_GIDSignInStrings
+__OBJC_CLASS_RO_$_GIDSignInStrings
+/Users/dustinyang/project/iOs/GANDA/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDSignInStrings.m
+GoogleSignIn/GoogleSignIn/Sources/GIDSignInStrings.m
+__OBJC_METACLASS_RO_$_PodsDummy_GoogleSignIn
+__OBJC_CLASS_RO_$_PodsDummy_GoogleSignIn
+/Users/dustinyang/project/iOs/GANDA/Pods/Target Support Files/GoogleSignIn/GoogleSignIn-dummy.m
++[NSBundle(GID3PAdditions) gid_frameworkBundle]
++[NSBundle(GID3PAdditions) gid_registerFonts]
+___45+[NSBundle(GID3PAdditions) gid_registerFonts]_block_invoke
+_OBJC_CLASSLIST_REFERENCES_$_.5
+_gid_registerFonts.once
+_OBJC_CLASSLIST_REFERENCES_$_.14
+_OBJC_CLASSLIST_REFERENCES_$_.21
+__OBJC_$_CATEGORY_CLASS_METHODS_NSBundle_$_GID3PAdditions
+__OBJC_$_CATEGORY_NSBundle_$_GID3PAdditions
+/Users/dustinyang/project/iOs/GANDA/Pods/GoogleSignIn/GoogleSignIn/Sources/NSBundle+GID3PAdditions.m
+__45+[NSBundle(GID3PAdditions) gid_registerFonts]_block_invoke
+GoogleSignIn/GoogleSignIn/Sources/NSBundle+GID3PAdditions.m

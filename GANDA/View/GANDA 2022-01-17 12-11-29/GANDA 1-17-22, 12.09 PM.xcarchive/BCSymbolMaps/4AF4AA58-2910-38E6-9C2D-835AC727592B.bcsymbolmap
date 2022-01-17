@@ -1,0 +1,584 @@
+BCSymbolMap Version: 2.0
+Apple clang version 13.0.0 (clang-1300.0.29.30)
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.2.sdk
+iPhoneOS15.2.sdk
+/Users/dustinyang/Library/Developer/Xcode/DerivedData/GANDA-bkfrvszbcqnkoreznnrrqsjlzexv/Build/Intermediates.noindex/ArchiveIntermediates/GANDA/IntermediateBuildFilesPath/Pods.build/Release-iphoneos/GeoFire.build/DerivedSources/GeoFire_vers.c
+/Users/dustinyang/project/iOs/GANDA/Pods
+-[GeoFire init]
+-[GeoFire initWithFirebaseRef:]
+-[GeoFire setLocation:forKey:]
+-[GeoFire setLocation:forKey:withCompletionBlock:]
+-[GeoFire firebaseRefForLocationKey:]
+___37-[GeoFire firebaseRefForLocationKey:]_block_invoke
+-[GeoFire setLocationValue:forKey:withBlock:]
+___45-[GeoFire setLocationValue:forKey:withBlock:]_block_invoke
+___45-[GeoFire setLocationValue:forKey:withBlock:]_block_invoke_2
+___copy_helper_block_e8_32b40s
+___destroy_helper_block_e8_32s40s
+___45-[GeoFire setLocationValue:forKey:withBlock:]_block_invoke.56
+___45-[GeoFire setLocationValue:forKey:withBlock:]_block_invoke_2.57
+-[GeoFire removeKey:]
+-[GeoFire removeKey:withCompletionBlock:]
++[GeoFire locationFromValue:]
+-[GeoFire getLocationForKey:withCallback:]
+___42-[GeoFire getLocationForKey:withCallback:]_block_invoke
+___42-[GeoFire getLocationForKey:withCallback:]_block_invoke_2
+___copy_helper_block_e8_32s40b
+___42-[GeoFire getLocationForKey:withCallback:]_block_invoke.99
+___42-[GeoFire getLocationForKey:withCallback:]_block_invoke_2.100
+-[GeoFire queryAtLocation:withRadius:]
+-[GeoFire queryWithRegion:]
+-[GeoFire firebaseRef]
+-[GeoFire setFirebaseRef:]
+-[GeoFire callbackQueue]
+-[GeoFire setCallbackQueue:]
+-[GeoFire .cxx_destruct]
+_OBJC_CLASSLIST_REFERENCES_$_
+_OBJC_SELECTOR_REFERENCES_
+_OBJC_SELECTOR_REFERENCES_.4
+_OBJC_SELECTOR_REFERENCES_.6
+_OBJC_SELECTOR_REFERENCES_.10
+_OBJC_SELECTOR_REFERENCES_.12
+_OBJC_SELECTOR_REFERENCES_.16
+_firebaseRefForLocationKey:.illegalCharacters
+_firebaseRefForLocationKey:.onceToken
+___block_descriptor_32_e5_v8?0l
+___block_literal_global
+_OBJC_CLASSLIST_REFERENCES_$_.18
+_OBJC_SELECTOR_REFERENCES_.22
+_OBJC_SELECTOR_REFERENCES_.24
+_OBJC_SELECTOR_REFERENCES_.28
+_OBJC_SELECTOR_REFERENCES_.30
+_OBJC_CLASSLIST_REFERENCES_$_.31
+_OBJC_SELECTOR_REFERENCES_.33
+_OBJC_CLASSLIST_REFERENCES_$_.34
+_OBJC_SELECTOR_REFERENCES_.36
+_OBJC_SELECTOR_REFERENCES_.38
+_OBJC_CLASSLIST_REFERENCES_$_.41
+_OBJC_SELECTOR_REFERENCES_.43
+_OBJC_CLASSLIST_REFERENCES_$_.46
+_OBJC_SELECTOR_REFERENCES_.48
+_OBJC_SELECTOR_REFERENCES_.50
+_OBJC_SELECTOR_REFERENCES_.52
+___block_descriptor_48_e8_32bs40s_e5_v8?0l
+___block_descriptor_48_e8_32bs40s_e42_v24?0"NSError"8"FIRDatabaseReference"16l
+_OBJC_SELECTOR_REFERENCES_.55
+_OBJC_SELECTOR_REFERENCES_.59
+_OBJC_SELECTOR_REFERENCES_.61
+_OBJC_SELECTOR_REFERENCES_.63
+_OBJC_SELECTOR_REFERENCES_.65
+_OBJC_SELECTOR_REFERENCES_.67
+_OBJC_SELECTOR_REFERENCES_.69
+_OBJC_SELECTOR_REFERENCES_.71
+_OBJC_SELECTOR_REFERENCES_.73
+_OBJC_CLASSLIST_REFERENCES_$_.74
+_OBJC_SELECTOR_REFERENCES_.76
+_OBJC_SELECTOR_REFERENCES_.78
+_OBJC_CLASSLIST_REFERENCES_$_.79
+_OBJC_SELECTOR_REFERENCES_.81
+_OBJC_CLASSLIST_REFERENCES_$_.82
+_OBJC_SELECTOR_REFERENCES_.84
+_OBJC_CLASSLIST_REFERENCES_$_.85
+_OBJC_SELECTOR_REFERENCES_.87
+_OBJC_CLASSLIST_REFERENCES_$_.88
+_OBJC_SELECTOR_REFERENCES_.92
+_OBJC_SELECTOR_REFERENCES_.94
+_OBJC_CLASSLIST_REFERENCES_$_.95
+_OBJC_SELECTOR_REFERENCES_.97
+___block_descriptor_48_e8_32s40bs_e5_v8?0l
+___block_descriptor_48_e8_32s40bs_e25_v16?0"FIRDataSnapshot"8l
+___block_descriptor_48_e8_32s40bs_e17_v16?0"NSError"8l
+_OBJC_SELECTOR_REFERENCES_.103
+_OBJC_CLASSLIST_REFERENCES_$_.104
+_OBJC_SELECTOR_REFERENCES_.106
+_OBJC_CLASSLIST_REFERENCES_$_.107
+_OBJC_SELECTOR_REFERENCES_.109
+__OBJC_$_CLASS_METHODS_GeoFire
+__OBJC_METACLASS_RO_$_GeoFire
+__OBJC_$_INSTANCE_METHODS_GeoFire
+_OBJC_IVAR_$_GeoFire._firebaseRef
+_OBJC_IVAR_$_GeoFire._callbackQueue
+__OBJC_$_INSTANCE_VARIABLES_GeoFire
+__OBJC_$_PROP_LIST_GeoFire
+__OBJC_CLASS_RO_$_GeoFire
+/Users/dustinyang/project/iOs/GANDA/Pods/GeoFire/GeoFire/Implementation/GeoFire.m
+GeoFire/GeoFire/Implementation/GeoFire.m
+GeoFire/GeoFire/API/GeoFire.h
+__42-[GeoFire getLocationForKey:withCallback:]_block_invoke_2.100
+__42-[GeoFire getLocationForKey:withCallback:]_block_invoke.99
+__copy_helper_block_e8_32s40b
+__42-[GeoFire getLocationForKey:withCallback:]_block_invoke_2
+__42-[GeoFire getLocationForKey:withCallback:]_block_invoke
+__45-[GeoFire setLocationValue:forKey:withBlock:]_block_invoke_2.57
+__45-[GeoFire setLocationValue:forKey:withBlock:]_block_invoke.56
+__destroy_helper_block_e8_32s40s
+__copy_helper_block_e8_32b40s
+__45-[GeoFire setLocationValue:forKey:withBlock:]_block_invoke_2
+__45-[GeoFire setLocationValue:forKey:withBlock:]_block_invoke
+__37-[GeoFire firebaseRefForLocationKey:]_block_invoke
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.2.sdk/usr/include/dispatch/once.h
+__OBJC_METACLASS_RO_$_PodsDummy_GeoFire
+__OBJC_CLASS_RO_$_PodsDummy_GeoFire
+/Users/dustinyang/project/iOs/GANDA/Pods/Target Support Files/GeoFire/GeoFire-dummy.m
++[GFBase32Utils valueToBase32Character:]
++[GFBase32Utils base32CharacterToValue:]
++[GFBase32Utils base32Characters]
+___33+[GFBase32Utils base32Characters]_block_invoke
+_BASE_32_CHARS
+_base32Characters.onceToken
+_base32Characters.chars
+_OBJC_CLASSLIST_REFERENCES_$_.4
+__OBJC_$_CLASS_METHODS_GFBase32Utils
+__OBJC_METACLASS_RO_$_GFBase32Utils
+__OBJC_CLASS_RO_$_GFBase32Utils
+/Users/dustinyang/project/iOs/GANDA/Pods/GeoFire/GeoFire/Utils/GFBase32Utils.m
+__33+[GFBase32Utils base32Characters]_block_invoke
+GeoFire/GeoFire/Utils/GFBase32Utils.m
+llvm.loop.mustprogress
+-[GFGeoHash initWithLocation:]
+-[GFGeoHash initWithLocation:precision:]
++[GFGeoHash newWithLocation:]
++[GFGeoHash newWithLocation:precision:]
++[GFGeoHash newWithString:]
+-[GFGeoHash initWithString:]
+-[GFGeoHash initWithCheckedHash:]
++[GFGeoHash isValidGeoHash:]
+___28+[GFGeoHash isValidGeoHash:]_block_invoke
+-[GFGeoHash isEqual:]
+-[GFGeoHash hash]
+-[GFGeoHash description]
+-[GFGeoHash geoHashValue]
+-[GFGeoHash setGeoHashValue:]
+-[GFGeoHash .cxx_destruct]
+_OBJC_SELECTOR_REFERENCES_.2
+_OBJC_CLASSLIST_REFERENCES_$_.9
+_OBJC_SELECTOR_REFERENCES_.11
+_OBJC_CLASSLIST_REFERENCES_$_.12
+_OBJC_SELECTOR_REFERENCES_.14
+_OBJC_CLASSLIST_REFERENCES_$_.15
+_OBJC_SELECTOR_REFERENCES_.17
+_OBJC_SELECTOR_REFERENCES_.19
+_OBJC_SELECTOR_REFERENCES_.21
+_OBJC_SELECTOR_REFERENCES_.23
+_isValidGeoHash:.base32Set
+_isValidGeoHash:.onceToken
+_OBJC_CLASSLIST_REFERENCES_$_.27
+_OBJC_SELECTOR_REFERENCES_.29
+_OBJC_SELECTOR_REFERENCES_.31
+_OBJC_SELECTOR_REFERENCES_.35
+_OBJC_SELECTOR_REFERENCES_.37
+_OBJC_SELECTOR_REFERENCES_.39
+_OBJC_SELECTOR_REFERENCES_.41
+_OBJC_SELECTOR_REFERENCES_.45
+_OBJC_SELECTOR_REFERENCES_.49
+__OBJC_$_CLASS_METHODS_GFGeoHash
+__OBJC_METACLASS_RO_$_GFGeoHash
+__OBJC_$_INSTANCE_METHODS_GFGeoHash
+_OBJC_IVAR_$_GFGeoHash._geoHashValue
+__OBJC_$_INSTANCE_VARIABLES_GFGeoHash
+__OBJC_$_PROP_LIST_GFGeoHash
+__OBJC_CLASS_RO_$_GFGeoHash
+/Users/dustinyang/project/iOs/GANDA/Pods/GeoFire/GeoFire/Utils/GFGeoHash.m
+GeoFire/GeoFire/Utils/GFGeoHash.m
+GeoFire/GeoFire/Utils/GFGeoHash.h
+__28+[GFGeoHash isValidGeoHash:]_block_invoke
+-[GFGeoHashQuery initWithStartValue:endValue:]
++[GFGeoHashQuery newWithStartValue:endValue:]
++[GFGeoHashQuery bitsForLatitudeWithResolution:]
++[GFGeoHashQuery meters:toLongitudeDegreesAtLatitude:]
++[GFGeoHashQuery bitsForLongitudeWithResolution:atLatitude:]
++[GFGeoHashQuery wrapLongitude:]
++[GFGeoHashQuery bitsForBoundingBoxAtLocation:withSize:]
++[GFGeoHashQuery bitsForRegion:]
++[GFGeoHashQuery geoHashQueryWithGeoHash:bits:]
++[GFGeoHashQuery joinQueries:]
++[GFGeoHashQuery queriesForRegion:]
+___35+[GFGeoHashQuery queriesForRegion:]_block_invoke
+___copy_helper_block_e8_32s
+___destroy_helper_block_e8_32s
++[GFGeoHashQuery queriesForLocation:radius:]
+-[GFGeoHashQuery isPrefixTo:]
+-[GFGeoHashQuery isSuperQueryOf:]
+-[GFGeoHashQuery canJoinWith:]
+-[GFGeoHashQuery joinWith:]
+-[GFGeoHashQuery containsGeoHash:]
+-[GFGeoHashQuery isEqual:]
+-[GFGeoHashQuery hash]
+-[GFGeoHashQuery copyWithZone:]
+-[GFGeoHashQuery description]
+-[GFGeoHashQuery startValue]
+-[GFGeoHashQuery setStartValue:]
+-[GFGeoHashQuery endValue]
+-[GFGeoHashQuery setEndValue:]
+-[GFGeoHashQuery .cxx_destruct]
+_OBJC_SELECTOR_REFERENCES_.8
+_OBJC_CLASSLIST_REFERENCES_$_.13
+_OBJC_SELECTOR_REFERENCES_.15
+_OBJC_CLASSLIST_REFERENCES_$_.20
+_OBJC_CLASSLIST_REFERENCES_$_.29
+___block_descriptor_56_e8_32s_e11_v24?0d8d16l
+_OBJC_SELECTOR_REFERENCES_.53
+_OBJC_SELECTOR_REFERENCES_.57
+_OBJC_SELECTOR_REFERENCES_.75
+__OBJC_$_CLASS_METHODS_GFGeoHashQuery
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_NSCopying
+__OBJC_$_PROTOCOL_METHOD_TYPES_NSCopying
+__OBJC_PROTOCOL_$_NSCopying
+__OBJC_LABEL_PROTOCOL_$_NSCopying
+__OBJC_CLASS_PROTOCOLS_$_GFGeoHashQuery
+__OBJC_METACLASS_RO_$_GFGeoHashQuery
+__OBJC_$_INSTANCE_METHODS_GFGeoHashQuery
+_OBJC_IVAR_$_GFGeoHashQuery._startValue
+_OBJC_IVAR_$_GFGeoHashQuery._endValue
+__OBJC_$_INSTANCE_VARIABLES_GFGeoHashQuery
+__OBJC_$_PROP_LIST_GFGeoHashQuery
+__OBJC_CLASS_RO_$_GFGeoHashQuery
+/Users/dustinyang/project/iOs/GANDA/Pods/GeoFire/GeoFire/Utils/GFGeoHashQuery.m
+GeoFire/GeoFire/Utils/GFGeoHashQuery.m
+GeoFire/GeoFire/Utils/GFGeoHashQuery.h
+__destroy_helper_block_e8_32s
+__copy_helper_block_e8_32s
+__35+[GFGeoHashQuery queriesForRegion:]_block_invoke
+-[GFGeoQueryBounds initWithStartValue:endValue:]
++[GFGeoQueryBounds boundsWithStartValue:endValue:]
+-[GFGeoQueryBounds isEqual:]
+-[GFGeoQueryBounds hash]
+-[GFGeoQueryBounds copyWithZone:]
+-[GFGeoQueryBounds description]
+-[GFGeoQueryBounds startValue]
+-[GFGeoQueryBounds setStartValue:]
+-[GFGeoQueryBounds endValue]
+-[GFGeoQueryBounds setEndValue:]
+-[GFGeoQueryBounds .cxx_destruct]
+__OBJC_$_CLASS_METHODS_GFGeoQueryBounds
+__OBJC_CLASS_PROTOCOLS_$_GFGeoQueryBounds
+__OBJC_METACLASS_RO_$_GFGeoQueryBounds
+__OBJC_$_INSTANCE_METHODS_GFGeoQueryBounds
+_OBJC_IVAR_$_GFGeoQueryBounds._startValue
+_OBJC_IVAR_$_GFGeoQueryBounds._endValue
+__OBJC_$_INSTANCE_VARIABLES_GFGeoQueryBounds
+__OBJC_$_PROP_LIST_GFGeoQueryBounds
+__OBJC_CLASS_RO_$_GFGeoQueryBounds
+/Users/dustinyang/project/iOs/GANDA/Pods/GeoFire/GeoFire/Utils/GFGeoQueryBounds.m
+GeoFire/GeoFire/Utils/GFGeoQueryBounds.m
+GeoFire/GeoFire/Utils/GFGeoQueryBounds.h
+-[GFQueryLocationInfo isInQuery]
+-[GFQueryLocationInfo setIsInQuery:]
+-[GFQueryLocationInfo location]
+-[GFQueryLocationInfo setLocation:]
+-[GFQueryLocationInfo geoHash]
+-[GFQueryLocationInfo setGeoHash:]
+-[GFQueryLocationInfo snapshot]
+-[GFQueryLocationInfo setSnapshot:]
+-[GFQueryLocationInfo .cxx_destruct]
+-[GFGeoHashQueryHandle childAddedHandle]
+-[GFGeoHashQueryHandle setChildAddedHandle:]
+-[GFGeoHashQueryHandle childRemovedHandle]
+-[GFGeoHashQueryHandle setChildRemovedHandle:]
+-[GFGeoHashQueryHandle childChangedHandle]
+-[GFGeoHashQueryHandle setChildChangedHandle:]
+-[GFCircleQuery initWithGeoFire:location:radius:]
+-[GFCircleQuery setCenter:]
+-[GFCircleQuery center]
+-[GFCircleQuery setRadius:]
+-[GFCircleQuery radius]
+-[GFCircleQuery locationIsInQuery:]
+-[GFCircleQuery queriesForCurrentCriteria]
+-[GFCircleQuery centerLocation]
+-[GFCircleQuery setCenterLocation:]
+-[GFCircleQuery .cxx_destruct]
+-[GFRegionQuery initWithGeoFire:region:]
+-[GFRegionQuery setRegion:]
+-[GFRegionQuery region]
+-[GFRegionQuery locationIsInQuery:]
+-[GFRegionQuery queriesForCurrentCriteria]
+-[GFQuery initWithGeoFire:]
+-[GFQuery firebaseForGeoHashQuery:]
+-[GFQuery updateLocationInfo:forKey:snapshot:]
+___46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke
+___46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke_2
+___copy_helper_block_e8_32b40s48s
+___destroy_helper_block_e8_32s40s48s
+___copy_helper_block_e8_32s40s48s
+___46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke.149
+___46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke_2.150
+___46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke.155
+___46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke_2.156
+___46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke_3
+___46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke_4
+___46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke_5
+___46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke_6
+___46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke_7
+___46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke_8
+-[GFQuery queriesContainGeoHash:]
+-[GFQuery childAdded:]
+-[GFQuery childChanged:]
+-[GFQuery childRemoved:]
+___24-[GFQuery childRemoved:]_block_invoke
+___24-[GFQuery childRemoved:]_block_invoke_2
+___24-[GFQuery childRemoved:]_block_invoke_3
+___24-[GFQuery childRemoved:]_block_invoke_4
+___24-[GFQuery childRemoved:]_block_invoke_5
+___copy_helper_block_e8_32s40s
+-[GFQuery locationIsInQuery:]
+-[GFQuery queriesForCurrentCriteria]
+-[GFQuery searchCriteriaDidChange]
+-[GFQuery checkAndFireReadyEvent]
+___33-[GFQuery checkAndFireReadyEvent]_block_invoke
+-[GFQuery updateQueries]
+___24-[GFQuery updateQueries]_block_invoke
+___24-[GFQuery updateQueries]_block_invoke.224
+___24-[GFQuery updateQueries]_block_invoke_2
+___24-[GFQuery updateQueries]_block_invoke.233
+___24-[GFQuery updateQueries]_block_invoke_2.237
+___24-[GFQuery updateQueries]_block_invoke_3
+___24-[GFQuery updateQueries]_block_invoke_4
+___24-[GFQuery updateQueries]_block_invoke.249
+-[GFQuery reset]
+-[GFQuery removeAllObservers]
+-[GFQuery removeObserverWithFirebaseHandle:]
+-[GFQuery totalObserverCount]
+-[GFQuery observeEventType:withBlock:]
+___38-[GFQuery observeEventType:withBlock:]_block_invoke
+___38-[GFQuery observeEventType:withBlock:]_block_invoke_2
+___copy_helper_block_e8_32b
+-[GFQuery observeEventType:withSnapshotBlock:]
+___46-[GFQuery observeEventType:withSnapshotBlock:]_block_invoke
+___46-[GFQuery observeEventType:withSnapshotBlock:]_block_invoke_2
+-[GFQuery observeReadyWithBlock:]
+-[GFQuery geoFire]
+-[GFQuery setGeoFire:]
+-[GFQuery locationInfos]
+-[GFQuery setLocationInfos:]
+-[GFQuery queries]
+-[GFQuery setQueries:]
+-[GFQuery firebaseHandles]
+-[GFQuery setFirebaseHandles:]
+-[GFQuery outstandingQueries]
+-[GFQuery setOutstandingQueries:]
+-[GFQuery keyEnteredObservers]
+-[GFQuery setKeyEnteredObservers:]
+-[GFQuery keyExitedObservers]
+-[GFQuery setKeyExitedObservers:]
+-[GFQuery keyMovedObservers]
+-[GFQuery setKeyMovedObservers:]
+-[GFQuery keyEnteredSnapshotObservers]
+-[GFQuery setKeyEnteredSnapshotObservers:]
+-[GFQuery keyExitedSnapshotObservers]
+-[GFQuery setKeyExitedSnapshotObservers:]
+-[GFQuery keyMovedSnapshotObservers]
+-[GFQuery setKeyMovedSnapshotObservers:]
+-[GFQuery readyObservers]
+-[GFQuery setReadyObservers:]
+-[GFQuery currentHandle]
+-[GFQuery setCurrentHandle:]
+-[GFQuery .cxx_destruct]
+__OBJC_METACLASS_RO_$_GFQueryLocationInfo
+__OBJC_$_INSTANCE_METHODS_GFQueryLocationInfo
+_OBJC_IVAR_$_GFQueryLocationInfo._isInQuery
+_OBJC_IVAR_$_GFQueryLocationInfo._location
+_OBJC_IVAR_$_GFQueryLocationInfo._geoHash
+_OBJC_IVAR_$_GFQueryLocationInfo._snapshot
+__OBJC_$_INSTANCE_VARIABLES_GFQueryLocationInfo
+__OBJC_$_PROP_LIST_GFQueryLocationInfo
+__OBJC_CLASS_RO_$_GFQueryLocationInfo
+__OBJC_METACLASS_RO_$_GFGeoHashQueryHandle
+__OBJC_$_INSTANCE_METHODS_GFGeoHashQueryHandle
+_OBJC_IVAR_$_GFGeoHashQueryHandle._childAddedHandle
+_OBJC_IVAR_$_GFGeoHashQueryHandle._childRemovedHandle
+_OBJC_IVAR_$_GFGeoHashQueryHandle._childChangedHandle
+__OBJC_$_INSTANCE_VARIABLES_GFGeoHashQueryHandle
+__OBJC_$_PROP_LIST_GFGeoHashQueryHandle
+__OBJC_CLASS_RO_$_GFGeoHashQueryHandle
+_OBJC_IVAR_$_GFCircleQuery._centerLocation
+_OBJC_IVAR_$_GFCircleQuery._radius
+_OBJC_SELECTOR_REFERENCES_.54
+_OBJC_SELECTOR_REFERENCES_.56
+_OBJC_SELECTOR_REFERENCES_.58
+_OBJC_SELECTOR_REFERENCES_.60
+_OBJC_CLASSLIST_REFERENCES_$_.61
+__OBJC_METACLASS_RO_$_GFCircleQuery
+__OBJC_$_INSTANCE_METHODS_GFCircleQuery
+__OBJC_$_INSTANCE_VARIABLES_GFCircleQuery
+__OBJC_$_PROP_LIST_GFCircleQuery
+__OBJC_CLASS_RO_$_GFCircleQuery
+_OBJC_IVAR_$_GFRegionQuery._region
+_OBJC_SELECTOR_REFERENCES_.88
+_OBJC_SELECTOR_REFERENCES_.90
+__OBJC_METACLASS_RO_$_GFRegionQuery
+__OBJC_$_INSTANCE_METHODS_GFRegionQuery
+__OBJC_$_INSTANCE_VARIABLES_GFRegionQuery
+__OBJC_$_PROP_LIST_GFRegionQuery
+__OBJC_CLASS_RO_$_GFRegionQuery
+_OBJC_SELECTOR_REFERENCES_.105
+_OBJC_SELECTOR_REFERENCES_.107
+_OBJC_SELECTOR_REFERENCES_.113
+_OBJC_SELECTOR_REFERENCES_.115
+_OBJC_SELECTOR_REFERENCES_.117
+_OBJC_SELECTOR_REFERENCES_.119
+_OBJC_SELECTOR_REFERENCES_.121
+_OBJC_SELECTOR_REFERENCES_.123
+_OBJC_SELECTOR_REFERENCES_.125
+_OBJC_CLASSLIST_REFERENCES_$_.126
+_OBJC_SELECTOR_REFERENCES_.128
+_OBJC_SELECTOR_REFERENCES_.129
+_OBJC_SELECTOR_REFERENCES_.130
+_OBJC_SELECTOR_REFERENCES_.131
+_OBJC_SELECTOR_REFERENCES_.132
+_OBJC_SELECTOR_REFERENCES_.133
+_OBJC_CLASSLIST_REFERENCES_$_.134
+_OBJC_SELECTOR_REFERENCES_.136
+_OBJC_SELECTOR_REFERENCES_.137
+_OBJC_SELECTOR_REFERENCES_.138
+_OBJC_SELECTOR_REFERENCES_.140
+_OBJC_SELECTOR_REFERENCES_.142
+___block_descriptor_56_e8_32bs40s48s_e5_v8?0l
+___block_descriptor_56_e8_32s40s48s_e45_v32?08?<v?"NSString""CLLocation">16^B24l
+_OBJC_SELECTOR_REFERENCES_.146
+_OBJC_SELECTOR_REFERENCES_.148
+_OBJC_SELECTOR_REFERENCES_.151
+___block_descriptor_56_e8_32s40s48s_e50_v32?08?<v?"NSString""FIRDataSnapshot">16^B24l
+_OBJC_SELECTOR_REFERENCES_.154
+_OBJC_SELECTOR_REFERENCES_.158
+_OBJC_SELECTOR_REFERENCES_.160
+_OBJC_SELECTOR_REFERENCES_.162
+_OBJC_SELECTOR_REFERENCES_.164
+_OBJC_SELECTOR_REFERENCES_.166
+_OBJC_SELECTOR_REFERENCES_.168
+_OBJC_CLASSLIST_REFERENCES_$_.169
+_OBJC_SELECTOR_REFERENCES_.171
+_OBJC_SELECTOR_REFERENCES_.173
+_OBJC_SELECTOR_REFERENCES_.175
+_OBJC_SELECTOR_REFERENCES_.177
+_OBJC_SELECTOR_REFERENCES_.179
+_OBJC_SELECTOR_REFERENCES_.181
+_OBJC_SELECTOR_REFERENCES_.183
+_OBJC_SELECTOR_REFERENCES_.185
+___block_descriptor_48_e8_32s40s_e25_v16?0"FIRDataSnapshot"8l
+_OBJC_SELECTOR_REFERENCES_.188
+_OBJC_SELECTOR_REFERENCES_.194
+_OBJC_SELECTOR_REFERENCES_.196
+_OBJC_SELECTOR_REFERENCES_.198
+_OBJC_SELECTOR_REFERENCES_.200
+___block_descriptor_40_e8_32s_e21_v32?08?<v?>16^B24l
+_OBJC_SELECTOR_REFERENCES_.202
+_OBJC_CLASSLIST_REFERENCES_$_.203
+_OBJC_SELECTOR_REFERENCES_.205
+_OBJC_SELECTOR_REFERENCES_.207
+_OBJC_SELECTOR_REFERENCES_.209
+_OBJC_SELECTOR_REFERENCES_.213
+_OBJC_SELECTOR_REFERENCES_.214
+_OBJC_SELECTOR_REFERENCES_.216
+_OBJC_SELECTOR_REFERENCES_.217
+_OBJC_SELECTOR_REFERENCES_.218
+_OBJC_SELECTOR_REFERENCES_.220
+___block_descriptor_40_e8_32s_e28_v24?0"GFGeoHashQuery"8^B16l
+_OBJC_SELECTOR_REFERENCES_.223
+_OBJC_SELECTOR_REFERENCES_.226
+_OBJC_CLASSLIST_REFERENCES_$_.227
+_OBJC_SELECTOR_REFERENCES_.229
+___block_descriptor_40_e8_32s_e25_v16?0"FIRDataSnapshot"8l
+_OBJC_SELECTOR_REFERENCES_.231
+_OBJC_SELECTOR_REFERENCES_.232
+_OBJC_SELECTOR_REFERENCES_.235
+_OBJC_SELECTOR_REFERENCES_.236
+_OBJC_SELECTOR_REFERENCES_.239
+_OBJC_SELECTOR_REFERENCES_.240
+_OBJC_SELECTOR_REFERENCES_.242
+_OBJC_SELECTOR_REFERENCES_.244
+___block_descriptor_40_e8_32s_e36_v32?08"GFQueryLocationInfo"16^B24l
+_OBJC_CLASSLIST_REFERENCES_$_.246
+_OBJC_SELECTOR_REFERENCES_.248
+_OBJC_SELECTOR_REFERENCES_.250
+___block_descriptor_48_e8_32s40s_e36_v32?08"GFQueryLocationInfo"16^B24l
+_OBJC_SELECTOR_REFERENCES_.252
+_OBJC_CLASSLIST_REFERENCES_$_.253
+_OBJC_SELECTOR_REFERENCES_.255
+_OBJC_SELECTOR_REFERENCES_.257
+_OBJC_SELECTOR_REFERENCES_.259
+_OBJC_SELECTOR_REFERENCES_.261
+_OBJC_SELECTOR_REFERENCES_.263
+_OBJC_SELECTOR_REFERENCES_.265
+_OBJC_SELECTOR_REFERENCES_.267
+_OBJC_SELECTOR_REFERENCES_.269
+_OBJC_SELECTOR_REFERENCES_.271
+_OBJC_SELECTOR_REFERENCES_.273
+_OBJC_SELECTOR_REFERENCES_.275
+_OBJC_SELECTOR_REFERENCES_.277
+_OBJC_CLASSLIST_REFERENCES_$_.278
+_OBJC_SELECTOR_REFERENCES_.280
+_OBJC_SELECTOR_REFERENCES_.282
+_OBJC_SELECTOR_REFERENCES_.286
+_OBJC_SELECTOR_REFERENCES_.288
+_OBJC_SELECTOR_REFERENCES_.290
+_OBJC_SELECTOR_REFERENCES_.292
+___block_descriptor_40_e8_32bs_e46_v32?0"NSString"8"GFQueryLocationInfo"16^B24l
+__OBJC_METACLASS_RO_$_GFQuery
+__OBJC_$_INSTANCE_METHODS_GFQuery
+_OBJC_IVAR_$_GFQuery._geoFire
+_OBJC_IVAR_$_GFQuery._locationInfos
+_OBJC_IVAR_$_GFQuery._queries
+_OBJC_IVAR_$_GFQuery._firebaseHandles
+_OBJC_IVAR_$_GFQuery._outstandingQueries
+_OBJC_IVAR_$_GFQuery._keyEnteredObservers
+_OBJC_IVAR_$_GFQuery._keyExitedObservers
+_OBJC_IVAR_$_GFQuery._keyMovedObservers
+_OBJC_IVAR_$_GFQuery._keyEnteredSnapshotObservers
+_OBJC_IVAR_$_GFQuery._keyExitedSnapshotObservers
+_OBJC_IVAR_$_GFQuery._keyMovedSnapshotObservers
+_OBJC_IVAR_$_GFQuery._readyObservers
+_OBJC_IVAR_$_GFQuery._currentHandle
+__OBJC_$_INSTANCE_VARIABLES_GFQuery
+__OBJC_$_PROP_LIST_GFQuery
+__OBJC_CLASS_RO_$_GFQuery
+/Users/dustinyang/project/iOs/GANDA/Pods/GeoFire/GeoFire/Implementation/GFQuery.m
+GeoFire/GeoFire/Implementation/GFQuery.m
+GeoFire/GeoFire/API/GFQuery.h
+__46-[GFQuery observeEventType:withSnapshotBlock:]_block_invoke_2
+__46-[GFQuery observeEventType:withSnapshotBlock:]_block_invoke
+__copy_helper_block_e8_32b
+__38-[GFQuery observeEventType:withBlock:]_block_invoke_2
+__38-[GFQuery observeEventType:withBlock:]_block_invoke
+__24-[GFQuery updateQueries]_block_invoke.249
+__24-[GFQuery updateQueries]_block_invoke_4
+__24-[GFQuery updateQueries]_block_invoke_3
+__24-[GFQuery updateQueries]_block_invoke_2.237
+__24-[GFQuery updateQueries]_block_invoke.233
+__24-[GFQuery updateQueries]_block_invoke_2
+__24-[GFQuery updateQueries]_block_invoke.224
+__24-[GFQuery updateQueries]_block_invoke
+__33-[GFQuery checkAndFireReadyEvent]_block_invoke
+__copy_helper_block_e8_32s40s
+__24-[GFQuery childRemoved:]_block_invoke_5
+__24-[GFQuery childRemoved:]_block_invoke_4
+__24-[GFQuery childRemoved:]_block_invoke_3
+__24-[GFQuery childRemoved:]_block_invoke_2
+__24-[GFQuery childRemoved:]_block_invoke
+__46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke_8
+__46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke_7
+__46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke_6
+__46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke_5
+__46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke_4
+__46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke_3
+__46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke_2.156
+__46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke.155
+__46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke_2.150
+__46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke.149
+__copy_helper_block_e8_32s40s48s
+__destroy_helper_block_e8_32s40s48s
+__copy_helper_block_e8_32b40s48s
+__46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke_2
+__46-[GFQuery updateLocationInfo:forKey:snapshot:]_block_invoke
++[GFUtils geoHashForLocation:]
++[GFUtils geoHashForLocation:withPrecision:]
++[GFUtils distanceFromLocation:toLocation:]
++[GFUtils queryBoundsForLocation:withRadius:]
+_OBJC_CLASSLIST_REFERENCES_$_.7
+_OBJC_SELECTOR_REFERENCES_.9
+_OBJC_CLASSLIST_REFERENCES_$_.10
+_OBJC_SELECTOR_REFERENCES_.25
+__OBJC_$_CLASS_METHODS_GFUtils
+__OBJC_METACLASS_RO_$_GFUtils
+__OBJC_CLASS_RO_$_GFUtils
+/Users/dustinyang/project/iOs/GANDA/Pods/GeoFire/GeoFire/Utils/GFUtils.m
+GeoFire/GeoFire/Utils/GFUtils.m

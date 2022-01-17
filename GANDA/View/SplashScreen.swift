@@ -26,13 +26,19 @@ struct SplashScreen: View {
             APP_THEME_GRADIENT.ignoresSafeArea()
           
             Spacer()
-            Image("logo").resizable().frame(width: 128  ,height: 128, alignment: .center).scaledToFit()
-//                .scaleEffect(self.showHeart ? 1.9 : 1.2, anchor: .center)
-                .animation(Animation.easeInOut(duration: 1.5).repeatForever(autoreverses: true))
-//                .scaleEffect(self.reloading ? 1.1 : 1, anchor: .center)
-//                .onAppear{
-//                    self.reloading.toggle()
-//            }
+            VStack(alignment : .center){
+                Image("logo").resizable().frame(width: 128  ,height: 128, alignment: .center).scaledToFit()
+    //                .scaleEffect(self.showHeart ? 1.9 : 1.2, anchor: .center)
+                    .animation(Animation.easeInOut(duration: 1.5).repeatForever(autoreverses: true))
+    //                .scaleEffect(self.reloading ? 1.1 : 1, anchor: .center)
+    //                .onAppear{
+    //                    self.reloading.toggle()
+    //            }
+                Text("나의 스타일로 Ganda")
+                    .font(Font.custom(FONT_COOKIE, size: 14))
+                    .foregroundColor(.white)
+            }.offset(y: -20)
+ 
 //            .animation(Animation.spring(response: 0.7, dampingFraction: 1.0, blendDuration: 1.0).repeatForever(autoreverses: true))
             Spacer()
            

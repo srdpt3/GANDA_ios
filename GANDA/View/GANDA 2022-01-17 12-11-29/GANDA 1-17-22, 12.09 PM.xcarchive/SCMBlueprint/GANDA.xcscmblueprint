@@ -1,0 +1,26 @@
+{
+  "DVTSourceControlWorkspaceBlueprintLocationsKey" : {
+    "7DE07400BE9303A27995DABBE20E5588A3B7A195" : {
+      "DVTSourceControlBranchIdentifierKey" : "main",
+      "DVTSourceControlLocationRevisionKey" : "3291edc89be05a94f4511b4ad0eeae4c21ead2d8",
+      "DVTSourceControlBranchOptionsKey" : 4,
+      "DVTSourceControlBranchRemoteNameKey" : "origin",
+      "DVTSourceControlWorkspaceBlueprintLocationTypeKey" : "DVTSourceControlBranch"
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "7DE07400BE9303A27995DABBE20E5588A3B7A195",
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "ECDBA77A-7C77-469C-8AC7-6A03F8EAF624",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "7DE07400BE9303A27995DABBE20E5588A3B7A195" : "GANDA\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "GANDA",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "GANDA.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/srdpt3\/GANDA_ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7DE07400BE9303A27995DABBE20E5588A3B7A195"
+    }
+  ]
+}

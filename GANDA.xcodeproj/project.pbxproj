@@ -55,7 +55,6 @@
 		111F089727922F670096BF68 /* TagView_Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111F087B27922F670096BF68 /* TagView_Card.swift */; };
 		111F089A27922F7D0096BF68 /* TabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111F085D27922E710096BF68 /* TabButton.swift */; };
 		111F089B27922F7D0096BF68 /* plus.json in Resources */ = {isa = PBXBuildFile; fileRef = 111F086327922E8D0096BF68 /* plus.json */; };
-		111F089C27922F7D0096BF68 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 111F086427922E8D0096BF68 /* loading.json */; };
 		111F089D27922F7D0096BF68 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111F086627922E9F0096BF68 /* ViewExtension.swift */; };
 		111F089E27922F7D0096BF68 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111F086827922EB10096BF68 /* FloatingButton.swift */; };
 		111F089F27922F7D0096BF68 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111F086A27922EC60096BF68 /* CustomTextField.swift */; };
@@ -81,6 +80,8 @@
 		111F08C127949FBB0096BF68 /* video6.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 111F08C027949FBB0096BF68 /* video6.MP4 */; };
 		111F08C32794E1D70096BF68 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111F08C22794E1D60096BF68 /* SplashScreen.swift */; };
 		111F08C5279515B30096BF68 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111F08C4279515B20096BF68 /* ProfileView.swift */; };
+		111F08C72795AC6C0096BF68 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 111F08C62795AC6A0096BF68 /* loading.json */; };
+		1170EFB12795F0C900DE59E0 /* ScrollViewRefreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1170EFB02795F0C900DE59E0 /* ScrollViewRefreshable.swift */; };
 		1184AC5E2791FD550094C384 /* GANDAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184AC5D2791FD550094C384 /* GANDAApp.swift */; };
 		1184AC602791FD550094C384 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184AC5F2791FD550094C384 /* ContentView.swift */; };
 		1184AC622791FD5B0094C384 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1184AC612791FD5B0094C384 /* Assets.xcassets */; };
@@ -126,7 +127,6 @@
 		111F085E27922E760096BF68 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		111F086127922E820096BF68 /* BoardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardingView.swift; sourceTree = "<group>"; };
 		111F086327922E8D0096BF68 /* plus.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = plus.json; sourceTree = "<group>"; };
-		111F086427922E8D0096BF68 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		111F086527922E970096BF68 /* MyPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		111F086627922E9F0096BF68 /* ViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		111F086727922EA80096BF68 /* FavoriteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
@@ -164,6 +164,8 @@
 		111F08C027949FBB0096BF68 /* video6.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video6.MP4; sourceTree = "<group>"; };
 		111F08C22794E1D60096BF68 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		111F08C4279515B20096BF68 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		111F08C62795AC6A0096BF68 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		1170EFB02795F0C900DE59E0 /* ScrollViewRefreshable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewRefreshable.swift; sourceTree = "<group>"; };
 		1184AC5A2791FD550094C384 /* GANDA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GANDA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1184AC5D2791FD550094C384 /* GANDAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GANDAApp.swift; sourceTree = "<group>"; };
 		1184AC5F2791FD550094C384 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				111F08B02793A9260096BF68 /* ActivityIndicatorView.swift */,
 				111F08C22794E1D60096BF68 /* SplashScreen.swift */,
 				111F08C4279515B20096BF68 /* ProfileView.swift */,
+				1170EFB02795F0C900DE59E0 /* ScrollViewRefreshable.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -301,10 +304,10 @@
 		111F086227922E8D0096BF68 /* Lottie Json */ = {
 			isa = PBXGroup;
 			children = (
+				111F08C62795AC6A0096BF68 /* loading.json */,
 				111F08B22794857B0096BF68 /* no-data.json */,
 				111F08AE27932AAF0096BF68 /* upload.json */,
 				111F086327922E8D0096BF68 /* plus.json */,
-				111F086427922E8D0096BF68 /* loading.json */,
 			);
 			path = "Lottie Json";
 			sourceTree = "<group>";
@@ -333,10 +336,10 @@
 			children = (
 				111F08C027949FBB0096BF68 /* video6.MP4 */,
 				111F08B527949F810096BF68 /* video1.MP4 */,
+				111F08B427949F7C0096BF68 /* video7.MP4 */,
 				111F08B727949F830096BF68 /* video2.MP4 */,
 				111F08B927949F840096BF68 /* video3.MP4 */,
 				111F08B627949F820096BF68 /* video4.MP4 */,
-				111F08B427949F7C0096BF68 /* video7.MP4 */,
 				111F085727922E4C0096BF68 /* Service */,
 				111F085427922E440096BF68 /* Helpers */,
 				111F082927922D3D0096BF68 /* Models */,
@@ -443,10 +446,10 @@
 				1184AC652791FD5B0094C384 /* Preview Assets.xcassets in Resources */,
 				111F089B27922F7D0096BF68 /* plus.json in Resources */,
 				1184AC6E2791FDE40094C384 /* GoogleService-Info.plist in Resources */,
+				111F08C72795AC6C0096BF68 /* loading.json in Resources */,
 				1184AC622791FD5B0094C384 /* Assets.xcassets in Resources */,
 				111F08C127949FBB0096BF68 /* video6.MP4 in Resources */,
 				111F08BB27949F860096BF68 /* video1.MP4 in Resources */,
-				111F089C27922F7D0096BF68 /* loading.json in Resources */,
 				111F08BC27949F860096BF68 /* video4.MP4 in Resources */,
 				111F08BA27949F860096BF68 /* video7.MP4 in Resources */,
 				111F08BF27949F860096BF68 /* video3.MP4 in Resources */,
@@ -564,6 +567,7 @@
 				111F089727922F670096BF68 /* TagView_Card.swift in Sources */,
 				111F08B12793A92A0096BF68 /* ActivityIndicatorView.swift in Sources */,
 				111F087F27922F670096BF68 /* SelectionView.swift in Sources */,
+				1170EFB12795F0C900DE59E0 /* ScrollViewRefreshable.swift in Sources */,
 				111F08A427922F7D0096BF68 /* ChartView_BAR.swift in Sources */,
 				111F089527922F670096BF68 /* LoadingView.swift in Sources */,
 				111F08C5279515B30096BF68 /* ProfileView.swift in Sources */,
@@ -699,12 +703,14 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = GANDA/GANDA.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.0;
 				DEVELOPMENT_ASSET_PATHS = "\"GANDA/Preview Content\"";
 				DEVELOPMENT_TEAM = CSE9343A58;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GANDA/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -715,7 +721,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "frontyard.Demo-blackcow";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -733,12 +739,14 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = GANDA/GANDA.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.0;
 				DEVELOPMENT_ASSET_PATHS = "\"GANDA/Preview Content\"";
 				DEVELOPMENT_TEAM = CSE9343A58;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GANDA/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -749,7 +757,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "frontyard.Demo-blackcow";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
