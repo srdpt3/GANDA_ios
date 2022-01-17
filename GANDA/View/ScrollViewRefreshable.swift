@@ -36,7 +36,7 @@ struct ScrollRefreshable<Content: View>: View {
         .listStyle(.plain)
         .refreshable {
             await onRefresh()
-        }
+        } .background(Color("BG"))
     }
 }
 

@@ -49,8 +49,8 @@ let DEFAULT_LOCATION = "대한민국"
 //public let BANNER_UNIT_ID = "ca-app-pub-1790336833303238/5428347738"
 
 //TEST BANNER UNIT ID
-//public let BANNER_UNIT_ID = "ca-app-pub-3940256099942544/2934735716"
-public let BANNER_UNIT_ID = "ca-app-pub-1790336833303238~5310295210"
+public let BANNER_UNIT_ID = "ca-app-pub-3940256099942544/2934735716"
+//public let BANNER_UNIT_ID = "ca-app-pub-1790336833303238~5310295210"
 
 //
 //GADApplicationIdentifier : ca-app-pub-1790336833303238~5310295210
@@ -78,8 +78,8 @@ public let BUTTON_TITLE_FONT_SIZE = 18
 
 public let VOTE_NUMBER = "numVote"
 public let CHART_Y_AXIS = 100
-public let CARD_LIMIT_TO_QUERY = 20
-public let MY_CARD_LIMIT_TO_QUERY = 6
+public let CARD_LIMIT_TO_QUERY = 36
+public let MY_CARD_LIMIT_TO_QUERY = 20
 
 
 

@@ -17,6 +17,7 @@ target 'GANDA' do
   pod 'AAInfographics'
   pod 'lottie-ios'
   pod 'GoogleSignIn'
+  pod 'Google-Mobile-Ads-SDK'
 
   # Pods for GANDA
 

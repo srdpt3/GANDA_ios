@@ -67,7 +67,7 @@ struct MainView: View {
                         
                         Capsule()
                             .fill(showMenu ? Color.white : APP_THEME_COLOR)
-                            .frame(width: 30, height: 4)
+                            .frame(width: 30, height: 3)
                         // Rotating...
                             .rotationEffect(.init(degrees: showMenu ? -50 : 0))
                             .offset(x: showMenu ? 2 : 0, y: showMenu ? 9 : 0)
@@ -76,11 +76,11 @@ struct MainView: View {
                             
                             Capsule()
                                 .fill(showMenu ? Color.white :APP_THEME_COLOR)
-                                .frame(width: 30, height: 4)
+                                .frame(width: 30, height: 3)
                             // Moving Up when clicked...
                             Capsule()
                                 .fill(showMenu ? Color.white : APP_THEME_COLOR)
-                                .frame(width: 30, height:4)
+                                .frame(width: 30, height:3)
                                 .offset(y: showMenu ? -8 : 0)
                         }
                         .rotationEffect(.init(degrees: showMenu ? 50 : 0))

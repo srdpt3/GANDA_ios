@@ -7,10 +7,13 @@
 
 import SwiftUI
 import Firebase
+import GoogleMobileAds
 
 @main
 struct GANDAApp: App {
-
+    init(){
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+    }
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var observer = Observer()

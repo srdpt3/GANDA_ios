@@ -33,7 +33,9 @@ struct CardView: View {
     
     @State var voteData:[Double] = []
     @State var voteBarData:[Double] = []
-    
+    @State var numVote: Int = 0
+    @State var numLike: Int = 0
+
     //    @State var buttonTitle : [String] = ["나는코린이다", "빨간구두가 잘어울린다","돈잘벌꺼같다"]
     @State var numVoteData:[Int] = [0,0,0]
     let bar_graph_ratio =  UIScreen.main.bounds.height < 896.0 ? 4.0 : 3
@@ -88,11 +90,15 @@ struct CardView: View {
                                     }
                                 }.onLongPressGesture {
                                     withAnimation(.spring()){
-                                        
-                                        showFlag.toggle()
-                                        self.selected = post
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                        if post.imageLocation != "" {
+                                            self.selected = post
+                                                
+                                            showFlag.toggle()
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                            }
                                         }
+                                       
+                                      
                                     }
                                 }
                         })
@@ -181,7 +187,7 @@ struct CardView: View {
                     }
                     else{
 
-                        LottieView(filename: "loading").frame(width: 200, height: 200).offset(y:20)
+//                        LottieView(filename: "loading").frame(width: 200, height: 200).offset(y:20)
                     }
                 }){
                     
@@ -275,7 +281,8 @@ struct CardView: View {
                             if(!observer.votedCards.contains(self.selected.id.uuidString)){
                                 HStack{
                                     Spacer()
-                                    RatingDetailView(card: selected, hideDetail : true)
+                                    RatingDetailView(card: selected, numLiked: $numLike, numVote : $numVote, hideDetail : true)
+
                                     Spacer()
                                     
                                 }.padding(.vertical, 10)
@@ -294,6 +301,7 @@ struct CardView: View {
                                             self.sendMessageToDevice(title: ("\(User.currentUser()!.username) 이 투표를 했습니다"),
                                                                      body: "\(self.selected.attrNames[0])", token: self.selected.token)
                                             self.persist()
+                                            
                                         }
                                         buttonSelected = self.selected.attrNames[0]
                                         
@@ -363,6 +371,7 @@ struct CardView: View {
                                         })
                                     }
       
+
                                     Spacer(minLength: 0)
                                     
                                     
@@ -373,15 +382,15 @@ struct CardView: View {
                                 .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
                                 .shadow(color: Color.black.opacity(0.05), radius: 5, x: -5, y: -5)
                                 .padding(.horizontal)
-                                
-                                
+                                Spacer(minLength: 0)
+                          
                             }
                             else{
                                 HStack{
                                     Spacer()
-                                    RatingDetailView(card: selected, hideDetail : false)
+                                    RatingDetailView(card: selected, numLiked: $numLike, numVote : $numVote, hideDetail : false)
                                     Spacer()
-                                    
+                               
                                 }.padding(.vertical, 10)
                                 VStack(alignment: .leading,spacing: 22){
                                     if !self.voteData.isEmpty {
@@ -565,6 +574,8 @@ struct CardView: View {
     func loadChartData(postId : String){
         observer.loadChartData(postId: postId) { voteBarData, numVote , numLiked in
             self.voteData  = voteBarData
+            self.numVote = numVote
+            self.numLike = numLiked
         }
     }
     

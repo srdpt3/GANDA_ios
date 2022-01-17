@@ -100,6 +100,8 @@ class Observer: ObservableObject {
     }
     
     func getMyCards(){
+        
+            
         Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.whereField("userId", isEqualTo: User.currentUser()!.id ).limit(to: MY_CARD_LIMIT_TO_QUERY).getDocuments { [self] (snap, err) in
             self.myActiveCards.removeAll()
             
@@ -117,18 +119,23 @@ class Observer: ObservableObject {
             }
             //            self.isReloading = false
             
+            
             while (self.myActiveCards.count < MY_CARD_LIMIT_TO_QUERY){
                 
                 let dummyCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [], numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0)
                 self.myActiveCards.append(dummyCard)
                 
+            }
+            
+            self.myActiveCards = self.myActiveCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
+            
+            while (self.myActiveCards.count > 6){
                 
-                //                print("self.activeCards.count \(self.activeCards.count)")
+                self.myActiveCards.removeLast()
+                
                 
             }
             
-            
-            self.myActiveCards = self.myActiveCards.sorted(by: { $0.createdDate > $1.createdDate })
             
             print("self.myActiveCards.count \(self.myActiveCards.count)")
             
@@ -144,7 +151,7 @@ class Observer: ObservableObject {
     }
     func getAllCard(){
         
-        Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.limit(to: CARD_LIMIT_TO_QUERY).getDocuments { (snap, err) in
+        Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.limit(to: CARD_LIMIT_TO_QUERY).order(by: "lastModifiedDate", descending: true).getDocuments { (snap, err) in
             //            self.activeCards.removeAll()
             self.activeCards.removeAll()
             
@@ -167,6 +174,17 @@ class Observer: ObservableObject {
             }
             self.columns = self.activeCards.count > 10 ?  3 : 2
             print("self.activeCards.count \(self.activeCards.count)")
+            
+            if (self.activeCards.count >= 15 && self.columns == 3){
+                
+                for _ in 1...6 {
+                    let dummyCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [], numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0)
+                    self.activeCards.append(dummyCard)
+                }
+                
+
+            }
+            
             
             while (self.activeCards.count < 10 && self.columns == 2){
                 

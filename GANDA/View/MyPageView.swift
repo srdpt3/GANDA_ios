@@ -141,6 +141,9 @@ struct ImageGrid : View {
                         .shadow(color: Color.black.opacity(0.05), radius: 5, x: -5, y: -5)
                         .padding(.horizontal, 1)
                     
+                    
+                
+                    
                 }.padding(.horizontal, 12)
                     .blur(radius: self.$showingModal.wrappedValue ? 5 : 0, opaque: false)
                     .offset(y:-20)
@@ -256,6 +259,9 @@ struct ImageGrid : View {
                 }
 
             }
+            
+            Spacer(minLength: 0)
+       
             //            .padding(.top)
         }
         .frame(maxWidth: .infinity)
@@ -265,6 +271,8 @@ struct ImageGrid : View {
             RoundedRectangle(cornerRadius: 20)
                 .fill(Color.white)
         )
+        
+        BannerAd(unitID: BANNER_UNIT_ID).padding(.horizontal)
     }
     
     @ViewBuilder

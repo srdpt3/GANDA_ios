@@ -85,7 +85,7 @@ struct SideMenu: View {
                 
                 TabButton(image: "video.square.fill", title: "릴스", selectedTab: $selectedTab, showmenu: $showMenu, animation: animation)
                 
-                TabButton(image: "gearshape.fill", title: "세팅", selectedTab: $selectedTab, showmenu: $showMenu, animation: animation)
+                TabButton(image: "gearshape.fill", title: "앱정보", selectedTab: $selectedTab, showmenu: $showMenu, animation: animation)
 //
 //                TabButton(image: "questionmark.circle", title: "Help", selectedTab: $selectedTab, showmenu: $showMenu, animation: animation)
 

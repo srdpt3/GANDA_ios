@@ -20,7 +20,10 @@ struct ContentView: View {
             if(!SplashScreen.shouldAnimate){
                 
                 if log_Status{
-                    MainView()
+                    withAnimation(.interactiveSpring(response: 0.4, dampingFraction: 0.5, blendDuration: 0.5)){
+                        MainView()
+                    }
+                    
                     
                 }
                 else{

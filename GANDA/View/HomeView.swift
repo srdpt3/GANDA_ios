@@ -40,7 +40,7 @@ struct Home: View {
             
             
             SettingsView()
-                .tag("세팅")
+                .tag("앱정보")
      
         }
     }

@@ -98,11 +98,12 @@ struct BoardingView: View {
                 
                 // Sign In Buttons...
                 
-                SignInButton(image: "applelogo", text: "Continue with Apple", isSystem: true) {
-                    
-                    
-                }
-                .padding(.top)
+//                SignInButton(image: "applelogo", text: "Continue with Apple", isSystem: true) {
+//
+//
+//                }
+                Text("").padding()
+//                .padding(.top)
                 //                SignInWithAppleButton { (request) in
                 //
                 //                    //                    // requesting paramertes from apple login...
