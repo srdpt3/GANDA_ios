@@ -76,15 +76,4 @@ struct LottieView: UIViewRepresentable {
     }
 
 
-    struct LoadingView2: View {
-        var filename: String
-
-        var body: some View {
-            VStack {
-                LottieView2(filename: filename)
-                    .frame(width: 300, height: 300)
-            }
-        }
-    }
-
 }

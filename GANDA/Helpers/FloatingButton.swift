@@ -44,7 +44,7 @@ struct FloatingButton: View {
                         .offset(x: isTap ? -0  : 0, y: isTap ? -180:0 )
                         .opacity(isTap ? 1 : 0)
                         .fullScreenCover(isPresented: $showUploadView) {
-                            UploadView(uploadComplete: self.$uploadComplete, showUploadView: self.$showUploadView)
+                            UploadPhotoView(uploadComplete: self.$uploadComplete, showUploadView: self.$showUploadView)
                         } 
                     
                     Button(action: {

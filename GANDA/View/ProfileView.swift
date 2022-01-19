@@ -179,3 +179,20 @@ struct Blurview : UIViewRepresentable {
         
     }
 }
+
+struct Blurview2 : UIViewRepresentable {
+    
+    func makeUIView(context: UIViewRepresentableContext<Blurview2>) -> UIVisualEffectView {
+        
+        
+        let view = UIVisualEffectView(effect: UIBlurEffect(style: .systemMaterialDark))
+        
+        return view
+    }
+    
+    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Blurview2>) {
+        
+        
+    }
+}
+

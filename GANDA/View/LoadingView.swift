@@ -8,43 +8,36 @@
 import SwiftUI
 
 struct LoadingView: View {
-    
-    let isLoading: Bool
-    let error: NSError?
-    let retryAction: (() -> ())?
-    
+    @State var animate = false
     var body: some View {
-        Group {
-            if isLoading {
-                HStack {
-                    Spacer()
-                    ProgressView()
-//                    ActivityIndicatorView()
-                    Spacer()
-                }
-            } else if error == nil {
-                HStack {
-                    Spacer()
-                    VStack(spacing: 4) {
-//                        Text(error!.localizedDescription).font(.headline)
-                        if self.retryAction != nil {
-                            Button(action: self.retryAction!) {
-                                Text("Retry")
-                            }
-                            .foregroundColor(Color(UIColor.systemBlue))
-                            .buttonStyle(PlainButtonStyle())
-                        }
-                    }
-                    Spacer()
-                }
-            }
+    
+        VStack{
+            Circle().trim(from :0 , to:0.8)
+                .stroke(AngularGradient(gradient: .init(colors: [APP_THEME_COLOR,.purple ]), center: .center), style: StrokeStyle(lineWidth: 8, lineCap: .round))
+                .frame(width: 45, height: 45)
+                .rotationEffect(.init(degrees: self.animate ? 360 :0))
+                .animation(Animation.linear(duration: 0.7).repeatForever(autoreverses: false))
+        }.onAppear {
+            self.animate.toggle()
         }
+        
     }
 }
 
 struct LoadingView_Previews: PreviewProvider {
     static var previews: some View {
-        LoadingView(isLoading: true, error: nil, retryAction: nil)
+        LoadingView()
     }
 }
 
+struct Indicator : UIViewRepresentable {
+    func makeUIView(context: UIViewRepresentableContext<Indicator>) -> UIActivityIndicatorView {
+        let indi = UIActivityIndicatorView(style: .large)
+        indi.color = UIColor.tintColor
+        return indi
+    }
+    
+    func updateUIView(_ uiView: UIActivityIndicatorView, context: UIViewRepresentableContext<Indicator>) {
+        
+    }
+}

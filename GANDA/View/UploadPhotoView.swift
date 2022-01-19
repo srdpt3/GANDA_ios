@@ -1,13 +1,13 @@
 //
-//  UploadView.swift
-//  Demo-blackcow
+//  UploadPhotoView.swift
+//  GANDA
 //
-//  Created by Dustin yang on 1/2/22.
+//  Created by Dustin yang on 1/18/22.
 //
 
 import SwiftUI
 
-struct UploadView: View {
+struct UploadPhotoView: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var uploadComplete : Bool
     @Binding var showUploadView : Bool
@@ -41,72 +41,72 @@ struct UploadView: View {
     
     let haptics = UINotificationFeedbackGenerator()
     @Namespace var animation
-    
     var body: some View {
-        
-        ScrollView(.vertical, showsIndicators: false, content: {
-            
-            VStack{
+        ZStack {
+            ScrollView(.vertical, showsIndicators: false){
                 
-                VStack(alignment: .leading, spacing: 20){
-                    
+                VStack(alignment: .leading, spacing: 15){
                     HStack(spacing: 15){
-        
-                            if self.images[0].count == 0{
-                                
-                                Image(systemName: "photo").resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 100, height: 100)
-                                    .cornerRadius(10)
-                                //                                    .zIndex(1)
-                                    .foregroundColor(APP_THEME_COLOR)
-                                    .onTapGesture {
-                                        self.imagePicker.toggle()
-                                        self.index = 0
-                                        self.haptics.notificationOccurred(.success)
+                        
+                        if self.images[0].count == 0{
+                            
+                            LottieView(filename: "upload").frame(width: 100, height: 100)
+                                .clipShape(Circle()).padding(.bottom, 10).padding(.top, 10).zIndex(1)
+                                .onTapGesture {
+                                    self.haptics.notificationOccurred(.success)
+                                    self.imagePicker.toggle()
+                                }
+                                .opacity(self.images[0].count > 0 ? 0 : 1)
+                              
+    
+                            
+                        }
+                        else{
+                            
+                            Image(uiImage: UIImage(data: self.images[0])!)
+                                .resizable()
+                                .renderingMode(.original)
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 100, height: 100)
+                                .cornerRadius(10)
+                        }
+                        
+                        
+                    }
+                   
+                }  .overlay(
+                    VStack{
+                        
+                        HStack{
+                            Spacer()
+                            Button {
+                                withAnimation(.spring()){
                                     
-                                    }
-                                    .opacity(self.images[0].count > 0 ? 0 : 1)
+                                    showUploadView.toggle()
+                                }
                                 
+                            } label: {
+                                Spacer()
+                                Image(systemName: "xmark")
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color.black.opacity(0.5))
+                                    .clipShape(Circle())
+                                    .opacity( showLoading ? 0 : 1 )
                                 
-                                //                                LottieView(filename: "upload").frame(width: 100, height: 100)
-                                //                                    .clipShape(Circle()).padding(.bottom, 10).padding(.top, 10).zIndex(1)
-                                //                                    .onTapGesture {
-                                //                                        self.index = 0
-                                //                                        self.haptics.notificationOccurred(.success)
-                                //                                        self.imagePicker.toggle()
-                                //                                    }
-                                //                                    .opacity(self.images[0].count > 0 ? 0 : 1)
-                            }
-                            else{
-                                
-                                Image(uiImage: UIImage(data: self.images[0])!)
-                                    .resizable()
-                                    .renderingMode(.original)
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 100, height: 100)
-                                    .cornerRadius(10)
                                 
                             }
-                     
-                        
-                        
-                    }.padding(.leading)
+                        }.padding(.trailing)
+              
+                    }.frame(width: 50, height: 50).offset(x:150)
                     
-                }
-                .padding(.horizontal)
-                .cornerRadius(20)
-                .background(
-                    Color("BG")
-                        .ignoresSafeArea()
+                    
                 )
-                VStack{
-
-                    CustomTextField(image: "questionmark.circle", title: "내스타일 질문", value: $questionText, animation: animation)
-                }
+                CustomTextField(image: "questionmark.circle", title: "내스타일 질문", value: $questionText, animation: animation)
                 CustomTextField(image: "filemenu.and.selection", title: "보기 1", value: $selectionText[0], animation: animation)
                 CustomTextField(image: "filemenu.and.selection", title: "보기 2", value: $selectionText[1], animation: animation)
                 CustomTextField(image: "filemenu.and.selection", title: "보기 3(선택사항)", value: $selectionText[2], animation: animation)
+                
                 VStack{
                     VStack(spacing: 10){
                         TextField(PLEASE_ADD_TAG, text: $text)
@@ -163,10 +163,10 @@ struct UploadView: View {
                                 selectionText[0] = selectionText[0].trimmingCharacters(in: .whitespacesAndNewlines)
                                 selectionText[1] = selectionText[1].trimmingCharacters(in: .whitespacesAndNewlines)
                                 selectionText[2] = selectionText[2].trimmingCharacters(in: .whitespacesAndNewlines)
-
+                                
                                 // Use same Font size and limit here used in TagView....
                                 showLoading.toggle()
-//                                self.uploadPicture()
+                                self.uploadPicture()
                                 self.haptics.notificationOccurred(.success)
                                 
                             } label: {
@@ -184,63 +184,33 @@ struct UploadView: View {
                             .opacity((tags.count < 3 || questionText == "" || self.images[0].count == 0 || showLoading ||
                                       (selectionText[0].trimmingCharacters(in: .whitespacesAndNewlines) == "" && selectionText[1].trimmingCharacters(in: .whitespacesAndNewlines) == "")) ? 0.6 : 1 )
                         }
-                        //                        .sheet(isPresented: $buttonDisable) {
-                        //                            ProgressView()
-                        //                        }
+
                         
                         
                     }
-       
-                }
-                .padding(.horizontal, 12)
-                .frame(maxWidth: .infinity,maxHeight: .infinity,alignment: .top)
-                .alert(isPresented: $showAlert) {
-                    Alert(title: Text(ERROR), message: Text(TAG_LIMIT_ERROR), dismissButton: .destructive(Text("Ok")))
-                }.sheet(isPresented: self.$imagePicker) {
-                    ImagePicker(showImagePicker: self.$imagePicker, pickedImage: self.$image, imageData: self.$images[self.index])
-                }
-                if(showLoading){
-                    LoadingView()
-                }
+                    
+                } .padding(.horizontal, 12)
+                    .frame(maxWidth: .infinity,maxHeight: .infinity,alignment: .top)
+                    .alert(isPresented: $showAlert) {
+                        Alert(title: Text(ERROR), message: Text(TAG_LIMIT_ERROR), dismissButton: .destructive(Text("Ok")))
+                    }.sheet(isPresented: self.$imagePicker) {
+                        ImagePicker(showImagePicker: self.$imagePicker, pickedImage: self.$image, imageData: self.$images[self.index])
+                    }
+                
+                
+                
+            }.blur(radius : self.showLoading ? 15 : 0)
+            
+            if showLoading{
+                LoadingView()
             }
             
-   
-        }).blur(radius : self.showLoading ? 15 : 0)
-            .background(
-                Color("BG")
-                    .ignoresSafeArea()
-            )
-            .environment(\.colorScheme, .light)
-            .navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true)
-            .overlay(
-                VStack{
-                    
-                    HStack{
-                        Spacer()
-                        Button {
-                            withAnimation(.spring()){
-                                
-                                showUploadView.toggle()
-                            }
-                            
-                        } label: {
-                            Spacer()
-                            Image(systemName: "xmark")
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color.black.opacity(0.5))
-                                .clipShape(Circle())
-                                .opacity( showLoading ? 0 : 1 )
-                            
-                            
-                        }
-                    }.padding(.trailing)
-                    Spacer()
-                }
-                
-                
-            )
+            
+        }.background(
+            Color("BG")
+                .ignoresSafeArea()
+        ).environment(\.colorScheme, .light).navigationBarHidden(true).navigationBarBackButtonHidden(true)
+
             .alert(isPresented: $uploadComplete) {
                 
                 return  Alert(
@@ -255,11 +225,7 @@ struct UploadView: View {
                 
                 
             }
-        
-
-        
     }
-    
     
     func uploadPicture(){
     
@@ -272,6 +238,7 @@ struct UploadView: View {
                 
                 observer.refresh()
                 self.uploadComplete.toggle()
+                self.showLoading.toggle()
                 //                self.showUploadView.toggle()
                 
                 //                self.presentationMode.wrappedValue.dismiss()
@@ -305,26 +272,9 @@ struct UploadView: View {
         return status
     }
 }
-
-struct UploadView_Previews: PreviewProvider {
-    @State static var isShowing = false
-    @State static var showUploadView = false
-    
-    static var previews: some View {
-        UploadView(uploadComplete: $isShowing, showUploadView: $showUploadView)
-    }
-}
-
-
-
-public struct CustomStyle : TextFieldStyle {
-    public func _body(configuration: TextField<Self._Label>) -> some View {
-        configuration
-            .padding(7)
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .strokeBorder(Color.black, lineWidth: 1)
-            )
-    }
-    
-}
+//
+//struct UploadPhotoView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        UploadPhotoView()
+//    }
+//}

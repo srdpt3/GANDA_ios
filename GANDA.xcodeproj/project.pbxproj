@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		111A55BF2797B13D00488235 /* UploadPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111A55BE2797B13D00488235 /* UploadPhotoView.swift */; };
 		111F083327922D770096BF68 /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111F082A27922D510096BF68 /* Vote.swift */; };
 		111F083427922D770096BF68 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111F082B27922D550096BF68 /* User.swift */; };
 		111F083527922D770096BF68 /* ActiveVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111F082C27922D5A0096BF68 /* ActiveVote.swift */; };
@@ -91,6 +92,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		111A55BE2797B13D00488235 /* UploadPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPhotoView.swift; sourceTree = "<group>"; };
 		111F082A27922D510096BF68 /* Vote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vote.swift; sourceTree = "<group>"; };
 		111F082B27922D550096BF68 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		111F082C27922D5A0096BF68 /* ActiveVote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveVote.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				111F08C22794E1D60096BF68 /* SplashScreen.swift */,
 				111F08C4279515B20096BF68 /* ProfileView.swift */,
 				1170EFB02795F0C900DE59E0 /* ScrollViewRefreshable.swift */,
+				111A55BE2797B13D00488235 /* UploadPhotoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -527,6 +530,7 @@
 				111F08AB279259390096BF68 /* Observer.swift in Sources */,
 				111F08C32794E1D70096BF68 /* SplashScreen.swift in Sources */,
 				111F087E27922F670096BF68 /* SettingsLabelView.swift in Sources */,
+				111A55BF2797B13D00488235 /* UploadPhotoView.swift in Sources */,
 				111F088427922F670096BF68 /* HelpView.swift in Sources */,
 				111F089327922F670096BF68 /* ParallexView.swift in Sources */,
 				111F08A327922F7D0096BF68 /* CustomCornersd.swift in Sources */,
@@ -629,7 +633,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -684,7 +688,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

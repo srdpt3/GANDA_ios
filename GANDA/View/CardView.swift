@@ -10,10 +10,10 @@ import SDWebImageSwiftUI
 struct CardView: View {
     
     @EnvironmentObject var observer : Observer
-
+    
     let icon_size =  UIScreen.main.bounds.height <  926.0 ? 25 : 30
     let logo_size =  UIScreen.main.bounds.height < 926.0 ? 30 : 35
-
+    
     @Binding var showDetailView : Bool
     
     @State var selected  = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [],numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0)
@@ -35,7 +35,7 @@ struct CardView: View {
     @State var voteBarData:[Double] = []
     @State var numVote: Int = 0
     @State var numLike: Int = 0
-
+    
     //    @State var buttonTitle : [String] = ["나는코린이다", "빨간구두가 잘어울린다","돈잘벌꺼같다"]
     @State var numVoteData:[Int] = [0,0,0]
     let bar_graph_ratio =  UIScreen.main.bounds.height < 896.0 ? 4.0 : 3
@@ -54,7 +54,7 @@ struct CardView: View {
     @State var showFavoriteView  = false
     
     let haptics = UINotificationFeedbackGenerator()
-
+    
     var body: some View {
         ZStack(alignment: .bottomTrailing){
             NavigationView{
@@ -84,7 +84,7 @@ struct CardView: View {
                                             }
                                             showDetailScreen.toggle()
                                             showDetailView.toggle()
-                                         
+                                            
                                         }
                                         
                                     }
@@ -92,13 +92,13 @@ struct CardView: View {
                                     withAnimation(.spring()){
                                         if post.imageLocation != "" {
                                             self.selected = post
-                                                
+                                            
                                             showFlag.toggle()
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                             }
                                         }
-                                       
-                                      
+                                        
+                                        
                                     }
                                 }
                         })
@@ -126,10 +126,10 @@ struct CardView: View {
                                         //        playSound(sound: "sound-click", type: "mp3")
                                         
                                         self.haptics.notificationOccurred(.success)
-                  
+                                        
                                     }) {
                                         Image(systemName:  "bell.fill")
-                                          .foregroundColor(APP_THEME_COLOR)
+                                            .foregroundColor(APP_THEME_COLOR)
                                             .frame(width: CGFloat(icon_size), height: CGFloat(icon_size))
                                     }
                                     
@@ -186,8 +186,8 @@ struct CardView: View {
                         
                     }
                     else{
-
-//                        LottieView(filename: "loading").frame(width: 200, height: 200).offset(y:20)
+                        
+                        //                        LottieView(filename: "loading").frame(width: 200, height: 200).offset(y:20)
                     }
                 }){
                     
@@ -198,12 +198,12 @@ struct CardView: View {
                     // Since iOS 15 will show indicator until await task finishes...
                     await Task.sleep(1_500_000_000)
                 }
-                    
-         
+                
+                
             }
             .overlay(
                 FloatingButton(isTap: $isTap, showUploadView: $showUploadView, showFavoriteView: $showFavoriteView, uploadComplete:$uploadComplete)
-              
+                
             )
             //            .zIndex(1)
             
@@ -222,10 +222,10 @@ struct CardView: View {
                                 .ignoresSafeArea(.container)
                             
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                                .overlay(
-//
-//                                    HeartLike(isTapped: self.$cardViewModel.liked, taps: 3)
-//                                )
+                            //                                .overlay(
+                            //
+                            //                                    HeartLike(isTapped: self.$cardViewModel.liked, taps: 3)
+                            //                                )
                                 .cornerRadius(15)
                             
                             HStack{
@@ -277,12 +277,12 @@ struct CardView: View {
                         .previewLayout(.fixed(width: 375, height: 500))
                         // Detail View....
                         VStack{
-                         
+                            
                             if(!observer.votedCards.contains(self.selected.id.uuidString)){
                                 HStack{
                                     Spacer()
                                     RatingDetailView(card: selected, numLiked: $numLike, numVote : $numVote, hideDetail : true)
-
+                                    
                                     Spacer()
                                     
                                 }.padding(.vertical, 10)
@@ -292,10 +292,10 @@ struct CardView: View {
                                         .font(Font.custom(FONT, size: 16))
                                         .fontWeight(.heavy)
                                         .foregroundColor(.black)
-//                                    Spacer(minLength: 0)
+                                    //                                    Spacer(minLength: 0)
                                     Button(action: {
                                         self.haptics.notificationOccurred(.success)
-
+                                        
                                         withAnimation {
                                             self.buttonPressed[0].toggle()
                                             self.sendMessageToDevice(title: ("\(User.currentUser()!.username) 이 투표를 했습니다"),
@@ -317,14 +317,14 @@ struct CardView: View {
                                             .shadow(color: Color.black.opacity(self.buttonPressed[0] ? 0.1: 0.3), radius: 5, x: 5, y: 5)
                                             .shadow(color: Color.white.opacity(0.5), radius: 5, x: -8, y: -8)
                                         
-//                                   =
+                                        //                                   =
                                     })
                                     
                                     Button(action: {
                                         self.haptics.notificationOccurred(.success)
-
+                                        
                                         withAnimation {
-
+                                            
                                             self.buttonPressed[1].toggle()
                                             self.sendMessageToDevice(title: ("누군가가 투표를 했습니다"),
                                                                      body: "\(self.selected.attrNames[1])", token: self.selected.token)
@@ -347,7 +347,7 @@ struct CardView: View {
                                     if(self.selected.attrNames[2] != ""){
                                         Button(action: {
                                             self.haptics.notificationOccurred(.success)
-
+                                            
                                             withAnimation {
                                                 self.buttonPressed[2].toggle()
                                                 self.sendMessageToDevice(title: ("\(User.currentUser()!.username) 이 투표를 했습니다"),
@@ -370,8 +370,8 @@ struct CardView: View {
                                                 .shadow(color: Color.white.opacity(0.5), radius: 5, x: -8, y: -8)
                                         })
                                     }
-      
-
+                                    
+                                    
                                     Spacer(minLength: 0)
                                     
                                     
@@ -383,21 +383,21 @@ struct CardView: View {
                                 .shadow(color: Color.black.opacity(0.05), radius: 5, x: -5, y: -5)
                                 .padding(.horizontal)
                                 Spacer(minLength: 0)
-                          
+                                
                             }
                             else{
                                 HStack{
                                     Spacer()
                                     RatingDetailView(card: selected, numLiked: $numLike, numVote : $numVote, hideDetail : false)
                                     Spacer()
-                               
+                                    
                                 }.padding(.vertical, 10)
                                 VStack(alignment: .leading,spacing: 22){
                                     if !self.voteData.isEmpty {
                                         ChartView_BAR(data: self.$voteData, totalNum: self.$ymax, title: self.selected.description, categories: self.selected.attrNames)
                                             .frame(maxWidth: .infinity,idealHeight: 200)
                                     }
-     
+                                    
                                     Divider().padding(.horizontal, 15)
                                     VStack(spacing: 5){
                                         HStack{
@@ -409,7 +409,7 @@ struct CardView: View {
                                         }
                                         TagView_Card(maxLimit: 100, tags: self.selected.tags,fontSize: 16)
                                         // Default Height...
-                                            .frame(height: 120)
+                                            .frame(height: 100)
                                         
                                         //                                            ParallexView().padding(.leading,15).z
                                         
@@ -486,7 +486,7 @@ struct CardView: View {
             
             
         }
-      
+        
         
     }
     
@@ -545,9 +545,9 @@ struct CardView: View {
             // Or Your Action when message sends...
             print("Success")
             DispatchQueue.main.async {[self] in
-//                title = ""
-//                body = ""
-//                token = ""
+                //                title = ""
+                //                body = ""
+                //                token = ""
             }
         }
         .resume()
@@ -610,13 +610,13 @@ struct CardView: View {
                 .opacity(startAnimation && !animationEnded ? 1 : 0)
             // BG...
                 .background(
-                
+                    
                     ZStack{
                         
                         CustomShape(radius: resetBG ? 29 : 0)
                             .fill(Color.purple)
                             .clipShape(Circle())
-                            // Fixed Size...
+                        // Fixed Size...
                             .frame(width: 50, height: 50)
                             .scaleEffect(bgAniamtion ? 2.2 : 0)
                         
