@@ -401,7 +401,7 @@ struct CardView: View {
                                     Divider().padding(.horizontal, 15)
                                     VStack(spacing: 5){
                                         HStack{
-                                            Text("사진 태그들")
+                                            Text("사진 태그들 - Long press to search (Test)")
                                                 .foregroundColor(Color.black).font(Font.custom(FONT, size: 15))
                                                 .fontWeight(.bold)
                                                 .foregroundColor(.black)
