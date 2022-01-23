@@ -12,6 +12,7 @@ import Firebase
 class Observer: ObservableObject {
     
     @AppStorage("isLogged") var log_Status = false
+    @Namespace var animation_card
 
     @Published var isSucess = false
     @Published var error: NSError?
@@ -57,6 +58,8 @@ class Observer: ObservableObject {
     
     //All Active CAard
     @Published var activeCards = [ActiveVote]()
+    @Published var compositionalArray : [[ActiveVote]] = []
+
     @Published var myActiveCards = [ActiveVote]()
     @Published var mainVoteCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [],numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0)
     init(){
@@ -91,12 +94,42 @@ class Observer: ObservableObject {
         
             votedCards.removeAll()
             getAllCard()
+    
             checkVoted()
             getMyCards()
+        
+        DispatchQueue.main.async {
+        
+        }
         
         
    
         
+    }
+    func setCompositionalLayout(){
+        
+        var currentArrayCards : [ActiveVote] = []
+        
+        activeCards.forEach { (card) in
+            
+            currentArrayCards.append(card)
+            
+            if currentArrayCards.count == 3{
+                
+                // appending to Main Array...
+                compositionalArray.append(currentArrayCards)
+                currentArrayCards.removeAll()
+            }
+            
+            // if not 3 or Even No of cards...
+            
+            if currentArrayCards.count != 3 && card.id == activeCards.last!.id{
+                
+                // appending to Main Array...
+                compositionalArray.append(currentArrayCards)
+                currentArrayCards.removeAll()
+            }
+        }
     }
     
     func getMyCards(){
@@ -206,8 +239,11 @@ class Observer: ObservableObject {
             
             
             
-            print("self.activeCards.count \(self.activeCards.count)")
-
+            DispatchQueue.main.async {
+                print("self.activeCards.count \(self.activeCards.count)")
+                if !self.activeCards.isEmpty{self.setCompositionalLayout()}
+            }
+        
         }
     }
     

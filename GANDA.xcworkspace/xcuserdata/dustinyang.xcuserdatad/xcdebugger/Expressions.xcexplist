@@ -3,10 +3,72 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #1 in closure #1 in closure #2 in closure #1 in closure #1 in ImageGrid.body.getter:MyPageView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selected">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in CardView.body.getter:CardView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.observer.compositionalArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CardView.init(observer:showDetailView:selected:showDetailScreen:isTap:showUploadView:uploadComplete:activeVote:loadView:buttonPressed:buttonSelected:voteData:voteBarData:numVoteData:ymax:activeCards:animation:tags:selectedFlag:showFlag:flagMessage:showFavoriteView:):CardView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "UIScreen.main.bounds.height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in CardView.body.getter:CardView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.observer">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #2 in ProgressImageView.body.getter:MyPageView.swift">
          <PersistentStrings>
             <PersistentString
                value = "seclectedPic">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in CardView.body.getter:CardView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.observer.compositionalArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in Observer.getMyCards():Observer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.myActiveCards">
+            </PersistentString>
+            <PersistentString
+               value = "User.currentUser()!.id">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in Layout1.body.getter:Layout1.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cards">
+            </PersistentString>
+            <PersistentString
+               value = "cards[0]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -25,33 +87,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in CardView.body.getter:CardView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.observer">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #1 in closure #2 in closure #1 in closure #1 in ImageGrid.body.getter:MyPageView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "selected">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in Observer.getMyCards():Observer.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.myActiveCards">
-            </PersistentString>
-            <PersistentString
-               value = "User.currentUser()!.id">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "closure #2 in closure #1 in closure #2 in closure #1 in CardView.body.getter:CardView.swift">
          <PersistentStrings>
             <PersistentString
@@ -63,10 +98,10 @@
          contextName = "ChartView_BAR.randomDataArray():ChartView_BAR.swift">
       </ContextState>
       <ContextState
-         contextName = "CardView.init(observer:showDetailView:selected:showDetailScreen:isTap:showUploadView:uploadComplete:activeVote:loadView:buttonPressed:buttonSelected:voteData:voteBarData:numVoteData:ymax:activeCards:animation:tags:selectedFlag:showFlag:flagMessage:showFavoriteView:):CardView.swift">
+         contextName = "Observer.refresh():Observer.swift">
          <PersistentStrings>
             <PersistentString
-               value = "UIScreen.main.bounds.height">
+               value = "self.activeCards">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

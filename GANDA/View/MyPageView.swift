@@ -253,10 +253,10 @@ struct ImageGrid : View {
                 StatView(title: LIKENUM, count: numLiked, image: "suit.heart", color: GRADIENT_COLORS[1])
                 
                 
-                if(User.currentUser() != nil){
-                    StatView(title: POINTNUM, count: User.currentUser()!.point_avail, image: "bitcoinsign.circle", color: GRADIENT_COLORS[2])
-
-                }
+//                if(User.currentUser() != nil){
+//                    StatView(title: POINTNUM, count: User.currentUser()!.point_avail, image: "bitcoinsign.circle", color: GRADIENT_COLORS[2])
+//
+//                }
 
             }
             
@@ -272,7 +272,7 @@ struct ImageGrid : View {
                 .fill(Color.white)
         )
         
-        BannerAd(unitID: BANNER_UNIT_ID).padding(.horizontal)
+//        BannerAd(unitID: BANNER_UNIT_ID).padding(.horizontal)
     }
     
     @ViewBuilder
@@ -281,14 +281,14 @@ struct ImageGrid : View {
         VStack(alignment: .leading, spacing: 10) {
             
             HStack{
-//                Spacer()
+                Spacer()
                 Image(systemName: image)
-                Text(title).font(Font.custom(FONT, size: 14))
+                Text(title).font(Font.custom(FONT, size: 15).bold())
                 Spacer()
             }
             HStack{
                 Spacer()
-                Text(String(count)).font(Font.custom(FONT, size: 16))
+                Text(String(count)).font(Font.custom(FONT, size: 15))
                 Spacer()
                 
             }

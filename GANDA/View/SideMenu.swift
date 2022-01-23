@@ -59,19 +59,19 @@ struct SideMenu: View {
                 }
        
 
-                Button(action: {
-                    withAnimation{
-                        self.profile_show.toggle()
-                    }
-                 
-                    
-                    
-                }, label: {
-                    Text(PROFILE_VIEW)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                        .opacity(0.7)
-                })
+//                Button(action: {
+//                    withAnimation{
+//                        self.profile_show.toggle()
+//                    }
+//
+//
+//
+//                }, label: {
+//                    Text(PROFILE_VIEW)
+//                        .fontWeight(.semibold)
+//                        .foregroundColor(.white)
+//                        .opacity(0.7)
+//                })
             })
             
             // tab Buttons...
@@ -83,7 +83,7 @@ struct SideMenu: View {
             
                 TabButton(image: "chart.bar.doc.horizontal.fill", title: "마이페이지", selectedTab: $selectedTab, showmenu: $showMenu, animation: animation)
                 
-                TabButton(image: "video.square.fill", title: "릴스", selectedTab: $selectedTab, showmenu: $showMenu, animation: animation)
+//                TabButton(image: "video.square.fill", title: "릴스", selectedTab: $selectedTab, showmenu: $showMenu, animation: animation)
                 
                 TabButton(image: "gearshape.fill", title: "앱정보", selectedTab: $selectedTab, showmenu: $showMenu, animation: animation)
 //

@@ -35,9 +35,9 @@ struct Home: View {
               
             
             MyPageView().tag("마이페이지")
-            ReelsView()
-                .tag("릴스")
-            
+//            ReelsView()
+//                .tag("릴스")
+//            
             
             SettingsView()
                 .tag("앱정보")

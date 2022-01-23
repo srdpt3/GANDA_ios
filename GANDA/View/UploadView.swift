@@ -106,7 +106,7 @@ struct UploadView: View {
                 }
                 CustomTextField(image: "filemenu.and.selection", title: "보기 1", value: $selectionText[0], animation: animation)
                 CustomTextField(image: "filemenu.and.selection", title: "보기 2", value: $selectionText[1], animation: animation)
-                CustomTextField(image: "filemenu.and.selection", title: "보기 3(선택사항)", value: $selectionText[2], animation: animation)
+//                CustomTextField(image: "filemenu.and.selection", title: "보기 3(선택사항)", value: $selectionText[2], animation: animation)
                 VStack{
                     VStack(spacing: 10){
                         TextField(PLEASE_ADD_TAG, text: $text)

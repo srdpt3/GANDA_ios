@@ -59,7 +59,7 @@ struct CardView: View {
         ZStack(alignment: .bottomTrailing){
             NavigationView{
                 
-                ScrollRefreshable(title: "사진 새로고침", tintColor: APP_THEME_COLOR, content: {
+            
                     
                     if !self.observer.activeCards.isEmpty {
                         
@@ -106,76 +106,57 @@ struct CardView: View {
                             .padding(.top, -50)
                             .toolbar {
                                 
-                                ToolbarItem(placement: .navigationBarLeading) {
+                                ToolbarItem(placement: .automatic) {
                                     
-                                    Image("logo_main_blue")
+                                    Image(APP_LOGO)
                                         .resizable()
                                         .scaledToFit()
-                                        .frame(height: CGFloat(logo_size))
-                                        .foregroundColor(Color("Gray"))
-                                        .padding(.leading,50)
-                                    
+                                        .frame(height: 30)
+                                        .padding(.leading, 80)
                                     
                                 }
                                 
-                                
-                                ToolbarItem(placement: .navigationBarTrailing) {
-                                    
-                                    Button(action: {
-                                        // ACTION
-                                        //        playSound(sound: "sound-click", type: "mp3")
-                                        
-                                        self.haptics.notificationOccurred(.success)
-                                        
-                                    }) {
-                                        Image(systemName:  "bell.fill")
-                                            .foregroundColor(APP_THEME_COLOR)
-                                            .frame(width: CGFloat(icon_size), height: CGFloat(icon_size))
-                                    }
-                                    
-                                }
-                                
-                                
-                                
-                                
-                                ToolbarItem(placement: .navigationBarTrailing) {
-                                    
-                                    Button {
-                                        self.haptics.notificationOccurred(.success)
-                                        self.observer.columns = min(self.observer.columns + 1, 4)
-                                        
-                                    } label: {
-                                        Image(systemName: "plus")
-                                            .foregroundColor(.white)
-                                            .background(
-                                                ZStack{
-                                                    APP_THEME_COLOR
-                                                }
-                                                    .frame(width: CGFloat(icon_size), height: CGFloat(icon_size))
-                                                    .clipShape(Circle())
-                                            )
-                                        
-                                    }
-                                    
-                                }
-                                
-                                ToolbarItem(placement: .navigationBarTrailing) {
-                                    
-                                    Button {
-                                        self.haptics.notificationOccurred(.success)
-                                        self.observer.columns = max(self.observer.columns - 1, 1)
-                                    } label: {
-                                        Image(systemName: "minus")
-                                            .foregroundColor(.white)
-                                            .background(
-                                                ZStack{
-                                                    APP_THEME_COLOR
-                                                }
-                                                    .frame(width: CGFloat(icon_size), height: CGFloat(icon_size))
-                                                    .clipShape(Circle())
-                                            )
-                                    }
-                                }
+//
+//
+//
+//                                ToolbarItem(placement: .navigationBarTrailing) {
+//
+//                                    Button {
+//                                        self.haptics.notificationOccurred(.success)
+//                                        self.observer.columns = min(self.observer.columns + 1, 4)
+//
+//                                    } label: {
+//                                        Image(systemName: "plus")
+//                                            .foregroundColor(.white)
+//                                            .background(
+//                                                ZStack{
+//                                                    APP_THEME_COLOR
+//                                                }
+//                                                    .frame(width: CGFloat(icon_size), height: CGFloat(icon_size))
+//                                                    .clipShape(Circle())
+//                                            )
+//
+//                                    }
+//
+//                                }
+//
+//                                ToolbarItem(placement: .navigationBarTrailing) {
+//
+//                                    Button {
+//                                        self.haptics.notificationOccurred(.success)
+//                                        self.observer.columns = max(self.observer.columns - 1, 1)
+//                                    } label: {
+//                                        Image(systemName: "minus")
+//                                            .foregroundColor(.white)
+//                                            .background(
+//                                                ZStack{
+//                                                    APP_THEME_COLOR
+//                                                }
+//                                                    .frame(width: CGFloat(icon_size), height: CGFloat(icon_size))
+//                                                    .clipShape(Circle())
+//                                            )
+//                                    }
+//                                }
                             }.animation(.easeInOut, value: self.observer.columns)
                             .background(
                                 Color("BG")
@@ -186,18 +167,10 @@ struct CardView: View {
                         
                     }
                     else{
-                        
+                        ProgressView().frame(maxWidth:. infinity, maxHeight: .infinity)
                         //                        LottieView(filename: "loading").frame(width: 200, height: 200).offset(y:20)
                     }
-                }){
-                    
-                    // Refresh COntent....
-                    // Await Task....
-                    
-                    self.observer.refresh()
-                    // Since iOS 15 will show indicator until await task finishes...
-                    await Task.sleep(1_500_000_000)
-                }
+              
                 
                 
             }
