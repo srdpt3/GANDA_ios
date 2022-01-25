@@ -13,7 +13,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = context.coordinator
-        imagePicker.allowsEditing = true
+//        imagePicker.allowsEditing = true
         
 
         return imagePicker
@@ -43,11 +43,12 @@ struct ImagePicker: UIViewControllerRepresentable {
 //             } else if let img = info[UIImagePickerController.InfoKey.originalImage] as! UIImage {
 //                 uiImage = img
             
-            let uiImage = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
+            let uiImage = info[.originalImage] as! UIImage
+//            parent.image = info[.originalImage] as? UIImage
+
             parentImagePicker.pickedImage = Image(uiImage: uiImage)
             if let mediaData = uiImage.jpegData(compressionQuality: 0.5) {
                 parentImagePicker.imageData = mediaData
-                print(parentImagePicker.imageData)
             }
             parentImagePicker.showImagePicker = false
             

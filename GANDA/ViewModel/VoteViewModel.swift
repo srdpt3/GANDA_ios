@@ -84,7 +84,7 @@ class VoteViewModel: ObservableObject {
     func persist(votePost:  ActiveVote, buttonPressed:[Bool]) {
         
         
-        var post :ActiveVote = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [],tags: [],  numVote: 0,  createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: TOKEN, numLiked: 0)
+        var post :ActiveVote = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [],tags: [],  numVote: 0,  createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: TOKEN, numLiked: 0, itemType: "")
         post  = votePost
         //batch writing. vote multiple entries
         let batch = Ref.FIRESTORE_ROOT.batch()

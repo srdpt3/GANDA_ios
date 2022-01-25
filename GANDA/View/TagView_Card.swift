@@ -80,12 +80,12 @@ struct TagView_Card: View {
             .contextMenu{
                 
               
-                
-                Button("네이버 검색하기"){
-                    openURL(URL(string: "https://www.naver.com/")!)
-
-                    
-                }
+//                
+//                Button("네이버 검색하기"){
+//                    openURL(URL(string: "https://www.naver.com/")!)
+//
+//                    
+//                }
             }
             .matchedGeometryEffect(id: tag.id, in: animation)
     }

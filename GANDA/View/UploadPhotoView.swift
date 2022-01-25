@@ -179,9 +179,9 @@ struct UploadPhotoView: View {
                                     .cornerRadius(20)
                             }
                             // Disabling Button...
-                            .disabled((tags.count < 3 || questionText == "" || self.images[0].count == 0) || showLoading ||
+                            .disabled((questionText == "" || self.images[0].count == 0) || showLoading ||
                                       (selectionText[0].trimmingCharacters(in: .whitespacesAndNewlines) == "" && selectionText[1].trimmingCharacters(in: .whitespacesAndNewlines) == ""))
-                            .opacity((tags.count < 3 || questionText == "" || self.images[0].count == 0 || showLoading ||
+                            .opacity((questionText == "" || self.images[0].count == 0 || showLoading ||
                                       (selectionText[0].trimmingCharacters(in: .whitespacesAndNewlines) == "" && selectionText[1].trimmingCharacters(in: .whitespacesAndNewlines) == "")) ? 0.6 : 1 )
                         }
 
@@ -236,7 +236,7 @@ struct UploadPhotoView: View {
             
             withAnimation {
                 
-                observer.refresh()
+                
                 self.uploadComplete.toggle()
                 self.showLoading.toggle()
                 //                self.showUploadView.toggle()

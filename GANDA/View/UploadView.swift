@@ -51,44 +51,44 @@ struct UploadView: View {
                 VStack(alignment: .leading, spacing: 20){
                     
                     HStack(spacing: 15){
-        
-                            if self.images[0].count == 0{
-                                
-                                Image(systemName: "photo").resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 100, height: 100)
-                                    .cornerRadius(10)
-                                //                                    .zIndex(1)
-                                    .foregroundColor(APP_THEME_COLOR)
-                                    .onTapGesture {
-                                        self.imagePicker.toggle()
-                                        self.index = 0
-                                        self.haptics.notificationOccurred(.success)
+                        
+                        if self.images[0].count == 0{
+                            
+                            Image(systemName: "photo").resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 100, height: 100)
+                                .cornerRadius(10)
+                            //                                    .zIndex(1)
+                                .foregroundColor(APP_THEME_COLOR)
+                                .onTapGesture {
+                                    self.imagePicker.toggle()
+                                    self.index = 0
+                                    self.haptics.notificationOccurred(.success)
                                     
-                                    }
-                                    .opacity(self.images[0].count > 0 ? 0 : 1)
-                                
-                                
-                                //                                LottieView(filename: "upload").frame(width: 100, height: 100)
-                                //                                    .clipShape(Circle()).padding(.bottom, 10).padding(.top, 10).zIndex(1)
-                                //                                    .onTapGesture {
-                                //                                        self.index = 0
-                                //                                        self.haptics.notificationOccurred(.success)
-                                //                                        self.imagePicker.toggle()
-                                //                                    }
-                                //                                    .opacity(self.images[0].count > 0 ? 0 : 1)
-                            }
-                            else{
-                                
-                                Image(uiImage: UIImage(data: self.images[0])!)
-                                    .resizable()
-                                    .renderingMode(.original)
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 100, height: 100)
-                                    .cornerRadius(10)
-                                
-                            }
-                     
+                                }
+                                .opacity(self.images[0].count > 0 ? 0 : 1)
+                            
+                            
+                            //                                LottieView(filename: "upload").frame(width: 100, height: 100)
+                            //                                    .clipShape(Circle()).padding(.bottom, 10).padding(.top, 10).zIndex(1)
+                            //                                    .onTapGesture {
+                            //                                        self.index = 0
+                            //                                        self.haptics.notificationOccurred(.success)
+                            //                                        self.imagePicker.toggle()
+                            //                                    }
+                            //                                    .opacity(self.images[0].count > 0 ? 0 : 1)
+                        }
+                        else{
+                            
+                            Image(uiImage: UIImage(data: self.images[0])!)
+                                .resizable()
+                                .renderingMode(.original)
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 100, height: 100)
+                                .cornerRadius(10)
+                            
+                        }
+                        
                         
                         
                     }.padding(.leading)
@@ -101,12 +101,12 @@ struct UploadView: View {
                         .ignoresSafeArea()
                 )
                 VStack{
-
+                    
                     CustomTextField(image: "questionmark.circle", title: "내스타일 질문", value: $questionText, animation: animation)
                 }
                 CustomTextField(image: "filemenu.and.selection", title: "보기 1", value: $selectionText[0], animation: animation)
                 CustomTextField(image: "filemenu.and.selection", title: "보기 2", value: $selectionText[1], animation: animation)
-//                CustomTextField(image: "filemenu.and.selection", title: "보기 3(선택사항)", value: $selectionText[2], animation: animation)
+                //                CustomTextField(image: "filemenu.and.selection", title: "보기 3(선택사항)", value: $selectionText[2], animation: animation)
                 VStack{
                     VStack(spacing: 10){
                         TextField(PLEASE_ADD_TAG, text: $text)
@@ -162,11 +162,11 @@ struct UploadView: View {
                                 
                                 selectionText[0] = selectionText[0].trimmingCharacters(in: .whitespacesAndNewlines)
                                 selectionText[1] = selectionText[1].trimmingCharacters(in: .whitespacesAndNewlines)
-                                selectionText[2] = selectionText[2].trimmingCharacters(in: .whitespacesAndNewlines)
-
+//                                selectionText[2] = selectionText[2].trimmingCharacters(in: .whitespacesAndNewlines)
+                                
                                 // Use same Font size and limit here used in TagView....
                                 showLoading.toggle()
-//                                self.uploadPicture()
+                                //                                self.uploadPicture()
                                 self.haptics.notificationOccurred(.success)
                                 
                             } label: {
@@ -179,9 +179,9 @@ struct UploadView: View {
                                     .cornerRadius(20)
                             }
                             // Disabling Button...
-                            .disabled((tags.count < 3 || questionText == "" || self.images[0].count == 0) || showLoading ||
+                            .disabled((  questionText == "" || self.images[0].count == 0) || showLoading ||
                                       (selectionText[0].trimmingCharacters(in: .whitespacesAndNewlines) == "" && selectionText[1].trimmingCharacters(in: .whitespacesAndNewlines) == ""))
-                            .opacity((tags.count < 3 || questionText == "" || self.images[0].count == 0 || showLoading ||
+                            .opacity(( questionText == "" || self.images[0].count == 0 || showLoading ||
                                       (selectionText[0].trimmingCharacters(in: .whitespacesAndNewlines) == "" && selectionText[1].trimmingCharacters(in: .whitespacesAndNewlines) == "")) ? 0.6 : 1 )
                         }
                         //                        .sheet(isPresented: $buttonDisable) {
@@ -190,7 +190,7 @@ struct UploadView: View {
                         
                         
                     }
-       
+                    
                 }
                 .padding(.horizontal, 12)
                 .frame(maxWidth: .infinity,maxHeight: .infinity,alignment: .top)
@@ -204,7 +204,7 @@ struct UploadView: View {
                 }
             }
             
-   
+            
         }).blur(radius : self.showLoading ? 15 : 0)
             .background(
                 Color("BG")
@@ -256,25 +256,21 @@ struct UploadView: View {
                 
             }
         
-
+        
         
     }
     
     
     func uploadPicture(){
-    
+        
         uploadViewModel.uploadVote(title: self.questionText, selectionText: self.selectionText, tags: self.tags, imageData: self.images[0]) { result in
             
-            
-            //            self.showAlert.toggle()
-            
             withAnimation {
-                
-                observer.refresh()
+
+                //
+                observer.getMyCards()
+                observer.checkVoted()
                 self.uploadComplete.toggle()
-                //                self.showUploadView.toggle()
-                
-                //                self.presentationMode.wrappedValue.dismiss()
                 
             }
             

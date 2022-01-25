@@ -60,3 +60,9 @@ struct PostCardView: View{
         //            .cornerRadius(10)
     }
 }
+
+extension View{
+    func getRect2()->CGRect{
+        return UIScreen.main.bounds
+    }
+}

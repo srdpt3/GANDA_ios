@@ -12,6 +12,7 @@ struct MyPageView: View {
     @State  var showingModal: Bool = false
     @State  var animatingModal: Bool = false
     
+    
     @EnvironmentObject var observer : Observer
 
     var body: some View {
@@ -73,7 +74,7 @@ struct ImageGrid : View {
     @State var totalNumVote : Int = 0
     @State var totalNumLiked : Int = 0
 
-    
+    @State var deleteVote : Bool = false
     
     @State var isAnimating : Bool = true
    @State var voteDataOneCard:[Double] = []
@@ -185,6 +186,26 @@ struct ImageGrid : View {
                                             }.padding(.trailing)
                                                 .padding(.top)
                                             Spacer()
+                                            HStack{
+                                                Spacer()
+                                                Button {
+                                                    withAnimation(.spring(response: 0.9, dampingFraction: 1.0, blendDuration: 1.0)){
+                                                        
+                                                        self.deleteVote.toggle()
+                                                        self.haptics.notificationOccurred(.success)
+                                                    }
+                                                    
+                                                } label: {
+                                                    Spacer()
+                                                    Image(systemName: "trash")
+                                                        .foregroundColor(.white)
+                                                        .frame(width: 25, height: 25)
+                                                        .padding(5)
+                                                        .background(Color.black.opacity(0.5))
+                                                        .clipShape(Circle())
+                                                    
+                                                }
+                                            }.padding([.trailing,.bottom])
                                         }
                                         
                                         
@@ -216,11 +237,127 @@ struct ImageGrid : View {
                                 self.animatingModal = true
                             }).offset(y: 50)
                             //                        .padding(.horizontal)
+                            
+                            
+                            if self.deleteVote {
+                                ZStack {
+                                    
+//                                    APP_THEME_COLOR.edgesIgnoringSafeArea(.all)
+                                    
+                                    // MODAL
+                                    VStack(spacing: 0) {
+                                        // TITLE
+                                        Text("등록한 사진 삭제")
+                                            .font(Font.custom(FONT, size: 20))
+                                            .fontWeight(.heavy)
+                                            .padding()
+                                            .frame(minWidth: 0, maxWidth: .infinity)
+                                            .background(APP_THEME_COLOR)
+                                            .foregroundColor(Color.white)
+                                        
+                                        Spacer()
+                                        
+                                        // MESSAGE
+                                        
+                                        VStack(spacing: 16) {
+                                            
+                                            HStack{
+                                                Text("투표를 종료하시겠습니까?")
+                                                    .font(Font.custom(FONT, size: 15))
+                                                    .lineLimit(2)
+                                                    .multilineTextAlignment(.center)
+                                                    .foregroundColor(Color.gray)
+                                                    .layoutPriority(1)
+                                                
+                                                Button(action: {
+                                                }) {
+                                                    
+                                                    Image(systemName: "xmark.circle").resizable().frame(width: 30, height: 30).foregroundColor(Color.gray)
+                                                }
+                                            }
+                                            
+                                            
+                                            
+                                            HStack{
+                                                Button(action: {
+                                                    self.deleteVote.toggle()
+                                                    
+                                                }) {
+                                                    Text(CANCEL.uppercased())
+                                                        .font(Font.custom(FONT, size: 15))
+                                                        .fontWeight(.semibold)
+                                                        .accentColor(Color.gray)
+                                                        .padding(.horizontal, 45)
+                                                        .padding(.vertical, 15)
+                                                        .frame(minWidth: 80)
+                                                        .background(
+                                                            Capsule()
+                                                                .strokeBorder(lineWidth: 1.75)
+                                                                .foregroundColor(Color.gray)
+                                                    )
+                                                }
+                                                Button(action: {
+                                                    
+                                                    withAnimation(){
+                                                        self.observer.deleteVote(postId: selected.id.uuidString)
+
+                                                        self.animatingModal.toggle()
+                                                        self.self.showingModal.toggle()
+                                                        self.deleteVote.toggle()
+                                                    }
+                                                    
+                                                    
+            //                                        self.messageViewModel.leaveRoom(recipientId: self.userID)
+                                  
+                                                    
+                                                }) {
+                                                    Text(CONFIRM.uppercased())
+                                                        .font(Font.custom(FONT, size: 15))
+                                                        .fontWeight(.semibold)
+                                                        .accentColor(APP_THEME_COLOR)
+                                                        .padding(.horizontal, 45)
+                                                        .padding(.vertical, 15)
+                                                        .frame(minWidth: 80)
+                                                        .background(
+                                                            Capsule()
+                                                                .strokeBorder(lineWidth: 1.75)
+                                                                .foregroundColor(APP_THEME_COLOR)
+                                                    )
+                                                }
+                                                
+                                            }
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                    }
+                                    .frame(minWidth: 240, idealWidth: 240, maxWidth: 280, minHeight: 140, idealHeight: 160, maxHeight: 200, alignment: .center)
+                                    .background(Color.white)
+                                    .cornerRadius(20)
+                                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 5, y: 5)
+                                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: -5, y: -5)
+//                                    .shadow(color: APP_THEME_COLOR, radius: 6, x: 0, y: 8)
+                                    .opacity(self.$animatingModal.wrappedValue ? 1 : 0)
+                                    .offset(y: self.$animatingModal.wrappedValue ? 0 : -100)
+                                    .animation(Animation.spring(response: 0.6, dampingFraction: 1.0, blendDuration: 1.0))
+                                    .onAppear(perform: {
+                                        self.animatingModal = true
+                                    })
+                                }
+                            }
+                            
+                            
+                            
                         }
                         Spacer()
                     }
                     
                 }
+                
+                
+         
+                
+                
             }
         }
         .background(

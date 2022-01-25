@@ -53,7 +53,7 @@ class StorageService {
 //
                     let voteId = UUID()
 //                    //                    let user =  User(id: userId, email: "test@gmail.com", profileImageUrl:  metaImageUrl, username: "test", age: "30", sex:"male",    swipe:0, degree: 0)
-                    let data =  ActiveVote.init(id: voteId, attr1: myVote.attr1, attr2: myVote.attr1, attr3: myVote.attr1, attr4: myVote.attr4, attr5: myVote.attr5, attrNames: myVote.attrNames, tags: myVote.tags,  numVote: myVote.numVote, createdDate: myVote.createdDate, lastModifiedDate: myVote.lastModifiedDate, userId: User.currentUser()!.id, email: User.currentUser()!.email, imageLocation: metaImageUrl, username: User.currentUser()!.username, sex: "", location: "", description: myVote.title, token: TOKEN, numLiked: 0)
+                    let data =  ActiveVote.init(id: voteId, attr1: myVote.attr1, attr2: myVote.attr1, attr3: myVote.attr1, attr4: myVote.attr4, attr5: myVote.attr5, attrNames: myVote.attrNames, tags: myVote.tags,  numVote: myVote.numVote, createdDate: myVote.createdDate, lastModifiedDate: myVote.lastModifiedDate, userId: User.currentUser()!.id, email: User.currentUser()!.email, imageLocation: metaImageUrl, username: User.currentUser()!.username, sex: "", location: "", description: myVote.title, token: TOKEN, numLiked: 0, itemType: "")
                     guard let finalDict = try? data.toDictionary() else {return}
 
 

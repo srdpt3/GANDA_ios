@@ -78,7 +78,7 @@ public let BUTTON_TITLE_FONT_SIZE = 18
 
 public let VOTE_NUMBER = "numVote"
 public let CHART_Y_AXIS = 100
-public let CARD_LIMIT_TO_QUERY = 36
+public let CARD_LIMIT_TO_QUERY = 100
 public let MY_CARD_LIMIT_TO_QUERY = 20
 
 
@@ -223,7 +223,7 @@ public let SELECT_ATTRIBUTES = "사진에 대한 3가지 태그를 정해주세�
 public let UPLOAD_COMPLETE = "사진등록이 완료되었습니다"
 public let UPLOAD_BUTTON = "등록"
 public let ADD_TAG = "태그 추가"
-public let PLEASE_ADD_TAG = "사진에 대한 태그를 입력해 주세요(3개이상)"
+public let PLEASE_ADD_TAG = "사진에 대한 태그를 입력해 주세요 (선택사항)"
 
 
 // Key

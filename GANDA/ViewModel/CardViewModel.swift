@@ -29,7 +29,7 @@ class CardViewModel: ObservableObject {
     @Published var totalFlagged: Int = 0
     @Published var votedCards = [String]()
     @Published var isLoading = false
-    @Published var mainVoteCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [],numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0)
+    @Published var mainVoteCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [],numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0, itemType: "")
 
     let CARDLIMIT : Int = 5
     @Published var columns: Int = 3
@@ -121,6 +121,22 @@ class CardViewModel: ObservableObject {
         }
         
     }
+    
+    
+    func deletePost(postId : String ,onSuccess: @escaping(_ result: Bool) -> Void) {
+        var result : Bool = false
+        Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE_POSTID(postId: postId).getDocument{ document, err in
+            if let doc = document, doc.exists {
+                doc.reference.delete()
+                result = true
+            }
+            
+            onSuccess(result)
+        }
+        
+        
+    }
+    
     
     
   

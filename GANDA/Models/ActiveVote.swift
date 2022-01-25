@@ -8,7 +8,7 @@
 import SwiftUI
 
 import Foundation
-struct ActiveVote: Encodable, Decodable, Identifiable,Hashable{
+struct ActiveVote: Codable, Identifiable,Hashable{
     var id = UUID()
     var attr1 : Int
     var attr2: Int
@@ -29,7 +29,22 @@ struct ActiveVote: Encodable, Decodable, Identifiable,Hashable{
     var description: String
     var token : String
     var numLiked: Int
+    var itemType: String
+
 
     
     
 }
+
+
+// Product Types...
+enum ItemType: String,CaseIterable {
+    case dailyLook = "데일리 룩"
+    case datingLook = "데이팅 룩"
+    case hotItem = "핫템"
+    case shoppingItem = "쇼핑템"
+}
+
+
+
+

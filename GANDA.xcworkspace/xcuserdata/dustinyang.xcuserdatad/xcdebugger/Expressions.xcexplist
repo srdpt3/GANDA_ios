@@ -46,6 +46,9 @@
          contextName = "closure #1 in closure #1 in closure #1 in CardView.body.getter:CardView.swift">
          <PersistentStrings>
             <PersistentString
+               value = "">
+            </PersistentString>
+            <PersistentString
                value = "self.observer.compositionalArray">
             </PersistentString>
          </PersistentStrings>
@@ -58,6 +61,17 @@
             </PersistentString>
             <PersistentString
                value = "User.currentUser()!.id">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in Observer.getAllCard():Observer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "ActiveVote.init(fromDictionary: dict)">
+            </PersistentString>
+            <PersistentString
+               value = "decoderActivity">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -99,6 +113,14 @@
       </ContextState>
       <ContextState
          contextName = "Observer.refresh():Observer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.activeCards">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in Observer.getAllCard():Observer.swift">
          <PersistentStrings>
             <PersistentString
                value = "self.activeCards">

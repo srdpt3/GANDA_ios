@@ -59,9 +59,12 @@ class Observer: ObservableObject {
     //All Active CAard
     @Published var activeCards = [ActiveVote]()
     @Published var compositionalArray : [[ActiveVote]] = []
+    @Published var filteredCards: [ActiveVote] = []
+    @Published var itemType: ItemType = .dailyLook
 
+    
     @Published var myActiveCards = [ActiveVote]()
-    @Published var mainVoteCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [],numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0)
+    @Published var mainVoteCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [],numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0, itemType: "")
     init(){
         if log_Status {
             refresh()
@@ -98,13 +101,6 @@ class Observer: ObservableObject {
             checkVoted()
             getMyCards()
         
-        DispatchQueue.main.async {
-        
-        }
-        
-        
-   
-        
     }
     func setCompositionalLayout(){
         
@@ -133,118 +129,109 @@ class Observer: ObservableObject {
     }
     
     func getMyCards(){
-        
-            
-        Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.whereField("userId", isEqualTo: User.currentUser()!.id ).limit(to: MY_CARD_LIMIT_TO_QUERY).getDocuments { [self] (snap, err) in
-            self.myActiveCards.removeAll()
-            
-            if err != nil{
-                print((err?.localizedDescription)!)
-                self.error = (err! as NSError)
-                return
-            }
-            
-            for i in snap!.documents{
-                let dict = i.data()
-                guard let decoderPost = try? ActiveVote.init(fromDictionary: dict) else {return}
-                self.myActiveCards.append(decoderPost)
+        Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.whereField("userId", isEqualTo: User.currentUser()!.id ).limit(to: MY_CARD_LIMIT_TO_QUERY).addSnapshotListener ({ [self] (snapshot, error) in
+            snapshot!.documentChanges.forEach { (documentChange) in
                 
+                switch documentChange.type {
+                case .added:
+                    print("type: added")
+                    
+                    let dict = documentChange.document.data()
+                    guard let decoderActivity = try? ActiveVote.init(fromDictionary: dict) else {return}
+                    self.myActiveCards.append(decoderActivity)
+                    print("self.activeCards.count \(self.myActiveCards.count)")
+                case .modified:
+                    print("type: modified")
+
+                case .removed:
+                    let dict = documentChange.document.data()
+                    guard let decoderActivity = try? ActiveVote.init(fromDictionary: dict) else {return}
+         
+                    if let selectionIndex = self.myActiveCards.firstIndex(of: decoderActivity){
+                        self.myActiveCards.remove(at: selectionIndex)
+                    }
+                    
+                }
+                print("self.activeCards.count \(self.myActiveCards.count)")
+                self.myActiveCards = self.myActiveCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
+//                DispatchQueue.main.async {
+//                    print("self.activeCards.count \(self.activeCards.count)")
+//                    if !self.activeCards.isEmpty{self.setCompositionalLayout()}
+//                }
+
             }
-            //            self.isReloading = false
             
-            
+
             while (self.myActiveCards.count < MY_CARD_LIMIT_TO_QUERY){
                 
-                let dummyCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [], numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0)
+                let dummyCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [], numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0, itemType: "")
                 self.myActiveCards.append(dummyCard)
                 
             }
             
-            self.myActiveCards = self.myActiveCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
-            
             while (self.myActiveCards.count > 6){
-                
                 self.myActiveCards.removeLast()
-                
-                
             }
-            
-            
+            self.myActiveCards = self.myActiveCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
+
             print("self.myActiveCards.count \(self.myActiveCards.count)")
-            
             if(self.myActiveCards[0].imageLocation != ""){
                 loadMainVoteChartData(postId: self.myActiveCards[0].id.uuidString)
-
             }
-            
-        }
-        
-//        loadChartData(postId: mainVoteCard)
-        
+        })
     }
     func getAllCard(){
         
-        Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.limit(to: CARD_LIMIT_TO_QUERY).order(by: "lastModifiedDate", descending: true).getDocuments { (snap, err) in
-            //            self.activeCards.removeAll()
-            self.activeCards.removeAll()
-            
-            if err != nil{
-                print((err?.localizedDescription)!)
-                self.error = (err! as NSError)
-                return
-            }
-            
-            for i in snap!.documents{
+        Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.limit(to: CARD_LIMIT_TO_QUERY).order(by: "lastModifiedDate", descending: true).addSnapshotListener ({ (snapshot, error) in
+
+            snapshot!.documentChanges.forEach { (documentChange) in
                 
-                let id = i.documentID
-                if(id != Auth.auth().currentUser?.uid){
+                switch documentChange.type {
+                case .added:
+                    print("type: added")
                     
-                    let dict = i.data()
-                    guard let decoderPost = try? ActiveVote.init(fromDictionary: dict) else {return}
-                    self.activeCards.append(decoderPost)
+                    let dict = documentChange.document.data()
+                    guard let decoderActivity = try? ActiveVote.init(fromDictionary: dict) else {return}
+                    self.activeCards.append(decoderActivity)
+                case .modified:
+                    print("type: modified")
+
+                case .removed:
+                    let dict = documentChange.document.data()
+                    guard let decoderActivity = try? ActiveVote.init(fromDictionary: dict) else {return}
+         
+                    if let selectionIndex = self.activeCards.firstIndex(of: decoderActivity){
+                        self.activeCards.remove(at: selectionIndex)
+
+                    }
+                    
+
+                    
                 }
-                
-            }
-            self.columns = self.activeCards.count > 10 ?  3 : 2
-            print("self.activeCards.count \(self.activeCards.count)")
-            
-            if (self.activeCards.count >= 15 && self.columns == 3){
-                
-                for _ in 1...6 {
-                    let dummyCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [], numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0)
-                    self.activeCards.append(dummyCard)
-                }
-                
+//                if !self.activeCards.isEmpty{self.setCompositionalLayout()}
+//                print("self.votedCards size is \(self.votedCards.count)")
+                self.activeCards = self.activeCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
+//                DispatchQueue.main.async {
+//                    print("self.activeCards.count \(self.activeCards.count)")
+//                    if !self.activeCards.isEmpty{self.setCompositionalLayout()}
+//                }
 
             }
             
             
-            while (self.activeCards.count < 10 && self.columns == 2){
+            while (self.activeCards.count % 5 != 0){
                 
-                let dummyCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [], numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0)
-                self.activeCards.append(dummyCard)
-                
-                
-                
-            }
-            
-            
-            while (self.activeCards.count < 15 && self.columns == 3){
-                
-                let dummyCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [], numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0)
+                let dummyCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [], numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0, itemType: "")
                 self.activeCards.append(dummyCard)
                 
             }
-            
-            
-            
-            
-            DispatchQueue.main.async {
-                print("self.activeCards.count \(self.activeCards.count)")
-                if !self.activeCards.isEmpty{self.setCompositionalLayout()}
-            }
+            print("self.activeCards size is \(self.activeCards.count)")
+        })
         
-        }
+//        DispatchQueue.main.async {
+//            print("self.activeCards.count \(self.activeCards.count)")
+//            if !self.activeCards.isEmpty{self.setCompositionalLayout()}
+//        }
     }
     
     
@@ -299,6 +286,14 @@ class Observer: ObservableObject {
     }
     
     
+    func deleteVote(postId : String){
+        self.cardViewModel.deletePost(postId: postId) { result in
+            
+        }
+    }
+    
+    
+    
     func loadMainVoteChartData(postId: String){
         self.mainVoteNum = 0
         self.mainVoteLiked = 0
@@ -350,7 +345,7 @@ class Observer: ObservableObject {
     
     func persist(votePost:  ActiveVote, buttonPressed:[Bool]) {
         
-        var post :ActiveVote = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [],tags: [],  numVote: 0,  createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: TOKEN, numLiked: 0)
+        var post :ActiveVote = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [],tags: [],  numVote: 0,  createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: TOKEN, numLiked: 0, itemType: "")
         post  = votePost
         //batch writing. vote multiple entries
         let batch = Ref.FIRESTORE_ROOT.batch()

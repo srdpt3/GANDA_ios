@@ -16,7 +16,7 @@ struct CardView: View {
     
     @Binding var showDetailView : Bool
     
-    @State var selected  = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [],numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0)
+    @State var selected  = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [],numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0, itemType: "")
     @State var showDetailScreen = false
     @State var isTap = false
     
@@ -58,11 +58,9 @@ struct CardView: View {
     var body: some View {
         ZStack(alignment: .bottomTrailing){
             NavigationView{
-                
-            
+                if !self.observer.activeCards.isEmpty {
                     
-                    if !self.observer.activeCards.isEmpty {
-                        
+                    VStack {
                         StaggeredGrid(columns: self.observer.columns, list: self.observer.activeCards, content: { post in
                             
                             // Post Card View...
@@ -88,19 +86,8 @@ struct CardView: View {
                                         }
                                         
                                     }
-                                }.onLongPressGesture {
-                                    withAnimation(.spring()){
-                                        if post.imageLocation != "" {
-                                            self.selected = post
-                                            
-                                            showFlag.toggle()
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                            }
-                                        }
-                                        
-                                        
-                                    }
                                 }
+                            
                         })
                             .padding(.horizontal)
                             .padding(.top, -50)
@@ -116,61 +103,22 @@ struct CardView: View {
                                     
                                 }
                                 
-//
-//
-//
-//                                ToolbarItem(placement: .navigationBarTrailing) {
-//
-//                                    Button {
-//                                        self.haptics.notificationOccurred(.success)
-//                                        self.observer.columns = min(self.observer.columns + 1, 4)
-//
-//                                    } label: {
-//                                        Image(systemName: "plus")
-//                                            .foregroundColor(.white)
-//                                            .background(
-//                                                ZStack{
-//                                                    APP_THEME_COLOR
-//                                                }
-//                                                    .frame(width: CGFloat(icon_size), height: CGFloat(icon_size))
-//                                                    .clipShape(Circle())
-//                                            )
-//
-//                                    }
-//
-//                                }
-//
-//                                ToolbarItem(placement: .navigationBarTrailing) {
-//
-//                                    Button {
-//                                        self.haptics.notificationOccurred(.success)
-//                                        self.observer.columns = max(self.observer.columns - 1, 1)
-//                                    } label: {
-//                                        Image(systemName: "minus")
-//                                            .foregroundColor(.white)
-//                                            .background(
-//                                                ZStack{
-//                                                    APP_THEME_COLOR
-//                                                }
-//                                                    .frame(width: CGFloat(icon_size), height: CGFloat(icon_size))
-//                                                    .clipShape(Circle())
-//                                            )
-//                                    }
-//                                }
                             }.animation(.easeInOut, value: self.observer.columns)
                             .background(
                                 Color("BG")
                                     .ignoresSafeArea()
                             )
                         
-                        
-                        
                     }
-                    else{
-                        ProgressView().frame(maxWidth:. infinity, maxHeight: .infinity)
-                        //                        LottieView(filename: "loading").frame(width: 200, height: 200).offset(y:20)
-                    }
-              
+                    
+                    
+                    
+                    
+                }
+                else{
+                    ProgressView().frame(maxWidth:. infinity, maxHeight: .infinity)
+                }
+                
                 
                 
             }
@@ -193,8 +141,31 @@ struct CardView: View {
                             //                                    .frame(maxWidth: .infinity,alignment: .leading)
                                 .matchedGeometryEffect(id: selected.id, in: animation)
                                 .ignoresSafeArea(.container)
+                            //                                                    .frame(width: getRect().width , height: getRect().height / 1.5)
                             
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity).overlay(
+                                    
+                                    VStack{
+                                        Spacer()
+                                        HStack{
+                                            Spacer()
+                                            Button {
+                                                withAnimation {
+                                                    self.showFlag.toggle()
+                                                }
+                                            } label: {
+                                                Image(systemName: "flag" )
+                                                    .resizable().foregroundColor(APP_THEME_COLOR)
+                                                    .scaledToFit()
+                                                    .frame(maxHeight: 35)
+                                                
+                                            }
+                                        }.padding(.trailing)
+                                            .padding(.bottom)
+                                     
+                                    }
+
+                                )
                             //                                .overlay(
                             //
                             //                                    HeartLike(isTapped: self.$cardViewModel.liked, taps: 3)
@@ -222,32 +193,32 @@ struct CardView: View {
                                             .clipShape(Circle())
                                     }
                                 }
-                                
-                                
-                                
                                 Spacer()
                                 
                                 Button {
                                     self.observer.liked ? self.observer.disLikePost(postId: selected.id.uuidString) :
                                     self.observer.likePost(post: selected)
                                 } label: {
-                                    Image(self.observer.liked ? "full-heart" : "empty-heart" )
-                                        .resizable()
+                                    Image(systemName: self.observer.liked ? "heart.fill" : "heart" )
+                                        .resizable().foregroundColor(Color("pink"))
                                         .scaledToFit()
                                         .frame(maxHeight: 35)
-                                        .clipShape(Circle())
                                     
                                 }
                             }
                             .padding(.top,35)
                             .padding(.horizontal)
                             
+//
+                            
                             
                         }
                         .ignoresSafeArea(.container)
                         .frame(maxHeight: .infinity,   alignment: .leading)
                         // you will get this warning becasue we didnt hide the old view so dont worry about that it will work fine...
-                        .previewLayout(.fixed(width: 375, height: 500))
+                        .previewLayout(.fixed(width: 375, height: 600))
+                        //                        .frame(width: getRect().width , height: getRect().height / 1.5)
+                        
                         // Detail View....
                         VStack{
                             
@@ -344,8 +315,10 @@ struct CardView: View {
                                         })
                                     }
                                     
+                                    Divider().padding(.horizontal, 15)
                                     
-                                    Spacer(minLength: 0)
+                                    tagview(selected: self.selected)
+                                    //                                    Spacer(minLength: 0)
                                     
                                     
                                 }
@@ -372,21 +345,9 @@ struct CardView: View {
                                     }
                                     
                                     Divider().padding(.horizontal, 15)
-                                    VStack(spacing: 5){
-                                        HStack{
-                                            Text("사진 태그들 - Long press to search (Test)")
-                                                .foregroundColor(Color.black).font(Font.custom(FONT, size: 15))
-                                                .fontWeight(.bold)
-                                                .foregroundColor(.black)
-                                            Spacer(minLength: 0)
-                                        }
-                                        TagView_Card(maxLimit: 100, tags: self.selected.tags,fontSize: 16)
-                                        // Default Height...
-                                            .frame(height: 100)
-                                        
-                                        //                                            ParallexView().padding(.leading,15).z
-                                        
-                                    }.padding(.leading,12)
+                                    
+                                    tagview(selected: self.selected)
+                                    
                                     
                                 }
                                 .offset(y : -20)
@@ -408,31 +369,6 @@ struct CardView: View {
                 )
                 .ignoresSafeArea(.container)
             }
-            
-            
-            if(showFavoriteView){
-                VStack{
-                    
-                    Spacer()
-                    
-                    FavoriteView(showFavoriteView: self.$showFavoriteView, isTap: self.$isTap).offset(y: self.showFavoriteView ? (UIApplication.shared.windows.last?.safeAreaInsets.bottom)! + 130 : UIScreen.main.bounds.height)
-                        .onTapGesture {
-                            withAnimation{
-                                self.showFavoriteView.toggle()
-                                
-                            }
-                        }
-                    //                        .animation(Animation.spring(response: 0.8, dampingFraction: 1.0, blendDuration: 1.0))
-                    
-                    //
-                    
-                }.background(Color(UIColor.label.withAlphaComponent(self.showFavoriteView ? 0.7 : 0)).edgesIgnoringSafeArea(.all))
-                //                    .animation(Animation.spring(response: 0.8, dampingFraction: 0.9, blendDuration: 1.0))
-                
-                
-            }
-            
-            
             
             if(showFlag){
                 VStack{
@@ -526,6 +462,46 @@ struct CardView: View {
         .resume()
     }
     
+    @ViewBuilder
+    func ItemTypeView(type: ItemType)->some View{
+        
+        Button {
+            // Updating Current Type...
+            withAnimation{
+                self.observer.itemType = type
+            }
+        } label: {
+            
+            Text(type.rawValue).font(Font.custom(FONT, size: 15))
+                .fontWeight(.semibold)
+            // Changing Color based on Current product Type...
+                .foregroundColor(self.observer.itemType == type ? Color("Purple") : Color.gray)
+                .padding(.bottom,10)
+            // Adding Indicator at bottom...
+                .overlay(
+                    
+                    // Adding Matched Geometry Effect...
+                    ZStack{
+                        if self.observer.itemType == type{
+                            Capsule()
+                                .fill(Color("Purple"))
+                                .matchedGeometryEffect(id: "PRODUCTTAB", in: animation)
+                                .frame(height: 2)
+                        }
+                        else{
+                            
+                            Capsule()
+                                .fill(Color.clear)
+                                .frame(height: 2)
+                        }
+                    }
+                        .padding(.horizontal,-5)
+                    
+                    ,alignment: .bottom
+                )
+        }
+    }
+    
     
     func persist() {
         
@@ -552,154 +528,33 @@ struct CardView: View {
         }
     }
     
-    
-    struct HeartLike: View{
-        
-        // Animation Properites....
-        @Binding var isTapped: Bool
-        
-        @State var startAnimation = false
-        @State var bgAniamtion = false
-        // Resetting Bg....
-        @State var resetBG = false
-        @State var fireworkAnimation = false
-        
-        @State var animationEnded = false
-        
-        // To Avoid Taps during Animation...
-        @State var tapComplete = false
-        
-        // Setting How Many taps...
-        var taps: Int = 2
-        
-        var body: some View{
+    @ViewBuilder
+    func tagview(selected : ActiveVote) -> some View {
+        VStack(spacing: 5){
             
-            // Heart Like Animation....
-            Image(systemName: resetBG ? "suit.heart.fill" : "suit.heart")
-                .font(.system(size: 45))
-                .foregroundColor(resetBG ? .red : .gray)
-            // Scaling...
-                .scaleEffect(startAnimation && !resetBG ? 0 : 1)
-                .opacity(startAnimation && !animationEnded ? 1 : 0)
-            // BG...
-                .background(
-                    
-                    ZStack{
-                        
-                        CustomShape(radius: resetBG ? 29 : 0)
-                            .fill(Color.purple)
-                            .clipShape(Circle())
-                        // Fixed Size...
-                            .frame(width: 50, height: 50)
-                            .scaleEffect(bgAniamtion ? 2.2 : 0)
-                        
-                        ZStack{
-                            
-                            // random Colors..
-                            let colors: [Color] = [.red,.purple,.green,.yellow,.pink]
-                            
-                            ForEach(1...6,id: \.self){index in
-                                
-                                Circle()
-                                    .fill(colors.randomElement()!)
-                                    .frame(width: 12, height: 12)
-                                    .offset(x: fireworkAnimation ? 80 : 40)
-                                    .rotationEffect(.init(degrees: Double(index) * 60))
-                            }
-                            
-                            ForEach(1...6,id: \.self){index in
-                                
-                                Circle()
-                                    .fill(colors.randomElement()!)
-                                    .frame(width: 8, height: 8)
-                                    .offset(x: fireworkAnimation ? 64 : 24)
-                                    .rotationEffect(.init(degrees: Double(index) * 60))
-                                    .rotationEffect(.init(degrees: -45))
-                            }
-                        }
-                        .opacity(resetBG ? 1 : 0)
-                        .opacity(animationEnded ? 0 : 1)
-                    }
-                )
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                .contentShape(Rectangle())
-                .onTapGesture(count: taps){
-                    
-                    if tapComplete{
-                        
-                        updateFields(value: false)
-                        // resettin back...
-                        return
-                    }
-                    
-                    
-                    if startAnimation{
-                        return
-                    }
-                    
-                    isTapped = true
-                    
-                    withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.6, blendDuration: 0.6)){
-                        
-                        startAnimation = true
-                    }
-                    
-                    // Sequnce Animation...
-                    // Chain Animation...
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                        
-                        withAnimation(.interactiveSpring(response: 0.4, dampingFraction: 0.5, blendDuration: 0.5)){
-                            
-                            bgAniamtion = true
-                        }
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                            
-                            withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.6, blendDuration: 0.6)){
-                                
-                                resetBG = true
-                            }
-                            
-                            // Fireworks...
-                            withAnimation(.spring()){
-                                fireworkAnimation = true
-                            }
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                                
-                                withAnimation(.easeOut(duration: 0.4)){
-                                    animationEnded = true
-                                }
-                                
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                    tapComplete = true
-                                }
-                            }
-                        }
-                    }
-                }
-                .onChange(of: isTapped) { newValue in
-                    if isTapped && !startAnimation{
-                        // setting everything to true...
-                        updateFields(value: true)
-                    }
-                    
-                    if !isTapped{
-                        updateFields(value: false)
-                    }
-                }
-        }
-        
-        func updateFields(value: Bool){
+            if(selected.tags.isEmpty){
+                Text("등록된 태그가 없습니다")
+                    .foregroundColor(Color.black).font(Font.custom(FONT, size: 15))
+                    .fontWeight(.bold)
+                    .foregroundColor(.gray)
+                Spacer(minLength: 0)
+            }else{
+//                HStack{
+//                    Text("태그")
+//                        .foregroundColor(Color.black).font(Font.custom(FONT, size: 15))
+//                        .fontWeight(.bold)
+//                        .foregroundColor(.black)
+//                    Spacer(minLength: 0)
+//                }
+                TagView_Card(maxLimit: 100, tags: selected.tags,fontSize: 14)
+                    .frame(height: selected.tags.count >= 4 ? 120 : 80)
+            }
             
-            startAnimation = value
-            bgAniamtion = value
-            resetBG = value
-            fireworkAnimation = value
-            animationEnded = value
-            tapComplete = value
-            isTapped = value
-        }
+            
+            
+        }.padding(.leading,12)
+        
+        
     }
 }
 
