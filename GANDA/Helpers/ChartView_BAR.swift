@@ -67,23 +67,18 @@ struct ChartView_BAR: UIViewRepresentable {
     
     
     func updateUIView(_ uiView: AAChartView, context:  UIViewRepresentableContext<Self>) {
-        
-        
         uiView.aa_onlyRefreshTheChartDataWithChartModelSeries([
             AASeriesElement().name(title).colorByPoint(true)
                 .dataSorting(AADataSorting()
                     .enabled(true).matchByName(true))
                 .data(randomDataArray())
-            //            AASeriesElement()
-            //            .name("받은 투표순")
-            //            .type(.line)
             ////            .yAxis(0)
             ////                .dataSorting(AADataSorting()
             ////            .enabled(true).matchByName(true))
             //            .data([numVote[0],numVote[1],numVote[2],numVote[3],numVote[4]]).color(AAGradientColor.mysticMauve)
             //            .data([numVote[0], numVote[1], numVote[2], numVote[3], numVote[4]])
         ])
-        
+
         
     }
     
@@ -145,7 +140,8 @@ struct ChartView_BAR: UIViewRepresentable {
                     ))
             ))
             .series([
-                AASeriesElement().name(title).color(APP_THEME_COLOR)
+                AASeriesElement()
+                    .name(title).color(APP_THEME_COLOR)
 //                    .colorByPoint(true)
                     .dataSorting(AADataSorting()
                         .enabled(true)

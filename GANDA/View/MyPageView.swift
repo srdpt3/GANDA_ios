@@ -67,9 +67,7 @@ struct ImageGrid : View {
     @Binding var showingModal: Bool
     @Binding var animatingModal: Bool
     
-//    @State var voteData:[Double] = []
-//
-    @State var numVoteData:[Int] = [0,0,0]
+
     @State var ymax : Int = 100
     @State var totalNumVote : Int = 0
     @State var totalNumLiked : Int = 0
@@ -107,23 +105,7 @@ struct ImageGrid : View {
                     VStack(alignment: .leading,spacing: 5){
                         HStack{
                             
-                            if self.img[0].description != ""{
-                                ChartView_BAR(data: self.$observer.mainVoteData, totalNum: self.$ymax, title: self.img[0].description, categories: self.img[0].attrNames)
-                                    .frame( height: 170)
-                            }else{
-                                HStack{
-                                    Spacer()
-                                    LottieView(filename: "no-data").frame( height: 170)
-                                    
-                                    Text("참여중인 사진이 없어요")
-                                        .font(Font.custom(FONT, size: 14))
-                                        .fontWeight(.heavy)
-                                        .foregroundColor(Color("Gray")).padding(.trailing)
-                                    Spacer()
-                                }
-                               
-                                
-                            }
+                            chart()
                             
                         }
                         
@@ -171,6 +153,7 @@ struct ImageGrid : View {
                                                         
                                                         self.showingModal.toggle()
                                                         self.haptics.notificationOccurred(.success)
+                                                        self.selected = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [],numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0, itemType: "")
                                                     }
                                                     
                                                 } label: {
@@ -269,11 +252,11 @@ struct ImageGrid : View {
                                                     .foregroundColor(Color.gray)
                                                     .layoutPriority(1)
                                                 
-                                                Button(action: {
-                                                }) {
-                                                    
-                                                    Image(systemName: "xmark.circle").resizable().frame(width: 30, height: 30).foregroundColor(Color.gray)
-                                                }
+//                                                Button(action: {
+//                                                }) {
+//
+//                                                    Image(systemName: "xmark.circle").resizable().frame(width: 30, height: 30).foregroundColor(Color.gray)
+//                                                }
                                             }
                                             
                                             
@@ -287,9 +270,9 @@ struct ImageGrid : View {
                                                         .font(Font.custom(FONT, size: 15))
                                                         .fontWeight(.semibold)
                                                         .accentColor(Color.gray)
-                                                        .padding(.horizontal, 45)
-                                                        .padding(.vertical, 15)
-                                                        .frame(minWidth: 80)
+                                                        .padding(.horizontal, 35)
+                                                        .padding(.vertical, 10)
+                                                        .frame(minWidth: 70)
                                                         .background(
                                                             Capsule()
                                                                 .strokeBorder(lineWidth: 1.75)
@@ -306,18 +289,14 @@ struct ImageGrid : View {
                                                         self.deleteVote.toggle()
                                                     }
                                                     
-                                                    
-            //                                        self.messageViewModel.leaveRoom(recipientId: self.userID)
-                                  
-                                                    
                                                 }) {
                                                     Text(CONFIRM.uppercased())
                                                         .font(Font.custom(FONT, size: 15))
                                                         .fontWeight(.semibold)
                                                         .accentColor(APP_THEME_COLOR)
-                                                        .padding(.horizontal, 45)
-                                                        .padding(.vertical, 15)
-                                                        .frame(minWidth: 80)
+                                                        .padding(.horizontal, 35)
+                                                        .padding(.vertical, 10)
+                                                        .frame(minWidth: 70)
                                                         .background(
                                                             Capsule()
                                                                 .strokeBorder(lineWidth: 1.75)
@@ -331,7 +310,7 @@ struct ImageGrid : View {
                                         Spacer()
                                         
                                     }
-                                    .frame(minWidth: 240, idealWidth: 240, maxWidth: 280, minHeight: 140, idealHeight: 160, maxHeight: 200, alignment: .center)
+                                    .frame(minWidth: 220, idealWidth: 220, maxWidth: 260, minHeight: 130, idealHeight: 140, maxHeight: 180, alignment: .center)
                                     .background(Color.white)
                                     .cornerRadius(20)
                                     .shadow(color: Color.black.opacity(0.2), radius: 5, x: 5, y: 5)
@@ -365,12 +344,42 @@ struct ImageGrid : View {
                 .ignoresSafeArea()
         )
         .onAppear {
-        
+            
+            
+//            DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
+//
+//                self.numVoteData = self.observer.mainVoteData
+//                self.voteTitle =  self.observer.desc
+//                self.attrNames = self.observer.attrNames
+//
+//            }
             
         }
         
         
         
+    }
+    
+    
+    @ViewBuilder
+    func chart()->some View{
+        if !self.observer.myActiveCards.isEmpty {
+            ChartView_BAR(data: self.$observer.mainVoteData  , totalNum: self.$ymax, title: "최근 등록된 투표", categories: self.observer.attrNames )
+                .frame( height: 170)
+        }else{
+            HStack{
+                Spacer()
+                LottieView(filename: "no-data").frame( height: 170)
+                
+                Text("참여중인 사진이 없어요")
+                    .font(Font.custom(FONT, size: 14))
+                    .fontWeight(.heavy)
+                    .foregroundColor(Color("Gray")).padding(.trailing)
+                Spacer()
+            }
+            
+            
+        }
     }
     
     

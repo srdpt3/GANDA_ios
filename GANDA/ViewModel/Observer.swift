@@ -28,14 +28,15 @@ class Observer: ObservableObject {
     @Published var mainVoteData:[Double] = [0,0,0]
     @Published var mainVoteNum : Int = 0
     @Published var mainVoteLiked : Int = 0
+    @Published var desc : String = ""
+    @Published var attrNames : [String] = []
+
+    
     @Published var columns: Int = 3
     
     
     // LIKE - DISLIKIE
     @Published var liked : Bool = false
-
-    //    @State var buttonTitle : [String] = ["나는코린이다", "빨간구두가 잘어울린다","돈잘벌꺼같다"]
-    @State var numVoteData:[Int] = [0,0,0]
     
     private var cardViewModel = CardViewModel()
     @StateObject private var chartViewModel = ChartViewModel()
@@ -97,7 +98,6 @@ class Observer: ObservableObject {
         
             votedCards.removeAll()
             getAllCard()
-    
             checkVoted()
             getMyCards()
         
@@ -129,38 +129,27 @@ class Observer: ObservableObject {
     }
     
     func getMyCards(){
-        Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.whereField("userId", isEqualTo: User.currentUser()!.id ).limit(to: MY_CARD_LIMIT_TO_QUERY).addSnapshotListener ({ [self] (snapshot, error) in
-            snapshot!.documentChanges.forEach { (documentChange) in
-                
-                switch documentChange.type {
-                case .added:
-                    print("type: added")
-                    
-                    let dict = documentChange.document.data()
-                    guard let decoderActivity = try? ActiveVote.init(fromDictionary: dict) else {return}
-                    self.myActiveCards.append(decoderActivity)
-                    print("self.activeCards.count \(self.myActiveCards.count)")
-                case .modified:
-                    print("type: modified")
 
-                case .removed:
-                    let dict = documentChange.document.data()
-                    guard let decoderActivity = try? ActiveVote.init(fromDictionary: dict) else {return}
-         
-                    if let selectionIndex = self.myActiveCards.firstIndex(of: decoderActivity){
-                        self.myActiveCards.remove(at: selectionIndex)
-                    }
-                    
-                }
-                print("self.activeCards.count \(self.myActiveCards.count)")
-                self.myActiveCards = self.myActiveCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
-//                DispatchQueue.main.async {
-//                    print("self.activeCards.count \(self.activeCards.count)")
-//                    if !self.activeCards.isEmpty{self.setCompositionalLayout()}
-//                }
+        
+        Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.whereField("userId", isEqualTo: User.currentUser()!.id ).getDocuments { [self] (snap, err) in
+            self.myActiveCards.removeAll()
 
+            if err != nil{
+                print((err?.localizedDescription)!)
+                self.error = (err! as NSError)
+                return
             }
             
+            for i in snap!.documents{
+                let dict = i.data()
+                guard let decoderPost = try? ActiveVote.init(fromDictionary: dict) else {return}
+                self.myActiveCards.append(decoderPost)
+                
+            }
+            //            self.isReloading = false
+            
+            self.myActiveCards = self.myActiveCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
+            self.desc = self.myActiveCards[0].description
 
             while (self.myActiveCards.count < MY_CARD_LIMIT_TO_QUERY){
                 
@@ -168,18 +157,20 @@ class Observer: ObservableObject {
                 self.myActiveCards.append(dummyCard)
                 
             }
-            
-            while (self.myActiveCards.count > 6){
-                self.myActiveCards.removeLast()
-            }
-            self.myActiveCards = self.myActiveCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
 
-            print("self.myActiveCards.count \(self.myActiveCards.count)")
+            
+//            while (self.myActiveCards.count > 6){
+//                self.myActiveCards.removeLast()
+//            }
             if(self.myActiveCards[0].imageLocation != ""){
+                self.desc = self.myActiveCards[0].description
                 loadMainVoteChartData(postId: self.myActiveCards[0].id.uuidString)
             }
-        })
+            
+        }
+
     }
+    
     func getAllCard(){
         
         Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.limit(to: CARD_LIMIT_TO_QUERY).order(by: "lastModifiedDate", descending: true).addSnapshotListener ({ (snapshot, error) in
@@ -202,22 +193,15 @@ class Observer: ObservableObject {
          
                     if let selectionIndex = self.activeCards.firstIndex(of: decoderActivity){
                         self.activeCards.remove(at: selectionIndex)
-
                     }
                     
 
-                    
-                }
-//                if !self.activeCards.isEmpty{self.setCompositionalLayout()}
-//                print("self.votedCards size is \(self.votedCards.count)")
-                self.activeCards = self.activeCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
-//                DispatchQueue.main.async {
-//                    print("self.activeCards.count \(self.activeCards.count)")
-//                    if !self.activeCards.isEmpty{self.setCompositionalLayout()}
-//                }
+                    self.activeCards = self.activeCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
 
+                }
             }
-            
+            self.activeCards = self.activeCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
+
             
             while (self.activeCards.count % 5 != 0){
                 
@@ -287,31 +271,68 @@ class Observer: ObservableObject {
     
     
     func deleteVote(postId : String){
+        resetVoteData()
         self.cardViewModel.deletePost(postId: postId) { result in
-            
+            self.getMyCards()
+
         }
     }
     
     
     
     func loadMainVoteChartData(postId: String){
-        self.mainVoteNum = 0
-        self.mainVoteLiked = 0
-        self.mainVoteData.removeAll()
-    
-        self.chartViewModel.loadChartData(postId: postId) {(vote) in
-            if(vote.numVote == 0){
-                self.mainVoteData = [0,0,0]
-            }else{
-                let attr1 = (Double(vote.attr1) / Double(vote.numVote) * 100).roundToDecimal(1)
-                let attr2 = (Double(vote.attr2) / Double(vote.numVote) * 100).roundToDecimal(1)
-                let attr3 = (Double(vote.attr3) / Double(vote.numVote) * 100).roundToDecimal(1)
-                
-                self.mainVoteData = [attr1, attr2, attr3]
-                self.mainVoteNum = vote.numVote
-                self.mainVoteLiked = vote.numLiked
+        
+        resetVoteData()
+        isLoading = true
+        Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE_POSTID(postId: postId).addSnapshotListener { (querySnapshot, error) in
+            guard let document = querySnapshot else {
+                print("No documents")
+                return
             }
+            
+            var vote : ActiveVote?
+            
+            if(document.documentID == postId && document.data() != nil){
+                let _dictionary = document.data()
+
+//                let dict = document.data()!
+                guard let decoderVote = try? ActiveVote.init(fromDictionary: _dictionary) else {return}
+                vote = decoderVote
+                self.desc = vote!.description
+
+                if(vote!.numVote == 0){
+                    self.mainVoteData = [0,0,0]
+                }else{
+                    let attr1 = (Double(vote!.attr1) / Double(vote!.numVote) * 100).roundToDecimal(1)
+                    let attr2 = (Double(vote!.attr2) / Double(vote!.numVote) * 100).roundToDecimal(1)
+                    let attr3 = (Double(vote!.attr3) / Double(vote!.numVote) * 100).roundToDecimal(1)
+                    
+                    
+                    self.mainVoteData = [attr1, attr2, attr3]
+                    self.mainVoteNum = vote!.numVote
+                    self.mainVoteLiked = vote!.numLiked
+                    self.attrNames = vote!.attrNames
+                    
+                }
+                
+            }
+//            else{
+//                data = Vote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], numVote: 0, createdDate: 0, lastModifiedDate: 0, imageLocation : User.currentUser()!.profileImageUrl)
+//            }
+//            self.isLoading = false
+         
+            
+            
         }
+        
+
+    }
+    
+    func resetVoteData(){
+        mainVoteData = [0, 0, 0]
+        mainVoteNum = 0
+        mainVoteLiked = 0
+        attrNames = []
     }
     
     

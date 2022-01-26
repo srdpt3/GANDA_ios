@@ -11,6 +11,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in closure #1 in UploadPhotoView.uploadPicture():UploadPhotoView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = " self.observer.mainVoteData">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #1 in closure #1 in closure #1 in CardView.body.getter:CardView.swift">
          <PersistentStrings>
             <PersistentString
@@ -19,10 +27,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "CardView.init(observer:showDetailView:selected:showDetailScreen:isTap:showUploadView:uploadComplete:activeVote:loadView:buttonPressed:buttonSelected:voteData:voteBarData:numVoteData:ymax:activeCards:animation:tags:selectedFlag:showFlag:flagMessage:showFavoriteView:):CardView.swift">
+         contextName = "closure #1 in closure #1 in Observer.getAllCard():Observer.swift">
          <PersistentStrings>
             <PersistentString
-               value = "UIScreen.main.bounds.height">
+               value = "ActiveVote.init(fromDictionary: dict)">
+            </PersistentString>
+            <PersistentString
+               value = "decoderActivity">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -65,13 +76,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in Observer.getAllCard():Observer.swift">
+         contextName = "CardView.init(observer:showDetailView:selected:showDetailScreen:isTap:showUploadView:uploadComplete:activeVote:loadView:buttonPressed:buttonSelected:voteData:voteBarData:numVoteData:ymax:activeCards:animation:tags:selectedFlag:showFlag:flagMessage:showFavoriteView:):CardView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "ActiveVote.init(fromDictionary: dict)">
+               value = "UIScreen.main.bounds.height">
             </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in ImageGrid.body.getter:MyPageView.swift">
+         <PersistentStrings>
             <PersistentString
-               value = "decoderActivity">
+               value = "self.observer.mainVoteData">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -93,10 +109,19 @@
          contextName = "closure #1 in closure #3 in closure #1 in closure #1 in closure #1 in ImageGrid.body.getter:MyPageView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "$numVoteData">
+               value = "attrNames">
+            </PersistentString>
+            <PersistentString
+               value = "self.$observer.desc">
+            </PersistentString>
+            <PersistentString
+               value = "self.observer.desc">
             </PersistentString>
             <PersistentString
                value = "self.observer.mainVoteData">
+            </PersistentString>
+            <PersistentString
+               value = "$numVoteData">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -107,9 +132,6 @@
                value = "observer.votedCards">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ChartView_BAR.randomDataArray():ChartView_BAR.swift">
       </ContextState>
       <ContextState
          contextName = "Observer.refresh():Observer.swift">

@@ -228,20 +228,14 @@ struct UploadPhotoView: View {
     }
     
     func uploadPicture(){
-    
+        self.observer.resetVoteData()
+        
         uploadViewModel.uploadVote(title: self.questionText, selectionText: self.selectionText, tags: self.tags, imageData: self.images[0]) { result in
-            
-            
-            //            self.showAlert.toggle()
-            
             withAnimation {
-                
-                
+
                 self.uploadComplete.toggle()
                 self.showLoading.toggle()
-                //                self.showUploadView.toggle()
-                
-                //                self.presentationMode.wrappedValue.dismiss()
+                self.observer.getMyCards()
                 
             }
             
