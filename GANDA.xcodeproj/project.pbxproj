@@ -85,6 +85,7 @@
 		11A9A38F279CBC5B00369C4A /* Layout1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A9A38E279CBC5B00369C4A /* Layout1.swift */; };
 		11A9A391279CBC6D00369C4A /* Layout2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A9A390279CBC6D00369C4A /* Layout2.swift */; };
 		11A9A393279CBC7700369C4A /* Layout3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A9A392279CBC7700369C4A /* Layout3.swift */; };
+		11A9A3AF27A101C700369C4A /* Flag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A9A3AE27A101C600369C4A /* Flag.swift */; };
 		543EF83213E40842EB8AB0A5 /* Pods_GANDA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B65729013E0159881A104B4D /* Pods_GANDA.framework */; };
 /* End PBXBuildFile section */
 
@@ -170,6 +171,7 @@
 		11A9A38E279CBC5B00369C4A /* Layout1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout1.swift; sourceTree = "<group>"; };
 		11A9A390279CBC6D00369C4A /* Layout2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout2.swift; sourceTree = "<group>"; };
 		11A9A392279CBC7700369C4A /* Layout3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout3.swift; sourceTree = "<group>"; };
+		11A9A3AE27A101C600369C4A /* Flag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flag.swift; sourceTree = "<group>"; };
 		44068BF4A68EA3419CF6AD64 /* Pods-GANDA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GANDA.release.xcconfig"; path = "Target Support Files/Pods-GANDA/Pods-GANDA.release.xcconfig"; sourceTree = "<group>"; };
 		9AA13FE468D64C83FBCB4CEB /* Pods-GANDA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GANDA.debug.xcconfig"; path = "Target Support Files/Pods-GANDA/Pods-GANDA.debug.xcconfig"; sourceTree = "<group>"; };
 		B65729013E0159881A104B4D /* Pods_GANDA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GANDA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -253,6 +255,7 @@
 				111F082F27922D680096BF68 /* Tag.swift */,
 				111F082B27922D550096BF68 /* User.swift */,
 				111F082A27922D510096BF68 /* Vote.swift */,
+				11A9A3AE27A101C600369C4A /* Flag.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				111F088A27922F670096BF68 /* UploadView.swift in Sources */,
 				111F088027922F670096BF68 /* TagView.swift in Sources */,
 				111F088E27922F670096BF68 /* PushTestView.swift in Sources */,
+				11A9A3AF27A101C700369C4A /* Flag.swift in Sources */,
 				111F084427922DD20096BF68 /* VoteViewModel.swift in Sources */,
 				111F085F27922E760096BF68 /* StorageService.swift in Sources */,
 				111F083B27922D770096BF68 /* SwiftUIView.swift in Sources */,

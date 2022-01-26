@@ -55,7 +55,8 @@ class Observer: ObservableObject {
     
     
     @Published var votedCards = [String]()
-    
+    @Published var flaggedards = [String]()
+
     
     //All Active CAard
     @Published var activeCards = [ActiveVote]()
@@ -97,6 +98,7 @@ class Observer: ObservableObject {
         
         
             votedCards.removeAll()
+            
             getAllCard()
             checkVoted()
             getMyCards()
@@ -173,49 +175,75 @@ class Observer: ObservableObject {
     
     func getAllCard(){
         
-        Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.limit(to: CARD_LIMIT_TO_QUERY).order(by: "lastModifiedDate", descending: true).addSnapshotListener ({ (snapshot, error) in
-
-            snapshot!.documentChanges.forEach { (documentChange) in
-                
-                switch documentChange.type {
-                case .added:
-                    print("type: added")
-                    
-                    let dict = documentChange.document.data()
-                    guard let decoderActivity = try? ActiveVote.init(fromDictionary: dict) else {return}
-                    self.activeCards.append(decoderActivity)
-                case .modified:
-                    print("type: modified")
-
-                case .removed:
-                    let dict = documentChange.document.data()
-                    guard let decoderActivity = try? ActiveVote.init(fromDictionary: dict) else {return}
-         
-                    if let selectionIndex = self.activeCards.firstIndex(of: decoderActivity){
-                        self.activeCards.remove(at: selectionIndex)
-                    }
-                    
-
-                    self.activeCards = self.activeCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
-
-                }
-            }
-            self.activeCards = self.activeCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
-
-            
-            while (self.activeCards.count % 5 != 0){
-                
-                let dummyCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [], numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0, itemType: "")
-                self.activeCards.append(dummyCard)
-                
-            }
-            print("self.activeCards size is \(self.activeCards.count)")
-        })
         
-//        DispatchQueue.main.async {
-//            print("self.activeCards.count \(self.activeCards.count)")
-//            if !self.activeCards.isEmpty{self.setCompositionalLayout()}
-//        }
+        Ref.FIRESTORE_COLLECTION_FLAG_USERID(userId: User.currentUser()!.id).collection("flagged").getDocuments { [self] (snap, err) in
+            self.flaggedards.removeAll()
+            
+            if err != nil{
+                print((err?.localizedDescription)!)
+                self.error = (err! as NSError)
+                return
+            }
+            
+            for i in snap!.documents{
+                //               let dict = i.data()
+                //                guard let decoderPost = try? ActiveVote.init(fromDictionary: dict) else {return}
+                self.flaggedards.append(i.documentID)
+            }
+            
+            Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.limit(to: CARD_LIMIT_TO_QUERY).order(by: "lastModifiedDate", descending: true).addSnapshotListener ({ (snapshot, error) in
+
+                snapshot!.documentChanges.forEach { (documentChange) in
+                    
+                    switch documentChange.type {
+                    case .added:
+                        print("type: added")
+                        
+                        let dict = documentChange.document.data()
+                        guard let decoderActivity = try? ActiveVote.init(fromDictionary: dict) else {return}
+                        
+                        if(!self.flaggedards.contains(decoderActivity.id.uuidString)){
+                            self.activeCards.append(decoderActivity)
+
+                        }
+                        
+                    case .modified:
+                        print("type: modified")
+
+                    case .removed:
+                        let dict = documentChange.document.data()
+                        guard let decoderActivity = try? ActiveVote.init(fromDictionary: dict) else {return}
+             
+                        if let selectionIndex = self.activeCards.firstIndex(of: decoderActivity){
+                            self.activeCards.remove(at: selectionIndex)
+                        }
+                        
+
+                        self.activeCards = self.activeCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
+
+                    }
+                }
+                self.activeCards = self.activeCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
+
+                
+                while (self.activeCards.count % 5 != 0){
+                    
+                    let dummyCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [], numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0, itemType: "")
+                    self.activeCards.append(dummyCard)
+                    
+                }
+                print("self.activeCards size is \(self.activeCards.count)")
+            })
+            
+    //        DispatchQueue.main.async {
+    //            print("self.activeCards.count \(self.activeCards.count)")
+    //            if !self.activeCards.isEmpty{self.setCompositionalLayout()}
+    //        }
+        }
+        
+        
+        
+    
     }
     
     
@@ -239,6 +267,8 @@ class Observer: ObservableObject {
             self.liked = result
         }
     }
+
+    
     
     func checkVoted(){
         self.votedCards.removeAll()
@@ -362,6 +392,53 @@ class Observer: ObservableObject {
             onSuccess(voteData, numVote , numLiked)
         }
     }
+    
+    func flagPicture(reason: String, vote:ActiveVote){
+        let batch = Ref.FIRESTORE_ROOT.batch()
+        let flag = Flag(vote: vote, email: User.currentUser()!.email, username: User.currentUser()!.username, reason: reason, date: Date().timeIntervalSince1970)
+
+        guard let dict = try? flag.toDictionary() else { return }
+//        let flagId = Ref.FIRESTORE_COLLECTION_FLAG_USERID(userId: User.currentUser()!.id).collection("flagged").document().documentID
+        let flaggedRef = Ref.FIRESTORE_COLLECTION_FLAG_USERID(userId: User.currentUser()!.id).collection("flagged").document(vote.id.uuidString)
+        batch.setData(dict, forDocument: flaggedRef)
+        
+        
+        batch.setData(dict, forDocument: flaggedRef)
+        
+        batch.commit() { err in
+            if let err = err {
+                print("Error writing batch \(err)")
+            } else {
+                print("Batch addToMyList write succeeded.")
+            }
+        }
+
+    }
+    
+    
+    
+    func checkFlag(){
+        
+        Ref.FIRESTORE_COLLECTION_FLAG_USERID(userId: User.currentUser()!.id).collection("flagged").getDocuments { [self] (snap, err) in
+            self.flaggedards.removeAll()
+            
+            if err != nil{
+                print((err?.localizedDescription)!)
+                self.error = (err! as NSError)
+                return
+            }
+            
+            for i in snap!.documents{
+                //               let dict = i.data()
+                //                guard let decoderPost = try? ActiveVote.init(fromDictionary: dict) else {return}
+                self.flaggedards.append(i.documentID)
+            }
+            
+            
+        }
+    }
+    
+    
     
     
     func persist(votePost:  ActiveVote, buttonPressed:[Bool]) {

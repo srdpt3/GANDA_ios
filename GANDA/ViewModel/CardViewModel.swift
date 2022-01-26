@@ -37,6 +37,7 @@ class CardViewModel: ObservableObject {
     init(){
     }
     
+
     
     
     func checkLiked(postId : String,onSuccess: @escaping(_ result: Bool) -> Void){

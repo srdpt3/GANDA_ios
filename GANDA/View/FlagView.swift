@@ -10,51 +10,12 @@ import SwiftUI
 
 
 struct FlagView : View {
-//    @EnvironmentObject  var obs : observer
+    @EnvironmentObject  var obs : Observer
     @Binding var selected : String
     @Binding var show : Bool
     @Binding var flagMessage : Bool
     
-    var updatedValueDict = ["attr1":0 , "attr2":0, "attr3":0, "attr4":0, "attr5":0]
-    var buttonTitle : [String] = ["없음", "없음","없음", "없음", "없음"]
-    
-    
-    func flagPicture(reason: String){
-        let batch = Ref.FIRESTORE_ROOT.batch()
-//
-//        let currentVote = self.obs.getCurrentCard().user
-//        let flag = Flag(id: currentVote.id, email: currentVote.email, imageLocation: currentVote.imageLocation, username: currentVote.username, reason: reason, reporter: User.currentUser()!.id,   date:  Date().timeIntervalSince1970)
-//
-//        guard let dict = try? flag.toDictionary() else { return }
-//        let flagId = Ref.FIRESTORE_COLLECTION_FLAG_USERID(userId: flag.id).collection("flagged").document().documentID
-//        let flaggedRef = Ref.FIRESTORE_COLLECTION_FLAG_USERID(userId: flag.id).collection("flagged").document(flagId)
-//        batch.setData(dict, forDocument: flaggedRef)
-//
-//
-//
-//        let myVote = MyVote(userId: currentVote.id, myVotes: updatedValueDict, attrNames: buttonTitle, voteDate: Date().timeIntervalSince1970, comment: "FLAGGED")
-//        let myVoteRef = Ref.FIRESTORE_COLLECTION_MYVOTE_USERID(userId: currentVote.id)
-//
-//        guard let dict2 = try? myVote.toDictionary() else {return}
-//        batch.setData(dict2, forDocument: myVoteRef)
-//
-//        batch.commit() { err in
-//            if let err = err {
-//                print("Error writing batch \(err)")
-//            } else {
-//                print("Batch addToMyList write succeeded.")
-//            }
-//        }
-//
-//        withAnimation{
-//            self.show.toggle()
-//            self.flagMessage.toggle()
-//            self.obs.moveCards()
-//        }
-//
-//        self.selected = ""
-    }
-    
+    var selectedVote : ActiveVote
     var body : some View{
         
         VStack(alignment: .leading, spacing: 10) {
@@ -116,7 +77,7 @@ struct FlagView : View {
                     
                     
                     
-                    self.flagPicture(reason: self.selected)
+                    self.obs.flagPicture(reason: self.selected, vote: selectedVote)
                     
                 }) {
                     

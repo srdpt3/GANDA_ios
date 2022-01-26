@@ -154,10 +154,10 @@ struct CardView: View {
                                                     self.showFlag.toggle()
                                                 }
                                             } label: {
-                                                Image(systemName: "flag" )
+                                                Image(systemName: "flag.fill" )
                                                     .resizable().foregroundColor(APP_THEME_COLOR)
                                                     .scaledToFit()
-                                                    .frame(maxHeight: 35)
+                                                    .frame(maxHeight: 25)
                                                 
                                             }
                                         }.padding(.trailing)
@@ -375,7 +375,7 @@ struct CardView: View {
                     
                     Spacer()
                     
-                    FlagView(selected: self.$selectedFlag,show: self.$showFlag, flagMessage: self.$flagMessage).offset(y: self.showFlag ? (UIApplication.shared.windows.last?.safeAreaInsets.bottom)! + 15 : UIScreen.main.bounds.height)
+                    FlagView(selected: self.$selectedFlag,show: self.$showFlag, flagMessage: self.$flagMessage, selectedVote: self.selected).offset(y: self.showFlag ? (UIApplication.shared.windows.last?.safeAreaInsets.bottom)! + 15 : UIScreen.main.bounds.height)
                         .onTapGesture {
                             withAnimation{
                                 self.showFlag.toggle()

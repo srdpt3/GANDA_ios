@@ -11,6 +11,29 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in Observer.checkFlag():Observer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "i.data()">
+            </PersistentString>
+            <PersistentString
+               value = "i">
+            </PersistentString>
+            <PersistentString
+               value = "snap">
+            </PersistentString>
+            <PersistentString
+               value = "">
+            </PersistentString>
+            <PersistentString
+               value = "i.documentID">
+            </PersistentString>
+            <PersistentString
+               value = "snap!.documents">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #1 in UploadPhotoView.uploadPicture():UploadPhotoView.swift">
          <PersistentStrings>
             <PersistentString
@@ -31,6 +54,9 @@
          <PersistentStrings>
             <PersistentString
                value = "ActiveVote.init(fromDictionary: dict)">
+            </PersistentString>
+            <PersistentString
+               value = "self.flaggedards">
             </PersistentString>
             <PersistentString
                value = "decoderActivity">
