@@ -20,9 +20,14 @@ struct ContentView: View {
             if(!SplashScreen.shouldAnimate){
                 
                 if log_Status{
-                    withAnimation(.interactiveSpring(response: 0.4, dampingFraction: 0.5, blendDuration: 0.5)){
-                        MainView()
-                    }
+                    MainView()
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                        MainView()
+//                    }
+                    
+//                    withAnimation(.interactiveSpring(response: 0.4, dampingFraction: 0.5, blendDuration: 0.5)){
+//                        MainView()
+//                    }
                     
                     
                 }

@@ -29,7 +29,7 @@ struct SplashScreen: View {
             VStack(alignment : .center){
                 Image("logo").resizable().frame(width: 128  ,height: 128, alignment: .center).scaledToFit()
     //                .scaleEffect(self.showHeart ? 1.9 : 1.2, anchor: .center)
-                    .animation(Animation.easeInOut(duration: 1.5).repeatForever(autoreverses: true))
+                    .animation(Animation.easeInOut(duration: 1.5).repeatForever(autoreverses: true)).padding(.bottom, 5)
     //                .scaleEffect(self.reloading ? 1.1 : 1, anchor: .center)
     //                .onAppear{
     //                    self.reloading.toggle()

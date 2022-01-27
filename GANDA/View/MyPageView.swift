@@ -14,13 +14,13 @@ struct MyPageView: View {
     
     
     @EnvironmentObject var observer : Observer
-
+    
     var body: some View {
         NavigationView{
             ScrollView(.vertical, showsIndicators: false) {
                 if !self.observer.myActiveCards.isEmpty {
                     VStack(spacing:10) {
-                        ImageGrid(img:self.$observer.myActiveCards, selected: self.observer.myActiveCards[0], showingModal: $showingModal, animatingModal: $animatingModal).offset(y: -25)
+                        ImageGrid(img:self.observer.myActiveCards, selected: self.observer.myActiveCards[0], showingModal: $showingModal, animatingModal: $animatingModal).offset(y: -25)
                         
                     }     .toolbar {
                         
@@ -61,21 +61,21 @@ struct MyPageView_Previews: PreviewProvider {
 struct ImageGrid : View {
     @EnvironmentObject var observer : Observer
     let haptics = UINotificationFeedbackGenerator()
-
-    @Binding var img : [ActiveVote]
+    
+    var img : [ActiveVote]
     @State var selected : ActiveVote
     @Binding var showingModal: Bool
     @Binding var animatingModal: Bool
     
-
+    
     @State var ymax : Int = 100
     @State var totalNumVote : Int = 0
     @State var totalNumLiked : Int = 0
-
+    
     @State var deleteVote : Bool = false
     
     @State var isAnimating : Bool = true
-   @State var voteDataOneCard:[Double] = []
+    @State var voteDataOneCard:[Double] = []
     
     var body: some View {
         
@@ -125,7 +125,7 @@ struct ImageGrid : View {
                         .padding(.horizontal, 1)
                     
                     
-                
+                    
                     
                 }.padding(.horizontal, 12)
                     .blur(radius: self.$showingModal.wrappedValue ? 5 : 0, opaque: false)
@@ -225,13 +225,13 @@ struct ImageGrid : View {
                             if self.deleteVote {
                                 ZStack {
                                     
-//                                    APP_THEME_COLOR.edgesIgnoringSafeArea(.all)
+                                    //                                    APP_THEME_COLOR.edgesIgnoringSafeArea(.all)
                                     
                                     // MODAL
                                     VStack(spacing: 0) {
                                         // TITLE
                                         Text("등록한 사진 삭제")
-                                            .font(Font.custom(FONT, size: 20))
+                                            .font(Font.custom(FONT, size: 18))
                                             .fontWeight(.heavy)
                                             .padding()
                                             .frame(minWidth: 0, maxWidth: .infinity)
@@ -242,21 +242,21 @@ struct ImageGrid : View {
                                         
                                         // MESSAGE
                                         
-                                        VStack(spacing: 16) {
+                                        VStack(spacing: 12) {
                                             
                                             HStack{
                                                 Text("투표를 종료하시겠습니까?")
-                                                    .font(Font.custom(FONT, size: 15))
+                                                    .font(Font.custom(FONT, size: 14))
                                                     .lineLimit(2)
                                                     .multilineTextAlignment(.center)
                                                     .foregroundColor(Color.gray)
                                                     .layoutPriority(1)
                                                 
-//                                                Button(action: {
-//                                                }) {
-//
-//                                                    Image(systemName: "xmark.circle").resizable().frame(width: 30, height: 30).foregroundColor(Color.gray)
-//                                                }
+                                                //                                                Button(action: {
+                                                //                                                }) {
+                                                //
+                                                //                                                    Image(systemName: "xmark.circle").resizable().frame(width: 30, height: 30).foregroundColor(Color.gray)
+                                                //                                                }
                                             }
                                             
                                             
@@ -277,13 +277,13 @@ struct ImageGrid : View {
                                                             Capsule()
                                                                 .strokeBorder(lineWidth: 1.75)
                                                                 .foregroundColor(Color.gray)
-                                                    )
+                                                        )
                                                 }
                                                 Button(action: {
                                                     
                                                     withAnimation(){
                                                         self.observer.deleteVote(postId: selected.id.uuidString)
-
+                                                        
                                                         self.animatingModal.toggle()
                                                         self.self.showingModal.toggle()
                                                         self.deleteVote.toggle()
@@ -301,7 +301,7 @@ struct ImageGrid : View {
                                                             Capsule()
                                                                 .strokeBorder(lineWidth: 1.75)
                                                                 .foregroundColor(APP_THEME_COLOR)
-                                                    )
+                                                        )
                                                 }
                                                 
                                             }
@@ -315,7 +315,7 @@ struct ImageGrid : View {
                                     .cornerRadius(20)
                                     .shadow(color: Color.black.opacity(0.2), radius: 5, x: 5, y: 5)
                                     .shadow(color: Color.black.opacity(0.2), radius: 5, x: -5, y: -5)
-//                                    .shadow(color: APP_THEME_COLOR, radius: 6, x: 0, y: 8)
+                                    //                                    .shadow(color: APP_THEME_COLOR, radius: 6, x: 0, y: 8)
                                     .opacity(self.$animatingModal.wrappedValue ? 1 : 0)
                                     .offset(y: self.$animatingModal.wrappedValue ? 0 : -100)
                                     .animation(Animation.spring(response: 0.6, dampingFraction: 1.0, blendDuration: 1.0))
@@ -334,7 +334,7 @@ struct ImageGrid : View {
                 }
                 
                 
-         
+                
                 
                 
             }
@@ -346,13 +346,13 @@ struct ImageGrid : View {
         .onAppear {
             
             
-//            DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
-//
-//                self.numVoteData = self.observer.mainVoteData
-//                self.voteTitle =  self.observer.desc
-//                self.attrNames = self.observer.attrNames
-//
-//            }
+            //            DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
+            //
+            //                self.numVoteData = self.observer.mainVoteData
+            //                self.voteTitle =  self.observer.desc
+            //                self.attrNames = self.observer.attrNames
+            //
+            //            }
             
         }
         
@@ -399,15 +399,15 @@ struct ImageGrid : View {
                 StatView(title: LIKENUM, count: numLiked, image: "suit.heart", color: GRADIENT_COLORS[1])
                 
                 
-//                if(User.currentUser() != nil){
-//                    StatView(title: POINTNUM, count: User.currentUser()!.point_avail, image: "bitcoinsign.circle", color: GRADIENT_COLORS[2])
-//
-//                }
-
+                //                if(User.currentUser() != nil){
+                //                    StatView(title: POINTNUM, count: User.currentUser()!.point_avail, image: "bitcoinsign.circle", color: GRADIENT_COLORS[2])
+                //
+                //                }
+                
             }
             
             Spacer(minLength: 0)
-       
+            
             //            .padding(.top)
         }
         .frame(maxWidth: .infinity)
@@ -418,7 +418,7 @@ struct ImageGrid : View {
                 .fill(Color.white)
         )
         
-//        BannerAd(unitID: BANNER_UNIT_ID).padding(.horizontal)
+        //        BannerAd(unitID: BANNER_UNIT_ID).padding(.horizontal)
     }
     
     @ViewBuilder
@@ -466,23 +466,15 @@ struct ProgressImageView: View {
     var body: some View {
         
         if pic.imageLocation == ""{
-//            if(isMainPic){
-//                Image("")
-//                    .resizable()
-//                    .background(GRADIENT_COLORS[GRADIENT_COLORS.count - 1])
-//                    .shadow(color: Color.black.opacity(0.3), radius: 1, x: 1, y: 1)
-//                    .shadow(color: Color.white.opacity(0.5), radius: 5, x: -8, y: -8)
-//                    .frame(height: 270)
-//            }else{
-                Image("")
-                    .resizable()
-                    .background(GRADIENT_COLORS[GRADIENT_COLORS.count - 1])
-
-                    .shadow(color: Color.black.opacity(0.3), radius: 1, x: 1, y: 1)
-                    .shadow(color: Color.white.opacity(0.5), radius: 5, x: -8, y: -8)
-                    .frame(height :isMainPic ? 270 : 135)
-//            }
-
+            
+            Image("")
+                .resizable()
+                .background(GRADIENT_COLORS[GRADIENT_COLORS.count - 1])
+//                .foregroundColor(GRADIENT_COLORS[GRADIENT_COLORS.count - 1])
+                .shadow(color: Color.black.opacity(0.3), radius: 1, x: 1, y: 1)
+                .shadow(color: Color.white.opacity(0.5), radius: 5, x: -8, y: -8)
+                .frame(height :isMainPic ? 270 : 130)
+            
         }else{
             
             if(isMainPic){
@@ -492,14 +484,14 @@ struct ProgressImageView: View {
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                             withAnimation {
-                              
+                                
                                 observer.loadChartData(postId: pic.id.uuidString) { voteData , numVote, numLiked in
                                     voteDataOneCard = voteData
                                     showingModal.toggle()
                                 }
                             }
                             
-                        
+                            
                         }
                     }
                     .frame(height: 270)
@@ -510,7 +502,7 @@ struct ProgressImageView: View {
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                             withAnimation {
-                              
+                                
                                 observer.loadChartData(postId: pic.id.uuidString) { voteData , numVote, numLiked in
                                     voteDataOneCard = voteData
                                     showingModal.toggle()
@@ -519,8 +511,9 @@ struct ProgressImageView: View {
                             
                         }
                         
-                      
+                        
                     }
+//                    .frame(height: 135)
             }
             
         }

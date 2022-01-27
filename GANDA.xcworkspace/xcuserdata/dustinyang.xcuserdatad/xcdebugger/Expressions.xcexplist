@@ -53,10 +53,16 @@
          contextName = "closure #1 in closure #1 in Observer.getAllCard():Observer.swift">
          <PersistentStrings>
             <PersistentString
-               value = "ActiveVote.init(fromDictionary: dict)">
+               value = "selectionIndex">
+            </PersistentString>
+            <PersistentString
+               value = "self.activeCards.firstIndex(of: decoderActivity)">
             </PersistentString>
             <PersistentString
                value = "self.flaggedards">
+            </PersistentString>
+            <PersistentString
+               value = "ActiveVote.init(fromDictionary: dict)">
             </PersistentString>
             <PersistentString
                value = "decoderActivity">

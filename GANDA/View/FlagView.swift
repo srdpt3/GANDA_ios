@@ -14,6 +14,7 @@ struct FlagView : View {
     @Binding var selected : String
     @Binding var show : Bool
     @Binding var flagMessage : Bool
+    @Binding var flagComplete : Bool
     
     var selectedVote : ActiveVote
     var body : some View{
@@ -74,11 +75,17 @@ struct FlagView : View {
                 Spacer()
                 
                 Button(action: {
-                    
-                    
-                    
-                    self.obs.flagPicture(reason: self.selected, vote: selectedVote)
-                    
+   
+                    self.obs.flagPicture(reason: self.selected, vote: selectedVote) { result in
+                        
+                        self.obs.removeVoteFromCardList(postId: selectedVote.id)
+                        self.obs.flaggeCards.append(selectedVote.id.uuidString)
+                        
+                        flagComplete.toggle()
+                      
+                        self.selected  = ""
+ 
+                    }
                 }) {
                     
                     Text(BLOCK_BUTTON).padding(.vertical).padding(.horizontal,30).foregroundColor(.white)

@@ -55,7 +55,7 @@ class Observer: ObservableObject {
     
     
     @Published var votedCards = [String]()
-    @Published var flaggedards = [String]()
+    @Published var flaggeCards = [String]()
 
     
     //All Active CAard
@@ -96,7 +96,7 @@ class Observer: ObservableObject {
     func refresh(){
       
         
-        
+//        activeCards.removeAll()
             votedCards.removeAll()
             
             getAllCard()
@@ -131,10 +131,9 @@ class Observer: ObservableObject {
     }
     
     func getMyCards(){
-
         
+        self.myActiveCards.removeAll()
         Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.whereField("userId", isEqualTo: User.currentUser()!.id ).getDocuments { [self] (snap, err) in
-            self.myActiveCards.removeAll()
 
             if err != nil{
                 print((err?.localizedDescription)!)
@@ -151,7 +150,6 @@ class Observer: ObservableObject {
             //            self.isReloading = false
             
             self.myActiveCards = self.myActiveCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
-            self.desc = self.myActiveCards[0].description
 
             while (self.myActiveCards.count < MY_CARD_LIMIT_TO_QUERY){
                 
@@ -164,7 +162,7 @@ class Observer: ObservableObject {
 //            while (self.myActiveCards.count > 6){
 //                self.myActiveCards.removeLast()
 //            }
-            if(self.myActiveCards[0].imageLocation != ""){
+            if(!self.myActiveCards.isEmpty && self.myActiveCards[0].imageLocation != ""){
                 self.desc = self.myActiveCards[0].description
                 loadMainVoteChartData(postId: self.myActiveCards[0].id.uuidString)
             }
@@ -175,24 +173,21 @@ class Observer: ObservableObject {
     
     func getAllCard(){
         
-        
+
         Ref.FIRESTORE_COLLECTION_FLAG_USERID(userId: User.currentUser()!.id).collection("flagged").getDocuments { [self] (snap, err) in
-            self.flaggedards.removeAll()
-            
+            self.flaggeCards.removeAll()
+
             if err != nil{
                 print((err?.localizedDescription)!)
                 self.error = (err! as NSError)
                 return
             }
-            
+
             for i in snap!.documents{
-                //               let dict = i.data()
-                //                guard let decoderPost = try? ActiveVote.init(fromDictionary: dict) else {return}
-                self.flaggedards.append(i.documentID)
+                self.flaggeCards.append(i.documentID)
             }
             
             Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.limit(to: CARD_LIMIT_TO_QUERY).order(by: "lastModifiedDate", descending: true).addSnapshotListener ({ (snapshot, error) in
-
                 snapshot!.documentChanges.forEach { (documentChange) in
                     
                     switch documentChange.type {
@@ -202,7 +197,7 @@ class Observer: ObservableObject {
                         let dict = documentChange.document.data()
                         guard let decoderActivity = try? ActiveVote.init(fromDictionary: dict) else {return}
                         
-                        if(!self.flaggedards.contains(decoderActivity.id.uuidString)){
+                        if(!self.flaggeCards.contains(decoderActivity.id.uuidString)){
                             self.activeCards.append(decoderActivity)
 
                         }
@@ -214,27 +209,26 @@ class Observer: ObservableObject {
                         let dict = documentChange.document.data()
                         guard let decoderActivity = try? ActiveVote.init(fromDictionary: dict) else {return}
              
-                        if let selectionIndex = self.activeCards.firstIndex(of: decoderActivity){
-                            self.activeCards.remove(at: selectionIndex)
-                        }
                         
-
-                        self.activeCards = self.activeCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
+                        removeVoteFromCardList(postId: decoderActivity.id)
 
                     }
                 }
-                self.activeCards = self.activeCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
 
                 
-                while (self.activeCards.count % 5 != 0){
+                while (self.activeCards.count % 4 != 0){
                     
                     let dummyCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [], numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0, itemType: "")
                     self.activeCards.append(dummyCard)
                     
                 }
+                
+                self.activeCards = self.activeCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
+
                 print("self.activeCards size is \(self.activeCards.count)")
             })
-            
+
+
     //        DispatchQueue.main.async {
     //            print("self.activeCards.count \(self.activeCards.count)")
     //            if !self.activeCards.isEmpty{self.setCompositionalLayout()}
@@ -246,6 +240,15 @@ class Observer: ObservableObject {
     
     }
     
+    
+    func removeVoteFromCardList(postId: UUID){
+        
+        if let idx = self.activeCards.firstIndex(where: { $0.id == postId}) {
+            self.activeCards.remove(at: idx)
+        }
+        self.activeCards = self.activeCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
+
+    }
     
     func disLikePost(postId : String){
         self.cardViewModel.disLikePost(postId: postId) { result in
@@ -303,6 +306,7 @@ class Observer: ObservableObject {
     func deleteVote(postId : String){
         resetVoteData()
         self.cardViewModel.deletePost(postId: postId) { result in
+            print("deleteVote")
             self.getMyCards()
 
         }
@@ -393,7 +397,8 @@ class Observer: ObservableObject {
         }
     }
     
-    func flagPicture(reason: String, vote:ActiveVote){
+    func flagPicture(reason: String, vote:ActiveVote , onSuccess: @escaping(_ result: Bool) -> Void){
+        var result : Bool = false
         let batch = Ref.FIRESTORE_ROOT.batch()
         let flag = Flag(vote: vote, email: User.currentUser()!.email, username: User.currentUser()!.username, reason: reason, date: Date().timeIntervalSince1970)
 
@@ -410,34 +415,12 @@ class Observer: ObservableObject {
                 print("Error writing batch \(err)")
             } else {
                 print("Batch addToMyList write succeeded.")
+                result = true
+                onSuccess(result)
             }
         }
 
     }
-    
-    
-    
-    func checkFlag(){
-        
-        Ref.FIRESTORE_COLLECTION_FLAG_USERID(userId: User.currentUser()!.id).collection("flagged").getDocuments { [self] (snap, err) in
-            self.flaggedards.removeAll()
-            
-            if err != nil{
-                print((err?.localizedDescription)!)
-                self.error = (err! as NSError)
-                return
-            }
-            
-            for i in snap!.documents{
-                //               let dict = i.data()
-                //                guard let decoderPost = try? ActiveVote.init(fromDictionary: dict) else {return}
-                self.flaggedards.append(i.documentID)
-            }
-            
-            
-        }
-    }
-    
     
     
     
@@ -447,7 +430,6 @@ class Observer: ObservableObject {
         post  = votePost
         //batch writing. vote multiple entries
         let batch = Ref.FIRESTORE_ROOT.batch()
-        let currentUser = User.currentUser()!
         
         let id = votePost.id.uuidString
         let voteRef = Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.document(id)
@@ -473,14 +455,12 @@ class Observer: ObservableObject {
         }
         batch.updateData([key : FieldValue.increment(Int64(1))], forDocument: voteRef)
         batch.updateData([VOTE_NUMBER : FieldValue.increment(Int64(1))], forDocument: voteRef)
-        //                let myVote = Vote(attr1: 0, attr2 : 0 , attr3 : 1 , attr4: 2, attr5: 0,attrNames:buttonTitle)
         guard let dict = try? post.toDictionary() else {return}
         let myVoteRef = Ref.FIRESTORE_COLLECTION_MYVOTE_USERID(postId:id)
         
         //        let myVote = MyVote(userId: id, myVotes: updatedValueDict, attrNames: buttonTitle, voteDate: Date().timeIntervalSince1970, comment: "")
         //        guard let dict = try? myVote.toDictionary() else {return}
         batch.setData(dict, forDocument: myVoteRef)
-        
         
         
         

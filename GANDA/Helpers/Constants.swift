@@ -165,7 +165,7 @@ public let BUTTONNAME_AFTER_VOTE  = "카드 다시 보기"
 //FLAG
 
 public let BLOCKUSER = "신고해주셔서 감사합니다"
-public let BLOCKMSG = "끌림팀에서 검토 후 신속히 처리하겠습니다."
+public let BLOCKMSG = "간다팀에서 검토 후 신속히 처리하겠습니다."
 
 public let BLOCK_BUTTON = " 신고하기"
 public let CACEL_BLOCK_BUTTON = "취소"

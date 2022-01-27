@@ -22,6 +22,7 @@ struct CardView: View {
     
     @State var showUploadView = false
     @State var uploadComplete = false
+    @State var flagComplete = false
     
     // To show dynamic...
     @State var activeVote : ActiveVote?
@@ -58,66 +59,81 @@ struct CardView: View {
     var body: some View {
         ZStack(alignment: .bottomTrailing){
             NavigationView{
-                if !self.observer.activeCards.isEmpty {
-                    
-                    VStack {
-                        StaggeredGrid(columns: self.observer.columns, list: self.observer.activeCards, content: { post in
+                
+                
+                ScrollRefreshable(title: "사진 새로고침", tintColor: APP_THEME_COLOR, content: {
+                    if !self.observer.activeCards.isEmpty {
+                        
+                        VStack {
                             
-                            // Post Card View...
-                            PostCardView(post: post)
-                                .matchedGeometryEffect(id: post.id, in: animation)
-                                .onTapGesture {
-                                    withAnimation(.spring()){
-                                        
-                                        if post.imageLocation != "" {
-                                            self.voteBarData.removeAll()
-                                            self.voteData.removeAll()
-                                            self.selected = post
-                                            let postID = self.selected.id.uuidString
+                            StaggeredGrid(columns: self.observer.columns, list: self.observer.activeCards, content: { post in
+                                
+                                // Post Card View...
+                                PostCardView(post: post)
+                                    .matchedGeometryEffect(id: post.id, in: animation)
+                                    .onTapGesture {
+                                        withAnimation(.spring()){
                                             
-                                            print(TOKEN)
-                                            DispatchQueue.main.asyncAfter(deadline: .now()) {
-                                                loadChartData(postId: postID)
-                                                self.observer.checkLiked(postId: postID)
+                                            if post.imageLocation != "" {
+                                                self.voteBarData.removeAll()
+                                                self.voteData.removeAll()
+                                                self.selected = post
+                                                let postID = self.selected.id.uuidString
+                                                
+                                                print(TOKEN)
+                                                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                                    loadChartData(postId: postID)
+                                                    self.observer.checkLiked(postId: postID)
+                                                }
+                                                showDetailScreen.toggle()
+                                                showDetailView.toggle()
+                                                
                                             }
-                                            showDetailScreen.toggle()
-                                            showDetailView.toggle()
                                             
                                         }
+                                    }
+                                
+                            })
+                                .padding(.horizontal)
+                                .padding(.top, -50)
+                                .toolbar {
+                                    
+                                    ToolbarItem(placement: .automatic) {
+                                        
+                                        Image(APP_LOGO)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(height: 30)
+                                            .padding(.leading, 80)
                                         
                                     }
-                                }
+                                    
+                                }.animation(.easeInOut, value: self.observer.columns)
+                                .background(
+                                    Color("BG")
+                                        .ignoresSafeArea()
+                                )
                             
-                        })
-                            .padding(.horizontal)
-                            .padding(.top, -50)
-                            .toolbar {
-                                
-                                ToolbarItem(placement: .automatic) {
-                                    
-                                    Image(APP_LOGO)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(height: 30)
-                                        .padding(.leading, 80)
-                                    
-                                }
-                                
-                            }.animation(.easeInOut, value: self.observer.columns)
-                            .background(
-                                Color("BG")
-                                    .ignoresSafeArea()
-                            )
+                        }
+                        
+                        
+                        
                         
                     }
+                    else{
+                        ProgressView().frame(maxWidth:. infinity, maxHeight: .infinity)
+                    }
+                }){
                     
-                    
-                    
-                    
+                    // Refresh COntent....
+                    // Await Task....
+                    self.observer.activeCards.removeAll()
+                    self.observer.refresh()
+                    // Since iOS 15 will show indicator until await task finishes...
+                    await Task.sleep(1_000_000_000)
                 }
-                else{
-                    ProgressView().frame(maxWidth:. infinity, maxHeight: .infinity)
-                }
+                
+                
                 
                 
                 
@@ -162,9 +178,9 @@ struct CardView: View {
                                             }
                                         }.padding(.trailing)
                                             .padding(.bottom)
-                                     
+                                        
                                     }
-
+                                    
                                 )
                             //                                .overlay(
                             //
@@ -209,7 +225,7 @@ struct CardView: View {
                             .padding(.top,35)
                             .padding(.horizontal)
                             
-//
+                            //
                             
                             
                         }
@@ -367,7 +383,7 @@ struct CardView: View {
                     Color("BG")
                         .ignoresSafeArea()
                 )
-                .ignoresSafeArea(.container)
+                //                .ignoresSafeArea(.container)
             }
             
             if(showFlag){
@@ -375,11 +391,10 @@ struct CardView: View {
                     
                     Spacer()
                     
-                    FlagView(selected: self.$selectedFlag,show: self.$showFlag, flagMessage: self.$flagMessage, selectedVote: self.selected).offset(y: self.showFlag ? (UIApplication.shared.windows.last?.safeAreaInsets.bottom)! + 15 : UIScreen.main.bounds.height)
+                    FlagView(selected: self.$selectedFlag,show: self.$showFlag, flagMessage: self.$flagMessage, flagComplete: $flagComplete, selectedVote: self.selected).offset(y: self.showFlag ? (UIApplication.shared.windows.last?.safeAreaInsets.bottom)! + 15 : UIScreen.main.bounds.height)
                         .onTapGesture {
                             withAnimation{
                                 self.showFlag.toggle()
-                                
                             }
                         }
                         .alert(isPresented: $flagMessage) {
@@ -392,6 +407,21 @@ struct CardView: View {
                 }.background(Color(UIColor.label.withAlphaComponent(self.showFlag ? 0.5 : 0)).edgesIgnoringSafeArea(.all))
                     .animation(Animation.spring(response: 0.8, dampingFraction: 0.9, blendDuration: 1.0))
             }
+            
+            
+        }
+        
+        .alert(isPresented: $flagComplete) {
+            
+            return  Alert(
+                title: Text(BLOCKUSER),
+                message: Text(BLOCKMSG),
+                dismissButton: .default(Text(CONFIRM).font(.custom(FONT, size: 17)).foregroundColor(APP_THEME_COLOR), action: {
+                    showFlag.toggle()
+                    
+                    
+                    
+                }))
             
             
         }
@@ -539,13 +569,13 @@ struct CardView: View {
                     .foregroundColor(.gray)
                 Spacer(minLength: 0)
             }else{
-//                HStack{
-//                    Text("태그")
-//                        .foregroundColor(Color.black).font(Font.custom(FONT, size: 15))
-//                        .fontWeight(.bold)
-//                        .foregroundColor(.black)
-//                    Spacer(minLength: 0)
-//                }
+                //                HStack{
+                //                    Text("태그")
+                //                        .foregroundColor(Color.black).font(Font.custom(FONT, size: 15))
+                //                        .fontWeight(.bold)
+                //                        .foregroundColor(.black)
+                //                    Spacer(minLength: 0)
+                //                }
                 TagView_Card(maxLimit: 100, tags: selected.tags,fontSize: 14)
                     .frame(height: selected.tags.count >= 4 ? 120 : 80)
             }

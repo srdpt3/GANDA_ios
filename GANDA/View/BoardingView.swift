@@ -283,9 +283,14 @@ struct BoardingView: View {
                     } else {
                         print("Batch persistMatching write succeeded.")
                         saveUserLocally(mUserDictionary: dict as NSDictionary)
+                        self.observer.activeCards.removeAll()
+
                         observer.refresh()
-                        withAnimation{
-                            log_Status = true
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            withAnimation() {
+                                log_Status = true
+                            }
                         }
                     }
                 }
