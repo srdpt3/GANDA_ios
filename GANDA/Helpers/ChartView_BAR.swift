@@ -12,6 +12,7 @@ import AAInfographics
 struct ChartView_BAR: UIViewRepresentable {
     
     @Binding var data : [Double]
+    
 //    @Binding var numVote : [Int]
     
     @Binding var totalNum : Int

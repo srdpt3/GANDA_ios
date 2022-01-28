@@ -37,3 +37,20 @@ struct NeumorphicButtonStyle: ButtonStyle {
             .font(.custom(FONT, size: 18))
     }
 }
+
+struct tagButtonStyle: ButtonStyle {
+
+  func makeBody(configuration: Self.Configuration) -> some View {
+    configuration.label
+          .font(.subheadline)
+          .foregroundColor(configuration.isPressed ? .white : .black)
+//          .background(configuration.isPressed ? APP_THEME_COLOR: .white)
+          .frame(height: 30)
+          .padding(.horizontal)
+          .overlay (
+            Capsule()
+                .stroke(Color(.systemGray5), lineWidth: 1))
+  }
+
+}
+

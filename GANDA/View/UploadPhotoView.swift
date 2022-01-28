@@ -38,6 +38,7 @@ struct UploadPhotoView: View {
     @State var password = ""
     @State var name = ""
     @State var number = ""
+    @State var category : String = ""
     
     let haptics = UINotificationFeedbackGenerator()
     @Namespace var animation
@@ -47,7 +48,7 @@ struct UploadPhotoView: View {
                 
                 VStack(alignment: .leading, spacing: 15){
                     HStack(spacing: 15){
-                        
+                        Spacer()
                         if self.images[0].count == 0{
                             
                             LottieView(filename: "upload").frame(width: 100, height: 100)
@@ -57,9 +58,7 @@ struct UploadPhotoView: View {
                                     self.imagePicker.toggle()
                                 }
                                 .opacity(self.images[0].count > 0 ? 0 : 1)
-                              
-    
-                            
+            
                         }
                         else{
                             
@@ -70,7 +69,8 @@ struct UploadPhotoView: View {
                                 .frame(width: 100, height: 100)
                                 .cornerRadius(10)
                         }
-                        
+                        DropDown(category: $category).padding(.top)
+                        Spacer()
                         
                     }
                    
@@ -158,7 +158,7 @@ struct UploadPhotoView: View {
                             .opacity(text == "" ? 0.6 : 1)
                             //                        Spacer()
                             Button {
-                                
+                                hideKeyboard()
                                 
                                 selectionText[0] = selectionText[0].trimmingCharacters(in: .whitespacesAndNewlines)
                                 selectionText[1] = selectionText[1].trimmingCharacters(in: .whitespacesAndNewlines)
@@ -170,6 +170,9 @@ struct UploadPhotoView: View {
                                 self.haptics.notificationOccurred(.success)
                                 
                             } label: {
+                                
+                                
+                                
                                 Text(UPLOAD_BUTTON)
                                     .font(Font.custom(FONT, size: 16))
                                     .foregroundColor(Color.white)
@@ -180,9 +183,9 @@ struct UploadPhotoView: View {
                             }
                             // Disabling Button...
                             .disabled((questionText == "" || self.images[0].count == 0) || showLoading ||
-                                      (selectionText[0].trimmingCharacters(in: .whitespacesAndNewlines) == "" && selectionText[1].trimmingCharacters(in: .whitespacesAndNewlines) == ""))
+                                      selectionText[0].trimmingCharacters(in: .whitespacesAndNewlines) == "" || selectionText[1].trimmingCharacters(in: .whitespacesAndNewlines) == "")
                             .opacity((questionText == "" || self.images[0].count == 0 || showLoading ||
-                                      (selectionText[0].trimmingCharacters(in: .whitespacesAndNewlines) == "" && selectionText[1].trimmingCharacters(in: .whitespacesAndNewlines) == "")) ? 0.6 : 1 )
+                                      selectionText[0].trimmingCharacters(in: .whitespacesAndNewlines) == "" ||  selectionText[1].trimmingCharacters(in: .whitespacesAndNewlines) == "") ? 0.6 : 1 )
                         }
 
                         
@@ -230,7 +233,7 @@ struct UploadPhotoView: View {
     func uploadPicture(){
         self.observer.resetVoteData()
         
-        uploadViewModel.uploadVote(title: self.questionText, selectionText: self.selectionText, tags: self.tags, imageData: self.images[0]) { result in
+        uploadViewModel.uploadVote(title: self.questionText, selectionText: self.selectionText, tags: self.tags, imageData: self.images[0] , category: self.category) { result in
             withAnimation {
 
                 self.uploadComplete.toggle()
@@ -272,3 +275,89 @@ struct UploadPhotoView: View {
 //        UploadPhotoView()
 //    }
 //}
+
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif
+
+
+struct DropDown: View {
+    @Binding var category : String
+    @State var expand = false
+    var body: some View{
+        VStack(alignment: .leading, spacing: 18, content: {
+            
+            HStack{
+                Text(category == "" ? "카테고리": category).foregroundColor(.white).font(.custom(FONT, size: 15))
+                Image(systemName: expand ?  "chevron.up" :  "chevron.down").resizable().frame(width: 10, height: 10).foregroundColor(.white)
+            }.onTapGesture {
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                self.expand.toggle()
+            }
+            if(expand){
+                
+                Button(action: {
+                    self.category = "데일리룩"
+                    self.expand.toggle()
+                }){
+                    Text("데일리룩").font(.custom(FONT, size: 16))
+                }.foregroundColor(.white)
+                
+                Button(action: {
+                    self.category = "데이팅룩"
+                    self.expand.toggle()
+                }){
+                    Text("데이팅룩").font(.custom(FONT, size: 16))
+                }.foregroundColor(.white)
+                Button(action: {
+                    self.category = "핫아이템"
+                    
+                    self.expand.toggle()
+                }){
+                    Text("핫아이템").font(.custom(FONT, size: 16))
+                }.foregroundColor(.white)
+                
+                Button(action: {
+                    self.category = "악세사리"
+                    
+                    self.expand.toggle()
+                }){
+                    Text("악세사리").font(.custom(FONT, size: 16))
+                    
+                }.foregroundColor(.white)
+                
+                Button(action: {
+                    self.category = "신발"
+                    self.expand.toggle()
+                }){
+                    Text("신발").font(.custom(FONT, size: 16))
+                }.foregroundColor(.white)
+                
+                
+                
+                Button(action: {
+                    self.category = "기타"
+                    
+                    self.expand.toggle()
+                }){
+                    Text("기타").font(.custom(FONT, size: 16))
+                }.foregroundColor(.white)
+                
+            }
+            
+            
+            
+            
+        })
+            .padding()
+            .background(GRADIENT_COLORS[4])
+        
+            //            .background(LinearGradient(gradient: .init(colors:   [Color("Color5"),Color("Color11")]), startPoint: .top, endPoint: .bottom))
+            .cornerRadius(20)
+            .animation(Animation.spring(response: 0.6, dampingFraction: 1.0, blendDuration: 1.0))    }
+    
+}

@@ -72,28 +72,43 @@ struct CardView: View {
                                 PostCardView(post: post)
                                     .matchedGeometryEffect(id: post.id, in: animation)
                                     .onTapGesture {
-                                        withAnimation(.spring()){
-                                            
-                                            if post.imageLocation != "" {
-                                                self.voteBarData.removeAll()
-                                                self.voteData.removeAll()
-                                                self.selected = post
-                                                let postID = self.selected.id.uuidString
+                                        
+                                        if post.imageLocation != "" {
+                                            self.observer.isDeleted(postId: post.id.uuidString, onSuccess: { result in
                                                 
-                                                print(TOKEN)
-                                                DispatchQueue.main.asyncAfter(deadline: .now()) {
-                                                    loadChartData(postId: postID)
-                                                    self.observer.checkLiked(postId: postID)
+                                                
+                                                if(result){
+                                                    print("deleted")
+                                                }else{
+                         
+                                                    withAnimation(.spring()){
+                  
+                                                        self.voteBarData.removeAll()
+                                                        self.voteData.removeAll()
+                                                        self.selected = post
+                                                        let postID = self.selected.id.uuidString
+                                                        
+                                                        print(TOKEN)
+                                                        DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                                            loadChartData(postId: postID)
+                                                            self.observer.checkLiked(postId: postID)
+                                                        }
+                                                        showDetailScreen.toggle()
+                                                        showDetailView.toggle()
+                                                    }
+                                                    
+                                                 
                                                 }
-                                                showDetailScreen.toggle()
-                                                showDetailView.toggle()
                                                 
-                                            }
+                                                
+                                            })
                                             
                                         }
+                                        
                                     }
                                 
                             })
+                           
                                 .padding(.horizontal)
                                 .padding(.top, -50)
                                 .toolbar {
@@ -121,7 +136,7 @@ struct CardView: View {
                         
                     }
                     else{
-                        ProgressView().frame(maxWidth:. infinity, maxHeight: .infinity)
+//                        ProgressView().frame(maxWidth:. infinity, maxHeight: .infinity)
                     }
                 }){
                     
@@ -130,7 +145,7 @@ struct CardView: View {
                     self.observer.activeCards.removeAll()
                     self.observer.refresh()
                     // Since iOS 15 will show indicator until await task finishes...
-                    await Task.sleep(1_000_000_000)
+                    await Task.sleep(500_000_000)
                 }
                 
                 

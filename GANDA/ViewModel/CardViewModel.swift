@@ -37,7 +37,21 @@ class CardViewModel: ObservableObject {
     init(){
     }
     
+    func isDeleted(postId : String,onSuccess: @escaping(_ result: Bool) -> Void){
+        var result : Bool = false
 
+        Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE_POSTID(postId: postId).getDocument { (document, error) in
+            if let doc = document, doc.exists {
+                result = false
+            } else {
+                result  = true
+            }
+            onSuccess(result)
+        }
+       
+    }
+    
+    
     
     
     func checkLiked(postId : String,onSuccess: @escaping(_ result: Bool) -> Void){

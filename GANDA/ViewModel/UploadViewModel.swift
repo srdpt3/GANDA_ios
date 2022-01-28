@@ -20,9 +20,11 @@ class UploadViewModel: ObservableObject {
     var selectedButton = [String]()
     
 
-    func uploadVote(title : String, selectionText: [String], tags : [Tag],imageData: Data , onSuccess: @escaping(_ success: Bool ) -> Void) {
+    func uploadVote(title : String, selectionText: [String], tags : [Tag],imageData: Data ,category: String , onSuccess: @escaping(_ success: Bool ) -> Void) {
         var success : Bool = false
         let date: Double = Date().timeIntervalSince1970
+        
+        
         let myVote = Vote.init(id: UUID(), attr1: 0, attr2 : 0 , attr3 : 0 , attr4: 0, attr5: 0,title: title, tags:tags, attrNames: selectionText, numVote: 0, createdDate: date, lastModifiedDate: date, imageLocation: "")
         
         let storageAvatarUserId = Ref.STORAGE_VOTE_PIC_USERID(userId: UUID().uuidString)
@@ -30,7 +32,7 @@ class UploadViewModel: ObservableObject {
         metadata.contentType = "image/jpg"
         
 //        StorageService.saveVotePicture(myVote: myVote , userId: User.currentUser()!.id, imageData: imageData, metadata: metadata, storageAvatarRef: storageAvatarUserId)
-        StorageService.saveVotePicture(myVote: myVote , userId: User.currentUser()!.id, imageData: imageData, metadata: metadata, storageAvatarRef: storageAvatarUserId) { result in
+        StorageService.saveVotePicture(myVote: myVote , userId: User.currentUser()!.id, imageData: imageData, metadata: metadata, storageAvatarRef: storageAvatarUserId, category: category) { result in
             onSuccess(success)
         }
 

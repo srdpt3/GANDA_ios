@@ -37,7 +37,8 @@ class Observer: ObservableObject {
     
     // LIKE - DISLIKIE
     @Published var liked : Bool = false
-    
+    @Published var deleted : Bool = false
+
     private var cardViewModel = CardViewModel()
     @StateObject private var chartViewModel = ChartViewModel()
     @StateObject private var voteViewModel = VoteViewModel()
@@ -187,47 +188,39 @@ class Observer: ObservableObject {
                 self.flaggeCards.append(i.documentID)
             }
             
-            Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.limit(to: CARD_LIMIT_TO_QUERY).order(by: "lastModifiedDate", descending: true).addSnapshotListener ({ (snapshot, error) in
-                snapshot!.documentChanges.forEach { (documentChange) in
+            Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.limit(to: CARD_LIMIT_TO_QUERY).order(by: "lastModifiedDate", descending: true).getDocuments { (snapshot, err) in
+                //            self.activeCards.removeAll()
+                self.activeCards.removeAll()
+                
+                if err != nil{
+                    print((err?.localizedDescription)!)
+                    self.error = (err! as NSError)
+                    return
+                }
+                
+                for i in snapshot!.documents{
                     
-                    switch documentChange.type {
-                    case .added:
-                        print("type: added")
+                    let id = i.documentID
+                    if(id != Auth.auth().currentUser?.uid){
                         
-                        let dict = documentChange.document.data()
-                        guard let decoderActivity = try? ActiveVote.init(fromDictionary: dict) else {return}
+                        let dict = i.data()
+                        guard let decoderPost = try? ActiveVote.init(fromDictionary: dict) else {return}
                         
-                        if(!self.flaggeCards.contains(decoderActivity.id.uuidString)){
-                            self.activeCards.append(decoderActivity)
-
+                        if(!self.flaggeCards.contains(decoderPost.id.uuidString)){
+                            self.activeCards.append(decoderPost)
+                            
                         }
                         
-                    case .modified:
-                        print("type: modified")
-
-                    case .removed:
-                        let dict = documentChange.document.data()
-                        guard let decoderActivity = try? ActiveVote.init(fromDictionary: dict) else {return}
-             
-                        
-                        removeVoteFromCardList(postId: decoderActivity.id)
-
                     }
-                }
-
-                
-                while (self.activeCards.count % 4 != 0){
-                    
-                    let dummyCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [], numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0, itemType: "")
-                    self.activeCards.append(dummyCard)
                     
                 }
                 
                 self.activeCards = self.activeCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
-
-                print("self.activeCards size is \(self.activeCards.count)")
-            })
-
+                print("self.activeCards.count \(self.activeCards.count)")
+                
+                
+                
+            }
 
     //        DispatchQueue.main.async {
     //            print("self.activeCards.count \(self.activeCards.count)")
@@ -272,6 +265,17 @@ class Observer: ObservableObject {
     }
 
     
+    func isDeleted(postId : String ,onSuccess: @escaping(_ result: Bool) -> Void){
+        cardViewModel.isDeleted(postId: postId) { result in
+          
+            
+            onSuccess(result)
+
+        }
+    }
+
+    
+    
     
     func checkVoted(){
         self.votedCards.removeAll()
@@ -304,7 +308,7 @@ class Observer: ObservableObject {
     
     
     func deleteVote(postId : String){
-        resetVoteData()
+//        resetVoteData()
         self.cardViewModel.deletePost(postId: postId) { result in
             print("deleteVote")
             self.getMyCards()

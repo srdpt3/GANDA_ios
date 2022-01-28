@@ -30,9 +30,12 @@ struct Home: View {
         TabView(selection: $selectedTab){
             
             // Views...
-            CardView(showDetailView : $showDetailView)
-                .tag("둘러보기")
-              
+//            CardView(showDetailView : $showDetailView)
+//                .tag("둘러보기")
+//              
+            
+            FeedView(showDetailView : $showDetailView).tag("둘러보기")
+            
             
             MyPageView().tag("마이페이지")
 //            ReelsView()

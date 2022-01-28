@@ -24,3 +24,4 @@ struct Vote: Encodable, Decodable, Identifiable,Hashable{
     
    
 }
+
