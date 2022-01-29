@@ -11,25 +11,25 @@ import SDWebImageSwiftUI
 
 
 struct categoryButtonView: View {
-  @State var selectedBtn: String
-  @Binding var searchText : String
+    @State var selectedBtn: String
+    @Binding var searchText : String
     @State private var selected = false
-  var body: some View{
-      Button(action: {
-          print(selectedBtn)
-          searchText = selectedBtn
-          selected.toggle()
-      }){
-          Text(selectedBtn)
-              .font(.subheadline).foregroundColor(searchText == selectedBtn ? APP_THEME_COLOR : .black)
-              .frame(height: 30)
-              .padding(.horizontal)
-              .overlay (
-                Capsule()
-                    .stroke(Color(.systemGray5), lineWidth: 1))
-          
-      }
-  }
+    var body: some View{
+        Button(action: {
+            print(selectedBtn)
+            searchText = selectedBtn
+            selected.toggle()
+        }){
+            Text(selectedBtn)
+                .font(.subheadline).foregroundColor(searchText == selectedBtn ? APP_THEME_COLOR : .black)
+                .frame(height: 30)
+                .padding(.horizontal)
+                .overlay (
+                    Capsule()
+                        .stroke(Color(.systemGray5), lineWidth: 1))
+            
+        }
+    }
 }
 
 
@@ -42,7 +42,8 @@ struct FeedView: View {
     @State var loadSearch = false
     
     @EnvironmentObject var observer : Observer
-    
+    @State  var activeAlert: ActiveAlert = .etc
+
     let icon_size =  UIScreen.main.bounds.height <  926.0 ? 25 : 30
     let logo_size =  UIScreen.main.bounds.height < 926.0 ? 30 : 35
     
@@ -54,8 +55,9 @@ struct FeedView: View {
     
     @State var showUploadView = false
     @State var uploadComplete = false
-    @State var flagComplete = false
-    
+//    @State var flagComplete = false
+    @State var showAlert = false
+
     // To show dynamic...
     @State var activeVote : ActiveVote?
     
@@ -78,6 +80,8 @@ struct FeedView: View {
     @Namespace var animation
     @State var tags: [Tag] = []
     
+    //DELETED VOTE
+    @State var voteDeleted : Bool = false
     
     // FLAG
     @State var selectedFlag = ""
@@ -92,10 +96,6 @@ struct FeedView: View {
     var body: some View {
         
         ZStack {
-//            NavigationView{
-//
-//
-                
             GeometryReader { bounds in
                 ScrollView {
                     //
@@ -115,61 +115,71 @@ struct FeedView: View {
                         .padding(.vertical, 4)
                     }
                     .padding(.bottom, 2)
-                    
-                    LazyVGrid (columns: [GridItem(.adaptive(minimum: bounds.size.width / 3 - 1.2), spacing: 1.2)],
-                               spacing: 1) {
-                        
-                        ForEach(self.observer.activeCards
-                                    .filter({"\($0)".contains(searchText.lowercased()) ||
-                            searchText == "전체" })
-                                
-                                
-                                , id: \.self){ post in
-                            PostCardView(post: post)
-                                .matchedGeometryEffect(id: post.id, in: animation)
-                                .onTapGesture {
-                                    if post.imageLocation != "" {
-                                        self.observer.isDeleted(postId: post.id.uuidString, onSuccess: { result in
-                                            
-                                            if(result){
-                                                print("deleted")
-                                            }else{
-                     
-                                                withAnimation(.spring()){
-              
-                                                    self.voteBarData.removeAll()
-                                                    self.voteData.removeAll()
-                                                    self.selected = post
-                                                    let postID = self.selected.id.uuidString
+                    if !self.observer.activeCards.isEmpty {
+                        LazyVGrid (columns: [GridItem(.adaptive(minimum: bounds.size.width / 3 - 1.2), spacing: 1.2)],
+                                   spacing: 1) {
+                            
+                            ForEach(self.observer.activeCards
+                                        .filter({"\($0)".contains(searchText.lowercased()) ||
+                                searchText == "전체" }), id: \.self){ post in
+                                    PostCardView(post: post)
+                                        .matchedGeometryEffect(id: post.id, in: animation)
+                                        .onTapGesture {
+                                            if post.imageLocation != "" {
+                                                self.observer.isDeleted(postId: post.id.uuidString, onSuccess: { result in
                                                     
-                                                    print(TOKEN)
-                                                    DispatchQueue.main.asyncAfter(deadline: .now()) {
-                                                        loadChartData(postId: postID)
-                                                        self.observer.checkLiked(postId: postID)
+                                                    if(result){
+                                                        print("deleted")
+                                                        voteDeleted.toggle()
+                                                        showAlert.toggle()
+                                                        activeAlert = ActiveAlert.deleted
+                                                    }else{
+                                                        
+                                                        withAnimation(.spring()){
+                                                            
+                                                            self.voteBarData.removeAll()
+                                                            self.voteData.removeAll()
+                                                            self.selected = post
+                                                            let postID = self.selected.id.uuidString
+                                                            
+                                                            print(TOKEN)
+                                                            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                                                loadChartData(postId: postID)
+                                                                self.observer.checkLiked(postId: postID)
+                                                            }
+                                                            showDetailScreen.toggle()
+                                                            showDetailView.toggle()
+                                                        }
+                                                        
+                                                        
                                                     }
-                                                    showDetailScreen.toggle()
-                                                    showDetailView.toggle()
-                                                }
+                                                    
+                                                    
+                                                })
                                                 
-                                             
                                             }
                                             
-                                            
-                                        })
-                                        
-                                    }
+                                        }
                                     
                                 }
                             
-                        }
+                        }.animation(.spring())
                         
-                    }.animation(.spring())
+                    }else{
+                        VStack{
+                            Spacer()
+                            ProgressView().frame(maxWidth:. infinity, maxHeight: .infinity)
+                            Spacer()
+                        }
+
+                    }
+           
                 } .padding(.top, 50)
                     .overlay(
                         VStack{
                             HStack{
                                 Spacer()
-                           
+                                
                                 Image(APP_LOGO)
                                     .resizable()
                                     .scaledToFit()
@@ -191,11 +201,11 @@ struct FeedView: View {
                                         .padding(.trailing, 10).padding(.top, 10)
                                 }
                             }
-                        
+                            
                             Spacer()
                         }
                     )
-
+                
             }
             .onAppear(perform: {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -450,10 +460,11 @@ struct FeedView: View {
                     
                     Spacer()
                     
-                    FlagView(selected: self.$selectedFlag,show: self.$showFlag, flagMessage: self.$flagMessage, flagComplete: $flagComplete, selectedVote: self.selected).offset(y: self.showFlag ? (UIApplication.shared.windows.last?.safeAreaInsets.bottom)! + 15 : UIScreen.main.bounds.height)
+                    FlagView(selected: self.$selectedFlag,show: self.$showFlag, flagMessage: self.$flagMessage, flagComplete: $showAlert, activeAlert: $activeAlert, selectedVote: self.selected).offset(y: self.showFlag ? (UIApplication.shared.windows.last?.safeAreaInsets.bottom)! + 15 : UIScreen.main.bounds.height)
                         .onTapGesture {
                             withAnimation{
                                 self.showFlag.toggle()
+                                
                             }
                         }
                         .alert(isPresented: $flagMessage) {
@@ -470,23 +481,45 @@ struct FeedView: View {
             
         }
         .overlay(
-            FloatingButton(isTap: $isTap, showUploadView: $showUploadView, showFavoriteView: $showFavoriteView, uploadComplete:$uploadComplete)
+   
+            FloatingButton(isTap: $isTap, showUploadView: $showUploadView, showFavoriteView: $showFavoriteView, showDetailView: $showDetailView, uploadComplete:$uploadComplete)
             
         )
-        .alert(isPresented: $flagComplete) {
-            
-            return  Alert(
-                title: Text(BLOCKUSER),
-                message: Text(BLOCKMSG),
-                dismissButton: .default(Text(CONFIRM).font(.custom(FONT, size: 17)).foregroundColor(APP_THEME_COLOR), action: {
-                    showFlag.toggle()
-                    
-                    
-                    
+        .alert(isPresented: $showAlert) {
+            switch activeAlert {
+            case .flag:
+                return  Alert(
+                    title: Text(BLOCKUSER),
+                    message: Text(BLOCKMSG),
+                    dismissButton: .default(Text(CONFIRM).font(.custom(FONT, size: 17)).foregroundColor(APP_THEME_COLOR), action: {
+                        showFlag.toggle()
+                        showAlert = false
+
+                    }))
+            case .deleted:
+                    return  Alert(
+                    title: Text("존재 하지않는 사진"),
+                    message: Text("투표가 종료되었거나, 지워진 사진입니다"),
+                    dismissButton: .default(Text(CONFIRM).font(.custom(FONT, size: 17)).foregroundColor(APP_THEME_COLOR), action: {
+                        voteDeleted = false
+                        showAlert = false
+          
+                    }))
+            case .etc:
+                
+                return  Alert(title: Text(ERROR), message: Text("").font(.custom(FONT, size: 17)), dismissButton: .default(Text(CONFIRM).font(.custom(FONT, size: 17)).foregroundColor(APP_THEME_COLOR), action: {
                 }))
+                
+            }
+            
+            
+            
+
             
             
         }
+        
+    
     }
     
     func sendMessageToDevice(title: String, body:String, token:String){
@@ -677,46 +710,7 @@ struct SearchBar: View {
         }
     }
     
-
-    
-}
-
-
-
-struct Feed: Identifiable {
-    var id = UUID()
-    var title: String
-    var image: String
     
     
 }
 
-let feedData = [
-    Feed(title: "car", image: "car"),
-    Feed(title: "city", image: "city"),
-    Feed(title: "dog", image: "dog"),
-    Feed(title: "dog2", image: "dog2"),
-    Feed(title: "fall", image: "fall"),
-    Feed(title: "fireworks", image: "fireworks"),
-    Feed(title: "forest", image: "forest"),
-    Feed(title: "office", image: "office"),
-    Feed(title: "people", image: "people"),
-    Feed(title: "river", image: "river"),
-    Feed(title: "skate", image: "skate"),
-    Feed(title: "surf", image: "surf"),
-    Feed(title: "waterfall", image: "waterfall"),
-    Feed(title: "women 2", image: "women 2"),
-    Feed(title: "women", image: "women"),
-    
-]
-
-
-struct ImagesView: View {
-    var feed: Feed = feedData[0]
-    
-    var body: some View {
-        Image(feed.image)
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-    }
-}

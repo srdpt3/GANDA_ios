@@ -78,7 +78,7 @@ public let BUTTON_TITLE_FONT_SIZE = 18
 
 public let VOTE_NUMBER = "numVote"
 public let CHART_Y_AXIS = 100
-public let CARD_LIMIT_TO_QUERY = 100
+public let CARD_LIMIT_TO_QUERY = 70
 public let MY_CARD_LIMIT_TO_QUERY = 20
 
 

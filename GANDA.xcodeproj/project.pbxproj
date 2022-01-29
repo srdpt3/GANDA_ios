@@ -86,6 +86,7 @@
 		11A9A393279CBC7700369C4A /* Layout3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A9A392279CBC7700369C4A /* Layout3.swift */; };
 		11A9A3AF27A101C700369C4A /* Flag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A9A3AE27A101C600369C4A /* Flag.swift */; };
 		11FA356B27A343AE00764DD6 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FA356A27A343AD00764DD6 /* FeedView.swift */; };
+		11FA356D27A4A72600764DD6 /* CustomPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FA356C27A4A72500764DD6 /* CustomPicker.swift */; };
 		543EF83213E40842EB8AB0A5 /* Pods_GANDA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B65729013E0159881A104B4D /* Pods_GANDA.framework */; };
 /* End PBXBuildFile section */
 
@@ -172,6 +173,7 @@
 		11A9A392279CBC7700369C4A /* Layout3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout3.swift; sourceTree = "<group>"; };
 		11A9A3AE27A101C600369C4A /* Flag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flag.swift; sourceTree = "<group>"; };
 		11FA356A27A343AD00764DD6 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		11FA356C27A4A72500764DD6 /* CustomPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPicker.swift; sourceTree = "<group>"; };
 		44068BF4A68EA3419CF6AD64 /* Pods-GANDA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GANDA.release.xcconfig"; path = "Target Support Files/Pods-GANDA/Pods-GANDA.release.xcconfig"; sourceTree = "<group>"; };
 		9AA13FE468D64C83FBCB4CEB /* Pods-GANDA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GANDA.debug.xcconfig"; path = "Target Support Files/Pods-GANDA/Pods-GANDA.debug.xcconfig"; sourceTree = "<group>"; };
 		B65729013E0159881A104B4D /* Pods_GANDA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GANDA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -288,6 +290,7 @@
 				111F087827922F430096BF68 /* StaggeredGrid.swift */,
 				111F085D27922E710096BF68 /* TabButton.swift */,
 				111F086627922E9F0096BF68 /* ViewExtension.swift */,
+				11FA356C27A4A72500764DD6 /* CustomPicker.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 				111F08A827922F7D0096BF68 /* BarGraph.swift in Sources */,
 				111F089027922F670096BF68 /* BannerAdView.swift in Sources */,
 				111F088727922F670096BF68 /* ReelsView.swift in Sources */,
+				11FA356D27A4A72600764DD6 /* CustomPicker.swift in Sources */,
 				111F08A527922F7D0096BF68 /* Constants.swift in Sources */,
 				111F088227922F670096BF68 /* HomeView.swift in Sources */,
 				111F089D27922F7D0096BF68 /* ViewExtension.swift in Sources */,

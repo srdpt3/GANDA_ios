@@ -224,10 +224,7 @@ struct ImageGrid : View {
                             
                             if self.deleteVote {
                                 ZStack {
-                                    
-                                    //                                    APP_THEME_COLOR.edgesIgnoringSafeArea(.all)
-                                    
-                                    // MODAL
+                      
                                     VStack(spacing: 0) {
                                         // TITLE
                                         Text("등록한 사진 삭제")
@@ -263,6 +260,8 @@ struct ImageGrid : View {
                                             
                                             HStack{
                                                 Button(action: {
+                                                    
+                                                    
                                                     self.deleteVote.toggle()
                                                     
                                                 }) {
@@ -282,11 +281,13 @@ struct ImageGrid : View {
                                                 Button(action: {
                                                     
                                                     withAnimation(){
-                                                        self.observer.deleteVote(postId: selected.id.uuidString)
+                                                        self.observer.deleteVote(postId: selected.id.uuidString) { result in
+                                                            self.animatingModal.toggle()
+                                                            self.self.showingModal.toggle()
+                                                            self.deleteVote.toggle()
+                                                        }
                                                         
-                                                        self.animatingModal.toggle()
-                                                        self.self.showingModal.toggle()
-                                                        self.deleteVote.toggle()
+                                                     
                                                     }
                                                     
                                                 }) {

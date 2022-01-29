@@ -295,22 +295,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A1C08BB1-78BE-4E8A-8142-0533E27B3735"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GANDA/ViewModel/Observer.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "setCompositionalLayout()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "A89D64B9-BD52-47F0-BF1D-BAAC670985A5"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -318,8 +302,8 @@
             filePath = "GANDA/View/UploadPhotoView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
             landmarkName = "uploadPicture()"
             landmarkType = "7">
          </BreakpointContent>

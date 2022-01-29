@@ -14,6 +14,7 @@ struct UploadPhotoView: View {
     @State var showLoading : Bool = false
     
     @EnvironmentObject var observer : Observer
+    var colors = ["Red", "Green", "Blue", "Tartan"]
     
     
     @ObservedObject var uploadViewModel = UploadViewModel()
@@ -32,7 +33,8 @@ struct UploadPhotoView: View {
     @State var selectionText = Array(repeating: "", count: 3)
     @State var showAlert: Bool = false
     @State var index = 0
-    
+    @State var selectedCategory : String = "전체"
+
     
     @State var email = ""
     @State var password = ""
@@ -48,17 +50,18 @@ struct UploadPhotoView: View {
                 
                 VStack(alignment: .leading, spacing: 15){
                     HStack(spacing: 15){
-                        Spacer()
+                       Spacer()
                         if self.images[0].count == 0{
                             
                             LottieView(filename: "upload").frame(width: 100, height: 100)
                                 .clipShape(Circle()).padding(.bottom, 10).padding(.top, 10).zIndex(1)
+                                .padding(.leading, 30)
                                 .onTapGesture {
                                     self.haptics.notificationOccurred(.success)
                                     self.imagePicker.toggle()
                                 }
                                 .opacity(self.images[0].count > 0 ? 0 : 1)
-            
+                            
                         }
                         else{
                             
@@ -67,14 +70,23 @@ struct UploadPhotoView: View {
                                 .renderingMode(.original)
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 100, height: 100)
-                                .cornerRadius(10)
+                                .cornerRadius(10).padding(.leading, 30)
                         }
-                        DropDown(category: $category).padding(.top)
+                        
+                        CustomPicker(selected: $category).frame(width:UIScreen.main.bounds.width / 3 + 5)
+                            .padding(.trailing, 50).clipped()
+                        
+                                               
+                        //                        DropDown(category: $category).padding(.top)
+                        
+                 
+                        
                         Spacer()
                         
                     }
-                   
-                }  .overlay(
+                    
+                }
+                .overlay(
                     VStack{
                         
                         HStack{
@@ -96,12 +108,15 @@ struct UploadPhotoView: View {
                                 
                                 
                             }
-                        }.padding(.trailing)
+                        }.padding(.horizontal)
               
                     }.frame(width: 50, height: 50).offset(x:150)
                     
                     
                 )
+                
+
+                
                 CustomTextField(image: "questionmark.circle", title: "내스타일 질문", value: $questionText, animation: animation)
                 CustomTextField(image: "filemenu.and.selection", title: "보기 1", value: $selectionText[0], animation: animation)
                 CustomTextField(image: "filemenu.and.selection", title: "보기 2", value: $selectionText[1], animation: animation)
@@ -165,8 +180,9 @@ struct UploadPhotoView: View {
                                 selectionText[2] = selectionText[2].trimmingCharacters(in: .whitespacesAndNewlines)
                                 
                                 // Use same Font size and limit here used in TagView....
-                                showLoading.toggle()
-                                self.uploadPicture()
+                               showLoading.toggle()
+                                print(category)
+                               self.uploadPicture()
                                 self.haptics.notificationOccurred(.success)
                                 
                             } label: {
@@ -182,9 +198,9 @@ struct UploadPhotoView: View {
                                     .cornerRadius(20)
                             }
                             // Disabling Button...
-                            .disabled((questionText == "" || self.images[0].count == 0) || showLoading ||
+                            .disabled((questionText == "" || self.images[0].count == 0) || showLoading || category == "카테고리" ||
                                       selectionText[0].trimmingCharacters(in: .whitespacesAndNewlines) == "" || selectionText[1].trimmingCharacters(in: .whitespacesAndNewlines) == "")
-                            .opacity((questionText == "" || self.images[0].count == 0 || showLoading ||
+                            .opacity((questionText == "" || self.images[0].count == 0 || showLoading || category == "카테고리" ||
                                       selectionText[0].trimmingCharacters(in: .whitespacesAndNewlines) == "" ||  selectionText[1].trimmingCharacters(in: .whitespacesAndNewlines) == "") ? 0.6 : 1 )
                         }
 
@@ -209,10 +225,15 @@ struct UploadPhotoView: View {
             }
             
             
-        }.background(
-            Color("BG")
-                .ignoresSafeArea()
-        ).environment(\.colorScheme, .light).navigationBarHidden(true).navigationBarBackButtonHidden(true)
+        }
+        
+//        .background(
+//            Color("BG")
+//                .ignoresSafeArea()
+            
+            
+//        )
+        .environment(\.colorScheme, .light).navigationBarHidden(true).navigationBarBackButtonHidden(true)
 
             .alert(isPresented: $uploadComplete) {
                 
@@ -238,7 +259,9 @@ struct UploadPhotoView: View {
 
                 self.uploadComplete.toggle()
                 self.showLoading.toggle()
-                self.observer.getMyCards()
+                self.observer.getMyCards { result in
+                    print("card is loaded")
+                }
                 
             }
             

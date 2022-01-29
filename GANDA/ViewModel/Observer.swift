@@ -99,40 +99,16 @@ class Observer: ObservableObject {
         
 //        activeCards.removeAll()
             votedCards.removeAll()
-            
             getAllCard()
             checkVoted()
-            getMyCards()
-        
-    }
-    func setCompositionalLayout(){
-        
-        var currentArrayCards : [ActiveVote] = []
-        
-        activeCards.forEach { (card) in
-            
-            currentArrayCards.append(card)
-            
-            if currentArrayCards.count == 3{
-                
-                // appending to Main Array...
-                compositionalArray.append(currentArrayCards)
-                currentArrayCards.removeAll()
-            }
-            
-            // if not 3 or Even No of cards...
-            
-            if currentArrayCards.count != 3 && card.id == activeCards.last!.id{
-                
-                // appending to Main Array...
-                compositionalArray.append(currentArrayCards)
-                currentArrayCards.removeAll()
-            }
+            getMyCards { result in
+  
         }
-    }
-    
-    func getMyCards(){
         
+    }
+
+    
+    func getMyCards(onSuccess: @escaping(_ result: Bool) -> Void){
         self.myActiveCards.removeAll()
         Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.whereField("userId", isEqualTo: User.currentUser()!.id ).getDocuments { [self] (snap, err) in
 
@@ -165,7 +141,14 @@ class Observer: ObservableObject {
 //            }
             if(!self.myActiveCards.isEmpty && self.myActiveCards[0].imageLocation != ""){
                 self.desc = self.myActiveCards[0].description
-                loadMainVoteChartData(postId: self.myActiveCards[0].id.uuidString)
+                loadMainVoteChartData(postId: self.myActiveCards[0].id.uuidString) { chartResult in
+                    if(chartResult){
+                        onSuccess(chartResult)
+
+                    }
+                }
+                
+                
             }
             
         }
@@ -174,6 +157,8 @@ class Observer: ObservableObject {
     
     func getAllCard(){
         
+        self.activeCards.removeAll()
+        self.flaggeCards.removeAll()
 
         Ref.FIRESTORE_COLLECTION_FLAG_USERID(userId: User.currentUser()!.id).collection("flagged").getDocuments { [self] (snap, err) in
             self.flaggeCards.removeAll()
@@ -307,19 +292,22 @@ class Observer: ObservableObject {
     }
     
     
-    func deleteVote(postId : String){
+    func deleteVote(postId : String ,onSuccess: @escaping(_ result: Bool) -> Void){
 //        resetVoteData()
         self.cardViewModel.deletePost(postId: postId) { result in
             print("deleteVote")
-            self.getMyCards()
+            self.getMyCards { cardResult in
+//                result = cardResult
+                onSuccess(cardResult)
+           }
 
         }
     }
     
     
     
-    func loadMainVoteChartData(postId: String){
-        
+    func loadMainVoteChartData(postId: String,  onSuccess: @escaping(_ result: Bool) -> Void){
+        var result : Bool = false
         resetVoteData()
         isLoading = true
         Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE_POSTID(postId: postId).addSnapshotListener { (querySnapshot, error) in
@@ -350,17 +338,13 @@ class Observer: ObservableObject {
                     self.mainVoteNum = vote!.numVote
                     self.mainVoteLiked = vote!.numLiked
                     self.attrNames = vote!.attrNames
+                    result = true
+                    onSuccess(result)
                     
                 }
                 
             }
-//            else{
-//                data = Vote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], numVote: 0, createdDate: 0, lastModifiedDate: 0, imageLocation : User.currentUser()!.profileImageUrl)
-//            }
-//            self.isLoading = false
-         
-            
-            
+
         }
         
 

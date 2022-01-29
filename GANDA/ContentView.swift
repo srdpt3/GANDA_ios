@@ -6,6 +6,11 @@
 //
 import SwiftUI
 
+
+enum ActiveAlert {
+    case flag, deleted, etc
+}
+
 struct ContentView: View {
     @AppStorage("isLogged") var log_Status = false
     @EnvironmentObject var observer: Observer

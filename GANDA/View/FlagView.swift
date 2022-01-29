@@ -15,6 +15,7 @@ struct FlagView : View {
     @Binding var show : Bool
     @Binding var flagMessage : Bool
     @Binding var flagComplete : Bool
+    @Binding var activeAlert : ActiveAlert
     
     var selectedVote : ActiveVote
     var body : some View{
@@ -83,6 +84,8 @@ struct FlagView : View {
                         
                         flagComplete.toggle()
                       
+                        self.activeAlert = ActiveAlert.flag
+
                         self.selected  = ""
  
                     }

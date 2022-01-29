@@ -154,7 +154,7 @@ struct CardView: View {
                 
             }
             .overlay(
-                FloatingButton(isTap: $isTap, showUploadView: $showUploadView, showFavoriteView: $showFavoriteView, uploadComplete:$uploadComplete)
+                FloatingButton(isTap: $isTap, showUploadView: $showUploadView, showFavoriteView: $showFavoriteView, showDetailView: $showDetailView, uploadComplete:$uploadComplete)
                 
             )
             //            .zIndex(1)
@@ -401,27 +401,27 @@ struct CardView: View {
                 //                .ignoresSafeArea(.container)
             }
             
-            if(showFlag){
-                VStack{
-                    
-                    Spacer()
-                    
-                    FlagView(selected: self.$selectedFlag,show: self.$showFlag, flagMessage: self.$flagMessage, flagComplete: $flagComplete, selectedVote: self.selected).offset(y: self.showFlag ? (UIApplication.shared.windows.last?.safeAreaInsets.bottom)! + 15 : UIScreen.main.bounds.height)
-                        .onTapGesture {
-                            withAnimation{
-                                self.showFlag.toggle()
-                            }
-                        }
-                        .alert(isPresented: $flagMessage) {
-                            Alert(
-                                title: Text(BLOCKUSER),
-                                message: Text(BLOCKMSG),
-                                dismissButton: .default(Text(CONFIRM)))
-                        }
-                    
-                }.background(Color(UIColor.label.withAlphaComponent(self.showFlag ? 0.5 : 0)).edgesIgnoringSafeArea(.all))
-                    .animation(Animation.spring(response: 0.8, dampingFraction: 0.9, blendDuration: 1.0))
-            }
+//            if(showFlag){
+//                VStack{
+//                    
+//                    Spacer()
+//                    
+//                    FlagView(selected: self.$selectedFlag,show: self.$showFlag, flagMessage: self.$flagMessage, flagComplete: $showFlag, selectedVote: self.selected).offset(y: self.showFlag ? (UIApplication.shared.windows.last?.safeAreaInsets.bottom)! + 15 : UIScreen.main.bounds.height)
+//                        .onTapGesture {
+//                            withAnimation{
+//                                self.showFlag.toggle()
+//                            }
+//                        }
+//                        .alert(isPresented: $flagMessage) {
+//                            Alert(
+//                                title: Text(BLOCKUSER),
+//                                message: Text(BLOCKMSG),
+//                                dismissButton: .default(Text(CONFIRM)))
+//                        }
+//                    
+//                }.background(Color(UIColor.label.withAlphaComponent(self.showFlag ? 0.5 : 0)).edgesIgnoringSafeArea(.all))
+//                    .animation(Animation.spring(response: 0.8, dampingFraction: 0.9, blendDuration: 1.0))
+//            }
             
             
         }
