@@ -35,9 +35,9 @@ struct SplashScreen: View {
     //                    self.reloading.toggle()
     //            }
                 Text("나의 스타일로 Ganda")
-                    .font(Font.custom(FONT_COOKIE, size: 14))
+                    .font(Font.custom(FONT_COOKIE, size: 16))
                     .foregroundColor(.white)
-            }.offset(y: -20)
+            }.offset(y: -30)
  
 //            .animation(Animation.spring(response: 0.7, dampingFraction: 1.0, blendDuration: 1.0).repeatForever(autoreverses: true))
             Spacer()

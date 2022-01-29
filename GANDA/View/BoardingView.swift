@@ -21,16 +21,16 @@ struct BoardingView: View {
     // Titles and subtitles...
     @State var titles = [
         
-        "Today’s outfit of the day",
-        "Unique experience",
-        "Explore Fashion"
+        "오늘 내 옷 스타일 어때?",
+        "자유롭게 나만의 스타일을 표현",
+        "최신 옷 트랜드를 파악해보세요"
     ]
     
     @State var subTitles = [
         
-        "Clothes mean nothing until someone lives in tem",
-        "Style is the way to say who you are",
-        "You can have anthing you want if you dress for it",
+        "패션 스타일 통해 사람들과 소통할 수 있는 공간",
+        "사람들의 스타일에 투표를 하고 나도 받고..",
+        "내 스타일 찾아서 GANDA",
     ]
     
     // Animations....

@@ -78,11 +78,10 @@ struct SettingsView: View {
             label:
             SettingsLabelView(labelText: "Application", labelImage: "apps.iphone")
           ) {
-            SettingsRowView(name: DEVELOPER , content: "더스틴양")
-            SettingsRowView(name: CEO, content: "지디 권")
+            SettingsRowView(name: DEVELOPER , content: "GANDA LAB")
             SettingsRowView(name: MIN_REQUIREMENT, content: "iOS 15")
-            SettingsRowView(name: HOMEPAGE, linkLabel: "Company Website", linkDestination: "https://www.instagram.com/gideok_kwon/")
-            SettingsRowView(name: TWITTER_PAGE, linkLabel: "@srdpt3", linkDestination: "https://www.instagram.com/srdpt3/")
+            SettingsRowView(name: HOMEPAGE, linkLabel: "Company Website", linkDestination: "")
+            SettingsRowView(name: TWITTER_PAGE, linkLabel: "@srdpt3", linkDestination: "")
             SettingsRowView(name: VERSION, content: APP_VERSION)
           }
           

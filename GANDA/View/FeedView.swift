@@ -236,10 +236,13 @@ struct FeedView: View {
                                             Spacer()
                                             Button {
                                                 withAnimation {
-                                                    self.showFlag.toggle()
+                                                    if selected.username != User.currentUser()!.username {
+                                                        self.showFlag.toggle()
+                                                    }
+                                                  
                                                 }
                                             } label: {
-                                                Image(systemName: "flag.fill" )
+                                                Image(systemName: selected.username != User.currentUser()!.username ?  "flag.fill" : "" )
                                                     .resizable().foregroundColor(APP_THEME_COLOR)
                                                     .scaledToFit()
                                                     .frame(maxHeight: 25)
@@ -355,7 +358,7 @@ struct FeedView: View {
                                         withAnimation {
                                             
                                             self.buttonPressed[1].toggle()
-                                            self.sendMessageToDevice(title: ("누군가가 투표를 했습니다"),
+                                            self.sendMessageToDevice(title: ("\(User.currentUser()!.username) 이 투표를 했습니다"),
                                                                      body: "\(self.selected.attrNames[1])", token: self.selected.token)
                                             self.persist()
                                         }
