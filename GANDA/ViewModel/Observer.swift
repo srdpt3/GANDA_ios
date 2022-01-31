@@ -13,7 +13,8 @@ class Observer: ObservableObject {
     
     @AppStorage("isLogged") var log_Status = false
     @Namespace var animation_card
-
+    @Published var isTesting: Bool = false
+    
     @Published var isSucess = false
     @Published var error: NSError?
     @Published var totalFlagged: Int = 0
@@ -30,7 +31,7 @@ class Observer: ObservableObject {
     @Published var mainVoteLiked : Int = 0
     @Published var desc : String = ""
     @Published var attrNames : [String] = []
-
+    
     
     @Published var columns: Int = 3
     
@@ -38,7 +39,7 @@ class Observer: ObservableObject {
     // LIKE - DISLIKIE
     @Published var liked : Bool = false
     @Published var deleted : Bool = false
-
+    
     private var cardViewModel = CardViewModel()
     @StateObject private var chartViewModel = ChartViewModel()
     @StateObject private var voteViewModel = VoteViewModel()
@@ -46,7 +47,7 @@ class Observer: ObservableObject {
     @Published var showProfile = false
     
     // Storing The Selected profile...
-//    @Published var selectedProfile : Profile!
+    //    @Published var selectedProfile : Profile!
     
     // To Show Big Image...
     @Published var showEnlargedImage = false
@@ -57,23 +58,25 @@ class Observer: ObservableObject {
     
     @Published var votedCards = [String]()
     @Published var flaggeCards = [String]()
-
+    
     
     //All Active CAard
     @Published var activeCards = [ActiveVote]()
     @Published var compositionalArray : [[ActiveVote]] = []
     @Published var filteredCards: [ActiveVote] = []
     @Published var itemType: ItemType = .dailyLook
-
+    
     
     @Published var myActiveCards = [ActiveVote]()
     @Published var mainVoteCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [],numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0, itemType: "")
     init(){
+        getTestingMode()
+
         if log_Status {
             refresh()
         }
-//
-    
+        //
+        
     }
     
     
@@ -94,24 +97,34 @@ class Observer: ObservableObject {
         }
     }
     
+    func getTestingMode() {
+        Ref.FIRESTORE_COLLECTION_MODE.getDocuments { snap, err in
+            for i in snap!.documents{
+                let dict = i.data()
+                self.isTesting = i.get("testing") as! Bool
+            }
+            
+            
+        }
+    }
+    
     func refresh(){
-      
         
-//        activeCards.removeAll()
-            votedCards.removeAll()
-            getAllCard()
-            checkVoted()
-            getMyCards { result in
-  
+        //        activeCards.removeAll()
+        votedCards.removeAll()
+        getAllCard()
+        checkVoted()
+        getMyCards { result in
+            
         }
         
     }
-
+    
     
     func getMyCards(onSuccess: @escaping(_ result: Bool) -> Void){
         self.myActiveCards.removeAll()
         Ref.FIRESTORE_COLLECTION_ACTIVE_VOTE.whereField("userId", isEqualTo: User.currentUser()!.id ).getDocuments { [self] (snap, err) in
-
+            
             if err != nil{
                 print((err?.localizedDescription)!)
                 self.error = (err! as NSError)
@@ -127,24 +140,24 @@ class Observer: ObservableObject {
             //            self.isReloading = false
             
             self.myActiveCards = self.myActiveCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
-
+            
             while (self.myActiveCards.count < MY_CARD_LIMIT_TO_QUERY){
                 
                 let dummyCard = ActiveVote(attr1: 0, attr2: 0, attr3: 0, attr4: 0, attr5: 0, attrNames: [], tags: [], numVote: 0, createdDate: 0.0, lastModifiedDate: 0.0, userId: "", email: "", imageLocation: "", username: "", sex: "", location: "", description: "", token: "", numLiked: 0, itemType: "")
                 self.myActiveCards.append(dummyCard)
                 
             }
-
             
-//            while (self.myActiveCards.count > 6){
-//                self.myActiveCards.removeLast()
-//            }
+            
+            //            while (self.myActiveCards.count > 6){
+            //                self.myActiveCards.removeLast()
+            //            }
             if(!self.myActiveCards.isEmpty && self.myActiveCards[0].imageLocation != ""){
                 self.desc = self.myActiveCards[0].description
                 loadMainVoteChartData(postId: self.myActiveCards[0].id.uuidString) { chartResult in
                     if(chartResult){
                         onSuccess(chartResult)
-
+                        
                     }
                 }
                 
@@ -152,23 +165,23 @@ class Observer: ObservableObject {
             }
             
         }
-
+        
     }
     
     func getAllCard(){
         
         self.activeCards.removeAll()
         self.flaggeCards.removeAll()
-
+        
         Ref.FIRESTORE_COLLECTION_FLAG_USERID(userId: User.currentUser()!.id).collection("flagged").getDocuments { [self] (snap, err) in
             self.flaggeCards.removeAll()
-
+            
             if err != nil{
                 print((err?.localizedDescription)!)
                 self.error = (err! as NSError)
                 return
             }
-
+            
             for i in snap!.documents{
                 self.flaggeCards.append(i.documentID)
             }
@@ -206,16 +219,16 @@ class Observer: ObservableObject {
                 
                 
             }
-
-    //        DispatchQueue.main.async {
-    //            print("self.activeCards.count \(self.activeCards.count)")
-    //            if !self.activeCards.isEmpty{self.setCompositionalLayout()}
-    //        }
+            
+            //        DispatchQueue.main.async {
+            //            print("self.activeCards.count \(self.activeCards.count)")
+            //            if !self.activeCards.isEmpty{self.setCompositionalLayout()}
+            //        }
         }
         
         
         
-    
+        
     }
     
     
@@ -225,7 +238,7 @@ class Observer: ObservableObject {
             self.activeCards.remove(at: idx)
         }
         self.activeCards = self.activeCards.sorted(by: { $0.lastModifiedDate > $1.lastModifiedDate })
-
+        
     }
     
     func disLikePost(postId : String){
@@ -248,17 +261,17 @@ class Observer: ObservableObject {
             self.liked = result
         }
     }
-
+    
     
     func isDeleted(postId : String ,onSuccess: @escaping(_ result: Bool) -> Void){
         cardViewModel.isDeleted(postId: postId) { result in
-          
+            
             
             onSuccess(result)
-
+            
         }
     }
-
+    
     
     
     
@@ -293,14 +306,14 @@ class Observer: ObservableObject {
     
     
     func deleteVote(postId : String ,onSuccess: @escaping(_ result: Bool) -> Void){
-//        resetVoteData()
+        //        resetVoteData()
         self.cardViewModel.deletePost(postId: postId) { result in
             print("deleteVote")
             self.getMyCards { cardResult in
-//                result = cardResult
+                //                result = cardResult
                 onSuccess(cardResult)
-           }
-
+            }
+            
         }
     }
     
@@ -320,12 +333,12 @@ class Observer: ObservableObject {
             
             if(document.documentID == postId && document.data() != nil){
                 let _dictionary = document.data()
-
-//                let dict = document.data()!
+                
+                //                let dict = document.data()!
                 guard let decoderVote = try? ActiveVote.init(fromDictionary: _dictionary) else {return}
                 vote = decoderVote
                 self.desc = vote!.description
-
+                
                 if(vote!.numVote == 0){
                     self.mainVoteData = [0,0,0]
                 }else{
@@ -344,10 +357,10 @@ class Observer: ObservableObject {
                 }
                 
             }
-
+            
         }
         
-
+        
     }
     
     func resetVoteData(){
@@ -389,9 +402,9 @@ class Observer: ObservableObject {
         var result : Bool = false
         let batch = Ref.FIRESTORE_ROOT.batch()
         let flag = Flag(vote: vote, email: User.currentUser()!.email, username: User.currentUser()!.username, reason: reason, date: Date().timeIntervalSince1970)
-
+        
         guard let dict = try? flag.toDictionary() else { return }
-//        let flagId = Ref.FIRESTORE_COLLECTION_FLAG_USERID(userId: User.currentUser()!.id).collection("flagged").document().documentID
+        //        let flagId = Ref.FIRESTORE_COLLECTION_FLAG_USERID(userId: User.currentUser()!.id).collection("flagged").document().documentID
         let flaggedRef = Ref.FIRESTORE_COLLECTION_FLAG_USERID(userId: User.currentUser()!.id).collection("flagged").document(vote.id.uuidString)
         batch.setData(dict, forDocument: flaggedRef)
         
@@ -407,7 +420,7 @@ class Observer: ObservableObject {
                 onSuccess(result)
             }
         }
-
+        
     }
     
     
@@ -454,11 +467,11 @@ class Observer: ObservableObject {
         
         //
         //                let someoneVoteObject = Activity(activityId: User.currentUser()!.id, type: "voted", username: User.currentUser()!.username, userId: User.currentUser()!.id, userAvatar: User.currentUser()!.profileImageUrl, message: "", date: Date().timeIntervalSince1970, read: false, age: User.currentUserProfile()!.age, location: User.currentUserProfile()!.location,occupation: User.currentUserProfile()!.occupation, description: User.currentUserProfile()!.description)
-//
-//
-//        guard let someOneVotedDict = try? currentUser.toDictionary() else { return }
-//        let someOneVoteRef  = Ref.FIRESTORE_COLLECTION_WHO_VOTED_USERID(postId: id)
-//        batch.setData(someOneVotedDict, forDocument: someOneVoteRef)
+        //
+        //
+        //        guard let someOneVotedDict = try? currentUser.toDictionary() else { return }
+        //        let someOneVoteRef  = Ref.FIRESTORE_COLLECTION_WHO_VOTED_USERID(postId: id)
+        //        batch.setData(someOneVotedDict, forDocument: someOneVoteRef)
         
         
         batch.commit() { err in

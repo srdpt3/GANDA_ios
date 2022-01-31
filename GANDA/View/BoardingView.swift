@@ -16,7 +16,7 @@ struct BoardingView: View {
 
     // Loading Indicator...
     @State var isLoading: Bool = false
-    
+
     @AppStorage("isLogged") var log_Status = false
     // Titles and subtitles...
     @State var titles = [
@@ -82,19 +82,19 @@ struct BoardingView: View {
                     
                     ForEach(titleText){text in
                         
-                        Text(text.text)
+                        Text(text.text) .font(Font.custom(FONT, size: 20))
                             .offset(y: text.offset)
                     }
                     .font(.largeTitle.bold())
                 }
                 .offset(y: endAnimation ? -80 : 0)
-                .opacity(endAnimation ? 0 : 1)
+                .opacity(endAnimation ? 0 : 1).padding(.horizontal)
                 
-                Text(subTitles[currentIndex])
+                Text(subTitles[currentIndex]) .font(Font.custom(FONT, size: 20))
                     .opacity(0.7)
                     .offset(y: !subTitleAnimation ? 60 : 0)
                     .offset(y: endAnimation ? -80 : 0)
-                    .opacity(endAnimation ? 0 : 1)
+                    .opacity(endAnimation ? 0 : 1).padding(.horizontal)
                 
                 // Sign In Buttons...
                 
@@ -103,40 +103,63 @@ struct BoardingView: View {
 //
 //                }
                 Text("").padding()
-//                .padding(.top)
-                //                SignInWithAppleButton { (request) in
-                //
-                //                    //                    // requesting paramertes from apple login...
-                //                    loginData.nonce = randomNonceString()
-                //                    request.requestedScopes = [.email]
-                //                    request.nonce = sha256(loginData.nonce)
-                //
-                //                } onCompletion: { (result) in
-                //
-                //
-                //                    switch result{
-                //                    case .success(let user):
-                //                        print("success")
-                //                        // do Login With Firebase...
-                //                        guard let credential = user.credential as? ASAuthorizationAppleIDCredential else{
-                //                            print("error with firebase")
-                //                            return
-                //                        }
-                //                        loginData.authenticate(credential: credential)
-                //                    case.failure(let error):
-                //                        print(error.localizedDescription)
-                //                    }
-                //                }
-                //                .signInWithAppleButtonStyle(.white)
-                //                .frame(height: 55)
-                //                .clipShape(Capsule())
-                //                .padding(.horizontal,40)
-                //                .offset(y: -10)
                 //                .padding(.top)
-                SignInButton(image: "google", text: "Continue with Google", isSystem: false){
+                
+                
+                if(self.observer.isTesting){
+                    VStack {
+                        SignInWithAppleButton(.signIn,              //1
+                              onRequest: { (request) in             //2
+                            request.requestedScopes = [.fullName, .email]
+    //                          request.nonce = myNonceString()
+    //                          request.state = myStateString()
+                              },
+                              onCompletion: { (result) in           //3
+                                switch result {
+                                case .success(let authorization):
+                                    if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+//                                        let userId = appleIDCredential.user
+//                                        let identityToken = appleIDCredential.identityToken
+//                                        let authCode = appleIDCredential.authorizationCode
+//                                        let email = (appleIDCredential.email ?? "")! as String
+//                                        let givenName = (appleIDCredential.fullName?.givenName ?? "") as String
+//                                        let familyName = appleIDCredential.fullName?.familyName
+//                                        let state = appleIDCredential.state
+//
+//
+//                                        let userData = AppleUser.init(id: userId, email: email, username: givenName)
+//
+//                                        guard let dict = try? userData.toDictionary() else {return}
+//
+//                                        UserDefaults.standard.set(dict, forKey: "apple_user_test")
+//                                        UserDefaults.standard.synchronize()
+//
+                                        
+                                        authenticate(credential: appleIDCredential)
+                                        
+                                        // Here you have to send the data to the backend and according to the response let the user get into the app.
+                                    }
+                                    break
+                                case .failure(let error):
+                                    //Handle error
+                                    break
+                                }
+                              })
+                    }.signInWithAppleButtonStyle(.white)            //4
+                        .frame(width: UIScreen.main.bounds.width - 50  ,height: 50)
+                    .frame(height: 45)
+                    .clipShape(Capsule())
+                    .padding(.horizontal,40)
+                    .offset(y: -10)
+                    .padding(.top)
+                }
+  
+                
+                
+                SignInButton(image: "google", text: "SignIn with Google", isSystem: false){
                     print("asdfsadfsadf")
                     handleLogin()
-                }
+                }.frame(width: UIScreen.main.bounds.width - 50  ,height: 35)
                 //
                 //                SignInButton(image: "facebook", text: "Continue with Facebook", isSystem: false) {
                 //
@@ -182,6 +205,8 @@ struct BoardingView: View {
                     }
                 }
             }
+        }.onAppear {
+  
         }
     }
     
@@ -300,9 +325,84 @@ struct BoardingView: View {
             }
         }
     }
-    
-}
+    func authenticate(credential: ASAuthorizationAppleIDCredential){
+        
+        // getting Token....
+        guard let token = credential.identityToken else{
+            print("error with firebase")
+            
+            return
+        }
+        
+        // Token String...
+        guard let tokenString = String(data: token, encoding: .utf8) else{
+            print("error with Token")
+            return
+        }
+        
+        let firebaseCredential = OAuthProvider.credential(withProviderID: "apple.com", idToken: tokenString,rawNonce: "")
+    //        self.log_Status = true
+        Auth.auth().signIn(with: firebaseCredential) { (result, err) in
 
+            if let error = err{
+                print(error.localizedDescription)
+                return
+            }
+            AuthService.resetDefaults()
+            URLCache.shared.removeAllCachedResponses()
+            if let error = err {
+                print(error.localizedDescription)
+                return
+            }
+            
+            // Displaying User Name...
+            guard let user = result?.user else{
+                return
+            }
+            
+    //                let photoURL = user.photoURL?.absoluteURL?.absoluteString
+            
+    //            print(user.displayName ?? "Success!")
+            print(user)
+    //                let profileImageULR = user.photoURL?.absoluteString  as String ?? ""
+                
+    //            let profileImageULR = (user.photoURL)! as URL
+            
+            print(AppleUser.appleUser()?.email)
+            let userData = User.init(id: user.uid, email: user.email! , profileImageUrl: "", username: "Tester" , sex: "", createdDate:  Date().timeIntervalSince1970, point_avail: 3000, token: TOKEN)
+            
+            guard let dict = try? userData.toDictionary() else {return}
+            
+            let batch = Ref.FIRESTORE_ROOT.batch()
+            let firestoreUserId = Ref.FIRESTORE_DOCUMENT_USERID(userId: user.uid)
+            batch.setData(dict, forDocument: firestoreUserId)
+            
+            batch.commit() { err in
+                if let err = err {
+                    print("Error writing batch \(err)")
+                } else {
+                    print("Batch persistMatching write succeeded.")
+                    saveUserLocally(mUserDictionary: dict as NSDictionary)
+                    observer.activeCards.removeAll()
+
+                    observer.refresh()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        withAnimation() {
+                            log_Status = true
+                        }
+                    }
+                }
+            }
+
+            
+            
+            
+            
+        }
+    }
+
+}
 
 
 
@@ -334,14 +434,14 @@ struct SignInButton: View{
                 .fontWeight(.semibold)
                 .frame(maxWidth: .infinity, alignment: .center)
         }
-        .foregroundColor(!isSystem ? .white : .black)
-        .padding(.vertical,15)
-        .padding(.horizontal,40)
-//        .background(
-//            
-////            .white.opacity(isSystem ? 1 : 0.1)
-////            ,in: Capsule()
-//        )
+        .foregroundColor(.black)
+        .padding(.vertical,10)
+        .padding(.horizontal,30)
+        .background(
+            .white
+//            .white.opacity(isSystem ? 1 : 0.1)
+            ,in: Capsule()
+        )
         .onTapGesture {
             onClick()
         }

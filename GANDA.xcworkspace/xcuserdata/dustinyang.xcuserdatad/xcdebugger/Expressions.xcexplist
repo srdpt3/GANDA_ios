@@ -3,123 +3,13 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "closure #1 in closure #1 in closure #2 in closure #1 in closure #1 in ImageGrid.body.getter:MyPageView.swift">
+         contextName = "closure #3 in closure #2 in closure #1 in BoardingView.body.getter:BoardingView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "selected">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in Observer.checkFlag():Observer.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "i.data()">
+               value = "credential.email">
             </PersistentString>
             <PersistentString
-               value = "i">
-            </PersistentString>
-            <PersistentString
-               value = "snap">
-            </PersistentString>
-            <PersistentString
-               value = "">
-            </PersistentString>
-            <PersistentString
-               value = "i.documentID">
-            </PersistentString>
-            <PersistentString
-               value = "snap!.documents">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #1 in UploadPhotoView.uploadPicture():UploadPhotoView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = " self.observer.mainVoteData">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in CardView.body.getter:CardView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.observer.compositionalArray">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #1 in Observer.getAllCard():Observer.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "selectionIndex">
-            </PersistentString>
-            <PersistentString
-               value = "self.activeCards.firstIndex(of: decoderActivity)">
-            </PersistentString>
-            <PersistentString
-               value = "self.flaggedards">
-            </PersistentString>
-            <PersistentString
-               value = "ActiveVote.init(fromDictionary: dict)">
-            </PersistentString>
-            <PersistentString
-               value = "decoderActivity">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #1 in CardView.body.getter:CardView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.observer">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #2 in ProgressImageView.body.getter:MyPageView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "seclectedPic">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #1 in closure #1 in CardView.body.getter:CardView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "">
-            </PersistentString>
-            <PersistentString
-               value = "self.observer.compositionalArray">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in Observer.getMyCards():Observer.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.myActiveCards">
-            </PersistentString>
-            <PersistentString
-               value = "User.currentUser()!.id">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "CardView.init(observer:showDetailView:selected:showDetailScreen:isTap:showUploadView:uploadComplete:activeVote:loadView:buttonPressed:buttonSelected:voteData:voteBarData:numVoteData:ymax:activeCards:animation:tags:selectedFlag:showFlag:flagMessage:showFavoriteView:):CardView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "UIScreen.main.bounds.height">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #2 in ImageGrid.body.getter:MyPageView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.observer.mainVoteData">
+               value = "credential">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -135,25 +25,104 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ContentView.body.getter:ContentView.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #3 in closure #1 in closure #1 in closure #1 in ImageGrid.body.getter:MyPageView.swift">
+         contextName = "closure #1 in closure #1 in closure #1 in CardView.body.getter:CardView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "attrNames">
+               value = "">
             </PersistentString>
             <PersistentString
-               value = "self.$observer.desc">
+               value = "self.observer.compositionalArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in Observer.getAllCard():Observer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.activeCards">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in Observer.checkFlag():Observer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "i.data()">
             </PersistentString>
             <PersistentString
-               value = "self.observer.desc">
+               value = "i">
             </PersistentString>
             <PersistentString
-               value = "self.observer.mainVoteData">
+               value = "">
             </PersistentString>
             <PersistentString
-               value = "$numVoteData">
+               value = "snap!.documents">
+            </PersistentString>
+            <PersistentString
+               value = "snap">
+            </PersistentString>
+            <PersistentString
+               value = "i.documentID">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CardView.init(observer:showDetailView:selected:showDetailScreen:isTap:showUploadView:uploadComplete:activeVote:loadView:buttonPressed:buttonSelected:voteData:voteBarData:numVoteData:ymax:activeCards:animation:tags:selectedFlag:showFlag:flagMessage:showFavoriteView:):CardView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "UIScreen.main.bounds.height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in LoginViewModel.authenticate(credential:):LoginViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "result">
+            </PersistentString>
+            <PersistentString
+               value = "credential">
+            </PersistentString>
+            <PersistentString
+               value = "result?.user">
+            </PersistentString>
+            <PersistentString
+               value = "user.userId">
+            </PersistentString>
+            <PersistentString
+               value = "user.userID">
+            </PersistentString>
+            <PersistentString
+               value = "user.email">
+            </PersistentString>
+            <PersistentString
+               value = "user.uid">
+            </PersistentString>
+            <PersistentString
+               value = "user.displayName">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #4 in BoardingView.body.getter:BoardingView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Boolean.init(fromDictionary: dict)">
+            </PersistentString>
+            <PersistentString
+               value = "i.data()">
+            </PersistentString>
+            <PersistentString
+               value = "i.get(&quot;testing&quot;) as! DarwinBoolean">
+            </PersistentString>
+            <PersistentString
+               value = "i.data()[0].value">
+            </PersistentString>
+            <PersistentString
+               value = "i.get(&quot;testing&quot;)">
+            </PersistentString>
+            <PersistentString
+               value = "i.data().map(Boolean.init(testing:)) ?? &quot;nil&quot;">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -166,6 +135,48 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #2 in closure #2 in closure #2 in closure #1 in BoardingView.body.getter:BoardingView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in ImageGrid.body.getter:MyPageView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.observer.mainVoteData">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ContentView.body.getter:ContentView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in ProgressImageView.body.getter:MyPageView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "seclectedPic">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in Observer.getAllCard():Observer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selectionIndex">
+            </PersistentString>
+            <PersistentString
+               value = "decoderActivity">
+            </PersistentString>
+            <PersistentString
+               value = "self.flaggedards">
+            </PersistentString>
+            <PersistentString
+               value = "ActiveVote.init(fromDictionary: dict)">
+            </PersistentString>
+            <PersistentString
+               value = "self.activeCards.firstIndex(of: decoderActivity)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "Observer.refresh():Observer.swift">
          <PersistentStrings>
             <PersistentString
@@ -174,10 +185,84 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #2 in closure #1 in Observer.getAllCard():Observer.swift">
+         contextName = "closure #1 in closure #1 in UploadPhotoView.uploadPicture():UploadPhotoView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.activeCards">
+               value = " self.observer.mainVoteData">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in Observer.getMyCards():Observer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.myActiveCards">
+            </PersistentString>
+            <PersistentString
+               value = "User.currentUser()!.id">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in CardView.body.getter:CardView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.observer.compositionalArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #3 in closure #1 in closure #1 in closure #1 in ImageGrid.body.getter:MyPageView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.$observer.desc">
+            </PersistentString>
+            <PersistentString
+               value = "$numVoteData">
+            </PersistentString>
+            <PersistentString
+               value = "self.observer.desc">
+            </PersistentString>
+            <PersistentString
+               value = "self.observer.mainVoteData">
+            </PersistentString>
+            <PersistentString
+               value = "attrNames">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in CardView.body.getter:CardView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.observer">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LoginViewModel.authenticate(credential:):LoginViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "firebaseCredential">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "_allocateUninitializedArray&lt;&#x3c4;_0_0&gt;(_:):(null)">
+         <PersistentStrings>
+            <PersistentString
+               value = "user.email">
+            </PersistentString>
+            <PersistentString
+               value = "user">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #2 in closure #1 in closure #1 in ImageGrid.body.getter:MyPageView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selected">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

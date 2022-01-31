@@ -395,6 +395,12 @@ class Ref {
         return FIRESTORE_COLLECTION_VOTE.document(userId)
     }
     
+    static var FIRESTORE_COLLECTION_MODE = FIRESTORE_ROOT.collection("mode")
+//    static func FIRESTORE_COLLECTION_VOTE_USERID() -> DocumentReference {
+//        return FIRESTORE_COLLECTION_VOTE.document(userId)
+//    }
+//
+    
     
     
     static var FIRESTORE_COLLECTION_ACTIVE_VOTE = FIRESTORE_ROOT.collection("active_vote")

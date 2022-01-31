@@ -11,7 +11,7 @@ import Firebase
 import GoogleSignIn
 
 struct LoginPage: View {
-    
+
     // Loading Indicator...
     @State var isLoading: Bool = false
     
